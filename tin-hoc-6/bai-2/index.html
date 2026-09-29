@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Information Processing · Tin học 6 — Bài 2</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 01 · Title -->
+    <section class="slide center" data-part="Bài 2">
+      <div class="kicker">Tin học 6 — Kết nối tri thức với cuộc sống · Chủ đề 1 · Máy tính và cộng đồng</div>
+      <h1>INFORMATION PROCESSING</h1>
+      <p class="vi vi-big">Bài 2 — Xử lí thông tin</p>
+      <div class="viz" style="margin-top:24px">
+        <svg viewBox="0 0 640 200" role="img" aria-label="Eyes see, brain processes, hands act">
+          <circle cx="120" cy="100" r="42" fill="#1f6f8b"/>
+          <path d="M100 100 a20 14 0 0 1 40 0 a20 14 0 0 1 -40 0" fill="#fff"/>
+          <circle cx="120" cy="100" r="7" fill="#12455a"/>
+          <path d="M182 100 H244" stroke="#12455a" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 14"/>
+          <rect x="256" y="58" width="92" height="84" rx="18" fill="#e8963c"/>
+          <path d="M280 96 q22 -24 44 0 q22 24 44 0" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+          <path d="M362 100 H424" stroke="#12455a" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 14"/>
+          <circle cx="500" cy="100" r="42" fill="#3f8f6b"/>
+          <path d="M480 100 l14 14 26 -34" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="120" y="164" font-size="15" font-weight="800" fill="#3d5573" text-anchor="middle">thu nhận</text>
+          <text x="302" y="164" font-size="15" font-weight="800" fill="#3d5573" text-anchor="middle">xử lí</text>
+          <text x="500" y="164" font-size="15" font-weight="800" fill="#3d5573" text-anchor="middle">hành động</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 02 · Mục tiêu -->
+    <section class="slide" data-part="Sau bài này em sẽ">
+      <div class="kicker">Sau bài này em sẽ…</div>
+      <h2>WHAT YOU WILL BE ABLE TO DO</h2>
+      <ul class="examples" style="margin-top:20px">
+        <li>Name the four basic activities of information processing <span class="vi">· nêu được các hoạt động cơ bản trong xử lí thông tin</span></li>
+        <li>Explain why a computer is an effective tool for processing information <span class="vi">· giải thích được máy tính là công cụ hiệu quả để xử lí thông tin</span></li>
+        <li>Give real-life examples of each processing activity <span class="vi">· nêu được ví dụ minh hoạ cụ thể</span></li>
+      </ul>
+    </section>
+
+    <!-- 03 · Khởi động: quả phạt đền -->
+    <section class="slide split" data-part="Khởi động">
+      <div class="split-copy">
+        <div class="kicker">Khởi động · Thấy gì? Biết gì?</div>
+        <p class="question">Minh loves football — he still remembers one penalty kick.</p>
+        <p class="q-vi">Minh thích xem bóng đá và nhớ mãi một quả phạt đền. Bàn thắng xảy ra chỉ trong chớp mắt.</p>
+        <div class="think-tag">Think · Suy nghĩ</div>
+        <div class="step" hidden style="margin-top:18px">
+          <p class="en-lead">The striker's eyes never left the goalkeeper — then a sudden, perfect shot.</p>
+          <p class="vi vi-lead">Mắt cầu thủ liên tục quan sát thủ môn, đoán góc sơ hở nhất rồi khéo léo sút bóng.</p>
+        </div>
+        <div class="step" hidden style="margin-top:12px">
+          <p class="en-lead">In that split second, his <b>brain</b> did a lot of work.</p>
+          <p class="vi vi-lead">Trong khoảnh khắc ngắn ngủi đó, bộ não cầu thủ đã thực hiện một loạt hoạt động phức tạp.</p>
+        </div>
+      </div>
+      <div class="split-viz">
+        <div class="viz">
+          <svg viewBox="0 0 300 300" role="img" aria-label="A penalty kick toward the top corner of the goal">
+            <rect x="40" y="70" width="200" height="110" fill="none" stroke="#12455a" stroke-width="6"/>
+            <path d="M40 70 l0 -20 M240 70 l0 -20" stroke="#12455a" stroke-width="6"/>
+            <circle cx="200" cy="150" r="16" fill="#12455a"/>
+            <path d="M188 138 l24 24 M212 138 l-24 24" stroke="#fff" stroke-width="3"/>
+            <circle cx="70" cy="100" r="14" fill="#e8963c"/>
+            <rect x="58" y="114" width="24" height="34" rx="8" fill="#1f6f8b"/>
+            <circle cx="140" cy="230" r="14" fill="#12455a"/>
+            <rect x="126" y="244" width="28" height="38" rx="8" fill="#d9604f"/>
+            <path d="M150 250 q30 -70 62 -84" stroke="#3f8f6b" stroke-width="4" fill="none" stroke-dasharray="4 8"/>
+            <circle cx="212" cy="166" r="7" fill="#3f8f6b"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · Hoạt động 1: quá trình xử lí thông tin của cầu thủ -->
+    <section class="slide plain" data-part="Xử lí thông tin">
+      <div class="kicker">Hoạt động 1 · What did the brain actually do?</div>
+      <h2>FROM SEEING TO SCORING.</h2>
+      <div class="order" style="margin-top:6px">
+        <div class="o seq"><span class="rank">1</span><span>Eyes track the goalkeeper's position <span class="vi">mắt theo dõi vị trí thủ môn, thông tin chuyển lên não</span></span></div>
+        <div class="o seq step" hidden><span class="rank">2</span><span>Brain analyses and judges the open corner <span class="vi">não phân tích, đánh giá góc sơ hở</span></span></div>
+        <div class="o seq step" hidden><span class="rank">3</span><span>Brain decides: shoot to the high corner <span class="vi">não quyết định: sút vào góc cao</span></span></div>
+        <div class="o seq step" hidden><span class="rank">4</span><span>Legs act on that decision — goal! <span class="vi">chân thực hiện: sút bóng thành bàn thắng</span></span></div>
+      </div>
+      <p class="support step" hidden style="margin-top:14px">This whole chain — receiving, thinking, deciding, acting — is called <b>information processing</b>.
+        <span class="vi">Cả chuỗi hoạt động đó được gọi là <b>xử lí thông tin</b>.</span></p>
+    </section>
+
+    <!-- 05 · 4 hoạt động cơ bản (diagram) -->
+    <section class="slide plain" data-part="4 hoạt động cơ bản">
+      <div class="kicker">Hộp kiến thức · Bốn hoạt động cơ bản</div>
+      <h2>INFORMATION PROCESSING HAS FOUR STEPS.</h2>
+      <div class="flow4">
+        <div class="box c1"><div class="en">RECEIVE</div><div class="vi">thu nhận</div></div>
+        <div class="arw">→</div>
+        <div class="box c3"><div class="en">PROCESS</div><div class="vi">xử lí</div></div>
+        <div class="arw">→</div>
+        <div class="box c4"><div class="en">TRANSMIT</div><div class="vi">truyền</div></div>
+      </div>
+      <div class="flow4" style="margin-top:10px"><div class="arw">↕</div><div class="box c2"><div class="en">STORE</div><div class="vi">lưu trữ</div></div></div>
+      <ul class="deflist">
+        <li class="c1 step" hidden><b>Thu nhận</b> — nhờ các giác quan (nghe, nhìn, chạm, nếm, ngửi), con người nhận thông tin từ thế giới bên ngoài.<span class="vi">Ví dụ: mắt cầu thủ nhìn thấy vị trí thủ môn.</span></li>
+        <li class="c2 step" hidden><b>Lưu trữ</b> — não ghi nhớ lại thông tin; nếu không ghi nhớ được, thông tin sẽ mất.<span class="vi">Con người còn lưu trữ bằng cách ghi chép.</span></li>
+        <li class="c3 step" hidden><b>Xử lí</b> — não so sánh, phân tích, suy luận… để đưa ra kết luận, quyết định.<span class="vi">Biến đổi thông tin ban đầu thành thông tin mới.</span></li>
+        <li class="c4 step" hidden><b>Truyền</b> — thông tin được chuyển hoá thành hành vi, hoặc chia sẻ với người khác.<span class="vi">Ví dụ: chân sút bóng theo quyết định của não.</span></li>
+      </ul>
+    </section>
+
+    <!-- 06 · CORE NOTE 1 -->
+    <section class="slide notes" data-part="Ghi bài">
+      <div class="notes-head">
+        <span class="icon">📓</span>
+        <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi bài — Phần 1</div></div>
+      </div>
+      <ol class="notes-list">
+        <li><div><div class="en"><b>Xử lí thông tin</b> là quá trình con người tiếp nhận, biến đổi và sử dụng thông tin.</div></div></li>
+        <li><div><div class="en">Quá trình xử lí thông tin gồm 4 hoạt động cơ bản: <b>thu nhận, lưu trữ, xử lí, truyền</b> thông tin.</div></div></li>
+        <li><div><div class="en">Bộ não con người thực hiện các hoạt động này liên tục, thường không thể nhận ra.</div></div></li>
+      </ol>
+    </section>
+
+    <!-- 07 · Quiz phân loại -->
+    <section class="slide plain" data-part="Câu hỏi">
+      <div class="kicker">Câu hỏi · Mỗi việc dưới đây thuộc hoạt động nào?</div>
+      <h2>WHICH ACTIVITY IS IT?</h2>
+      <div class="order" style="margin-top:6px">
+        <div class="o"><span class="rank">a</span><span>Nghe chương trình ca nhạc trên đài <span class="vi step" hidden>→ thu nhận thông tin</span></span></div>
+        <div class="o"><span class="rank">b</span><span>Bố xem chương trình thời sự trên ti vi <span class="vi step" hidden>→ thu nhận thông tin</span></span></div>
+        <div class="o"><span class="rank">c</span><span>Em chép bài trên bảng vào vở <span class="vi step" hidden>→ lưu trữ thông tin</span></span></div>
+        <div class="o"><span class="rank">d</span><span>Em thực hiện một phép tính nhẩm <span class="vi step" hidden>→ xử lí thông tin</span></span></div>
+      </div>
+      <p class="support step" hidden style="margin-top:12px">Note the sequence: information is received first, then it can be stored, processed or shared.
+        <span class="vi">Lưu ý: thông tin luôn được thu nhận trước, sau đó mới có thể lưu trữ, xử lí hay truyền đi.</span></p>
+    </section>
+
+    <!-- 08 · Section 2 title -->
+    <section class="slide center" data-part="Xử lí thông tin trong máy tính">
+      <span class="sec-badge"><span class="n">2</span> Part 2</span>
+      <h1>CAN A MACHINE DO THIS TOO?</h1>
+      <p class="vi vi-big">Xử lí thông tin trong máy tính</p>
+      <p class="support" style="margin-top:20px">Máy tính là chiếc máy kì diệu giúp con người xử lí nguồn tài nguyên thông tin khổng lồ.</p>
+    </section>
+
+    <!-- 09 · 4 thành phần máy tính -->
+    <section class="slide split wide-viz" data-part="Xử lí thông tin trong máy tính">
+      <div class="split-copy">
+        <div class="kicker">Hộp kiến thức · Bốn thành phần của máy tính</div>
+        <p class="en-lead">A computer mirrors the human process — with four matching parts.</p>
+        <ul class="deflist" style="margin-top:10px">
+          <li class="c1 step" hidden><b>Thiết bị vào</b> — thu nhận thông tin: bàn phím, chuột, máy quét…</li>
+          <li class="c3 step" hidden><b>Bộ xử lí</b> — xử lí thông tin bằng cách thực hiện chương trình do con người viết ra.</li>
+          <li class="c2 step" hidden><b>Bộ nhớ</b> — lưu trữ thông tin: đĩa quang, đĩa từ, thẻ nhớ…</li>
+          <li class="c4 step" hidden><b>Thiết bị ra</b> — truyền, chia sẻ thông tin: màn hình, máy in…</li>
+        </ul>
+      </div>
+      <div class="split-viz">
+        <div class="viz">
+          <svg viewBox="0 0 420 300" role="img" aria-label="Keyboard and mouse into CPU, CPU to monitor, CPU linked to a disk store">
+            <rect x="18" y="120" width="70" height="46" rx="6" fill="#1f6f8b"/>
+            <circle cx="105" cy="150" r="16" fill="#12455a"/>
+            <path d="M128 143 H176" stroke="#12455a" stroke-width="6" stroke-linecap="round"/>
+            <path d="M170 137 l10 6 -10 6" fill="none" stroke="#12455a" stroke-width="5"/>
+            <rect x="182" y="108" width="80" height="80" rx="12" fill="#e8963c"/>
+            <text x="222" y="155" font-size="20" font-weight="800" fill="#fff" text-anchor="middle">CPU</text>
+            <path d="M266 143 H316" stroke="#12455a" stroke-width="6" stroke-linecap="round"/>
+            <path d="M310 137 l10 6 -10 6" fill="none" stroke="#12455a" stroke-width="5"/>
+            <rect x="322" y="96" width="86" height="66" rx="6" fill="#3f8f6b"/>
+            <rect x="332" y="106" width="66" height="42" rx="3" fill="#e6f3ec"/>
+            <rect x="352" y="162" width="26" height="10" fill="#3f8f6b"/>
+            <path d="M222 192 V236" stroke="#12455a" stroke-width="6" stroke-linecap="round"/>
+            <path d="M216 230 l6 10 6 -10" fill="none" stroke="#12455a" stroke-width="5"/>
+            <rect x="182" y="240" width="80" height="50" rx="8" fill="#d9604f"/>
+            <ellipse cx="222" cy="255" rx="28" ry="10" fill="#f6cfc8"/>
+            <text x="22" y="204" font-size="15" font-weight="800" fill="#1f6f8b">Thiết bị vào</text>
+            <text x="188" y="212" font-size="15" font-weight="800" fill="#e8963c">Bộ xử lí</text>
+            <text x="326" y="182" font-size="15" font-weight="800" fill="#3f8f6b">Bộ nhớ</text>
+            <text x="188" y="304" font-size="15" font-weight="800" fill="#d9604f">Thiết bị ra</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · Quiz 2 câu SGK -->
+    <section class="slide plain" data-part="Câu hỏi">
+      <div class="kicker">Câu hỏi · Kiểm tra nhanh</div>
+      <h2>QUICK CHECK</h2>
+      <p class="vi vi-lead">1. Máy tính gồm mấy thành phần để có thể thực hiện được các hoạt động xử lí thông tin?</p>
+      <div class="choices" data-quiz>
+        <button class="choice"><span class="letter">A</span><span><span class="en">3</span></span></button>
+        <button class="choice" data-correct><span class="letter">B</span><span><span class="en">4</span></span></button>
+        <button class="choice"><span class="letter">C</span><span><span class="en">5</span></span></button>
+        <button class="choice"><span class="letter">D</span><span><span class="en">6</span></span></button>
+      </div>
+      <p class="vi vi-lead step" hidden data-answer style="margin-top:14px">2. Chức năng của bộ nhớ máy tính là gì? → <b>Lưu trữ thông tin.</b></p>
+    </section>
+
+    <!-- 11 · Máy tính là công cụ hiệu quả -->
+    <section class="slide plain" data-part="Máy tính là công cụ hiệu quả">
+      <div class="kicker">Why a computer helps · Vì sao máy tính là công cụ hiệu quả</div>
+      <h2>FAST. ACCURATE. TIRELESS. HUGE MEMORY.</h2>
+      <ul class="examples" style="margin-top:10px">
+        <li class="step" hidden>Thu nhận thông tin dễ dàng, đa dạng, nhanh chóng <span class="vi">· máy quét, máy ảnh số, điện thoại thông minh…</span></li>
+        <li class="step" hidden>Xử lí với tốc độ cao, chính xác, bền bỉ <span class="vi">· hàng trăm tỉ phép tính mỗi giây, làm việc suốt ngày đêm</span></li>
+        <li class="step" hidden>Lưu trữ được lượng thông tin rất lớn <span class="vi">· một thẻ nhớ nhỏ có thể chứa hàng nghìn cuốn sách</span></li>
+        <li class="step" hidden>Kết nối mạng để trao đổi thông tin với cả thế giới <span class="vi">· kết nối với kho tri thức khổng lồ trên Internet</span></li>
+      </ul>
+    </section>
+
+    <!-- 12 · CORE NOTE 2 -->
+    <section class="slide notes" data-part="Ghi bài">
+      <div class="notes-head">
+        <span class="icon">📓</span>
+        <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi bài — Phần 2</div></div>
+      </div>
+      <ol class="notes-list">
+        <li><div><div class="en">Máy tính có đủ <b>4 thành phần</b> thực hiện các hoạt động xử lí thông tin: thiết bị vào, bộ xử lí, bộ nhớ, thiết bị ra.</div></div></li>
+        <li><div><div class="en">Máy tính là công cụ hỗ trợ con người xử lí thông tin hiệu quả vì: xử lí <b>nhanh, chính xác, bền bỉ</b>; lưu trữ <b>dung lượng lớn</b>; kết nối mạng rộng khắp.</div></div></li>
+      </ol>
+    </section>
+
+    <!-- 13 · Vận dụng -->
+    <section class="slide" data-part="Vận dụng">
+      <div class="kicker">Vận dụng · Chọn một lĩnh vực em quan tâm</div>
+      <h2>PICK A FIELD. LIST THE BENEFITS.</h2>
+      <div class="chip-grid" style="margin-top:16px">
+        <div class="chip on"><div class="lab">Y tế<span class="vi">Health</span></div></div>
+        <div class="chip on"><div class="lab">Giáo dục<span class="vi">Education</span></div></div>
+        <div class="chip on"><div class="lab">Âm nhạc<span class="vi">Music</span></div></div>
+        <div class="chip on"><div class="lab">Hội hoạ<span class="vi">Art</span></div></div>
+        <div class="chip on"><div class="lab">Nông nghiệp<span class="vi">Agriculture</span></div></div>
+        <div class="chip on"><div class="lab">Du lịch<span class="vi">Travel</span></div></div>
+      </div>
+      <p class="support step" hidden style="margin-top:16px">Em hãy liệt kê những lợi ích của máy tính trong lĩnh vực em vừa chọn, gắn với 4 hoạt động xử lí thông tin đã học.</p>
+    </section>
+
+    <!-- 14 · Chuyển bài -->
+    <section class="slide center" data-part="Chuyển bài">
+      <div class="kicker">Sắp tới · Coming up</div>
+      <h1>HOW DOES A COMPUTER "SEE" 0 AND 1?</h1>
+      <p class="vi vi-big">Bài 3 — Thông tin trong máy tính</p>
+      <p class="support" style="margin-top:20px">Máy tính xử lí thông tin rất nhanh — nhưng nó chỉ thực sự hiểu hai kí hiệu duy nhất. Đó là gì?</p>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 2</span>
+      <div id="ticks"></div>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 14</span>
+    </div>
+    <div id="help">← → / Presenter · Next reveals, then advances · F = fullscreen</div>
+
+  </div>
+</div>
+<script src="slides.js"></script>
+</body>
+</html>

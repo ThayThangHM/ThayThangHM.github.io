@@ -409,12 +409,15 @@ a { color: var(--brand); }
   .card-grid > .card { flex: 0 1 calc((100% - var(--gap)) / 2); }
 }
 
+/* Danh sách bài: xếp từ trái sang theo thứ tự bài, không căn giữa hàng cuối */
+.card-grid--start { justify-content: flex-start; }
+
 @media (min-width: 960px) {
   .card-grid { --gap: 24px; }
   .card-grid > .card { flex-basis: calc((100% - 2 * var(--gap)) / 3); }
 }
 
-.card { --accent: var(--brand); display: flex; }
+.card { --accent: var(--page-accent, var(--brand)); display: flex; }
 
 .card-body {
   position: relative;
@@ -540,6 +543,94 @@ a.card-body:hover .card-cta::after { margin-left: 4px; }
   color: var(--text-muted);
   font-size: .95rem;
 }
+
+/* ---------- Trang mục lục khối lớp (tin-hoc-6/7/8) ---------- */
+.page-head {
+  padding-block: clamp(28px, 5vw, 56px) 8px;
+  background:
+    radial-gradient(55% 90% at 90% 0%, color-mix(in srgb, var(--page-accent, var(--brand)) 12%, transparent), transparent 70%);
+}
+
+.back-link {
+  display: inline-flex;
+  padding: 6px 12px;
+  margin-left: -12px;
+  border-radius: 10px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-decoration: none;
+}
+.back-link:hover { color: var(--brand); background: color-mix(in srgb, var(--brand) 10%, transparent); }
+
+.page-eyebrow {
+  margin-top: 18px;
+  color: var(--page-accent, var(--brand));
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.page-title {
+  margin-top: 6px;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+
+.page-desc {
+  max-width: 44rem;
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  text-wrap: pretty;
+}
+
+.page-tip {
+  margin-top: 14px;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.8em;
+  padding: 1px 7px;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: 700 .9em/1.5 var(--font);
+  text-align: center;
+}
+
+/* Card bài giảng */
+.lesson-label {
+  align-self: flex-start;
+  margin-bottom: 14px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  font-size: .98rem;
+  font-weight: 800;
+}
+
+.lesson .card-title { font-size: 1.35rem; text-wrap: pretty; }
+
+.lesson-en {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* Đệm trên nút, kể cả khi bài không có tên tiếng Anh */
+.lesson .card-cta { padding-top: 16px; }
 
 /* ---------- Footer ---------- */
 .site-footer {

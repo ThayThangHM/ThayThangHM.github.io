@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thực hành: Khai thác thông tin số · Tin học 8 — Bài 3</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--
+  BÀI 3 — THỰC HÀNH: KHAI THÁC THÔNG TIN SỐ (SGK Tin học 8 KNTT tr.14–17)
+  PPCT: 2 tiết (tiết 5, 6). Bộ slide này được THIẾT KẾ LẠI ĐỂ DẠY TRỌN TRONG 1 TIẾT (45').
+  Cách gộp: GV giảng nhanh cả 3 nhiệm vụ (I do, ~17') → HS làm 1 sản phẩm MINI (3 trang) trong 15' (You do)
+  → 2 nhóm trình bày + nhận xét (4') → Luyện tập 2 câu SGK (3') → Core Notes (4') → Vận dụng + hoàn thiện
+  bài 10 trang ở nhà (1').
+  Nguồn: SGK tr.14–17 (Nhiệm vụ 1–3, Bảng 3.1, Hình 3.1–3.4, Luyện tập, Vận dụng); PP Tiết 1 + Tiết 2
+  (ảnh năng lượng tái tạo, câu hỏi "vì sao cần nguồn tin cậy"); KHDH: NLS 1.1.TC2a, 1.1.TC2b, 1.2.TC2a.
+  Mốc thời gian ghi ở đầu mỗi slide (⏱).
+-->
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 01 · Title  ⏱ 0:30 -->
+    <section class="slide" data-part="Bài 3">
+      <div class="slide-z center">
+        <div class="kicker">Tin học 8 · Topic 2 · Lesson 3</div>
+        <h1>HANDS-ON:<br>MINING DIGITAL INFORMATION</h1>
+        <p class="sub" style="font-size:34px">Thực hành: Khai thác thông tin số</p>
+        <div class="viz" style="margin-top:22px;width:620px">
+          <svg viewBox="0 0 560 150" role="img" aria-label="Search, check, then build a slide deck">
+            <rect x="10" y="52" width="170" height="44" rx="22" fill="#fff" stroke="#1f6f8b" stroke-width="4"/>
+            <circle cx="152" cy="74" r="11" fill="none" stroke="#1f6f8b" stroke-width="4"/><line x1="160" y1="82" x2="168" y2="90" stroke="#1f6f8b" stroke-width="4" stroke-linecap="round"/>
+            <rect x="26" y="68" width="100" height="10" rx="5" fill="#c9bfa8"/>
+            <path d="M192 74 h36 M220 64 l12 10 -12 10" stroke="#e8963c" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="276" cy="74" r="34" fill="#dcefe4" stroke="#3f8f6b" stroke-width="4"/>
+            <path d="M260 75 l11 11 21 -22" stroke="#3f8f6b" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M320 74 h36 M348 64 l12 10 -12 10" stroke="#e8963c" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="372" y="18" width="176" height="112" rx="10" fill="#12455a"/>
+            <rect x="388" y="34" width="90" height="14" rx="4" fill="#e8963c"/>
+            <rect x="388" y="58" width="80" height="7" rx="3" fill="#dff0f2"/><rect x="388" y="72" width="66" height="7" rx="3" fill="#dff0f2"/><rect x="388" y="86" width="74" height="7" rx="3" fill="#dff0f2"/>
+            <rect x="480" y="58" width="54" height="52" rx="5" fill="#9fe6c4"/><circle cx="496" cy="74" r="7" fill="#f6e0c4"/>
+          </svg>
+        </div>
+        <div class="pills" style="justify-content:center;margin-top:18px">
+          <span>Search</span><span>Evaluate</span><span>Build</span><span>Share</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Today's mission (objectives as a roadmap)  ⏱ 1:00 -->
+    <section class="slide" data-part="Nhiệm vụ hôm nay">
+      <div class="slide-z mid">
+        <div class="kicker">Today's mission · Nhiệm vụ hôm nay</div>
+        <h2>ONE LESSON · THREE MISSIONS · ONE PRODUCT</h2>
+        <div class="roadmap">
+          <div class="stop"><div class="ico">💡</div><div class="n">MISSION 1</div>
+            <div class="en">Plan the ideas &amp; structure</div><span class="vi">Hình thành ý tưởng và cấu trúc</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">🔍</div><div class="n">MISSION 2</div>
+            <div class="en">Search &amp; evaluate information</div><span class="vi">Tìm kiếm và đánh giá thông tin</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">🛠️</div><div class="n">MISSION 3</div>
+            <div class="en">Process &amp; share information</div><span class="vi">Xử lí và trao đổi thông tin</span></div>
+        </div>
+        <div class="callout amber mt-l">
+          <div class="ico">🎯</div>
+          <div><div class="en">Product: a mini slide deck about <span class="hl">Renewable energy</span></div>
+            <span class="vi">Sản phẩm: bài trình chiếu mini về chủ đề Năng lượng tái tạo — làm theo nhóm.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Warm-up (SGK dialogue, condensed)  ⏱ 2:00 -->
+    <section class="slide" data-part="Khởi động">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Warm-up · Khởi động</div>
+          <p class="question">Fossil fuels are running out. What can replace them?</p>
+          <p class="q-vi">Xăng, than đang cạn dần. Lấy gì thay thế?</p>
+          <div class="pills step">
+            <span>☀️ Sun · nắng</span><span>💨 Wind · gió</span><span>💧 Water · nước</span><span>♻️ Waste · rác thải</span>
+          </div>
+          <div class="callout step">
+            <div class="ico">🤔</div>
+            <div><div class="en">But each one has drawbacks. We need <u>reliable</u> information!</div>
+              <span class="vi">Mỗi nguồn đều có nhược điểm → cần tìm hiểu thông tin đầy đủ, đáng tin cậy.</span></div>
+          </div>
+        </div>
+        <div>
+          <img class="photo" src="assets/renewable-energy.jpg" alt="Solar panels, wind turbines, hydropower dam and biomass pellets">
+          <div class="cap">Solar · Wind · Hydro · Biomass</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · Mission 1 — Steps 1–2: topic → questions (= outline)  ⏱ 2:30 -->
+    <section class="slide" data-part="Nhiệm vụ 1 · Ý tưởng">
+      <div class="slide-z">
+        <div class="badge"><span class="n">1</span> Mission 1 · Plan</div>
+        <h2>TURN THE TOPIC INTO QUESTIONS</h2>
+        <p class="sub">Biến chủ đề thành các câu hỏi — đó chính là dàn ý của bài trình chiếu.</p>
+        <div class="cards g2" style="gap:12px;margin-top:10px">
+          <div class="card"><div class="num">1</div><div><div class="en">What is renewable energy?</div><span class="vi">Năng lượng tái tạo là gì?</span></div></div>
+          <div class="card"><div class="num">2</div><div><div class="en">Which source makes electricity where you live? Pros &amp; cons?</div><span class="vi">Điện ở nơi em sống từ nguồn nào? Ưu, nhược điểm?</span></div></div>
+          <div class="card"><div class="num">3</div><div><div class="en">Pick one alternative source. Pros &amp; cons?</div><span class="vi">Chọn 1 nguồn thay thế: ưu, nhược điểm?</span></div></div>
+          <div class="card"><div class="num">4</div><div><div class="en">What will replace petrol for cars &amp; motorbikes?</div><span class="vi">Lấy gì thay xăng dầu cho ô tô, xe máy?</span></div></div>
+          <div class="card"><div class="num">5</div><div><div class="en">Your own power plant: which way to make power? Why?</div><span class="vi">Nếu thiết kế nhà máy điện, em chọn cách nào? Vì sao?</span></div></div>
+          <div class="card amber step"><div class="ico">👥</div><div><div class="en">Each group picks ONE question (2–5)</div><span class="vi">Mỗi nhóm chọn 1 câu để làm trang nội dung.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · Mission 1 — Step 3: requirements  ⏱ 1:30 -->
+    <section class="slide" data-part="Nhiệm vụ 1 · Yêu cầu">
+      <div class="slide-z">
+        <div class="badge"><span class="n">1</span> Mission 1 · Plan</div>
+        <h2>SET CLEAR REQUIREMENTS</h2>
+        <p class="sub">Xác định mức độ, yêu cầu cụ thể — bài trình chiếu khoảng 10 trang:</p>
+        <div class="strip">
+          <div class="pg key">Title<br>page</div><div class="pg">Outline</div><div class="pg">Intro</div>
+          <div class="pg">Content</div><div class="pg">Content</div><div class="pg">Content</div><div class="pg">Content</div>
+          <div class="pg">Content</div><div class="pg">Conclusion</div><div class="pg key">References</div>
+        </div>
+        <div class="cards g3">
+          <div class="card col blue"><div class="ico">📄</div><div class="en">≤ 6 bullets per page</div><span class="vi">Mỗi trang không quá 6 mục</span></div>
+          <div class="card col blue"><div class="ico">✂️</div><div class="en">≤ 2 lines per bullet</div><span class="vi">Mỗi mục không quá 2 dòng</span></div>
+          <div class="card col blue"><div class="ico">🖼️</div><div class="en">≥ 2 pictures in the deck</div><span class="vi">Ít nhất 2 hình ảnh minh hoạ</span></div>
+        </div>
+        <div class="callout green step">
+          <div class="ico">⏱️</div>
+          <div><div class="en">In class today: 3 pages — Title · 1 Content page · References</div>
+            <span class="vi">Trên lớp làm bản mini 3 trang; hoàn thiện đủ ~10 trang ở nhà.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Mission 2 — Step 1: keywords (+ AI tip)  ⏱ 2:00 -->
+    <section class="slide" data-part="Nhiệm vụ 2 · Tìm kiếm">
+      <div class="slide-z">
+        <div class="badge"><span class="n">2</span> Mission 2 · Search</div>
+        <h2>WHICH KEYWORD WORKS BETTER?</h2>
+        <p class="sub">Group 3 needs the pros and cons of wind power. · Nhóm 3 cần ưu, nhược điểm của điện gió.</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span><span class="en">🔍 “năng lượng”</span><span class="vi">một từ chung chung</span></span></button>
+          <button class="choice" data-correct><span class="letter">B</span><span><span class="en">🔍 “ưu, nhược điểm của điện gió”</span><span class="vi">cụ thể, đúng câu hỏi</span></span></button>
+        </div>
+        <div class="step" data-answer>
+          <div class="pills"><span class="amber">năng lượng tái tạo</span><span class="amber">năng lượng thay thế</span><span class="amber">ưu, nhược điểm của thuỷ điện</span><span class="amber">ưu, nhược điểm của điện gió</span></div>
+          <p class="lead mt-s">Specific keywords → better results. <span class="vi" style="font-size:25px">Từ khoá cụ thể → kết quả sát hơn.</span></p>
+        </div>
+        <div class="callout violet step">
+          <div class="ico">🤖</div>
+          <div><span class="tag">AI tip</span><div class="en">AI answers are NOT sources — check &amp; cite the original.</div>
+            <span class="vi">Câu trả lời của AI không phải là nguồn tin — cần kiểm chứng và ghi nguồn gốc.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · Mission 2 — Step 2: log the results (Bảng 3.1)  ⏱ 1:30 -->
+    <section class="slide" data-part="Nhiệm vụ 2 · Ghi chép">
+      <div class="slide-z">
+        <div class="badge"><span class="n">2</span> Mission 2 · Log</div>
+        <h2>WRITE DOWN WHAT YOU FIND</h2>
+        <p class="sub">Ghi chép kết quả tìm kiếm — Bảng 3.1 (SGK)</p>
+        <table class="big">
+          <tr><th>#</th><th>Content<span class="vi">Nội dung</span></th><th>Website<span class="vi">Địa chỉ trang web</span></th><th>Source<span class="vi">Nguồn gốc</span></th><th>Year<span class="vi">Thời gian</span></th></tr>
+          <tr><td class="c">1</td><td>Khái niệm chung về các nguồn năng lượng</td><td class="url">hvacr.vn/diendan/</td><td>Cộng đồng Cơ Điện Lạnh Việt Nam</td><td class="c">2008</td></tr>
+          <tr><td class="c">2</td><td>Năng lượng tái tạo sẽ thống trị công suất điện toàn thế giới</td><td class="url">www.evn.com.vn</td><td>Tập đoàn Điện lực Việt Nam</td><td class="c">2022</td></tr>
+          <tr><td class="c">3</td><td>Quy hoạch điện VIII: Ưu tiên phát triển năng lượng tái tạo</td><td class="url">www.erea.gov.vn/vi-VN</td><td>Bộ Công Thương</td><td class="c">2021</td></tr>
+        </table>
+        <div class="callout step">
+          <div class="ico">📝</div>
+          <div><div class="en">A log helps you compare sources &amp; write References.</div>
+            <span class="vi">Ghi chép giúp dễ so sánh, đánh giá và ghi tài liệu tham khảo.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · Mission 2 — Step 3: evaluate (2 questions) + Hình 3.1  ⏱ 2:00 -->
+    <section class="slide" data-part="Nhiệm vụ 2 · Đánh giá">
+      <div class="slide-z">
+        <div class="badge"><span class="n">2</span> Mission 2 · Evaluate</div>
+        <h2>ASK 2 QUESTIONS BEFORE YOU USE IT</h2>
+        <div class="cards g2">
+          <div class="card blue"><div class="ico">🎯</div><div><div class="en">Is it RELEVANT?</div><span class="vi">Thông tin có thực sự phù hợp với nội dung trình bày không?</span></div></div>
+          <div class="card blue"><div class="ico">🛡️</div><div><div class="en">Is the source RELIABLE?</div><span class="vi">Nguồn tin có đáng tin cậy không?</span></div></div>
+        </div>
+        <div class="browser mt-s step">
+          <div class="bar"><span class="dots"><span></span><span></span><span></span></span><span class="search">quy hoạch điện VIII năng lượng tái tạo</span></div>
+          <div class="body serp">
+            <div class="url">https://moit.gov.vn › phat-trien-ben-vung › quy-hoach-...</div>
+            <div class="title">Quy hoạch điện VIII: Ưu tiên phát triển năng lượng tái tạo</div>
+            <div class="snip">9 thg 3, 2021 — Quy hoạch điện VIII khuyến khích <b>phát triển</b> mạnh mẽ <b>năng lượng tái tạo</b> (ngoài thuỷ điện), từ khoảng 13% năm 2020 lên tới gần 30% năm 2030 và ...</div>
+          </div>
+        </div>
+        <p class="lead mt-s step">…<b>.gov.vn</b> = government site → more reliable than forums.
+          <span class="vi">Trang của cơ quan chính phủ đáng tin cậy hơn diễn đàn, trang web doanh nghiệp (Hình 3.1).</span></p>
+      </div>
+    </section>
+
+    <!-- 09 · Mission 2 — apply: which row of the log?  ⏱ 1:30 -->
+    <section class="slide" data-part="Nhiệm vụ 2 · Chọn nguồn">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">?</span> Your call · Em chọn</div>
+        <h2 style="font-size:42px">“FUTURE POWER PLANTS” PAGE: WHICH SOURCE?</h2>
+        <p class="sub">Trang “Nhà máy điện tương lai” nên dùng nguồn nào trong bảng ghi chép?</p>
+        <div class="choices stack" data-quiz>
+          <button class="choice"><span class="letter">1</span><span><span class="en">General ideas about energy · a forum · 2008</span><span class="vi">Khái niệm chung · diễn đàn Cơ Điện Lạnh · 2008</span></span></button>
+          <button class="choice"><span class="letter">2</span><span><span class="en">Renewables will dominate world power · EVN · 2022</span><span class="vi">NLTT thống trị công suất điện thế giới · Tập đoàn Điện lực VN · 2022</span></span></button>
+          <button class="choice" data-correct><span class="letter">3</span><span><span class="en">Power Plan VIII · Ministry of Industry and Trade · 2021</span><span class="vi">Quy hoạch điện VIII · Bộ Công Thương (gov.vn) · 2021</span></span></button>
+        </div>
+        <div class="callout green step" data-answer>
+          <div class="ico">✅</div>
+          <div><div class="en">No. 3: relevant (it plans future power) + reliable (government).</div>
+            <span class="vi">Phù hợp: nói về quy hoạch điện tương lai · Đáng tin cậy: cơ quan nhà nước.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · Mission 3 — Step 1: build the pages (Hình 3.2–3.4)  ⏱ 2:00 -->
+    <section class="slide" data-part="Nhiệm vụ 3 · Tạo trang">
+      <div class="slide-z split wide-right">
+        <div>
+          <div class="badge"><span class="n">3</span> Mission 3 · Build</div>
+          <h2>BUILD PAGES FROM YOUR PLAN</h2>
+          <div class="cards g1">
+            <div class="card"><div class="ico">🗂️</div><div><div class="en">Outline page</div><span class="vi">Trang dàn ý (Hình 3.2)</span></div></div>
+            <div class="card green"><div class="ico">📊</div><div><div class="en">Content pages</div><span class="vi">Trang nội dung — dùng tư liệu đã chọn (Hình 3.3)</span></div></div>
+            <div class="card"><div class="ico">🔗</div><div><div class="en">References page</div><span class="vi">Trang tài liệu tham khảo (Hình 3.4)</span></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="page">
+            <h4>QUY HOẠCH CƠ CẤU NGUỒN ĐIỆN</h4>
+            <table>
+              <tr><th>Cơ cấu nguồn điện</th><th class="c">2030</th><th class="c">2045</th></tr>
+              <tr><td>Nhiệt điện than</td><td class="c">28%</td><td class="c">18%</td></tr>
+              <tr><td>Nhiệt điện khí</td><td class="c">19%</td><td class="c">24%</td></tr>
+              <tr><td>Thuỷ điện</td><td class="c">18%</td><td class="c">9%</td></tr>
+              <tr class="rw"><td>Điện gió</td><td class="c">14%</td><td class="c">22%</td></tr>
+              <tr class="rw"><td>Điện Mặt Trời</td><td class="c">13%</td><td class="c">20%</td></tr>
+              <tr><td>Điện sinh khối và NLTT khác</td><td class="c">2%</td><td class="c">2%</td></tr>
+              <tr><td>Thuỷ điện tích năng</td><td class="c">1%</td><td class="c">3%</td></tr>
+              <tr><td>Nhập khẩu điện</td><td class="c">5%</td><td class="c">2%</td></tr>
+            </table>
+          </div>
+          <div class="cap">Hình 3.3 · Content page example · Ví dụ trang nội dung</div>
+          <div class="callout amber step" data-mark=".rw|mark" style="margin-top:10px">
+            <div class="ico">📈</div>
+            <div><div class="en">Wind &amp; solar grow → evidence!</div>
+              <span class="vi">Số liệu từ nguồn tin cậy làm minh chứng cho lập luận.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · Mission 3 — Step 2: edit  ⏱ 1:30 -->
+    <section class="slide" data-part="Nhiệm vụ 3 · Biên tập">
+      <div class="slide-z">
+        <div class="badge"><span class="n">3</span> Mission 3 · Edit</div>
+        <h2>WHICH PAGE IS EASIER TO READ?</h2>
+        <div class="ba">
+          <figure class="bad">
+            <svg viewBox="0 0 400 200" role="img" aria-label="A page crowded with many lines of text and no picture">
+              <rect x="4" y="4" width="392" height="192" rx="10" fill="#fff" stroke="#c9bfa8" stroke-width="3"/>
+              <rect x="24" y="18" width="180" height="16" rx="4" fill="#12455a"/>
+              <g fill="#c9bfa8"><rect x="24" y="46" width="352" height="7" rx="3"/><rect x="24" y="60" width="340" height="7" rx="3"/><rect x="24" y="74" width="352" height="7" rx="3"/><rect x="24" y="88" width="330" height="7" rx="3"/><rect x="24" y="102" width="352" height="7" rx="3"/><rect x="24" y="116" width="344" height="7" rx="3"/><rect x="24" y="130" width="352" height="7" rx="3"/><rect x="24" y="144" width="320" height="7" rx="3"/><rect x="24" y="158" width="352" height="7" rx="3"/><rect x="24" y="172" width="300" height="7" rx="3"/></g>
+            </svg>
+            <figcaption>✗ Wall of text, no picture<span class="vi">Chữ dày đặc, không có hình</span></figcaption>
+          </figure>
+          <figure class="good">
+            <svg viewBox="0 0 400 200" role="img" aria-label="A clean page with four short bullets and two pictures">
+              <rect x="4" y="4" width="392" height="192" rx="10" fill="#fff" stroke="#3f8f6b" stroke-width="3"/>
+              <rect x="24" y="18" width="180" height="16" rx="4" fill="#12455a"/>
+              <g fill="#e8963c"><circle cx="30" cy="62" r="5"/><circle cx="30" cy="92" r="5"/><circle cx="30" cy="122" r="5"/><circle cx="30" cy="152" r="5"/></g>
+              <g fill="#c9bfa8"><rect x="42" y="58" width="150" height="9" rx="4"/><rect x="42" y="88" width="130" height="9" rx="4"/><rect x="42" y="118" width="145" height="9" rx="4"/><rect x="42" y="148" width="120" height="9" rx="4"/></g>
+              <rect x="222" y="48" width="154" height="60" rx="6" fill="#9fd4e6"/><rect x="222" y="118" width="154" height="60" rx="6" fill="#9fe6c4"/>
+              <circle cx="250" cy="70" r="10" fill="#f6e0c4"/><path d="M232 172 l40 -34 30 22 24 -16 40 28z" fill="#3f8f6b"/>
+            </svg>
+            <figcaption>✓ Short bullets + pictures<span class="vi">Ngắn gọn, có hình minh hoạ</span></figcaption>
+          </figure>
+        </div>
+        <div class="callout step">
+          <div class="ico">✏️</div>
+          <div><div class="en">≤ 6 bullets · ≤ 2 lines each · edit pictures with image software</div>
+            <span class="vi">Dùng phần mềm xử lí ảnh để tạo, sửa hình minh hoạ phù hợp nội dung.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · Mission 3 — Step 3: share (easy + safe)  ⏱ 2:00 -->
+    <section class="slide" data-part="Nhiệm vụ 3 · Chia sẻ">
+      <div class="slide-z mid">
+        <div class="badge"><span class="n">3</span> Mission 3 · Share</div>
+        <h2>HOW WILL YOU SHARE YOUR DECK?</h2>
+        <p class="sub">Chọn phương tiện chia sẻ và giải thích theo 2 tiêu chí: <b>dễ sử dụng</b> · <b>an toàn dữ liệu</b>.</p>
+        <div class="cards g3 xl">
+          <div class="card col"><div class="ico">✉️</div><div class="en">Email</div><span class="vi">Thư điện tử</span></div>
+          <div class="card col"><div class="ico">👥</div><div class="en">Social network</div><span class="vi">Mạng xã hội</span></div>
+          <div class="card col" id="b3-cloud"><div class="ico">☁️</div><div class="en">Shared storage</div><span class="vi">Không gian lưu trữ dùng chung (Google Drive, OneDrive…)</span></div>
+        </div>
+        <div class="callout green step" data-mark="#b3-cloud|pick">
+          <div class="ico">💬</div>
+          <div><div class="en">Example: shared storage, shared only with my group &amp; teacher.</div>
+            <span class="vi">Dễ dùng: cả nhóm cùng mở, cùng sửa một tệp · An toàn: chỉ người được mời mới xem được — không đăng công khai.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · YOUR TURN — group work with timer  ⏱ 15:00 -->
+    <section class="slide" data-part="Thực hành nhóm">
+      <div class="slide-z split wide-left">
+        <div>
+          <div class="badge green"><span class="n">★</span> Your turn · Thực hành</div>
+          <h2 style="font-size:44px">MAKE A 3-PAGE MINI DECK</h2>
+          <ol class="todo">
+            <li><div><span class="en">Search with 2+ keywords</span><span class="vi">Tìm với ít nhất 2 từ khoá cho câu hỏi của nhóm</span></div></li>
+            <li><div><span class="en">Log 3 sources, pick the most reliable</span><span class="vi">Ghi 3 nguồn (nội dung · web · nguồn gốc · năm), chọn nguồn tin cậy nhất</span></div></li>
+            <li><div><span class="en">Build: Title · Content · References</span><span class="vi">Tạo 3 trang; trang nội dung ≤ 6 mục, có hình</span></div></li>
+            <li><div><span class="en">Share it to the class folder</span><span class="vi">Chia sẻ vào thư mục chung của lớp</span></div></li>
+          </ol>
+        </div>
+        <div>
+          <div class="timer step" data-min="15"><div class="t">15:00</div><div class="l">Next = start · click = pause</div></div>
+          <div class="callout amber" style="margin-top:14px">
+            <div class="ico">🤝</div>
+            <div><div class="en">Roles: searcher · checker · designer</div>
+              <span class="vi">Phân vai: tìm kiếm · kiểm tra nguồn · thiết kế trang</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · Show & check (peer feedback, EQ)  ⏱ 4:00 -->
+    <section class="slide" data-part="Trình bày · Nhận xét">
+      <div class="slide-z mid">
+        <div class="kicker">Show &amp; check · Trình bày và nhận xét</div>
+        <h2>CHECK THE DECK</h2>
+        <div class="cards g2 xl">
+          <div class="card"><div class="ico">🗂️</div><div><div class="en">Follows the plan</div><span class="vi">Đúng cấu trúc, trả lời đúng câu hỏi của nhóm</span></div></div>
+          <div class="card"><div class="ico">📄</div><div><div class="en">≤ 6 bullets · ≤ 2 lines</div><span class="vi">Trình bày gọn, dễ đọc</span></div></div>
+          <div class="card"><div class="ico">🖼️</div><div><div class="en">Pictures fit the content</div><span class="vi">Hình ảnh phù hợp nội dung</span></div></div>
+          <div class="card"><div class="ico">🛡️</div><div><div class="en">Reliable sources listed</div><span class="vi">Có trang tài liệu tham khảo, nguồn tin cậy</span></div></div>
+        </div>
+        <div class="callout amber step">
+          <div class="ico">⭐</div>
+          <div><div class="en">Feedback = 1 star ⭐ + 1 wish 💡 — kind and specific.</div>
+            <span class="vi">Nhận xét: khen 1 điểm tốt + góp 1 ý cải thiện — lịch sự, cụ thể.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · Luyện tập 1 (SGK)  ⏱ 1:30 -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Practice 1 · Luyện tập (SGK)</div>
+        <h2 style="font-size:42px">LEARNING TO USE A NEW CAMERA: WHICH SOURCE FIRST?</h2>
+        <p class="sub">Để tìm hiểu cách sử dụng một chiếc máy ảnh mới, nguồn nào cần được tham khảo nhất?</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span><span class="en">Tips from someone who has taken photos</span><span class="vi">Hướng dẫn của một người đã từng chụp ảnh</span></span></button>
+          <button class="choice" data-correct><span class="letter">B</span><span><span class="en">The manufacturer's user manual</span><span class="vi">Hướng dẫn sử dụng của nhà sản xuất</span></span></button>
+          <button class="choice"><span class="letter">C</span><span><span class="en">Tips from someone good at IT</span><span class="vi">Hướng dẫn của một người giỏi Tin học</span></span></button>
+          <button class="choice"><span class="letter">D</span><span><span class="en">Answers on some photography forums</span><span class="vi">Câu trả lời trên một số diễn đàn về chụp ảnh</span></span></button>
+        </div>
+        <div class="callout green step" data-answer>
+          <div class="ico">✅</div>
+          <div><div class="en">B — the maker knows its own product best.</div>
+            <span class="vi">Nhà sản xuất là nguồn có thẩm quyền nhất về chính sản phẩm của họ.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · Luyện tập 2 (SGK) — đáp án C  ⏱ 1:30 -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Practice 2 · Luyện tập (SGK)</div>
+        <h2 style="font-size:42px">AN AFRICAN FOOTBALL TEAM: WHICH SOURCE IS MOST RELIABLE?</h2>
+        <p class="sub">Để tìm hiểu về một đội bóng đá ở châu Phi, nguồn nào đáng tin cậy nhất?</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span><span class="en">The team's fan club</span><span class="vi">Câu lạc bộ người hâm mộ đội bóng đó</span></span></button>
+          <button class="choice"><span class="letter">B</span><span><span class="en">The rival team's club</span><span class="vi">Câu lạc bộ của đội bóng đối thủ</span></span></button>
+          <button class="choice" data-correct><span class="letter">C</span><span><span class="en">The Confederation of African Football</span><span class="vi">Liên đoàn bóng đá châu Phi</span></span></button>
+          <button class="choice"><span class="letter">D</span><span><span class="en">A Vietnamese football forum</span><span class="vi">Diễn đàn Bóng đá Việt Nam</span></span></button>
+        </div>
+        <div class="callout green step" data-answer>
+          <div class="ico">✅</div>
+          <div><div class="en">C — official and neutral. Fans and rivals may be biased.</div>
+            <span class="vi">Liên đoàn là cơ quan quản lí chính thức, khách quan; người hâm mộ hay đội đối thủ dễ thiên vị.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · CORE NOTES 1/2  ⏱ 2:00 -->
+    <section class="slide notes" data-part="Core Notes · Ghi bài">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi bài</div></div>
+          <span class="pg">1 / 2</span>
+        </div>
+        <div class="notes-topic">Lesson 3 · Mining digital information in 3 steps <span class="vi">— Khai thác thông tin số theo 3 bước</span></div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en"><span class="k">PLAN</span> Turn the topic into questions (outline); set requirements.</div>
+            <span class="vi">Hình thành ý tưởng và cấu trúc: đặt câu hỏi → dàn ý; ~10 trang, ≤ 6 mục/trang, ≤ 2 dòng/mục, ≥ 2 hình.</span></div></li>
+          <li><span class="rn">2</span><div><div class="en"><span class="k">SEARCH &amp; EVALUATE</span> Use specific keywords; log content, website, source, date.</div>
+            <span class="vi">Tìm kiếm bằng từ khoá cụ thể, ghi chép kết quả; đánh giá: có phù hợp? có đáng tin cậy?</span></div></li>
+          <li><span class="rn">3</span><div><div class="en"><span class="k">PROCESS &amp; SHARE</span> Build pages from reliable sources; share safely.</div>
+            <span class="vi">Tạo trang, biên tập nội dung; chia sẻ bằng cách dễ sử dụng và an toàn dữ liệu.</span></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 18 · CORE NOTES 2/2  ⏱ 2:00 -->
+    <section class="slide notes" data-part="Core Notes · Ghi bài">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi bài</div></div>
+          <span class="pg">2 / 2</span>
+        </div>
+        <ol class="core" start="4">
+          <li><span class="rn">4</span><div><div class="en">Official sources are more reliable: government sites (…gov.vn), the manufacturer, the official organisation.</div>
+            <span class="vi">Nguồn có thẩm quyền (cơ quan nhà nước, nhà sản xuất, tổ chức chính thức) đáng tin cậy hơn diễn đàn, trang cá nhân.</span></div></li>
+          <li><span class="rn">5</span><div><div class="en">Reliable information → right conclusions, right decisions, problems solved.</div>
+            <span class="vi">Thông tin đáng tin cậy giúp đưa ra kết luận đúng, quyết định đúng và giải quyết được vấn đề.</span></div></li>
+          <li><span class="rn">6</span><div><div class="en">Always list your sources on a References page.</div>
+            <span class="vi">Luôn ghi rõ nguồn trong trang Tài liệu tham khảo.</span></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 19 · Vận dụng + homework + next  ⏱ 1:00 -->
+    <section class="slide" data-part="Vận dụng · Về nhà">
+      <div class="slide-z mid">
+        <div class="kicker">At home · Vận dụng &amp; về nhà</div>
+        <h2>YOUR HOMEWORK</h2>
+        <div class="cards g1 xl">
+          <div class="card"><div class="ico">⭐</div><div><div class="en">Find information about a team, a player or an artist you admire. Which source is most reliable? Why?</div>
+            <span class="vi">Tìm thông tin về một đội bóng, cầu thủ hay nghệ sĩ em hâm mộ; đánh giá các nguồn tìm được.</span></div></div>
+          <div class="card"><div class="ico">🖥️</div><div><div class="en">Finish your group's deck: about 10 pages.</div>
+            <span class="vi">Hoàn thiện bài trình chiếu Năng lượng tái tạo (~10 trang) theo cấu trúc đã lập.</span></div></div>
+        </div>
+        <div class="next-up step">
+          <div class="en">Next: Lesson 4 — Ethics &amp; culture in using digital technology</div>
+          <span class="vi">Bài 4: Đạo đức và văn hoá trong sử dụng công nghệ kĩ thuật số</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 3</span>
+      <div id="ticks"></div>
+      <span id="more-hint" hidden>▼ more</span>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 19</span>
+    </div>
+    <div id="help">Presenter / ← → · Next reveals, then advances<br>F fullscreen · + − 0 zoom · Z pin zoom bar</div>
+
+  </div>
+</div>
+
+<!-- Zoom bar: fixed to the real screen; auto-hides (move the mouse or press + − 0 to show it) -->
+<div id="zoombar">
+  <button id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="zsep"></span>
+  <button id="zMinus" title="Thu nhỏ (−)">A−</button>
+  <input type="range" id="zRange" min="80" max="170" step="10" value="100" aria-label="Zoom">
+  <button id="zPlus" title="Phóng to (+)">A+</button>
+  <span id="zVal">100%</span>
+  <button id="zReset" title="Về 100% (phím 0)">100%</button>
+  <button id="zPin" title="Ghim thanh zoom (Z)">📌</button>
+</div>
+<div id="ztoast"></div>
+
+<script src="slides.js"></script>
+</body>
+</html>

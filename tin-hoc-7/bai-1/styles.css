@@ -1,0 +1,289 @@
+﻿/* BÀI 1 — THIẾT BỊ VÀO – RA · Tin học 7 KNTT
+   Classroom presentation, 16:9. Visual-first. English primary / Vietnamese support. */
+
+:root{
+  --ink:#12233b;
+  --ink-soft:#3d5573;
+  --paper:#f4f1e8;
+  --paper-2:#ece6d6;
+  --blue:#1f6f8b;
+  --blue-deep:#12455a;
+  --sky:#dff0f2;
+  --amber:#e8963c;
+  --amber-soft:#f6e0c4;
+  --coral:#d9604f;
+  --green:#3f8f6b;
+  --green-soft:#e6f3ec;
+  --line:#c9bfa8;
+  --white:#ffffff;
+  --font: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--font);background:#0c1622;color:var(--ink);overflow:hidden}
+
+/* ---------- Stage / scaling ---------- */
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{
+  width:1280px;height:720px;position:relative;background:var(--paper);
+  overflow:hidden;transform-origin:center center;box-shadow:0 0 60px rgba(0,0,0,.5);
+}
+
+/* ---------- Slides ---------- */
+.slide{
+  position:absolute;inset:0;padding:24px 61px 25px;display:none;flex-direction:column;
+  background:var(--paper);
+overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable;}
+.slide.active{display:flex}
+.slide.center{align-items:center;justify-content:center;text-align:center}
+.slide.plain.active{justify-content:center}
+.slide.notes.active{justify-content:center}
+.slide::before{
+  content:"";position:absolute;right:-130px;top:-130px;width:340px;height:340px;
+  border:2px dashed var(--line);border-radius:50%;opacity:.45;pointer-events:none;
+}
+.slide.notes::before,.slide.plain::before{display:none}
+
+/* ---------- Typography ---------- */
+.kicker{
+  font-size:27px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);
+  font-weight:700;margin-bottom:10px;
+}
+h1{font-size:90px;line-height:1.05;color:var(--ink);font-weight:800;letter-spacing:-.01em}
+h2{font-size:57px;line-height:1.12;color:var(--ink);font-weight:800}
+.vi{color:var(--ink-soft);font-weight:500;font-style:italic}
+.en-lead{font-size:54px;font-weight:700;line-height:1.16;color:var(--ink)}
+.vi-lead{font-size:33px;margin-top:6px}
+.en-big{font-size:75px;font-weight:800;line-height:1.1}
+.vi-big{font-size:37.5px;margin-top:8px}
+p.support{font-size:31.5px;color:var(--ink-soft);margin-top:10px}
+.spacer{flex:1}
+
+.question{font-size:60px;font-weight:800;line-height:1.16;max-width:26ch;color:var(--ink)}
+.q-vi{font-size:33px;color:var(--ink-soft);margin-top:8px;font-style:italic}
+.think-tag{
+  display:inline-flex;align-items:center;gap:10px;margin-top:20px;
+  background:var(--sky);border:2px solid var(--blue);border-radius:999px;
+  padding:7px 18px;font-weight:800;font-size:24px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--blue-deep);
+}
+
+/* ---------- Steps (progressive reveal) ---------- */
+.step[hidden]{display:none}
+.step{animation:fade .32s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- Section badge ---------- */
+.sec-badge{
+  display:inline-flex;align-items:center;gap:12px;background:var(--blue);color:#fff;
+  border-radius:999px;padding:9px 22px;font-weight:800;font-size:25.5px;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:18px;align-self:flex-start;
+}
+.slide.center .sec-badge{align-self:center}
+.sec-badge .n{
+  width:28px;height:28px;border-radius:50%;background:#fff;color:var(--blue);
+  display:flex;align-items:center;justify-content:center;font-size:22.5px;
+}
+
+/* ---------- Split layout: copy + visual ---------- */
+.slide.split.active{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.slide.split.wide-viz.active{grid-template-columns:.82fr 1.18fr}
+.split-copy{min-width:0}
+.split-viz{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0}
+
+/* ---------- Photo frame ---------- */
+.photo{
+  background:var(--white);border:1px solid var(--line);border-radius:16px;
+  padding:14px;box-shadow:0 12px 30px rgba(18,35,59,.14);
+}
+.photo img{display:block;width:100%;height:auto;border-radius:6px}
+.photo.tight{padding:8px}
+.photo-cap{margin-top:10px;font-size:24px;color:var(--ink-soft);font-style:italic;text-align:center}
+.hero-img{max-width:560px}
+.hero-img.small{max-width:340px}
+
+/* full-bleed diagram slide */
+.diagram-wrap{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+}
+.diagram-wrap img{
+  max-width:92%;max-height:430px;height:auto;border-radius:12px;
+  background:#fff;border:1px solid var(--line);padding:16px;
+  box-shadow:0 14px 34px rgba(18,35,59,.16);
+}
+
+/* ---------- Device chips (classification) ---------- */
+.chip-grid{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.chip{
+  width:150px;background:var(--white);border:2px solid var(--line);border-radius:14px;
+  padding:10px 10px 8px;text-align:center;opacity:.5;transition:opacity .25s,border-color .25s,transform .25s;
+}
+.chip.on{opacity:1;transform:translateY(-3px)}
+.chip img{width:100%;height:78px;object-fit:contain;display:block;margin-bottom:6px}
+.chip .lab{font-size:22.5px;font-weight:800;line-height:1.15}
+.chip .lab .vi{font-size:19.5px;font-weight:500;display:block}
+.chip[data-kind="vao"].on{border-color:var(--blue)}
+.chip[data-kind="ra"].on{border-color:var(--amber)}
+.chip[data-kind="both"].on{border-color:var(--green)}
+.legend{display:flex;gap:22px;margin-top:16px;font-size:24px;font-weight:700}
+.legend i{width:16px;height:16px;border-radius:4px;display:inline-block;margin-right:7px;vertical-align:-2px}
+.legend .l-vao i{background:var(--blue)}
+.legend .l-ra i{background:var(--amber)}
+.legend .l-both i{background:var(--green)}
+
+/* ---------- Term reveal chip ---------- */
+.term{
+  display:inline-block;margin-top:8px;background:var(--white);border:2px solid var(--line);
+  border-radius:16px;padding:14px 22px;
+}
+.term .en,.term .vi{display:block}
+.term .en{font-size:45px;font-weight:800;color:var(--blue-deep);letter-spacing:.02em}
+.term .vi{font-size:28.5px;margin-top:3px}
+.term.io-in{border-color:var(--blue);background:#eef6f8}
+.term.io-out{border-color:var(--amber);background:var(--amber-soft)}
+
+ul.examples{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:9px}
+ul.examples li{font-size:33px;font-weight:600;border-left:5px solid var(--amber);padding-left:16px}
+ul.examples li .vi{display:block;font-size:24px;font-weight:500;margin-top:2px}
+
+/* ---------- Verdict tags (tricky cases) ---------- */
+.verdict{
+  display:inline-flex;align-items:center;gap:12px;margin-top:12px;
+  border-radius:12px;padding:9px 18px;font-weight:800;font-size:30px;
+}
+.verdict.in{background:#eef6f8;border:2px solid var(--blue);color:var(--blue-deep)}
+.verdict.out{background:var(--amber-soft);border:2px solid var(--amber);color:#8a4b12}
+.verdict.both{background:var(--green-soft);border:2px solid var(--green);color:#25604a}
+
+.case-row{display:flex;gap:22px;align-items:center;margin-top:12px}
+.case-row .photo{flex:none;width:220px}
+.case-row .case-text{min-width:0}
+
+/* ---------- I/O mini diagram (SVG) ---------- */
+.viz{display:flex;justify-content:center;align-items:center;margin-top:8px}
+.viz svg{width:100%;height:auto;display:block;max-width:560px}
+.split-viz .viz{width:100%}
+.split-viz .viz svg{max-width:100%;max-height:300px}
+
+/* ---------- Choices / quiz ---------- */
+.choices{display:flex;flex-direction:column;gap:10px;margin-top:16px;max-width:820px}
+.choice{
+  display:flex;gap:16px;align-items:flex-start;background:var(--white);
+  border:2px solid var(--line);border-radius:14px;padding:11px 18px;cursor:pointer;
+  transition:border-color .2s,background .2s;text-align:left;font:inherit;
+}
+.choice:hover{border-color:var(--blue)}
+.choice:focus{outline:none}
+.choice:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.choice.picked{border-color:var(--blue);background:var(--sky)}
+.choice.correct{border-color:var(--green);background:var(--green-soft)}
+.choice .letter{
+  width:38px;height:38px;flex:none;border-radius:50%;background:var(--paper-2);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:28.5px;
+}
+.choice.correct .letter{background:var(--green);color:#fff}
+.choice > span:last-child{display:flex;flex-direction:column;gap:2px}
+.choice .en{font-size:31.5px;font-weight:700;line-height:1.2}
+.choice .vi{font-size:22.5px}
+
+/* order steps (luyện tập 2) */
+.order{display:flex;flex-direction:column;gap:10px;margin-top:14px;max-width:760px}
+.order .o{
+  display:flex;gap:14px;align-items:center;background:var(--white);border:2px solid var(--line);
+  border-radius:12px;padding:11px 16px;font-size:30px;font-weight:600;
+}
+.order .o .rank{
+  width:34px;height:34px;flex:none;border-radius:8px;background:var(--paper-2);
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--ink-soft);
+}
+.order .o.seq .rank{background:var(--blue);color:#fff}
+.order .o .vi{font-size:21px;font-weight:500;color:var(--ink-soft)}
+
+/* do / don't */
+.dd{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:14px}
+.dd .col{background:var(--white);border:2px solid var(--line);border-radius:16px;padding:18px 20px}
+.dd .col.do{border-color:var(--green)}
+.dd .col.dont{border-color:var(--coral)}
+.dd .col h3{font-size:34.5px;font-weight:800;margin-bottom:10px}
+.dd .col.do h3{color:var(--green)}
+.dd .col.dont h3{color:var(--coral)}
+.dd .col li{list-style:none;font-size:27px;line-height:1.3;margin:8px 0;padding-left:22px;position:relative}
+.dd .col li .vi{font-size:21px;color:var(--ink-soft)}
+.dd .col.do li::before{content:"✔";position:absolute;left:0;color:var(--green);font-weight:800}
+.dd .col.dont li::before{content:"✗";position:absolute;left:0;color:var(--coral);font-weight:800}
+
+/* ports answer key */
+.keylist{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.keylist span{
+  background:var(--white);border:2px solid var(--blue);border-radius:10px;
+  padding:7px 14px;font-weight:800;font-size:28.5px;color:var(--blue-deep);
+}
+
+/* power-order note */
+.pw{display:flex;align-items:center;gap:16px;margin-top:14px;font-size:33px;font-weight:700}
+.pw .no{color:var(--coral)}
+.pw .yes{color:var(--green)}
+
+/* ---------- Core Notes ---------- */
+.slide.notes{background:#fbf9f2}
+.notes-head{
+  display:flex;align-items:center;gap:16px;border-bottom:3px solid var(--ink);
+  padding-bottom:14px;margin-bottom:18px;
+}
+.notes-head .icon{font-size:60px}
+.notes-head .t-en{font-size:48px;font-weight:800;letter-spacing:.06em}
+.notes-head .t-vi{font-size:28.5px}
+ol.notes-list{list-style:none;display:flex;flex-direction:column;gap:13px;counter-reset:nl}
+ol.notes-list li{display:flex;gap:14px;align-items:flex-start}
+ol.notes-list li::before{
+  counter-increment:nl;content:counter(nl);flex:none;width:34px;height:34px;border-radius:8px;
+  background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:27px;
+}
+ol.notes-list .en{font-size:31.5px;font-weight:800;line-height:1.28}
+ol.notes-list .en b{color:var(--blue-deep)}
+ol.notes-list .vi{font-size:25.5px;line-height:1.32;margin-top:2px}
+.notes-diagram{margin-top:14px;text-align:center}
+.notes-diagram code{
+  font-family:inherit;font-size:28.5px;font-weight:700;background:var(--white);
+  border:2px solid var(--line);border-radius:10px;padding:10px 16px;display:inline-block;color:var(--blue-deep);
+}
+
+/* ---------- Today I learned ---------- */
+ul.recap{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:16px}
+ul.recap li{border-left:5px solid var(--amber);padding-left:18px}
+ul.recap li .en{font-size:40.5px;font-weight:800}
+ul.recap li .vi{font-size:27px}
+
+/* penguin mascot */
+.mascot{position:absolute;right:56px;bottom:44px;width:118px;opacity:.96;pointer-events:none}
+.mascot img{width:100%;display:block}
+
+/* ---------- HUD ---------- */
+#hud{
+  position:absolute;left:0;right:0;bottom:0;height:32px;display:flex;align-items:center;gap:14px;
+  padding:0 22px;background:rgba(18,35,59,.06);font-size:19.5px;color:var(--ink-soft);z-index:5;
+}
+#ticks{display:flex;gap:3px;flex:1}
+#ticks .tk{height:6px;flex:1;background:var(--line);border-radius:3px}
+#ticks .tk.done{background:var(--blue)}
+#ticks .tk.cur{background:var(--amber)}
+#part-label{font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+#counter{font-weight:700;font-variant-numeric:tabular-nums}
+#reveal-hint{width:9px;height:9px;border-radius:50%;background:var(--amber);animation:pulse 1.2s infinite}
+#reveal-hint[hidden]{display:none}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+#help{
+  position:absolute;top:13px;right:18px;font-size:18px;color:var(--ink-soft);
+  background:rgba(255,255,255,.65);border-radius:8px;padding:6px 10px;z-index:5;
+}
+
+
+/* ---------- Scrollbar (visible when a slide overflows) ---------- */
+.slide-scroll-added{}
+.slide::-webkit-scrollbar{width:10px}
+.slide::-webkit-scrollbar-track{background:transparent}
+.slide::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+.slide::-webkit-scrollbar-thumb:hover{background:var(--blue,#1f6f8b)}
+.slide{scrollbar-width:thin}

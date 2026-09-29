@@ -8,55 +8,66 @@ HTML/CSS/JS thuần, không build.
 
 ```text
 /
-├── index.html            Trang chủ
-├── assets/
-│   ├── css/style.css     CSS dùng chung
-│   ├── js/main.js        Menu gập trên điện thoại
-│   └── images/home.png   Ảnh Hero trang chủ
+├── index.html                Trang chủ
+├── assets/                   CSS/JS/ảnh dùng chung của website
+├── tin-hoc-6/
+│   ├── index.html            Trang mục lục Tin học 6
+│   ├── bai-0/                Slide bài mở đầu (index.html, styles.css, slides.js, assets/)
+│   ├── bai-1/
+│   └── ...
+├── tin-hoc-7/                (tương tự)
+├── tin-hoc-8/                (tương tự)
+├── scripts/publish-slides.py Đồng bộ slide từ project nguồn
 └── README.md
 ```
 
-## Quy ước URL (dự kiến)
+| Chuyên mục          | URL                      | Trạng thái |
+|---------------------|--------------------------|------------|
+| Tin học 6 / 7 / 8   | `/tin-hoc-6/` …          | Có slide   |
+| Một bài             | `/tin-hoc-6/bai-2/`      | Link gửi trực tiếp cho học sinh được |
+| Đội tuyển Tin học   | `/doi-tuyen/` (dự kiến)  | Đang cập nhật |
+| Hoàng Mai Robotics  | `/robotics/` (dự kiến)   | Đang cập nhật |
+| Học lập trình       | <https://thaythangtoantin.com.vn/> | Link ngoài, mở tab mới |
 
-| Chuyên mục          | Thư mục        |
-|---------------------|----------------|
-| Tin học 6           | `/tin-hoc-6/`  |
-| Tin học 7           | `/tin-hoc-7/`  |
-| Tin học 8           | `/tin-hoc-8/`  |
-| Đội tuyển Tin học   | `/doi-tuyen/`  |
-| Hoàng Mai Robotics  | `/robotics/`   |
+## Đăng slide bài giảng
 
-Mỗi chuyên mục là một thư mục có `index.html` riêng (trang mục lục của chuyên mục đó).
-Bài giảng nằm trong thư mục con, mỗi bài một thư mục:
+Slide **gốc** nằm ở project `GiaoTrinh-GiaoAn-PP` (cùng thư mục cha với repo này):
+`Tin-Hoc-{6,7,8}/SlideHTML/Bai-XX/`. Không sửa slide trong repo này — sửa ở nguồn rồi chạy lại script.
 
-```text
-tin-hoc-6/
-├── index.html        Danh sách bài của Tin học 6
-├── bai-01/index.html
-├── bai-02/index.html
-└── ...
+```sh
+python scripts/publish-slides.py --dry-run   # xem trước
+python scripts/publish-slides.py             # đồng bộ
 ```
 
-Như vậy trang chủ chỉ cần biết 5 chuyên mục; thêm bài mới chỉ sửa trang `index.html` của chuyên mục đó.
+Script:
 
-## Mở một chuyên mục trên trang chủ
+- copy mỗi `Bai-XX/` sang `tin-hoc-N/bai-X/` (Bai-00 → bai-0, Bai-01 → bai-1, …) nguyên bản:
+  `index.html`, file `.css`/`.js` cùng cấp và thư mục `assets/` — file khác (ghi chú, nháp) không copy;
+- bỏ qua bài có đường dẫn tuyệt đối/local, URL Internet hoặc thiếu file (in lý do);
+- lấy tên bài từ chính slide (`<title>` hoặc dòng "Bài N — …" trên slide bìa);
+- tạo lại danh sách bài trong `tin-hoc-N/index.html` giữa `<!-- LESSONS:BEGIN -->` và `<!-- LESSONS:END -->`;
+- không xoá bài đã publish nếu nguồn không còn (chỉ cảnh báo), không commit, không push.
 
-Các card hiện hiển thị "Đang cập nhật" (không phải link, tránh 404).
-Khi thư mục chuyên mục đã có `index.html`, sửa card tương ứng trong `index.html` ở gốc:
+Nguồn ở chỗ khác: `python scripts/publish-slides.py --source "D:/duong/dan/GiaoTrinh-GiaoAn-PP"`.
+
+## Mở chuyên mục "Đang cập nhật" trên trang chủ
+
+Khi `/doi-tuyen/` hoặc `/robotics/` có nội dung, sửa card tương ứng trong `index.html` ở gốc
+(làm giống card Tin học 6/7/8):
 
 ```html
 <!-- Trước -->
-<li class="card card--soon" id="tin-hoc-6" style="--accent: var(--c-blue)">
+<li class="card card--soon" id="doi-tuyen" ...>
   <div class="card-body"> ... <span class="card-status">Đang cập nhật</span></div>
 </li>
 
 <!-- Sau -->
-<li class="card" id="tin-hoc-6" style="--accent: var(--c-blue)">
-  <a class="card-body" href="/tin-hoc-6/"> ... <span class="card-cta">Vào học</span></a>
+<li class="card" id="doi-tuyen" ...>
+  <a class="card-body" href="/doi-tuyen/"> ... <span class="card-cta">Vào học</span></a>
 </li>
 ```
 
-Đồng thời đổi link trên menu từ `#tin-hoc-6` thành `/tin-hoc-6/`.
+Đồng thời đổi link trên menu (trang chủ và 3 trang `tin-hoc-N/`) từ `#doi-tuyen` / `/#doi-tuyen` thành `/doi-tuyen/`.
 
 Card **Học lập trình** (class `card--external`) là link thật sang <https://thaythangtoantin.com.vn/>,
 mở trong tab mới (`target="_blank" rel="noopener noreferrer"`, có chữ ẩn "mở trong tab mới" cho trình đọc màn hình).
@@ -67,4 +78,4 @@ mở trong tab mới (`target="_blank" rel="noopener noreferrer"`, có chữ ẩ
 python -m http.server 8000
 ```
 
-Mở <http://localhost:8000/>. (Mở trực tiếp `index.html` cũng xem được giao diện, nhưng link "Trang chủ" `/` chỉ đúng khi chạy qua server.)
+Mở <http://localhost:8000/>. (Cần chạy qua server: các link menu dùng đường dẫn bắt đầu bằng `/`.)

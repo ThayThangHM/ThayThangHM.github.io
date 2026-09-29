@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Information in Computers · Tin học 6 — Bài 3</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 01 · Title -->
+    <section class="slide center" data-part="Bài 3">
+      <div class="kicker">Tin học 6 — Kết nối tri thức với cuộc sống · Chủ đề 1 · Máy tính và cộng đồng</div>
+      <h1>JUST 0 AND 1</h1>
+      <p class="vi vi-big">Bài 3 — Thông tin trong máy tính</p>
+      <div class="viz" style="margin-top:20px">
+        <svg viewBox="0 0 640 160" role="img" aria-label="A long row of 0s and 1s">
+          <g font-family="Segoe UI, sans-serif" font-size="34" font-weight="800">
+            <text x="60" y="90" fill="#1f6f8b">0</text><text x="110" y="90" fill="#12455a">1</text>
+            <text x="160" y="90" fill="#12455a">1</text><text x="210" y="90" fill="#1f6f8b">0</text>
+            <text x="260" y="90" fill="#1f6f8b">0</text><text x="310" y="90" fill="#e8963c">1</text>
+            <text x="360" y="90" fill="#e8963c">0</text><text x="410" y="90" fill="#3f8f6b">1</text>
+            <text x="460" y="90" fill="#3f8f6b">1</text><text x="510" y="90" fill="#12455a">0</text>
+            <text x="560" y="90" fill="#1f6f8b">1</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 02 · Mục tiêu -->
+    <section class="slide" data-part="Sau bài này em sẽ">
+      <div class="kicker">Sau bài này em sẽ…</div>
+      <h2>WHAT YOU WILL BE ABLE TO DO</h2>
+      <ul class="examples" style="margin-top:20px">
+        <li>Explain why information can be represented with just two symbols <span class="vi">· giải thích được việc có thể biểu diễn thông tin chỉ với hai kí hiệu 0 và 1</span></li>
+        <li>Know that a bit is the smallest unit of storage <span class="vi">· biết được bit là đơn vị nhỏ nhất trong lưu trữ thông tin</span></li>
+        <li>Name the basic units of data size, from byte to terabyte <span class="vi">· nêu được tên và độ lớn các đơn vị đo dung lượng thông tin</span></li>
+        <li>Estimate the storage capacity of common devices <span class="vi">· ước lượng khả năng lưu trữ của đĩa quang, đĩa từ, thẻ nhớ…</span></li>
+      </ul>
+    </section>
+
+    <!-- 03 · Khởi động -->
+    <section class="slide split" data-part="Khởi động">
+      <div class="split-copy">
+        <div class="kicker">Khởi động · Suy nghĩ</div>
+        <p class="question">People use letters, digits and symbols to express ideas.</p>
+        <p class="q-vi">Con người dùng chữ số, chữ cái và kí hiệu để diễn đạt suy nghĩ của mình cho người khác hiểu.</p>
+        <div class="think-tag">Think · Suy nghĩ</div>
+        <div class="step" hidden style="margin-top:18px">
+          <p class="en-lead">But today's computers understand only <b>two</b> symbols: 0 and 1.</p>
+          <p class="vi vi-lead">Nhưng máy tính thông dụng hiện nay chỉ làm việc được với hai kí hiệu là 0 và 1.</p>
+        </div>
+        <div class="step" hidden style="margin-top:12px">
+          <p class="en-lead">So how can text, images and sound all fit into just 0s and 1s?</p>
+          <p class="vi vi-lead">Vậy làm thế nào để máy tính hiểu được những dữ liệu chúng ta chuyển cho nó xử lí?</p>
+        </div>
+      </div>
+      <div class="split-viz">
+        <div class="viz">
+          <svg viewBox="0 0 300 300" role="img" aria-label="A question mark turning into 0 and 1">
+            <circle cx="150" cy="150" r="100" fill="#dff0f2" stroke="#1f6f8b" stroke-width="4"/>
+            <text x="150" y="175" font-size="110" font-weight="800" fill="#12455a" text-anchor="middle">?</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · Hoạt động 1: mã hoá số 4 -->
+    <section class="slide plain" data-part="Mã hoá">
+      <div class="kicker">Hoạt động 1 · Mã hoá — mỗi số từ 0 đến 7</div>
+      <h2>ANY NUMBER 0–7 CAN BECOME A 3-DIGIT CODE.</h2>
+      <p class="vi vi-lead">Mỗi số từ 0 đến 7 được chuyển thành một dãy gồm ba kí hiệu 0 và 1 (ba <b>bit</b>).</p>
+      <table class="dtab" style="margin-top:12px">
+        <tr><th>Số</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr>
+        <tr class="step" hidden><th>Mã hoá</th><td class="num">000</td><td class="num">001</td><td class="num">010</td><td class="num">011</td><td class="num">100</td><td class="num">101</td><td class="num">110</td><td class="num">111</td></tr>
+      </table>
+      <p class="support step" hidden style="margin-top:12px">If the range doubles (0–15), each number needs one more digit: a <b>4-bit</b> code.
+        <span class="vi">Nếu dãy số cho dài gấp đôi (0 đến 15) thì mỗi số sẽ được chuyển thành một dãy gồm bốn kí hiệu 0 và 1.</span></p>
+    </section>
+
+    <!-- 05 · Concept: BIT -->
+    <section class="slide split" data-part="Bit">
+      <div class="split-copy">
+        <div class="kicker">Hộp kiến thức</div>
+        <span class="term t-data"><span class="en">BIT</span><span class="vi">Binary digIT</span></span>
+        <p class="en-lead step" hidden style="margin-top:16px">Information in a computer is shown as a string of <b>bits</b> — each one a 0 or a 1.</p>
+        <p class="vi vi-lead step" hidden>Thông tin được biểu diễn trong máy tính bằng dãy các bit. Mỗi bit là một kí hiệu 0 hoặc 1, còn gọi là chữ số nhị phân.</p>
+        <p class="support step" hidden><b>Bit</b> là đơn vị đo nhỏ nhất trong lưu trữ thông tin.</p>
+      </div>
+      <div class="split-viz">
+        <div class="viz">
+          <div class="bitgrid" style="max-width:280px">
+            <div class="cell on">1</div><div class="cell">0</div><div class="cell on">1</div><div class="cell">0</div>
+            <div class="cell">0</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell">0</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Biểu diễn số -->
+    <section class="slide plain" data-part="Biểu diễn số">
+      <div class="kicker">Biểu diễn thông tin · Con số</div>
+      <h2>NUMBERS → BIT STRINGS.</h2>
+      <table class="dtab">
+        <tr><th>Số</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+        <tr><th>Dãy bit</th><td class="num">000</td><td class="num">001</td><td class="num">010</td><td class="num">011</td><td class="num">100</td><td class="num">101</td><td class="num">110</td><td class="num">111</td></tr>
+      </table>
+      <p class="support step" hidden style="margin-top:14px">By the same method, any number at all can be turned into a string of bits.
+        <span class="vi">Bằng cách tương tự, người ta có thể chuyển một số bất kì thành một dãy bit.</span></p>
+    </section>
+
+    <!-- 07 · Biểu diễn văn bản -->
+    <section class="slide plain" data-part="Biểu diễn văn bản">
+      <div class="kicker">Biểu diễn thông tin · Văn bản</div>
+      <h2>EACH CHARACTER HAS ITS OWN CODE.</h2>
+      <p class="vi vi-lead">Văn bản gồm chữ cái, chữ số, dấu câu… được gọi chung là <b>kí tự</b>. Mỗi kí tự được chuyển thành một dãy bit theo bảng mã.</p>
+      <div class="flow" style="margin-top:18px">
+        <div class="box data"><div class="en">C · A · F · E</div><div class="vi">văn bản</div></div>
+        <div class="arw step" hidden>→</div>
+        <div class="box info step" hidden><div class="en" style="font-size:19px">01000011 01000001<br>01000110 01000101</div><div class="vi">dãy bit</div></div>
+      </div>
+    </section>
+
+    <!-- 08 · Biểu diễn hình ảnh -->
+    <section class="slide plain" data-part="Biểu diễn hình ảnh">
+      <div class="kicker">Biểu diễn thông tin · Hình ảnh</div>
+      <h2>A GRID OF PIXELS BECOMES A GRID OF BITS.</h2>
+      <p class="vi vi-lead">Mỗi pixel trong ảnh đen trắng được biểu thị bằng một bit: 1 = ô đen, 0 = ô trắng.</p>
+      <div style="display:flex;gap:34px;align-items:center;justify-content:center;margin-top:14px">
+        <div class="bitgrid" style="max-width:280px" aria-label="Pixel letter A">
+          <div class="cell">0</div><div class="cell">0</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell">0</div><div class="cell">0</div><div class="cell">0</div><div class="cell">0</div>
+          <div class="cell">0</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell">0</div><div class="cell">0</div><div class="cell">0</div>
+          <div class="cell on">1</div><div class="cell on">1</div><div class="cell">0</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell">0</div><div class="cell">0</div><div class="cell">0</div>
+        </div>
+        <div class="step" hidden>
+          <p style="font-size:18px;font-weight:700;color:var(--blue-deep);line-height:1.9">
+            00110000<br>01111000<br>11011000
+          </p>
+        </div>
+      </div>
+      <p class="support step" hidden style="margin-top:10px">With color images, each pixel needs more bits to store its color.
+        <span class="vi">Với ảnh màu, mỗi pixel được biểu diễn bằng nhiều bit hơn.</span></p>
+    </section>
+
+    <!-- 09 · Biểu diễn âm thanh -->
+    <section class="slide plain" data-part="Biểu diễn âm thanh">
+      <div class="kicker">Biểu diễn thông tin · Âm thanh</div>
+      <h2>SOUND BECOMES NUMBERS, THEN BITS.</h2>
+      <p class="vi vi-lead">Dây đàn rung càng nhanh, âm thanh phát ra càng cao. Tốc độ rung được ghi lại dưới dạng số, rồi chuyển thành dãy bit.</p>
+      <div class="flow" style="margin-top:18px">
+        <div class="box data"><div class="en">440 Hz</div><div class="vi">nốt La chuẩn</div></div>
+        <div class="arw step" hidden>→</div>
+        <div class="box info step" hidden><div class="en">110111000</div><div class="vi">dãy bit</div></div>
+      </div>
+    </section>
+
+    <!-- 10 · Mini core note -->
+    <section class="slide notes" data-part="Ghi bài">
+      <div class="notes-head">
+        <span class="icon">📓</span>
+        <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi bài — Phần 1</div></div>
+      </div>
+      <ol class="notes-list">
+        <li><div><div class="en">Thông tin được biểu diễn trong máy tính bằng <b>dãy các bit</b>. Mỗi bit là một kí hiệu 0 hoặc 1 (chữ số nhị phân).</div></div></li>
+        <li><div><div class="en"><b>Bit</b> là đơn vị đo nhỏ nhất trong lưu trữ thông tin.</div></div></li>
+        <li><div><div class="en">Mọi dạng thông tin — số, văn bản, hình ảnh, âm thanh — đều được chuyển thành dãy bit để máy tính xử lí.</div></div></li>
+      </ol>
+    </section>
+
+    <!-- 11 · Hoạt động 2: vẽ trái tim -->
+    <section class="slide plain" data-part="Hoạt động">
+      <div class="kicker">Hoạt động 2 · Viết dãy bit</div>
+      <h2>TURN A PICTURE INTO A STRING OF BITS.</h2>
+      <p class="vi vi-lead">Trong lưới 8×8, hãy vẽ một hình trái tim. Chuyển mỗi dòng thành một dãy bit rồi nối các dòng lại với nhau.</p>
+      <div class="bitgrid" style="max-width:280px;margin-top:14px">
+        <div class="cell">0</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell">0</div><div class="cell">0</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell">0</div>
+        <div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div>
+        <div class="cell">0</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell">0</div>
+        <div class="cell">0</div><div class="cell">0</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell on">1</div><div class="cell">0</div><div class="cell">0</div>
+      </div>
+      <p class="support step" hidden style="margin-top:12px">Row 1 for example becomes: 01100110. Try the other rows with a partner.
+        <span class="vi">Dòng 1 ở trên tương ứng với dãy bit: 01100110. Em hãy cùng bạn thử các dòng còn lại.</span></p>
+    </section>
+
+    <!-- 12 · Quiz -->
+    <section class="slide plain" data-part="Câu hỏi">
+      <div class="kicker">Câu hỏi · Kiểm tra nhanh</div>
+      <h2>WHAT IS A BIT STRING FOR?</h2>
+      <p class="vi vi-lead">1. Dãy bit là gì?</p>
+      <div class="choices" data-quiz>
+        <button class="choice"><span class="letter">A</span><span><span class="en">Là âm thanh phát ra từ máy tính</span></span></button>
+        <button class="choice" data-correct><span class="letter">B</span><span><span class="en">Là dãy những kí hiệu 0 và 1</span></span></button>
+        <button class="choice"><span class="letter">C</span><span><span class="en">Là một dãy chỉ gồm chữ số 2</span></span></button>
+        <button class="choice"><span class="letter">D</span><span><span class="en">Là dãy những chữ số từ 0 đến 9</span></span></button>
+      </div>
+      <p class="vi vi-lead step" hidden data-answer style="margin-top:14px">2. Máy tính sử dụng dãy bit để làm gì? → <b>Biểu diễn số, văn bản, hình ảnh, âm thanh.</b></p>
+    </section>
+
+    <!-- 13 · Section 2 title -->
+    <section class="slide center" data-part="Đơn vị đo thông tin">
+      <span class="sec-badge"><span class="n">2</span> Part 2</span>
+      <h1>HOW DO WE MEASURE DATA?</h1>
+      <p class="vi vi-big">Đơn vị đo thông tin</p>
+      <p class="support" style="margin-top:20px">Thông tin trong máy tính được tổ chức dưới dạng các tệp — người ta cần đơn vị để đo dung lượng của chúng.</p>
+    </section>
+
+    <!-- 14 · byte + bảng đơn vị -->
+    <section class="slide plain" data-part="Đơn vị đo thông tin">
+      <div class="kicker">1 byte = 8 bit liên tục</div>
+      <h2>BYTE, KILOBYTE, MEGABYTE…</h2>
+      <div class="bytestrip">
+        <div class="b">0</div><div class="b">1</div><div class="b">1</div><div class="b">0</div><div class="b">0</div><div class="b">0</div><div class="b">0</div><div class="b">1</div>
+      </div>
+      <p class="vi vi-lead" style="margin-top:6px">↑ 1 byte (8 bit)</p>
+      <table class="dtab" style="margin-top:14px">
+        <tr><th>Đơn vị</th><th>Kí hiệu</th><th>Giá trị</th><th>Xấp xỉ</th></tr>
+        <tr><td>byte</td><td>B</td><td>1 B</td><td>—</td></tr>
+        <tr class="step" hidden><td>kilobyte</td><td>KB</td><td>1024 B</td><td>1 nghìn byte</td></tr>
+        <tr class="step" hidden><td>megabyte</td><td>MB</td><td>1024 KB</td><td>1 triệu byte</td></tr>
+        <tr class="step" hidden><td>gigabyte</td><td>GB</td><td>1024 MB</td><td>1 tỉ byte</td></tr>
+        <tr class="step" hidden><td>terabyte</td><td>TB</td><td>1024 GB</td><td>1 nghìn tỉ byte</td></tr>
+      </table>
+    </section>
+
+    <!-- 15 · Thiết bị lưu trữ -->
+    <section class="slide plain" data-part="Thiết bị lưu trữ">
+      <div class="kicker">Around you · Dung lượng các thiết bị lưu trữ</div>
+      <h2>HOW MUCH CAN EACH DEVICE HOLD?</h2>
+      <div class="unitrow">
+        <div class="unitcard on"><div class="name">CD</div><div class="val">≈ 700 MB</div></div>
+        <div class="unitcard on"><div class="name">DVD</div><div class="val">4,7 – 17 GB</div></div>
+        <div class="unitcard on"><div class="name">Bộ nhớ trong</div><div class="val">2 – 16 GB</div></div>
+        <div class="unitcard on"><div class="name">Ổ cứng</div><div class="val">vài trăm GB – vài TB</div></div>
+        <div class="unitcard on"><div class="name">Thẻ nhớ</div><div class="val">hàng trăm GB</div></div>
+      </div>
+      <p class="support step" hidden style="margin-top:16px">Thẻ nhớ được nhiều người ưa thích vì nhỏ gọn mà lưu trữ được rất nhiều dữ liệu.</p>
+    </section>
+
+    <!-- 16 · Vận dụng: tính toán -->
+    <section class="slide" data-part="Vận dụng">
+      <div class="kicker">Vận dụng · Tính toán</div>
+      <h2>DO THE MATH.</h2>
+      <ul class="examples" style="margin-top:10px">
+        <li>Một GB xấp xỉ bao nhiêu byte? <span class="vi step" hidden>→ khoảng một tỉ byte</span></li>
+        <li>Một bức ảnh chụp bằng máy ảnh chuyên nghiệp có dung lượng khoảng 12 MB. Một thẻ nhớ 16 GB chứa được bao nhiêu bức ảnh như vậy? <span class="vi step" hidden>→ 16 GB ≈ 16 384 MB ÷ 12 MB ≈ 1365 ảnh</span></li>
+      </ul>
+      <p class="support step" hidden style="margin-top:12px">Em hãy kiểm tra và ghi lại dung lượng các ổ đĩa của máy tính mà em đang sử dụng.</p>
+    </section>
+
+    <!-- 17 · CORE NOTE 2 -->
+    <section class="slide notes" data-part="Ghi bài">
+      <div class="notes-head">
+        <span class="icon">📓</span>
+        <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi bài — Phần 2</div></div>
+      </div>
+      <ol class="notes-list">
+        <li><div><div class="en">Đơn vị đo dung lượng thông tin cơ bản là <b>byte</b> (1 byte = 8 bit).</div></div></li>
+        <li><div><div class="en">Các đơn vị lớn hơn theo bội số 1024: <b>KB → MB → GB → TB</b>.</div></div></li>
+        <li><div><div class="en">Các thiết bị nhớ (đĩa quang, đĩa từ, thẻ nhớ…) có dung lượng rất khác nhau, dùng để lưu trữ và trao đổi dữ liệu.</div></div></li>
+      </ol>
+    </section>
+
+    <!-- 18 · Chuyển bài -->
+    <section class="slide center" data-part="Chuyển bài">
+      <div class="kicker">Sắp tới · Coming up</div>
+      <h1>HOW DO COMPUTERS TALK TO EACH OTHER?</h1>
+      <p class="vi vi-big">Chủ đề 2 — Bài 4: Mạng máy tính</p>
+      <p class="support" style="margin-top:20px">Máy tính đã có thể xử lí và lưu trữ thông tin — bước tiếp theo là kết nối chúng lại với nhau.</p>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 3</span>
+      <div id="ticks"></div>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 18</span>
+    </div>
+    <div id="help">← → / Presenter · Next reveals, then advances · F = fullscreen</div>
+
+  </div>
+</div>
+<script src="slides.js"></script>
+</body>
+</html>

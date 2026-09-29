@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Managing Data on a Computer · Tin học 7 — Bài 3</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 01 · Title -->
+    <section class="slide center" data-part="Bài 3">
+      <div class="kicker">Tin học 7 — Kết nối tri thức với cuộc sống · Chủ đề 1</div>
+      <h1>MANAGING DATA ON A COMPUTER</h1>
+      <p class="vi vi-big">Bài 3 — Quản lí dữ liệu trong máy tính</p>
+      <div class="viz" style="margin-top:26px">
+        <svg viewBox="0 0 640 220" role="img" aria-label="A folder holding files">
+          <path d="M180 70 h90 l24 26 h166 v92 h-280 z" fill="#e8963c"/>
+          <path d="M180 70 h90 l24 26 h-114 z" fill="#f6c887"/>
+          <rect x="220" y="112" width="60" height="48" rx="4" fill="#fff"/>
+          <rect x="292" y="112" width="60" height="48" rx="4" fill="#fff"/>
+          <rect x="364" y="112" width="60" height="48" rx="4" fill="#fff"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 02 · Hook -->
+    <section class="slide split" data-part="Khởi động">
+      <div class="split-copy">
+        <div class="kicker">Situation · Tình huống</div>
+        <p class="question">A family trip: notes and lots of photos. Where do you put them all?</p>
+        <p class="q-vi">Một chuyến du lịch cùng gia đình: em ghi chép và chụp nhiều ảnh kỉ niệm. Em sẽ lưu trữ chúng thế nào?</p>
+        <div class="think-tag">Think · Suy nghĩ</div>
+      </div>
+      <div class="split-viz">
+        <div class="viz">
+          <svg viewBox="0 0 300 260" role="img" aria-label="Photos and notes scattered, needing organization">
+            <rect x="40" y="30" width="70" height="54" rx="4" fill="#fff" stroke="#c9bfa8" stroke-width="2" transform="rotate(-8 75 57)"/>
+            <rect x="130" y="20" width="70" height="54" rx="4" fill="#fff" stroke="#c9bfa8" stroke-width="2" transform="rotate(6 165 47)"/>
+            <rect x="80" y="90" width="70" height="54" rx="4" fill="#fff" stroke="#c9bfa8" stroke-width="2" transform="rotate(-3 115 117)"/>
+            <rect x="170" y="95" width="60" height="70" rx="4" fill="#dff0f2" stroke="#1f6f8b" stroke-width="2" transform="rotate(8 200 130)"/>
+            <path d="M60 200 h180" stroke="#e8963c" stroke-width="6" stroke-dasharray="2 12" stroke-linecap="round"/>
+            <text x="150" y="230" font-size="16" font-weight="800" fill="#e8963c" text-anchor="middle">? ? ?</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Activity: draw folder tree -->
+    <section class="slide plain" data-part="Khởi động">
+      <span class="sec-badge"><span class="n">•</span> Pair task · Cặp đôi (3 phút)</span>
+      <h2>SKETCH A FOLDER TREE TO STORE THIS TRIP DATA.</h2>
+      <p class="vi vi-lead">Vẽ sơ đồ cây thư mục để chứa các tệp dữ liệu chuyến đi, đặt tên các thư mục sao cho dễ tìm kiếm.</p>
+      <div class="tree step" hidden style="margin-top:14px">
+        <div class="lv0">📁 DuLich</div>
+        <div class="lv1">📁 AnhChup</div>
+        <div class="lv2">🖼 bien.jpg · 🖼 nuiRung.jpg</div>
+        <div class="lv1">📁 GhiChu</div>
+        <div class="lv2">📄 lichtrinh.docx · 📄 chiphi.xlsx</div>
+      </div>
+    </section>
+
+    <!-- 04 · Naming: think first -->
+    <section class="slide plain" data-part="Tên tệp và thư mục">
+      <div class="kicker">Discuss · Thảo luận</div>
+      <h2>BEFORE YOU STORE DATA, WHAT SHOULD YOU DO FIRST — AND WHY?</h2>
+      <p class="vi vi-lead">Trước khi lưu trữ dữ liệu, ta cần làm gì? Tại sao?</p>
+      <p class="support step" hidden style="margin-top:14px"><b>Classify the data first</b> — sorted data is stored in order, so it is much faster to find later.
+        <span class="vi">Cần phân loại dữ liệu trước — dữ liệu có trật tự sẽ giúp tìm kiếm nhanh hơn.</span></p>
+    </section>
+
+    <!-- 05 · Naming rule -->
+    <section class="slide split" data-part="Tên tệp và thư mục">
+      <div class="split-copy">
+        <div class="kicker">Concept 1 · Khái niệm</div>
+        <h2>NAME FILES &amp; FOLDERS SO THEY ARE EASY TO REMEMBER.</h2>
+        <p class="vi vi-lead">Đặt tên tệp và thư mục sao cho dễ nhớ, cho biết bên trong chứa gì.</p>
+        <p class="support step" hidden style="margin-top:12px">A good name makes your future work much easier.
+          <span class="vi">Tên tốt sẽ giúp công việc sau này thuận lợi hơn rất nhiều.</span></p>
+      </div>
+      <div class="split-viz">
+        <div class="dd" style="grid-template-columns:1fr">
+          <div class="col do"><h3>DO · Nên</h3><ul>
+            <li>DuLichPhanThiet2026 <span class="vi">· rõ nội dung, có năm</span></li>
+            <li>BaiTap_Toan_Tuan3</li>
+          </ul></div>
+          <div class="col dont"><h3>DON'T · Không nên</h3><ul>
+            <li>New folder (2) <span class="vi">· không nói lên gì cả</span></li>
+            <li>asdf, tailieu1</li>
+          </ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Programs are files too -->
+    <section class="slide plain" data-part="Tên tệp và thư mục">
+      <div class="kicker">Concept 2 · Khái niệm</div>
+      <h2>A COMPUTER PROGRAM IS STORED AS A FILE TOO.</h2>
+      <p class="vi vi-lead">Chương trình máy tính được lưu trữ trên thiết bị nhớ giống như một tệp dữ liệu.</p>
+      <div class="filename step" hidden><span class="base">ScratchSetup</span><span class="dot">.</span><span class="ext-part">exe</span></div>
+      <p class="support step" hidden>In Windows, program files often end in <span class="ext">.exe</span> <span class="ext">.com</span> <span class="ext">.bat</span> <span class="ext">.msi</span>
+        <span class="vi">Trong Windows, tệp chương trình thường có phần mở rộng .exe, .com, .bat, .msi.</span></p>
+    </section>
+
+    <!-- 07 · Activity: match file type -> extension -->
+    <section class="slide plain" data-part="Tên tệp và thư mục">
+      <span class="sec-badge"><span class="n">•</span> Pair task · Cặp đôi</span>
+      <h2>MATCH EACH FILE TYPE TO ITS EXTENSION.</h2>
+      <p class="vi vi-lead">Ghép mỗi loại tệp với phần mở rộng phù hợp.</p>
+      <div class="match-grid">
+        <div class="m">Tài liệu Word <span class="ext step" hidden>.docx</span></div>
+        <div class="m">Chương trình cài đặt <span class="ext step" hidden>.exe</span></div>
+        <div class="m">Hình ảnh <span class="ext step" hidden>.jpg</span></div>
+        <div class="m">Chương trình Scratch <span class="ext step" hidden>.sb3</span></div>
+        <div class="m">Trang web <span class="ext step" hidden>.html</span></div>
+        <div class="m">Bài trình chiếu <span class="ext step" hidden>.pptx</span></div>
+      </div>
+    </section>
+
+    <!-- 08 · CORE NOTES mini 1 -->
+    <section class="slide notes" data-part="Ghi bài">
+      <div class="notes-head">
+        <span class="icon">📓</span>
+        <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi bài — Phần 1: Tên tệp và thư mục</div></div>
+      </div>
+      <ol class="notes-list">
+        <li><div>
+          <div class="en">Trước khi lưu trữ, cần <b>phân loại dữ liệu</b> để việc tìm kiếm sau này nhanh và dễ dàng hơn.</div>
+        </div></li>
+        <li><div>
+          <div class="en">Đặt tên tệp, thư mục <b>đơn giản, dễ nhớ</b>, cho biết bên trong chứa gì.</div>
+        </div></li>
+        <li><div>
+          <div class="en">Chương trình máy tính cũng là một tệp — tệp chương trình trong Windows thường có phần mở rộng <b>.exe, .com, .bat, .msi</b>.</div>
+        </div></li>
+      </ol>
+    </section>
+
+    <!-- 09 · Section 2 title -->
+    <section class="slide center" data-part="Bảo vệ dữ liệu">
+      <span class="sec-badge"><span class="n">2</span> Part 2</span>
+      <h1>PROTECTING YOUR DATA</h1>
+      <p class="vi vi-big">Các biện pháp bảo vệ dữ liệu</p>
+      <p class="support" style="margin-top:20px">Your computer has data you cannot afford to lose. How do you protect it?<br>
+        <span class="vi">Máy tính của em có nhiều dữ liệu quan trọng. Em bảo vệ chúng bằng cách nào?</span></p>
+    </section>
+
+    <!-- 10 · Three shields overview -->
+    <section class="slide plain" data-part="Bảo vệ dữ liệu">
+      <div class="kicker">Overview · Ba biện pháp chính</div>
+      <h2>THREE WAYS TO PROTECT YOUR DATA.</h2>
+      <div class="shield-grid">
+        <div class="shield step" hidden><div class="icon">💾</div><div class="nm">Backup</div><div class="d">Sao lưu dữ liệu</div></div>
+        <div class="shield step" hidden><div class="icon">🔑</div><div class="nm">Password</div><div class="d">Tài khoản &amp; mật khẩu</div></div>
+        <div class="shield step" hidden><div class="icon">🛡️</div><div class="nm">Antivirus</div><div class="d">Phần mềm chống virus</div></div>
+      </div>
+    </section>
+
+    <!-- 11 · Backup: what is it -->
+    <section class="slide split" data-part="Bảo vệ dữ liệu">
+      <div class="split-copy">
+        <div class="kicker">Method 1 · Sao lưu dữ liệu</div>
+        <h2>BACKUP = A COPY OF YOUR FILES, KEPT SOMEWHERE ELSE.</h2>
+        <p class="vi vi-lead">Sao lưu là tạo bản sao các tệp, thư mục rồi lưu lên một thiết bị lưu trữ khác.</p>
+        <p class="support step" hidden style="margin-top:12px">Store the backup on a device <em>other than</em> the one holding the original data.
+          <span class="vi">Cần lưu trên thiết bị khác với thiết bị chứa dữ liệu gốc, để tránh mất cả hai cùng lúc.</span></p>
+      </div>
+      <div class="split-viz">
+        <div class="viz">
+          <svg viewBox="0 0 300 220" role="img" aria-label="A file being copied from a computer to a separate storage device">
+            <rect x="20" y="60" width="90" height="70" rx="8" fill="#1f6f8b"/>
+            <text x="65" y="100" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Dữ liệu gốc</text>
+            <path d="M120 95 H190" stroke="#e8963c" stroke-width="6" stroke-dasharray="2 10"/>
+            <polygon points="190,95 176,87 176,103" fill="#e8963c"/>
+            <rect x="200" y="55" width="80" height="80" rx="10" fill="#3f8f6b"/>
+            <text x="240" y="100" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Bản sao lưu</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · Storage devices comparison -->
+    <section class="slide plain" data-part="Bảo vệ dữ liệu">
+      <div class="kicker">Which storage device? · Chọn thiết bị lưu trữ</div>
+      <h2>PICK A DEVICE THAT FITS THE JOB.</h2>
+      <div class="stack-grid">
+        <div class="stack step" hidden><div class="icon">💽</div><div class="nm">Ổ cứng ngoài</div><div class="pro">Dung lượng lớn, tiện dùng</div></div>
+        <div class="stack step" hidden><div class="icon">🔌</div><div class="nm">USB</div><div class="pro">Nhỏ gọn, khá bền</div></div>
+        <div class="stack step" hidden><div class="icon">💿</div><div class="nm">Đĩa quang</div><div class="pro">Chi phí thấp, khó nhiễm virus</div></div>
+        <div class="stack best step" hidden><div class="icon">☁️</div><div class="nm">Đám mây</div><div class="pro">Truy cập từ xa, mọi máy có Internet</div></div>
+      </div>
+      <p class="support step" hidden style="margin-top:14px">Backup <b>regularly</b> — not just once — to avoid losing new data.
+        <span class="vi">Cần sao lưu thường xuyên, không chỉ một lần, để tránh mất dữ liệu mới.</span></p>
+    </section>
+
+    <!-- 13 · Quiz: choose backup device for scenario -->
+    <section class="slide plain" data-part="Kiểm tra nhanh">
+      <div class="kicker">Quick check · Kiểm tra nhanh</div>
+      <h2>1 · Best way to back up photos you may need on any computer?</h2>
+      <p class="vi vi-lead">Cách nào phù hợp nhất để sao lưu ảnh mà em có thể cần xem trên bất kì máy tính nào?</p>
+      <div class="choices" data-quiz>
+        <button class="choice"><span class="letter">A</span><span><span class="en">Leave it only on this computer</span><span class="vi">chỉ giữ trên máy này</span></span></button>
+        <button class="choice"><span class="letter">B</span><span><span class="en">Optical disc</span><span class="vi">đĩa quang</span></span></button>
+        <button class="choice" data-correct><span class="letter">C</span><span><span class="en">Cloud storage</span><span class="vi">lưu trữ đám mây</span></span></button>
+        <button class="choice"><span class="letter">D</span><span><span class="en">Don't back up</span><span class="vi">không sao lưu</span></span></button>
+      </div>
+      <p class="support step" hidden data-answer><b>C — Cloud storage.</b> Accessible from any Internet-connected computer, and safe from local damage.
+        <span class="vi">Lưu trữ đám mây có thể truy cập từ bất kì máy nào có Internet, an toàn hơn nếu máy gốc bị hỏng.</span></p>
+    </section>
+
+    <!-- 14 · Password: why -->
+    <section class="slide split" data-part="Bảo vệ dữ liệu">
+      <div class="split-copy">
+        <div class="kicker">Method 2 · Tài khoản &amp; mật khẩu</div>
+        <p class="question">Should you set a password to stop others accessing your data?</p>
+        <p class="q-vi">Em có nên đặt mật khẩu cho tài khoản để tránh người khác truy cập trái phép không?</p>
+        <div class="step" hidden style="margin-top:20px">
+          <span class="term io-in"><span class="en">YES — always set a password.</span><span class="vi">Nên đặt mật khẩu cho tài khoản của mình trên máy tính và Internet.</span></span>
+        </div>
+      </div>
+      <div class="split-viz">
+        <div class="viz">
+          <svg viewBox="0 0 220 220" role="img" aria-label="A padlock protecting data">
+            <rect x="50" y="100" width="120" height="90" rx="14" fill="#1f6f8b"/>
+            <path d="M70 100 V70 a40 40 0 0 1 80 0 V100" fill="none" stroke="#12455a" stroke-width="14"/>
+            <circle cx="110" cy="140" r="14" fill="#dff0f2"/>
+            <rect x="103" y="140" width="14" height="26" rx="4" fill="#dff0f2"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · Good vs weak password -->
+    <section class="slide plain" data-part="Bảo vệ dữ liệu">
+      <div class="kicker">How to set a strong password · Cách đặt mật khẩu mạnh</div>
+      <h2>A STRONG PASSWORD IS HARD TO GUESS.</h2>
+      <div class="pw-row weak"><span class="val">12345678</span><span class="tag step" hidden>YẾU · dễ đoán</span></div>
+      <div class="pw-row weak"><span class="val">tênem_ngaysinh</span><span class="tag step" hidden>YẾU · thông tin cá nhân</span></div>
+      <div class="pw-row strong"><span class="val">2n#M1nhKhoa</span><span class="tag step" hidden>MẠNH · đủ 4 loại kí tự</span></div>
+      <p class="support step" hidden style="margin-top:12px">Use ≥8 characters, mixing digits, UPPER/lower case and symbols. Never use your name, birthday or phone number.
+        <span class="vi">Dùng ít nhất 8 kí tự, gồm chữ số, chữ hoa, chữ thường, kí hiệu đặc biệt. Không dùng tên, ngày sinh, số điện thoại.</span></p>
+    </section>
+
+    <!-- 16 · Quiz: strongest password -->
+    <section class="slide plain" data-part="Kiểm tra nhanh">
+      <div class="kicker">Quick check · Kiểm tra nhanh</div>
+      <h2>2 · Which password below is the strongest?</h2>
+      <p class="vi vi-lead">Mật khẩu nào sau đây mạnh nhất?</p>
+      <div class="choices" data-quiz>
+        <button class="choice"><span class="letter">A</span><span class="ext" style="margin:0">12345678</span></button>
+        <button class="choice"><span class="letter">B</span><span class="ext" style="margin:0">AnMinhKhoa</span></button>
+        <button class="choice" data-correct><span class="letter">C</span><span class="ext" style="margin:0">2n#M1nhKhoa</span></button>
+        <button class="choice"><span class="letter">D</span><span class="ext" style="margin:0">matkhau</span></button>
+      </div>
+      <p class="support step" hidden data-answer><b>C</b> mixes digits, symbols, upper and lower case — hardest to guess.
+        <span class="vi">C có đủ chữ số, kí hiệu, chữ hoa và chữ thường — khó đoán nhất.</span></p>
+    </section>
+
+    <!-- 17 · Antivirus -->
+    <section class="slide split" data-part="Bảo vệ dữ liệu">
+      <div class="split-copy">
+        <div class="kicker">Method 3 · Phần mềm chống virus</div>
+        <h2>MALWARE CAN DESTROY YOUR DATA.</h2>
+        <p class="vi vi-lead">Một số phần mềm độc hại có thể làm hỏng dữ liệu và chương trình trong máy tính.</p>
+        <ul class="examples step" hidden style="margin-top:14px">
+          <li>Virus <span class="vi">· virus máy tính</span></li>
+          <li>Worm <span class="vi">· sâu máy tính</span></li>
+          <li>Spyware <span class="vi">· phần mềm gián điệp</span></li>
+        </ul>
+        <p class="support step" hidden>Install antivirus software, keep it <b>on</b> and <b>updated</b>; never run software from unknown sources.
+          <span class="vi">Cài phần mềm diệt virus, luôn bật và cập nhật; không dùng phần mềm không rõ nguồn gốc.</span></p>
+      </div>
+      <div class="split-viz">
+        <div class="viz">
+          <svg viewBox="0 0 240 220" role="img" aria-label="A shield blocking a bug representing malware">
+            <path d="M120 20 L200 50 V110 C200 160 165 195 120 210 C75 195 40 160 40 110 V50 Z" fill="#3f8f6b"/>
+            <path d="M120 40 L184 64 V108 C184 148 156 176 120 190 C84 176 56 148 56 108 V64 Z" fill="#e6f3ec"/>
+            <circle cx="120" cy="112" r="26" fill="#d9604f"/>
+            <path d="M104 96 L136 128 M136 96 L104 128" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 · CORE NOTES mini 2 -->
+    <section class="slide notes" data-part="Ghi bài">
+      <div class="notes-head">
+        <span class="icon">📓</span>
+        <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi bài — Phần 2: Bảo vệ dữ liệu</div></div>
+      </div>
+      <ol class="notes-list">
+        <li><div>
+          <div class="en"><b>Sao lưu (backup):</b> tạo bản sao tệp/thư mục, lưu trên thiết bị khác (USB, ổ cứng ngoài, đĩa quang, đám mây), thực hiện thường xuyên.</div>
+        </div></li>
+        <li><div>
+          <div class="en"><b>Mật khẩu:</b> đặt cho mọi tài khoản, ≥ 8 kí tự, đủ chữ hoa/thường/số/kí hiệu, không dùng thông tin cá nhân.</div>
+        </div></li>
+        <li><div>
+          <div class="en"><b>Phần mềm chống virus:</b> cài đặt, luôn bật và cập nhật; không dùng phần mềm không rõ nguồn gốc.</div>
+        </div></li>
+      </ol>
+    </section>
+
+    <!-- 19 · Quiz: false statement about storage -->
+    <section class="slide plain" data-part="Luyện tập">
+      <div class="kicker">Practice · Luyện tập</div>
+      <h2>3 · Which statement about storage devices is <em>FALSE</em>?</h2>
+      <p class="vi vi-lead">Phát biểu nào sau đây về thiết bị lưu trữ là <b>sai</b>?</p>
+      <div class="choices" data-quiz>
+        <button class="choice"><span class="letter">A</span><span><span class="en">Memory cards/USB are easy to lose but convenient.</span></span></button>
+        <button class="choice" data-correct><span class="letter">B</span><span><span class="en">A writable CD needs no burner and has huge capacity.</span></span></button>
+        <button class="choice"><span class="letter">C</span><span><span class="en">Cloud storage avoids drops, loss and damage.</span></span></button>
+        <button class="choice"><span class="letter">D</span><span><span class="en">External hard disks are compact with large capacity.</span></span></button>
+      </div>
+      <p class="support step" hidden data-answer><b>B is false</b> — burning a CD actually needs a disc burner, and its capacity is small.
+        <span class="vi">B sai — ghi đĩa CD cần có đầu ghi đĩa, dung lượng lại nhỏ chứ không lớn.</span></p>
+    </section>
+
+    <!-- 20 · Vận dụng -->
+    <section class="slide plain" data-part="Vận dụng">
+      <div class="kicker">Apply · Vận dụng</div>
+      <h2>CHOOSE A DEVICE TO BACK UP THE "DuLich" FOLDER.</h2>
+      <p class="vi vi-lead">Em hãy lựa chọn một thiết bị lưu trữ để sao lưu thư mục "DuLich" và giải thích lí do chọn.</p>
+      <p class="support step" hidden style="margin-top:14px"><b>Cloud storage</b> — backs up remotely, reachable from any Internet-connected computer, large capacity, and safe from loss or damage.
+        <span class="vi">Đám mây — sao lưu từ xa, truy cập được từ mọi máy có kết nối Internet, dung lượng lớn, không sợ thất lạc hay hỏng.</span></p>
+      <div class="mascot"><img src="assets/penguin.png" alt=""></div>
+    </section>
+
+    <!-- 21 · Today I learned -->
+    <section class="slide" data-part="Tổng kết">
+      <div class="kicker">Today I learned · Hôm nay em đã học</div>
+      <h2>TODAY I LEARNED…</h2>
+      <ul class="recap">
+        <li><div class="en">Name files and folders so they are easy to remember and find.</div>
+          <div class="vi">Đặt tên tệp, thư mục dễ nhớ, dễ biết bên trong chứa gì.</div></li>
+        <li><div class="en">Protect data with backup, strong passwords, and antivirus software.</div>
+          <div class="vi">Bảo vệ dữ liệu bằng sao lưu, mật khẩu mạnh và phần mềm chống virus.</div></li>
+      </ul>
+      <p class="support step" hidden>How will you back up your own school files starting today?
+        <span class="vi">Từ hôm nay em sẽ sao lưu bài vở của mình như thế nào?</span></p>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 3</span>
+      <div id="ticks"></div>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 21</span>
+    </div>
+    <div id="help">← → / Presenter · Next reveals, then advances · F = fullscreen</div>
+
+  </div>
+</div>
+<script src="slides.js"></script>
+</body>
+</html>
