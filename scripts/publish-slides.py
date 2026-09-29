@@ -33,6 +33,8 @@ REPO = Path(__file__).resolve().parent.parent
 DEFAULT_SOURCE = REPO.parent / "GiaoTrinh-GiaoAn-PP"
 GRADES = (6, 7, 8)
 LESSON_DIR = re.compile(r"^Bai-(\d+)$")
+# Bài không đưa lên website (vẫn giữ trong nguồn). 0 = Bài mở đầu (Bai-00).
+EXCLUDE = {0}
 BEGIN, END = "<!-- LESSONS:BEGIN -->", "<!-- LESSONS:END -->"
 
 REF = re.compile(
@@ -182,6 +184,9 @@ def main():
             if not d.is_dir() or not m:
                 continue
             num = int(m.group(1))
+            if num in EXCLUDE:
+                print(f"  – {d.name}: bỏ qua (nằm trong EXCLUDE)")
+                continue
             if not (d / "index.html").exists():
                 print(f"  ! {d.name}: không có index.html — bỏ qua")
                 problems += 1
@@ -212,7 +217,9 @@ def main():
         if dst_root.is_dir():
             for extra in sorted(dst_root.glob("bai-*")):
                 n = extra.name[4:]
-                if extra.is_dir() and n.isdigit() and int(n) not in published:
+                if extra.is_dir() and n.isdigit() and int(n) in EXCLUDE:
+                    print(f"  ! {extra.relative_to(REPO).as_posix()}/ nằm trong EXCLUDE nhưng vẫn còn trên website — hãy tự xoá")
+                elif extra.is_dir() and n.isdigit() and int(n) not in published:
                     print(f"  ! {extra.relative_to(REPO).as_posix()}/ không còn trong nguồn — giữ nguyên, hãy tự xoá nếu muốn")
         update_index(grade, sorted(lessons), args.dry_run)
         print()

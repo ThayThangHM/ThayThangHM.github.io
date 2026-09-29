@@ -12,8 +12,7 @@ HTML/CSS/JS thuần, không build.
 ├── assets/                   CSS/JS/ảnh dùng chung của website
 ├── tin-hoc-6/
 │   ├── index.html            Trang mục lục Tin học 6
-│   ├── bai-0/                Slide bài mở đầu (index.html, styles.css, slides.js, assets/)
-│   ├── bai-1/
+│   ├── bai-1/                Slide Bài 1 (index.html, styles.css, slides.js, assets/)
 │   └── ...
 ├── tin-hoc-7/                (tương tự)
 ├── tin-hoc-8/                (tương tự)
@@ -41,7 +40,8 @@ python scripts/publish-slides.py             # đồng bộ
 
 Script:
 
-- copy mỗi `Bai-XX/` sang `tin-hoc-N/bai-X/` (Bai-00 → bai-0, Bai-01 → bai-1, …) nguyên bản:
+- bỏ qua các bài trong `EXCLUDE` ở đầu script (hiện là Bài mở đầu `Bai-00`);
+- copy mỗi `Bai-XX/` còn lại sang `tin-hoc-N/bai-X/` (Bai-01 → bai-1, Bai-02 → bai-2, …) nguyên bản:
   `index.html`, file `.css`/`.js` cùng cấp và thư mục `assets/` — file khác (ghi chú, nháp) không copy;
 - bỏ qua bài có đường dẫn tuyệt đối/local, URL Internet hoặc thiếu file (in lý do);
 - lấy tên bài từ chính slide (`<title>` hoặc dòng "Bài N — …" trên slide bìa);
