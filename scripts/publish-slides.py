@@ -76,7 +76,8 @@ def lesson_info(index_html, num):
     else:
         # Dòng "Bài N — Tên bài" nằm gọn trong một thẻ trên slide bìa
         m = re.search(r">\s*Bài (?:mở đầu|\d+)\s*[—–-]\s*([^<]+?)\s*<", cover)
-        if m and has_vietnamese(m.group(1)):
+        # dòng bìa ghi rõ "Bài N — …" nên tin được cả khi tên không dấu (vd "Internet")
+        if m:
             vi = text(m.group(1))
     en = h1 if h1 and not has_vietnamese(h1) else ""
     label = "Bài mở đầu" if num == 0 and "Bài mở đầu" in cover else f"Bài {num}"

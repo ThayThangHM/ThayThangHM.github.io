@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Internet · Tin học 6 — Bài 5</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--
+  BÀI 5 — INTERNET (SGK Tin học 6 KNTT tr.20–22, Chủ đề 2: Mạng máy tính và Internet)
+  PPCT (KHDH 2026–27): 2 tiết (1 LT + 1 TH) — tiết 10, 11.
+  TIẾT 1 (slide 1–20): Khởi động 5' → 1. Internet là gì? 13' → 2. Đặc điểm 14' → 3. Lợi ích 10' → Ghi nhớ 3'.
+  TIẾT 2 (slide 21–30): Thực hành trên máy: kiểm tra kết nối 7' → Nhóm "Internet giúp em làm gì?" 15'
+  → Đúng/Sai 6' → Kiểm chứng thông tin 5' → Luyện tập + Vận dụng 9' → Tổng kết 3'.
+  Nguồn: SGK (hội thoại An–Minh, Hoạt động 1–3, các hộp kiến thức, câu hỏi ?, ghi chú "Không nên truy cập Internet
+  liên tục trong nhiều giờ", Luyện tập, Vận dụng); PP cũ "PPT_KNTT_Bài 5_ Internet.pptx" (tranh HS dùng Internet,
+  hình Trái Đất kết nối, 6 câu Đúng/Sai trò chơi "Chú kiến chăm chỉ").
+  Phím: → PageDown Space = tiếp (hiện từng bước) · ← PageUp = lùi · F toàn màn hình · + − 0 zoom chữ · Z ghim thanh zoom.
+-->
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-pc" viewBox="0 0 80 70">
+      <rect x="4" y="2" width="72" height="48" rx="5" fill="#12455a"/><rect x="9" y="7" width="62" height="38" rx="2" fill="#9fd4e6"/>
+      <rect x="34" y="50" width="12" height="10" fill="#3d5573"/><rect x="20" y="60" width="40" height="7" rx="3" fill="#3d5573"/>
+    </symbol>
+    <symbol id="i-house" viewBox="0 0 80 70">
+      <path d="M6 32 L40 4 L74 32 V66 H6z" fill="#f6e0c4" stroke="#8a4b12" stroke-width="4"/><rect x="32" y="42" width="16" height="24" fill="#8a4b12"/>
+    </symbol>
+    <symbol id="i-cloud" viewBox="0 0 120 70">
+      <path d="M30 62 a24 24 0 0 1 0 -46 a30 30 0 0 1 56 6 a20 20 0 0 1 4 40z" fill="#dff0f2" stroke="#1f6f8b" stroke-width="4"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- ======================= TIẾT 1 ======================= -->
+
+    <!-- 01 · Title -->
+    <section class="slide" data-part="Bài 5">
+      <div class="slide-z split wide-left">
+        <div>
+          <div class="kicker">Tin học 6 · Chủ đề 2 · Mạng máy tính và Internet</div>
+          <h1 style="font-size:88px">THE INTERNET</h1>
+          <p class="sub" style="font-size:38px;font-style:normal;font-weight:800;color:var(--blue-deep)">Bài 5 — Internet</p>
+          <p class="lead-vi vi mt">2 tiết · Tiết 1: Internet là gì? Đặc điểm · Lợi ích<br>Tiết 2: Thực hành &amp; luyện tập</p>
+        </div>
+        <div class="viz"><img src="assets/trai-dat-ket-noi.png" alt="Trái Đất với nhiều người dùng máy tính kết nối" style="width:100%;max-width:400px"></div>
+      </div>
+    </section>
+
+    <!-- 02 · Goals -->
+    <section class="slide" data-part="Hôm nay">
+      <div class="slide-z mid">
+        <div class="kicker">Today · Sau bài này em sẽ</div>
+        <h2>THREE QUESTIONS FOR TODAY</h2>
+        <div class="cards g1 xl">
+          <div class="card blue"><div class="ico">🌏</div><div><div class="en">What is the Internet?</div><span class="vi">Biết Internet là gì.</span></div></div>
+          <div class="card amber"><div class="ico">⭐</div><div><div class="en">What are its main features?</div><span class="vi">Nêu được một số đặc điểm chính của Internet.</span></div></div>
+          <div class="card green"><div class="ico">🎁</div><div><div class="en">How does it help us?</div><span class="vi">Nêu được một số lợi ích chính của Internet.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Warm-up: dialogue An – Minh (SGK) -->
+    <section class="slide" data-part="Khởi động">
+      <div class="slide-z">
+        <div class="kicker">Warm-up · Khởi động</div>
+        <h2 style="font-size:42px">NO TIME TO BUY A PLANE TICKET!</h2>
+        <div class="chat">
+          <div class="say"><div class="who">An</div><div class="bub">Mẹ tớ có việc gấp cần đi công tác ngay nhưng bận quá chưa đến phòng vé máy bay được.</div></div>
+        </div>
+        <div class="callout amber mt">
+          <div class="ico">🤔</div>
+          <div><div class="en">What would you tell An's mom?</div><span class="vi">Nếu là Minh, em sẽ khuyên mẹ An làm gì?</span></div>
+        </div>
+        <div class="chat step">
+          <div class="say r c"><div class="who">Minh</div><div class="bub">Mẹ bạn có thể <b>đặt vé trên Internet</b>: các hãng bay đăng chuyến bay, giờ bay, giá vé. Có kết nối Internet là tìm thông tin, đặt vé và thanh toán được!</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · Activity 1: brainstorm -->
+    <section class="slide" data-part="1. Internet là gì?">
+      <div class="slide-z split">
+        <div>
+          <div class="badge"><span class="n">1</span> Activity 1 · Internet</div>
+          <p class="question" style="font-size:46px">What is the Internet? What can you do with it?</p>
+          <p class="q-vi">Em hiểu Internet là gì? Người sử dụng có thể làm được những gì khi truy cập Internet?</p>
+          <div class="callout amber mt"><div class="ico">✍️</div><div><div class="en">Pairs · write 3 things you do online</div><span class="vi">Theo cặp · ghi 3 việc em từng làm trên Internet</span></div></div>
+        </div>
+        <div>
+          <div class="timer step" data-min="2"><div class="t">2:00</div><div class="l">Think · Pair · Share</div></div>
+          <div class="pills step" style="justify-content:center"><span>🔎 tìm kiếm</span><span>📺 xem video</span><span>✉️ gửi thư</span><span class="amber">📚 học trực tuyến</span><span class="amber">🛒 mua hàng</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · Network of networks -->
+    <section class="slide" data-part="1. Internet là gì?">
+      <div class="slide-z split wide-right">
+        <div class="viz">
+          <svg viewBox="0 0 460 400" role="img" aria-label="Four separate computer networks joined together into the Internet">
+            <circle cx="230" cy="200" r="84" fill="#1f6f8b"/>
+            <text x="230" y="194" text-anchor="middle" font-size="30" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">INTERNET</text>
+            <text x="230" y="226" text-anchor="middle" font-size="40" font-family="Segoe UI Emoji, sans-serif">🌏</text>
+            <g stroke="#e8963c" stroke-width="6" stroke-linecap="round"><line x1="170" y1="140" x2="120" y2="90"/><line x1="290" y1="140" x2="340" y2="90"/><line x1="170" y1="260" x2="120" y2="310"/><line x1="290" y1="260" x2="340" y2="310"/></g>
+            <g font-family="Segoe UI, sans-serif" font-size="22" font-weight="800" fill="#12455a" text-anchor="middle">
+              <circle cx="80" cy="62" r="64" fill="#fff" stroke="#1f6f8b" stroke-width="3" stroke-dasharray="8 6"/>
+              <use href="#i-pc" x="36" y="34" width="40" height="35"/><use href="#i-pc" x="84" y="34" width="40" height="35"/><text x="80" y="92">Trường học</text>
+              <circle cx="380" cy="62" r="64" fill="#fff" stroke="#1f6f8b" stroke-width="3" stroke-dasharray="8 6"/>
+              <use href="#i-house" x="356" y="28" width="48" height="42"/><text x="380" y="92">Gia đình</text>
+              <circle cx="80" cy="338" r="64" fill="#fff" stroke="#1f6f8b" stroke-width="3" stroke-dasharray="8 6"/>
+              <use href="#i-pc" x="36" y="306" width="40" height="35"/><use href="#i-pc" x="84" y="306" width="40" height="35"/><text x="80" y="364">Công ty</text>
+              <circle cx="380" cy="338" r="64" fill="#fff" stroke="#1f6f8b" stroke-width="3" stroke-dasharray="8 6"/>
+              <use href="#i-pc" x="358" y="306" width="44" height="38"/><text x="380" y="364">Nước ngoài</text>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <div class="kicker">Key idea · Internet là gì?</div>
+          <p class="lead">The <span class="hl">Internet</span> links computer networks all over the world.</p>
+          <span class="lead-vi vi">Internet là mạng <b>liên kết các mạng máy tính</b> trên khắp thế giới.</span>
+          <div class="sticky mt-l step">Internet = a network of networks<span class="vi">Internet là mạng của các mạng máy tính.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · How to get on the Internet: ISP -->
+    <section class="slide" data-part="1. Internet là gì?">
+      <div class="slide-z">
+        <div class="kicker">Problem · Làm sao để vào được Internet?</div>
+        <h2 style="font-size:42px">HOW DOES YOUR COMPUTER JOIN THE INTERNET?</h2>
+        <div class="viz" style="margin-top:10px">
+          <svg viewBox="0 0 1100 230" role="img" aria-label="Home computer connects through an Internet service provider to the Internet">
+            <g stroke="#e8963c" stroke-width="7" stroke-linecap="round" stroke-dasharray="4 14"><line x1="250" y1="120" x2="420" y2="120"/><line x1="680" y1="120" x2="840" y2="120"/></g>
+            <use href="#i-house" x="40" y="20" width="200" height="175"/>
+            <use href="#i-pc" x="95" y="100" width="90" height="80"/>
+            <rect x="420" y="40" width="260" height="160" rx="22" fill="#fff" stroke="#8a4b12" stroke-width="5"/>
+            <text x="550" y="100" text-anchor="middle" font-size="40" font-weight="800" fill="#8a4b12" font-family="Segoe UI, sans-serif">ISP</text>
+            <text x="550" y="140" text-anchor="middle" font-size="22" font-weight="700" fill="#3d5573" font-family="Segoe UI, sans-serif">Nhà cung cấp</text>
+            <text x="550" y="170" text-anchor="middle" font-size="22" font-weight="700" fill="#3d5573" font-family="Segoe UI, sans-serif">dịch vụ Internet</text>
+            <use href="#i-cloud" x="840" y="40" width="240" height="150"/>
+            <text x="958" y="132" text-anchor="middle" font-size="32" font-weight="800" fill="#12455a" font-family="Segoe UI, sans-serif">Internet</text>
+          </svg>
+        </div>
+        <div class="cards g2">
+          <div class="card blue step"><div class="num">1</div><div><div class="en">Register with an ISP</div><span class="vi">Đăng kí với nhà cung cấp dịch vụ Internet (Internet Service Provider – ISP), ví dụ VNPT, Viettel, FPT…</span></div></div>
+          <div class="card blue step"><div class="num">2</div><div><div class="en">They set up &amp; give you access</div><span class="vi">ISP hỗ trợ cài đặt và cấp quyền truy cập Internet.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · What people do + services -->
+    <section class="slide" data-part="1. Internet là gì?">
+      <div class="slide-z">
+        <div class="kicker">Observe · Người dùng làm gì trên Internet?</div>
+        <h2>SEARCH · SHARE · STORE · EXCHANGE</h2>
+        <p class="sub">Người sử dụng truy cập Internet để tìm kiếm, chia sẻ, lưu trữ và trao đổi thông tin — qua nhiều <b>dịch vụ</b>:</p>
+        <div class="cards g3" style="gap:12px">
+          <div class="card step"><div class="ico">🌐</div><div><div class="en">World Wide Web</div><span class="vi">Mạng thông tin toàn cầu (WWW)</span></div></div>
+          <div class="card step"><div class="ico">🔎</div><div><div class="en">Search</div><span class="vi">Tìm kiếm</span></div></div>
+          <div class="card step"><div class="ico">✉️</div><div><div class="en">Email</div><span class="vi">Thư điện tử</span></div></div>
+          <div class="card step"><div class="ico">📞</div><div><div class="en">Calls · radio · TV</div><span class="vi">Điện thoại, phát thanh, truyền hình</span></div></div>
+          <div class="card step"><div class="ico">👥</div><div><div class="en">Social networks</div><span class="vi">Mạng xã hội</span></div></div>
+          <div class="card step"><div class="ico">☁️</div><div><div class="en">Storage · business</div><span class="vi">Lưu trữ, trao đổi dữ liệu, kinh doanh</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · Fill in the blanks (SGK ?) -->
+    <section class="slide" data-part="1. Internet là gì?">
+      <div class="slide-z">
+        <div class="kicker">Quick check · Điền từ thích hợp</div>
+        <h2>FILL IN THE BLANKS</h2>
+        <div class="pills"><span>chia sẻ</span><span>liên kết</span><span>thông tin</span><span>dịch vụ</span><span>mạng</span></div>
+        <div class="fill">
+          <p>a) Internet là mạng <span class="blank"><span class="n">(1)</span> <span class="step">liên kết</span></span> các <span class="blank"><span class="n">(2)</span> <span class="step">mạng</span></span> máy tính trên khắp thế giới.</p>
+          <p>b) Người sử dụng truy cập Internet để tìm kiếm, <span class="blank"><span class="n">(3)</span> <span class="step">chia sẻ</span></span>, lưu trữ và trao đổi <span class="blank"><span class="n">(4)</span> <span class="step">thông tin</span></span>.</p>
+          <p>c) Có nhiều <span class="blank"><span class="n">(5)</span> <span class="step">dịch vụ</span></span> thông tin khác nhau trên Internet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 · CORE NOTES 1 -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Internet là gì?</div></div>
+          <span class="pg">1 / 3</span>
+        </div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en"><span class="k">Internet</span> là mạng liên kết các mạng máy tính trên khắp thế giới.</div></div></li>
+          <li><span class="rn">2</span><div><div class="en">Máy tính kết nối Internet thông qua một <span class="k">nhà cung cấp dịch vụ Internet</span> (ISP).</div></div></li>
+          <li><span class="rn">3</span><div><div class="en">Có nhiều dịch vụ: <b>WWW, tìm kiếm, thư điện tử</b>… để tìm kiếm, chia sẻ, lưu trữ, trao đổi thông tin.</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 10 · Activity 2: guess the feature from examples -->
+    <section class="slide" data-part="2. Đặc điểm">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">2</span> Activity 2 · Theo em…</div>
+        <h2 style="font-size:42px">WHAT MAKES THE INTERNET SPECIAL?</h2>
+        <p class="sub">Đọc từng ví dụ — em đoán đó là đặc điểm gì của Internet?</p>
+        <div class="verdicts">
+          <div class="verdict"><span class="k">🇧🇷</span><div class="txt"><div class="en">You watch a video posted by a kid in Brazil.</div><span class="vi">Em ở Việt Nam xem video của một bạn ở Bra-xin.</span></div><span class="tag step" style="background:var(--blue);color:#fff">Toàn cầu</span></div>
+          <div class="verdict"><span class="k">💬</span><div class="txt"><div class="en">You comment — the author replies at once.</div><span class="vi">Em bình luận, người đăng trả lời em ngay.</span></div><span class="tag step" style="background:var(--blue);color:#fff">Tương tác</span></div>
+          <div class="verdict"><span class="k">🌙</span><div class="txt"><div class="en">10 p.m., at home, you look up a word.</div><span class="vi">10 giờ tối, ở nhà, em vẫn tra được từ mới.</span></div><span class="tag step" style="background:var(--blue);color:#fff">Dễ tiếp cận</span></div>
+          <div class="verdict"><span class="k">❓</span><div class="txt"><div class="en">Who owns the Internet?</div><span class="vi">Ai là “chủ” của Internet?</span></div><span class="tag step" style="background:var(--blue);color:#fff">Không chủ sở hữu</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · 4 main features -->
+    <section class="slide" data-part="2. Đặc điểm">
+      <div class="slide-z">
+        <div class="kicker">Explain · 4 đặc điểm chính</div>
+        <h2>FOUR MAIN FEATURES</h2>
+        <div class="cards g2">
+          <div class="card blue"><div class="ico">🌏</div><div><div class="en">Global · Tính toàn cầu</div><span class="vi">Năm 2020, hơn <b>một phần ba</b> dân số thế giới, ở hầu hết các quốc gia, đang dùng Internet.</span></div></div>
+          <div class="card blue"><div class="ico">🔁</div><div><div class="en">Interactive · Tính tương tác</div><span class="vi">Nhận và gửi thông tin tức thời — khác sách báo, đài, tivi truyền thống chỉ <b>một chiều</b>.</span></div></div>
+          <div class="card blue"><div class="ico">🕒</div><div><div class="en">Easy to access · Dễ tiếp cận</div><span class="vi">Tìm kiếm, lưu trữ, trao đổi, chia sẻ thông tin thuận lợi, nhanh chóng, <b>mọi lúc, mọi nơi</b>.</span></div></div>
+          <div class="card blue"><div class="ico">🙅</div><div><div class="en">No owner · Không chủ sở hữu</div><span class="vi">Mạng công cộng toàn cầu, <b>không thuộc</b> sở hữu hay do bất kì tổ chức, cá nhân nào điều hành.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · Other features -->
+    <section class="slide" data-part="2. Đặc điểm">
+      <div class="slide-z">
+        <div class="kicker">Also · Ngoài ra Internet còn có</div>
+        <h2>MORE FEATURES</h2>
+        <div class="cards g2 xl">
+          <div class="card col amber step"><div class="ico">🆕</div><div class="en">Up to date · Tính cập nhật</div><span class="vi">Thông tin được cập nhật thường xuyên.</span></div>
+          <div class="card col amber step"><div class="ico">💾</div><div class="en">Stored · Tính lưu trữ</div><span class="vi">Lưu trữ thường trực, sao chép nhanh và dễ dàng.</span></div>
+          <div class="card col amber step"><div class="ico">🎬</div><div class="en">Varied · Tính đa dạng</div><span class="vi">Văn bản, âm thanh, hình ảnh, video…</span></div>
+          <div class="card col amber step"><div class="ico">🎭</div><div class="en">Anonymous · Tính ẩn danh</div><span class="vi">Có thể dùng bí danh thay cho tên thật.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · SGK ? 1: main features — A, B, D, F -->
+    <section class="slide" data-part="2. Đặc điểm">
+      <div class="slide-z">
+        <div class="kicker">Quick check · Chọn các phương án đúng</div>
+        <h2 style="font-size:42px">WHICH ARE THE <em>MAIN</em> FEATURES?</h2>
+        <p class="sub">Internet có những đặc điểm chính nào dưới đây?</p>
+        <div class="choices g3" data-quiz>
+          <button class="choice" data-correct><span class="letter">A</span><span class="en">Tính toàn cầu</span></button>
+          <button class="choice" data-correct><span class="letter">B</span><span class="en">Tính tương tác</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en">Tính lưu trữ</span></button>
+          <button class="choice" data-correct><span class="letter">D</span><span class="en">Tính dễ tiếp cận</span></button>
+          <button class="choice"><span class="letter">E</span><span class="en">Tính đa dạng</span></button>
+          <button class="choice" data-correct><span class="letter">F</span><span class="en">Tính không chủ sở hữu</span></button>
+        </div>
+        <div class="callout green step" data-answer>
+          <div class="ico">✅</div>
+          <div><div class="en">A · B · D · F</div><span class="vi">C và E cũng là đặc điểm của Internet, nhưng là đặc điểm <b>khác</b>, không phải đặc điểm chính.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · Discuss + digital literacy -->
+    <section class="slide" data-part="2. Đặc điểm">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Discuss · Thảo luận</div>
+          <p class="question" style="font-size:44px">Which feature do you like best? Why?</p>
+          <p class="q-vi">Trong các đặc điểm của Internet, em thích đặc điểm nào nhất? Vì sao?</p>
+        </div>
+        <div>
+          <div class="callout violet step">
+            <div class="ico">🧐</div>
+            <div><div class="en">No owner + anonymous = anyone can post anything.</div><span class="vi">Không chủ sở hữu, ẩn danh → ai cũng đăng được, kể cả thông tin <b>sai</b>.</span></div>
+          </div>
+          <div class="callout green step">
+            <div class="ico">✅</div>
+            <div><div class="en">So: check before you believe or share.</div><span class="vi">Vì vậy: kiểm chứng thông tin trước khi tin và chia sẻ (hỏi thầy cô, bố mẹ, xem nguồn chính thức).</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · CORE NOTES 2 -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Đặc điểm</div></div>
+          <span class="pg">2 / 3</span>
+        </div>
+        <div class="notes-topic">4 đặc điểm chính của Internet:</div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en"><span class="k">Tính toàn cầu</span></div></div></li>
+          <li><span class="rn">2</span><div><div class="en"><span class="k">Tính tương tác</span></div></div></li>
+          <li><span class="rn">3</span><div><div class="en"><span class="k">Tính dễ tiếp cận</span></div></div></li>
+          <li><span class="rn">4</span><div><div class="en"><span class="k">Tính không chủ sở hữu</span></div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 16 · Activity 3: what do you use the Internet for? (SGK picture) -->
+    <section class="slide" data-part="3. Lợi ích">
+      <div class="slide-z split wide-right">
+        <div>
+          <div class="badge green"><span class="n">3</span> Activity 3 · Lợi ích</div>
+          <p class="question" style="font-size:42px">What do YOU use the Internet for?</p>
+          <p class="q-vi">Em thường truy cập Internet để làm những việc gì?</p>
+          <img src="assets/hs-dung-internet.png" alt="Nhóm học sinh cùng dùng máy tính xách tay" style="width:100%;max-width:420px;display:block;margin:10px auto 0">
+        </div>
+        <div class="chat" style="margin-top:0">
+          <div class="say step"><div class="who e">🎓</div><div class="bub">Tớ sẽ học tiếng Anh trực tuyến.</div></div>
+          <div class="say step"><div class="who e">🔎</div><div class="bub">Tớ sẽ tìm tư liệu cho bài tập nhóm.</div></div>
+          <div class="say b step"><div class="who e">✉️</div><div class="bub">Tớ gửi thư điện tử cho bạn bè ở khắp nơi trên thế giới.</div></div>
+          <div class="say b step"><div class="who e">🎵</div><div class="bub">Tớ có thể xem phim, nghe nhạc, chơi trò chơi…</div></div>
+          <div class="say c step"><div class="who e">🛍️</div><div class="bub">Tớ giúp mẹ quảng cáo và bán sản phẩm mẹ tự tay làm.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · Benefits -->
+    <section class="slide" data-part="3. Lợi ích">
+      <div class="slide-z">
+        <div class="kicker">Explain · Lợi ích của Internet</div>
+        <h2>HOW THE INTERNET HELPS US</h2>
+        <div class="cards g2">
+          <div class="card green"><div class="ico">⚡</div><div><div class="en">Fast, effective communication</div><span class="vi">Trao đổi thông tin nhanh chóng, hiệu quả.</span></div></div>
+          <div class="card green"><div class="ico">💻</div><div><div class="en">Learn and work online</div><span class="vi">Học tập và làm việc trực tuyến.</span></div></div>
+          <div class="card green"><div class="ico">📚</div><div><div class="en">Rich learning resources</div><span class="vi">Cung cấp nguồn tài liệu phong phú.</span></div></div>
+          <div class="card green"><div class="ico">🏦</div><div><div class="en">Everyday services</div><span class="vi">Cung cấp các tiện ích phục vụ đời sống.</span></div></div>
+          <div class="card green"><div class="ico">🎮</div><div><div class="en">Fun and entertainment</div><span class="vi">Là phương tiện vui chơi, giải trí.</span></div></div>
+          <div class="card" style="border-style:dashed"><div class="ico">🚀</div><div><div class="en">Helps society develop</div><span class="vi">Internet góp phần thúc đẩy xã hội phát triển.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 · SGK ?: what can you do with the Internet — a, b, d, e -->
+    <section class="slide" data-part="3. Lợi ích">
+      <div class="slide-z">
+        <div class="kicker">Quick check · Chọn những việc em có thể làm với Internet</div>
+        <h2 style="font-size:40px">WHICH CAN YOU DO WITH THE INTERNET?</h2>
+        <div class="choices stack" data-quiz style="gap:8px;margin-top:12px">
+          <button class="choice" data-correct><span class="letter">a</span><span class="en">Học ngoại ngữ trực tuyến với người nước ngoài.</span></button>
+          <button class="choice" data-correct><span class="letter">b</span><span class="en">Nghe nhạc, xem phim trực tuyến.</span></button>
+          <button class="choice"><span class="letter">c</span><span class="en">Chơi đá bóng để nâng cao sức khoẻ.</span></button>
+          <button class="choice" data-correct><span class="letter">d</span><span class="en">Tìm kiếm tài liệu học tập.</span></button>
+          <button class="choice" data-correct><span class="letter">e</span><span class="en">Gửi thư điện tử.</span></button>
+        </div>
+        <div class="callout green step" data-answer style="margin-top:10px">
+          <div class="ico">⚽</div>
+          <div><div class="en">a, b, d, e ✔ — football needs a real field!</div><span class="vi">Đá bóng phải ra sân thật — Internet không thay được vận động.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 · Healthy use (SGK note) -->
+    <section class="slide" data-part="3. Lợi ích">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Careful · Lưu ý của SGK</div>
+          <div class="sticky" style="font-size:40px;padding:26px 30px">Don't stay online for hours without a break.<span class="vi" style="font-size:28px">Không nên truy cập Internet liên tục trong nhiều giờ.</span></div>
+        </div>
+        <div>
+          <p class="lead" style="font-size:31px">Why not? · Vì sao?</p>
+          <div class="cards g1">
+            <div class="card coral step"><div class="ico">👀</div><div><div class="en">Tired eyes, poor sleep</div><span class="vi">Mỏi mắt, mất ngủ, ít vận động.</span></div></div>
+            <div class="card coral step"><div class="ico">📱</div><div><div class="en">Risk of Internet addiction</div><span class="vi">Có thể bị nghiện Internet, bỏ bê học tập.</span></div></div>
+            <div class="card green step"><div class="ico">⏰</div><div><div class="en">Set a time · take breaks · play outside</div><span class="vi">Đặt giờ dùng, nghỉ giải lao, ra ngoài vận động.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20 · CORE NOTES 3 -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Lợi ích</div></div>
+          <span class="pg">3 / 3</span>
+        </div>
+        <div class="notes-topic">Lợi ích của Internet:</div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en">Trao đổi thông tin <span class="k">nhanh chóng, hiệu quả</span>.</div></div></li>
+          <li><span class="rn">2</span><div><div class="en"><span class="k">Học tập, làm việc</span> trực tuyến; nguồn tài liệu phong phú.</div></div></li>
+          <li><span class="rn">3</span><div><div class="en"><span class="k">Tiện ích</span> đời sống; <span class="k">vui chơi, giải trí</span>.</div></div></li>
+          <li><span class="rn">⚠</span><div><div class="en">Dùng Internet <b>có giới hạn thời gian</b>.</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================= TIẾT 2 ======================= -->
+
+    <!-- 21 · Tiết 2 roadmap -->
+    <section class="slide" data-part="Tiết 2 · Thực hành">
+      <div class="slide-z mid">
+        <div class="kicker">Lesson 5 · Tiết 2 · Thực hành &amp; luyện tập</div>
+        <h2>TODAY'S THREE STATIONS</h2>
+        <div class="roadmap">
+          <div class="stop"><div class="ico">🖥️</div><span class="n">STATION 1</span><div class="en">Is my computer online?</div><span class="vi">Máy của em có Internet không?</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">👥</div><span class="n">STATION 2</span><div class="en">Internet in action</div><span class="vi">Nhóm: Internet giúp em làm gì?</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">🎯</div><span class="n">STATION 3</span><div class="en">Games &amp; practice</div><span class="vi">Đúng/Sai, kiểm chứng, luyện tập</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22 · Station 1: check the connection (hands-on) -->
+    <section class="slide" data-part="Tiết 2 · Thực hành">
+      <div class="slide-z split wide-right">
+        <div>
+          <div class="badge"><span class="n">1</span> Station 1 · Thực hành</div>
+          <p class="lead" style="font-size:30px">Look at the bottom-right corner of the taskbar.</p>
+          <span class="lead-vi vi">Quan sát góc phải dưới màn hình: máy em đang có biểu tượng nào?</span>
+          <ol class="todo">
+            <li class="step"><div><div class="en">Find the network icon</div><span class="vi">Tìm biểu tượng mạng cạnh đồng hồ.</span></div></li>
+            <li class="step"><div><div class="en">Point to it — read the message</div><span class="vi">Đưa con trỏ chuột vào, đọc dòng chữ hiện ra.</span></div></li>
+            <li class="step"><div><div class="en">Which connecting device? (Lesson 4)</div><span class="vi">Máy nối Internet qua thiết bị kết nối nào? Có dây hay không dây?</span></div></li>
+          </ol>
+        </div>
+        <div class="cards g1" style="margin-top:0">
+          <div class="card blue"><div class="ico">
+            <svg viewBox="0 0 60 50" width="56" height="46" aria-hidden="true"><g fill="none" stroke="#12455a" stroke-width="5" stroke-linecap="round"><path d="M6 20 a34 34 0 0 1 48 0"/><path d="M14 29 a22 22 0 0 1 32 0"/><path d="M22 38 a10 10 0 0 1 16 0"/></g><circle cx="30" cy="45" r="4" fill="#12455a"/></svg>
+            </div><div><div class="en">Wi-Fi</div><span class="vi">Kết nối không dây</span></div></div>
+          <div class="card blue"><div class="ico">
+            <svg viewBox="0 0 60 50" width="56" height="46" aria-hidden="true"><rect x="8" y="4" width="44" height="30" rx="3" fill="none" stroke="#12455a" stroke-width="5"/><path d="M30 34 v8 M18 46 h24" stroke="#12455a" stroke-width="5" stroke-linecap="round"/></svg>
+            </div><div><div class="en">Cable (Ethernet)</div><span class="vi">Kết nối có dây</span></div></div>
+          <div class="card coral"><div class="ico">
+            <svg viewBox="0 0 60 50" width="56" height="46" aria-hidden="true"><circle cx="26" cy="24" r="19" fill="none" stroke="#12455a" stroke-width="4"/><path d="M7 24 h38 M26 5 c-10 12 -10 26 0 38 c10 -12 10 -26 0 -38" fill="none" stroke="#12455a" stroke-width="3"/><circle cx="46" cy="38" r="11" fill="#d9604f"/><path d="M40 32 l12 12 M52 32 l-12 12" stroke="#fff" stroke-width="3.5"/></svg>
+            </div><div><div class="en">No Internet</div><span class="vi">Không có kết nối Internet</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 23 · Station 2: group task on computers -->
+    <section class="slide" data-part="Tiết 2 · Thực hành">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">2</span> Station 2 · Nhóm thực hành trên máy</div>
+        <h2 style="font-size:40px">INTERNET IN ACTION — EACH GROUP, ONE MISSION</h2>
+        <p class="sub">Mỗi nhóm bốc 1 nhiệm vụ, dùng máy tính có Internet để thực hiện (chỉ dùng trang thầy cô cho phép).</p>
+        <div class="cards g2" style="gap:12px">
+          <div class="card blue"><div class="ico">🌦️</div><div><div class="en">Tomorrow's weather where you live</div><span class="vi">Xem dự báo thời tiết ngày mai ở nơi em sống.</span></div></div>
+          <div class="card blue"><div class="ico">📖</div><div><div class="en">Meaning of an English word</div><span class="vi">Tra nghĩa một từ tiếng Anh trong bài học.</span></div></div>
+          <div class="card blue"><div class="ico">🗺️</div><div><div class="en">The way from home to school</div><span class="vi">Xem đường đi từ nhà đến trường trên bản đồ trực tuyến.</span></div></div>
+          <div class="card blue"><div class="ico">🎵</div><div><div class="en">A children's song to learn</div><span class="vi">Tìm và nghe một bài hát thiếu nhi.</span></div></div>
+        </div>
+        <div class="split" style="display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;margin-top:14px">
+          <div class="callout amber" style="margin-top:0"><div class="ico">📝</div><div><div class="en">Then fill in the group sheet (next slide)</div><span class="vi">Sau đó ghi kết quả vào phiếu nhóm.</span></div></div>
+          <div class="timer step" data-min="8" style="padding:10px 22px"><div class="t" style="font-size:64px">8:00</div><div class="l">Group work</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 24 · Group report sheet -->
+    <section class="slide" data-part="Tiết 2 · Thực hành">
+      <div class="slide-z">
+        <div class="kicker">Report · Phiếu báo cáo nhóm</div>
+        <h2>WHAT DID THE INTERNET DO FOR YOU?</h2>
+        <table class="big xl">
+          <tr><th>Việc em làm</th><th>Dịch vụ đã dùng</th><th>Lợi ích</th><th>Đặc điểm giúp em</th></tr>
+          <tr><td>🌦️ Xem thời tiết ngày mai</td><td>WWW (trang web)</td><td>Tiện ích đời sống</td><td>Dễ tiếp cận, cập nhật</td></tr>
+          <tr><td style="color:var(--ink-soft)">Nhóm em: …</td><td></td><td></td><td></td></tr>
+        </table>
+        <div class="callout step">
+          <div class="ico">🎤</div>
+          <div><div class="en">1 minute per group to report</div><span class="vi">Mỗi nhóm báo cáo 1 phút; các nhóm khác nhận xét: đúng dịch vụ, đúng lợi ích chưa?</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 25 · True / False game (PP "Chú kiến chăm chỉ") -->
+    <section class="slide" data-part="Tiết 2 · Luyện tập">
+      <div class="slide-z">
+        <div class="badge violet"><span class="n">3</span> Game · Đúng hay sai?</div>
+        <h2 style="font-size:42px">TRUE OR FALSE?</h2>
+        <div class="verdicts">
+          <div class="verdict"><span class="k">1</span><div class="txt"><div class="en">Người sử dụng có thể tìm kiếm, trao đổi thông tin trên Internet.</div></div><span class="tag ok step">ĐÚNG</span></div>
+          <div class="verdict"><span class="k">2</span><div class="txt"><div class="en">Có thể dùng bất kì thông tin nào trên Internet mà không cần xin phép.</div></div><span class="tag no step">SAI</span></div>
+          <div class="verdict"><span class="k">3</span><div class="txt"><div class="en">Internet có thông tin xấu nên cần cấm học sinh dùng Internet.</div></div><span class="tag no step">SAI</span></div>
+          <div class="verdict"><span class="k">4</span><div class="txt"><div class="en">Internet giúp học tập, làm việc và giải trí từ xa.</div></div><span class="tag ok step">ĐÚNG</span></div>
+          <div class="verdict"><span class="k">5</span><div class="txt"><div class="en">Sử dụng Internet tuyệt đối an toàn.</div></div><span class="tag no step">SAI</span></div>
+          <div class="verdict"><span class="k">6</span><div class="txt"><div class="en">Người sử dụng Internet có thể bị nghiện Internet.</div></div><span class="tag ok step">ĐÚNG</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 26 · Check the facts (digital literacy) — C -->
+    <section class="slide" data-part="Tiết 2 · Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Situation · Kiểm chứng thông tin</div>
+        <h2 style="font-size:40px">“NO SCHOOL TOMORROW!” — WHAT DO YOU DO?</h2>
+        <p class="sub">Một tài khoản lạ đăng: “Mai toàn thành phố được nghỉ học!”. Nhiều bạn chia sẻ vào nhóm lớp.</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span><span class="en">Share it with the whole class now</span><span class="vi">Chia sẻ ngay cho cả lớp</span></span></button>
+          <button class="choice"><span class="letter">B</span><span><span class="en">Believe it and stay home</span><span class="vi">Tin luôn và ở nhà</span></span></button>
+          <button class="choice" data-correct><span class="letter">C</span><span><span class="en">Ask the teacher / check the school's notice</span><span class="vi">Hỏi thầy cô, xem thông báo chính thức của trường</span></span></button>
+          <button class="choice"><span class="letter">D</span><span><span class="en">Post an angry comment</span><span class="vi">Vào bình luận chê bai</span></span></button>
+        </div>
+        <div class="callout green step" data-answer>
+          <div class="ico">✅</div>
+          <div><div class="en">C — anonymous posts may be false. Check the source!</div><span class="vi">Internet ẩn danh, không chủ sở hữu → ai cũng đăng được. Câu trả lời của chatbot AI cũng có thể sai — luôn kiểm tra lại.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 27 · Practice 1 (SGK Luyện tập 1) — C -->
+    <section class="slide" data-part="Tiết 2 · Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Practice 1 · Chọn phương án đúng</div>
+        <h2>THE INTERNET IS A NETWORK THAT…</h2>
+        <p class="sub">Internet là mạng:</p>
+        <div class="choices stack" data-quiz style="gap:10px">
+          <button class="choice"><span class="letter">A</span><span class="en">Kết nối hai máy tính với nhau.</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en">Kết nối các máy tính trong một nước.</span></button>
+          <button class="choice" data-correct><span class="letter">C</span><span class="en">Kết nối nhiều mạng máy tính trên phạm vi toàn cầu.</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en">Kết nối các máy tính trong một thành phố.</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:24px;margin-top:12px">✅ C — mạng của các mạng, trên khắp thế giới.</p>
+      </div>
+    </section>
+
+    <!-- 28 · Practice 2 (SGK Luyện tập 2) -->
+    <section class="slide" data-part="Tiết 2 · Luyện tập">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Practice 2 · Luyện tập</div>
+          <p class="question" style="font-size:46px">What do we need to connect a computer to the Internet?</p>
+          <p class="q-vi">Để máy tính kết nối được Internet ta cần làm gì?</p>
+        </div>
+        <div>
+          <div class="callout green step">
+            <div class="ico">📝</div>
+            <div><div class="en">Register with an Internet Service Provider (ISP).</div><span class="vi">Đăng kí với nhà cung cấp dịch vụ Internet để được hỗ trợ cài đặt và cấp quyền truy cập.</span></div>
+          </div>
+          <div class="callout step">
+            <div class="ico">📶</div>
+            <div><div class="en">Then connect the computer by cable or Wi-Fi.</div><span class="vi">Sau đó nối máy tính vào mạng (có dây hoặc không dây) — như Bài 4.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 29 · Vận dụng (SGK) -->
+    <section class="slide" data-part="Vận dụng">
+      <div class="slide-z">
+        <div class="kicker">Apply · Vận dụng</div>
+        <h2>THINK AND EXPLAIN</h2>
+        <div class="cards g1">
+          <div class="card blue"><div class="num">1</div><div><div class="en">Give an example: the Internet helps you learn and have fun.</div><span class="vi">Lấy ví dụ cho thấy Internet mang lại lợi ích cho việc học tập và giải trí.</span>
+            <span class="vi step" style="color:var(--green);font-weight:700">→ Xem video bài giảng khi ôn tập; nghe nhạc thư giãn sau giờ học…</span></div></div>
+          <div class="card blue"><div class="num">2</div><div><div class="en">Why is the Internet used more and more widely?</div><span class="vi">Giải thích tại sao Internet được sử dụng rộng rãi và ngày càng phát triển.</span>
+            <span class="vi step" style="color:var(--green);font-weight:700">→ Nhờ 4 đặc điểm (toàn cầu, tương tác, dễ tiếp cận, không chủ sở hữu) và rất nhiều lợi ích cho mọi lĩnh vực.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 30 · Summary -->
+    <section class="slide" data-part="Tổng kết">
+      <div class="slide-z">
+        <div class="kicker">Wrap-up · Sau bài học, em cần nhớ gì?</div>
+        <h2>WHAT SHOULD YOU REMEMBER?</h2>
+        <div class="cards g2">
+          <div class="card blue"><div class="num">1</div><div><div class="en">Internet = network of networks</div><span class="vi">Internet liên kết các mạng máy tính trên khắp thế giới.</span></div></div>
+          <div class="card blue"><div class="num">2</div><div><div class="en">Join through an ISP</div><span class="vi">Kết nối Internet thông qua nhà cung cấp dịch vụ Internet.</span></div></div>
+          <div class="card blue"><div class="num">3</div><div><div class="en">Global · interactive · accessible · no owner</div><span class="vi">4 đặc điểm chính: toàn cầu, tương tác, dễ tiếp cận, không chủ sở hữu.</span></div></div>
+          <div class="card blue"><div class="num">4</div><div><div class="en">Useful — but use it wisely</div><span class="vi">Nhiều lợi ích; dùng có giới hạn thời gian, kiểm chứng thông tin.</span></div></div>
+        </div>
+        <div class="next-up step">
+          <div class="en">Next: Lesson 6 — The World Wide Web 🕸️</div>
+          <span class="vi">Bài 6: Mạng thông tin toàn cầu — trang web, website, trình duyệt.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 5</span>
+      <div id="ticks"></div>
+      <span id="more-hint" hidden>▼ more</span>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 30</span>
+    </div>
+    <div id="help">Presenter / ← → · Next reveals, then advances<br>F fullscreen · + − 0 zoom · Z pin zoom bar</div>
+
+  </div>
+</div>
+
+<!-- Zoom bar: fixed to the real screen; auto-hides (move the mouse or press + − 0 to show it) -->
+<div id="zoombar">
+  <button id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="zsep"></span>
+  <button id="zMinus" title="Thu nhỏ (−)">A−</button>
+  <input type="range" id="zRange" min="80" max="170" step="10" value="100" aria-label="Zoom">
+  <button id="zPlus" title="Phóng to (+)">A+</button>
+  <span id="zVal">100%</span>
+  <button id="zReset" title="Về 100% (phím 0)">100%</button>
+  <button id="zPin" title="Ghim thanh zoom (Z)">📌</button>
+</div>
+<div id="ztoast"></div>
+
+<script src="slides.js"></script>
+</body>
+</html>
