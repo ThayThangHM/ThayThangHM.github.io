@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thầy Thắng Dạy Tin | Học Cùng Thầy Thắng</title>
+  <meta name="description" content="Thầy Thắng Dạy Tin – bài giảng, bài thực hành và tài liệu học tập môn Tin học dành cho học sinh.">
+  <meta name="theme-color" content="#1d4ed8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#noi-dung">Bỏ qua, tới nội dung chính</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Thầy Thắng Dạy Tin – Trang chủ">
+        <span class="brand-mark" aria-hidden="true">T</span>
+        <span class="brand-text">Thầy Thắng Dạy Tin</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-label">Menu</span>
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Điều hướng chính">
+        <ul>
+          <li><a href="/" aria-current="page">Trang chủ</a></li>
+          <li><a href="#tin-hoc-6">Tin học 6</a></li>
+          <li><a href="#tin-hoc-7">Tin học 7</a></li>
+          <li><a href="#tin-hoc-8">Tin học 8</a></li>
+          <li><a href="#doi-tuyen">Đội tuyển</a></li>
+          <li><a href="#robotics">Robotics</a></li>
+          <li><a class="nav-ext" href="https://thaythangtoantin.com.vn/" target="_blank" rel="noopener noreferrer">Học lập trình <svg class="ext-icon" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg><span class="sr-only"> (mở website thaythangtoantin.com.vn trong tab mới)</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="noi-dung">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <h1 id="hero-title" class="hero-title">
+            <span class="hero-line">Học Cùng</span>
+            <span class="hero-line hero-accent">Thầy Thắng</span>
+          </h1>
+          <p class="hero-tagline"><span class="nowrap">Bài giảng</span> <span class="dot" aria-hidden="true">•</span> <span class="nowrap">Thực hành</span> <span class="dot dot-break" aria-hidden="true">•</span> <span class="nowrap">Tài liệu học tập</span></p>
+          <p class="hero-lead">Nơi học sinh xem bài giảng, làm bài thực hành và tìm tài liệu môn Tin học.</p>
+          <a class="hero-cta" href="#chuyen-muc">Xem các chuyên mục</a>
+        </div>
+
+        <figure class="hero-media">
+          <img src="assets/images/home.png" width="1375" height="724" fetchpriority="high" decoding="async"
+               alt="Máy tính xách tay trên nền xanh công nghệ, màn hình hiện dòng chữ “Thầy Thắng dạy Tin – Programmer Informatics”, hai bên là hai chuột máy tính phát sáng.">
+        </figure>
+      </div>
+    </section>
+
+    <section class="sections" id="chuyen-muc" aria-label="Chuyên mục">
+      <div class="container">
+        <!--
+          Mỗi chuyên mục là một <li class="card">.
+          - Chưa có nội dung: giữ <div class="card-body"> + nhãn "Đang cập nhật" (class card--soon).
+          - Khi đã có trang con (vd. /tin-hoc-6/index.html): đổi <div class="card-body">
+            thành <a class="card-body" href="/tin-hoc-6/">, bỏ class card--soon,
+            thay nhãn bằng <span class="card-cta">Vào học</span>.
+          - Liên kết ra website khác: xem card "Học lập trình" (class card--external).
+        -->
+
+        <section class="card-group" aria-labelledby="nhom-thcs">
+          <div class="group-head">
+            <h2 id="nhom-thcs" class="group-title">Học chương trình Tin học THCS</h2>
+            <p class="group-desc">Bài giảng và hoạt động học tập theo từng khối lớp.</p>
+          </div>
+
+          <ul class="card-grid" role="list">
+            <li class="card card--soon" id="tin-hoc-6" style="--accent: var(--c-blue)">
+              <div class="card-body">
+                <span class="card-icon" aria-hidden="true">6</span>
+                <h3 class="card-title">Tin học 6</h3>
+                <p class="card-desc">Bài giảng và hoạt động học tập Tin học 6</p>
+                <span class="card-status">Đang cập nhật</span>
+              </div>
+            </li>
+
+            <li class="card card--soon" id="tin-hoc-7" style="--accent: var(--c-green)">
+              <div class="card-body">
+                <span class="card-icon" aria-hidden="true">7</span>
+                <h3 class="card-title">Tin học 7</h3>
+                <p class="card-desc">Bài giảng và hoạt động học tập Tin học 7</p>
+                <span class="card-status">Đang cập nhật</span>
+              </div>
+            </li>
+
+            <li class="card card--soon" id="tin-hoc-8" style="--accent: var(--c-orange)">
+              <div class="card-body">
+                <span class="card-icon" aria-hidden="true">8</span>
+                <h3 class="card-title">Tin học 8</h3>
+                <p class="card-desc">Bài giảng và hoạt động học tập Tin học 8</p>
+                <span class="card-status">Đang cập nhật</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="card-group" aria-labelledby="nhom-nang-cao">
+          <div class="group-head">
+            <h2 id="nhom-nang-cao" class="group-title">Khám phá và học nâng cao</h2>
+            <p class="group-desc">Lập trình, thi học sinh giỏi và dự án STEM.</p>
+          </div>
+
+          <ul class="card-grid" role="list">
+            <li class="card card--external" id="hoc-lap-trinh" style="--accent: var(--c-rose)">
+              <a class="card-body" href="https://thaythangtoantin.com.vn/" target="_blank" rel="noopener noreferrer">
+                <span class="card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M2.5 8.5h19"/><path d="M7 12.5l2.5 2-2.5 2"/><path d="M12 16.5h5"/></svg>
+                </span>
+                <h3 class="card-title">Học lập trình</h3>
+                <p class="card-kicker">Định hướng HSG <span aria-hidden="true">•</span> Chuyên Tin</p>
+                <p class="card-desc">C++ <span aria-hidden="true">•</span> Thuật toán <span aria-hidden="true">•</span> Luyện tập</p>
+                <span class="card-cta">Vào học <svg class="ext-icon" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span>
+                <span class="card-site">thaythangtoantin.com.vn<span class="sr-only"> — mở trong tab mới</span></span>
+              </a>
+            </li>
+
+            <li class="card card--soon" id="doi-tuyen" style="--accent: var(--c-purple)">
+              <div class="card-body">
+                <span class="card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/><path d="M13.5 5l-3 14"/></svg>
+                </span>
+                <h3 class="card-title">Đội tuyển Tin học</h3>
+                <p class="card-kicker">Tài liệu và hoạt động đội tuyển</p>
+                <p class="card-desc">Thuật toán <span aria-hidden="true">•</span> C++ <span aria-hidden="true">•</span> Luyện đề</p>
+                <span class="card-status">Đang cập nhật</span>
+              </div>
+            </li>
+
+            <li class="card card--soon" id="robotics" style="--accent: var(--c-teal)">
+              <div class="card-body">
+                <span class="card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3.5" r="1"/><circle cx="9" cy="13.5" r="1.2"/><circle cx="15" cy="13.5" r="1.2"/><path d="M9.5 17h5"/><path d="M2 13v3"/><path d="M22 13v3"/></svg>
+                </span>
+                <h3 class="card-title">Hoàng Mai Robotics</h3>
+                <p class="card-desc">Lập trình <span aria-hidden="true">•</span> Robot <span aria-hidden="true">•</span> Dự án STEM</p>
+                <span class="card-status">Đang cập nhật</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <p class="footer-name">
+            <span class="brand-mark" aria-hidden="true">T</span>
+            Thầy Thắng Dạy Tin
+          </p>
+          <p class="footer-slogan"><span class="nowrap">Học bài bản</span> <span aria-hidden="true">·</span> <span class="nowrap">Luyện thực chiến</span> <span class="dot-break" aria-hidden="true">·</span> <span class="nowrap">Tiến bộ rõ ràng</span></p>
+        </div>
+
+        <address class="footer-contact">
+          <p class="footer-item">
+            <svg class="footer-icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span><span class="footer-label">Địa chỉ:</span> TheOne - Gamuda Gardens - Hoàng Mai - Hà Nội</span>
+          </p>
+          <p class="footer-item">
+            <svg class="footer-icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+            <span><span class="footer-label">SĐT/Zalo:</span> <a href="tel:0393269463">0393.269.463</a></span>
+          </p>
+        </address>
+      </div>
+
+      <p class="footer-copy">© 2026 Thầy Thắng Dạy Tin</p>
+    </div>
+  </footer>
+</body>
+</html>
