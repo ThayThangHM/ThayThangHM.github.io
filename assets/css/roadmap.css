@@ -11,8 +11,9 @@
   --lv-hsg-nc: var(--c-orange);
   --lv-chuyen: var(--c-rose);
   --rm-edge: color-mix(in srgb, var(--text-muted) 45%, transparent);
-  --rm-drawer-w: 420px;
 }
+/* Bề rộng bảng chi tiết — đặt ở :root vì banner đăng ký (nằm ngoài .rm-root) cũng cần biết để né */
+:root { --rm-drawer-w: 420px; }
 @media (prefers-color-scheme: dark) {
   .rm-root { --lv-hsg: #facc15; }
 }
@@ -412,13 +413,17 @@
 .rm-links a { font-weight: 600; }
 .rm-tag { margin-left: 6px; color: var(--text-muted); font-size: .82rem; }
 
+/* Banner đăng ký (assets/js/promo-banner.js) nằm góc dưới phải, đúng chỗ bảng chi tiết mở ra.
+   Khi bảng mở, dời banner sang trái bảng để không bị che. */
+body.rm-open .tt-promo { right: calc(var(--rm-drawer-w) + 20px); }
+
 /* Màn hình rộng: mở bảng chi tiết thì sơ đồ co lại, không bị che */
 @media (min-width: 1200px) {
   body.rm-open .rm-wide { width: auto; margin-right: calc(var(--rm-drawer-w) + 12px); }
 }
 /* …và trên màn hình laptop thì chữ trong ô nhỏ lại một chút để không gãy chữ */
 @media (min-width: 1200px) and (max-width: 1599px) {
-  .rm-root { --rm-drawer-w: 380px; }
+  :root { --rm-drawer-w: 380px; }
   body.rm-open .rm-node { gap: 5px; padding: 6px 7px; font-size: .76rem; }
   body.rm-open .rm-tracks { font-size: .7rem; letter-spacing: .02em; }
 }
@@ -469,7 +474,13 @@
     box-shadow: 0 -12px 36px rgb(15 23 42 / .25);
   }
   .rm-drawer-head { padding: 14px 14px 10px 18px; }
-  .rm-drawer-body { padding: 12px 18px 24px; }
+  /* Bảng chiếm hết bề ngang: banner nổi lên trên bảng, nội dung bảng chừa chỗ ở đáy để cuộn qua được */
+  .rm-drawer-body { padding: 12px 18px 210px; }
+  body.rm-open .tt-promo { right: 20px; z-index: 1110; }
+}
+@media (max-width: 600px) {
+  .rm-drawer-body { padding-bottom: 100px; }
+  body.rm-open .tt-promo { right: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
