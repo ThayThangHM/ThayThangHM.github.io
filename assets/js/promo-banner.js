@@ -10,12 +10,12 @@
   var TITLE_MORE = ' cùng Thầy Thắng';      // ẩn ở bản gọn (điện thoại, trang slide)
   var SUB = 'Học bài bản • Thực hành thực tế • Phát triển tư duy lập trình';
   var CTA = 'Đăng ký ngay';
-  var STORE_KEY = 'ttPromoClosed';   // sessionStorage: đóng rồi thì không hiện lại trong phiên/tab này
+  // Bấm × chỉ ẩn tạm trên trang đang mở (không lưu storage/cookie): tải lại hay sang trang khác
+  // là hiện lại ngay; ở nguyên trang thì sau REOPEN_MS banner tự hiện lại.
+  var REOPEN_MS = 180000;            // 3 phút
+  var FADE_MS = 350;                 // khớp transition của .tt-promo
 
-  function closed() {
-    try { return sessionStorage.getItem(STORE_KEY) === '1'; } catch (e) { return false; }
-  }
-  if (closed() || document.querySelector('.tt-promo')) return;
+  if (document.querySelector('.tt-promo')) return;
 
   var CSS = [
     '.tt-promo{position:fixed;right:20px;bottom:20px;z-index:1000;width:360px;max-width:calc(100vw - 40px);',
@@ -27,6 +27,7 @@
     '  opacity:0;transform:translateY(16px);transition:opacity .35s ease,transform .35s ease}',
     '.tt-promo *{box-sizing:border-box}',
     '.tt-promo.is-in{opacity:1;transform:none}',
+    '.tt-promo[hidden]{display:none}',
     '.tt-promo-link{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;',
     '  padding:16px 44px 16px 16px;color:inherit;text-decoration:none;border-radius:inherit}',
     '.tt-promo-icon{grid-row:span 2;align-self:start;display:grid;place-items:center;width:44px;height:44px;',
@@ -88,11 +89,30 @@
     box.querySelector('.tt-promo-sub').textContent = SUB;
     box.querySelector('.tt-promo-cta').textContent = CTA;
 
-    box.querySelector('.tt-promo-close').addEventListener('click', function () {
-      try { sessionStorage.setItem(STORE_KEY, '1'); } catch (e) { /* chế độ riêng tư: chỉ ẩn */ }
-      window.removeEventListener('resize', place);
-      box.remove();
-    });
+    var reopenTimer = 0, fadeTimer = 0;
+    function clearTimers() {
+      clearTimeout(reopenTimer);
+      clearTimeout(fadeTimer);
+      reopenTimer = fadeTimer = 0;
+    }
+    function show() {
+      clearTimers();
+      box.hidden = false;
+      place();
+      void box.offsetWidth;          // chốt trạng thái ẩn để hiệu ứng hiện chạy lại
+      box.classList.add('is-in');
+    }
+    function hide() {
+      clearTimers();
+      box.classList.remove('is-in');
+      fadeTimer = setTimeout(function () { box.hidden = true; }, FADE_MS);
+      reopenTimer = setTimeout(show, REOPEN_MS);   // mỗi lần đóng bắt đầu lại 3 phút
+    }
+    box.querySelector('.tt-promo-close').addEventListener('click', hide);
+
+    // Rời trang: huỷ timer. Quay lại bằng nút Back (trang lấy từ bộ nhớ đệm): hiện lại ngay.
+    window.addEventListener('pagehide', clearTimers);
+    window.addEventListener('pageshow', function (e) { if (e.persisted) show(); });
 
     // Trang slide bắt Enter/Space ở document để chuyển slide — không để phím bấm trên banner lọt xuống.
     box.addEventListener('keydown', function (e) {

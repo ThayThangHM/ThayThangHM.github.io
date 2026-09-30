@@ -73,7 +73,8 @@ không có sẵn). Thêm trang mới bằng tay thì chạy:
 python scripts/publish-slides.py --banner-only
 ```
 
-Người xem bấm `×` thì banner ẩn đến hết phiên (dùng `sessionStorage`). Tắt banner toàn website: xoá nội dung
+Người xem bấm `×` thì banner chỉ ẩn tạm trên trang đang mở (không lưu storage): tải lại hoặc sang trang khác
+là hiện lại ngay, ở nguyên trang thì sau 3 phút tự hiện lại (`REOPEN_MS`). Tắt banner toàn website: xoá nội dung
 file `promo-banner.js` (giữ file rỗng).
 
 ## Mở chuyên mục "Đang cập nhật" trên trang chủ
