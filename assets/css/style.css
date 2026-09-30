@@ -233,7 +233,7 @@ a { color: var(--brand); }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar::before { transform: translateY(6px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar::after  { transform: translateY(-6px) rotate(-45deg); }
 
-@media (max-width: 1099px) {
+@media (max-width: 1199px) {
   /* Không có JS: menu xuống dòng, cuộn ngang nếu cần — không tràn trang */
   .site-nav { width: 100%; overflow-x: auto; padding-bottom: 8px; }
   .site-nav ul { flex-wrap: nowrap; }

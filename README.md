@@ -16,6 +16,9 @@ HTML/CSS/JS thuần, không build.
 │   └── ...
 ├── tin-hoc-7/                (tương tự)
 ├── tin-hoc-8/                (tương tự)
+├── hoat-dong-ngoai-gio/
+│   ├── index.html            Trang mục lục Hoạt động ngoài giờ
+│   └── huong-dan-thi-atgt/   Hướng dẫn đăng ký và thi ATGT (index.html tự chứa)
 ├── scripts/publish-slides.py Đồng bộ slide từ project nguồn
 └── README.md
 ```
@@ -24,6 +27,7 @@ HTML/CSS/JS thuần, không build.
 |---------------------|--------------------------|------------|
 | Tin học 6 / 7 / 8   | `/tin-hoc-6/` …          | Có slide   |
 | Một bài             | `/tin-hoc-6/bai-2/`      | Link gửi trực tiếp cho học sinh được |
+| Hoạt động ngoài giờ | `/hoat-dong-ngoai-gio/`  | Có hướng dẫn thi ATGT |
 | Đội tuyển Tin học   | `/doi-tuyen/` (dự kiến)  | Đang cập nhật |
 | Hoàng Mai Robotics  | `/robotics/` (dự kiến)   | Đang cập nhật |
 | Học lập trình       | <https://thaythangtoantin.com.vn/> | Link ngoài, mở tab mới |
@@ -49,6 +53,12 @@ Script:
 - không xoá bài đã publish nếu nguồn không còn (chỉ cảnh báo), không commit, không push.
 
 Nguồn ở chỗ khác: `python scripts/publish-slides.py --source "D:/duong/dan/GiaoTrinh-GiaoAn-PP"`.
+
+## Hoạt động ngoài giờ
+
+Nguồn: `GiaoTrinh-GiaoAn-PP/Hoat-Dong-Ngoai-Gio/`. Mỗi hướng dẫn là một file HTML tự chứa, copy vào
+`hoat-dong-ngoai-gio/<ten-muc>/index.html` (vd. `Huong-Dan-Thi-ATGT.html` → `huong-dan-thi-atgt/index.html`),
+rồi thêm một `<li class="card lesson">` vào `hoat-dong-ngoai-gio/index.html`.
 
 ## Mở chuyên mục "Đang cập nhật" trên trang chủ
 

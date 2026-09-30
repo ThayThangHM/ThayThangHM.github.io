@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hướng dẫn thi ATGT</title>
+<!--
+  CUỘC THI AN TOÀN GIAO THÔNG – PHẦN THI TRẮC NGHIỆM DÀNH CHO HỌC SINH
+  2 slide thực hành: (1) Đăng ký tài khoản · (2) Đăng nhập và làm bài thi.
+  File tự chứa, chạy offline. Sân khấu 16:9 (1280×720) tự co giãn theo màn hình.
+
+  ĐIỀU KHIỂN (dùng được với bút trình chiếu không dây):
+    Sau   = → PageDown ↓ Space Enter  (nếu slide đang phóng to và dài hơn màn hình: cuộn xuống trước)
+    Trước = ← PageUp ↑
+    Home / End = slide đầu / cuối · F = toàn màn hình
+    + / − / 0  = phóng to / thu nhỏ / về 100%   (hoặc bấm nút A− A+ trên thanh dưới)
+  URL: #2 mở thẳng slide 2.
+-->
+<style>
+:root{
+  --ink:#10233d;
+  --ink-soft:#44597a;
+  --paper:#f7f8fb;
+  --card:#ffffff;
+  --line:#d5dbe6;
+
+  /* THAO TÁC = xanh dương */
+  --act:#1d5fd1; --act-deep:#123f91; --act-soft:#e3ecfd;
+  /* THÔNG TIN CẦN NHẬP = xanh lá */
+  --inp:#13804a; --inp-deep:#0b5a33; --inp-soft:#def5e8;
+  /* CẢNH BÁO = đỏ */
+  --warn:#d3261f; --warn-deep:#9c1812; --warn-soft:#fde5e2;
+  /* Quy tắc / nổi bật = vàng */
+  --gold:#f2b705; --gold-soft:#fff6d6;
+  /* tô màu các phần của tài khoản */
+  --seg-name:#6a3fc1; --seg-date:#d9700a; --seg-at:#d3261f;
+
+  --font:"Segoe UI", "Be Vietnam Pro", Roboto, Arial, "Helvetica Neue", sans-serif;
+  --mono:Consolas, "Cascadia Mono", "Courier New", monospace;
+  --zoom:1;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--font);background:#0b1422;color:var(--ink);overflow:hidden}
+b,strong{font-weight:800}
+
+/* ---------- sân khấu 16:9 ---------- */
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1280px;height:720px;position:relative;background:var(--paper);overflow:hidden;
+  transform-origin:center center;box-shadow:0 0 60px rgba(0,0,0,.55)}
+
+.slide{position:absolute;inset:0 0 58px 0;display:none;overflow-y:auto;overflow-x:hidden;
+  scroll-behavior:smooth;scrollbar-width:thin}
+.slide.active{display:block}
+.slide-z{zoom:var(--zoom);min-height:100%;padding:16px 36px 12px;display:flex;flex-direction:column;gap:10px}
+
+/* ---------- đầu slide ---------- */
+.head{display:flex;align-items:center;gap:18px}
+.tag{flex:none;background:var(--ink);color:#fff;font-weight:800;font-size:20px;letter-spacing:.06em;
+  border-radius:10px;padding:8px 14px;line-height:1.1;text-align:center}
+.tag small{display:block;font-size:14px;font-weight:600;opacity:.8;letter-spacing:.02em}
+h1{font-size:42px;line-height:1.08;font-weight:900;letter-spacing:-.005em;flex:1}
+.legend{display:flex;gap:8px;flex:none}
+.legend span{font-size:16px;font-weight:800;border-radius:999px;padding:5px 12px;border:2px solid}
+.legend .l-act{color:var(--act-deep);background:var(--act-soft);border-color:var(--act)}
+.legend .l-inp{color:var(--inp-deep);background:var(--inp-soft);border-color:var(--inp)}
+.legend .l-warn{color:var(--warn-deep);background:var(--warn-soft);border-color:var(--warn)}
+
+/* ---------- website ---------- */
+.url{display:inline-block;font-weight:900;color:#fff;background:var(--act);border-radius:12px;
+  padding:6px 16px;letter-spacing:.01em;white-space:nowrap;box-shadow:0 4px 0 var(--act-deep)}
+.url.big{font-size:30px}
+.url.mid{font-size:24px}
+
+/* ---------- nút thao tác (giống nút bấm) ---------- */
+.btn{display:inline-block;font-weight:900;color:var(--act-deep);background:#fff;border:3px solid var(--act);
+  border-radius:12px;padding:3px 14px;box-shadow:0 4px 0 var(--act);white-space:nowrap}
+.btn .thin{font-weight:700}
+
+/* ---------- số bước ---------- */
+.num{flex:none;width:58px;height:58px;border-radius:50%;background:var(--act);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:900;
+  box-shadow:0 4px 0 var(--act-deep)}
+.num.inp{background:var(--inp);box-shadow:0 4px 0 var(--inp-deep)}
+
+/* ========== SLIDE 1 ========== */
+.s1-body{display:grid;grid-template-columns:600px 1fr;gap:20px;flex:1}
+.steps{display:flex;flex-direction:column;gap:12px}
+.st{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:2px solid var(--line);
+  border-left:8px solid var(--act);border-radius:16px;padding:10px 14px}
+.st.fill{border-left-color:var(--inp)}
+.st .txt{flex:1;min-width:0}
+.st .lbl{font-size:18px;font-weight:800;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase}
+.st .do{font-size:27px;font-weight:800;line-height:1.3;margin-top:2px}
+
+.form{margin-top:8px;border:2px solid var(--inp);border-radius:12px;overflow:hidden}
+.form .row{display:grid;grid-template-columns:132px 1fr;align-items:center;border-top:1px solid #bfe3cd}
+.form .row:first-child{border-top:0}
+.form .k{font-size:20px;font-weight:700;color:var(--ink-soft);padding:6px 10px;background:#f1faf5;height:100%;
+  display:flex;align-items:center}
+.form .v{font-size:23px;font-weight:900;color:var(--inp-deep);padding:5px 12px;background:var(--inp-soft);height:100%}
+.form .v .hint{font-size:21px;font-weight:700}
+.form .v.code{font-family:var(--mono);font-size:28px;letter-spacing:.08em}
+
+.right{display:flex;flex-direction:column;gap:12px;min-width:0}
+.rule{background:var(--gold-soft);border:4px solid var(--gold);border-radius:18px;padding:12px 18px 14px;
+  box-shadow:0 6px 0 #d9a300}
+.rule h3{font-size:24px;font-weight:900;letter-spacing:.04em;color:#6b4d00}
+.formula{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:8px;font-size:23px;font-weight:800}
+.formula .who{font-size:24px;font-weight:900;width:100%}
+.formula .who.inl{width:auto}
+.formula .eq,.formula .plus{font-size:30px;font-weight:900;color:var(--ink-soft)}
+.pill{border-radius:10px;padding:3px 12px;font-size:21px;color:#fff;font-weight:900;line-height:1.2;text-align:center}
+.pill.name{background:var(--seg-name)}
+.pill.date{background:var(--seg-date)}
+.pill.acc{background:var(--ink)}
+.pill.at{background:var(--seg-at);font-family:var(--mono);font-size:30px;padding:0 14px}
+
+.example{margin-top:12px;border-top:3px dashed #e3c35a;padding-top:10px}
+.who-ex{font-size:23px;font-weight:800}
+.who-ex .p{background:#fff;border:2px solid var(--line);border-radius:10px;padding:2px 10px;margin-left:4px}
+.coderow{display:flex;align-items:center;gap:10px;margin-top:8px}
+.coderow .arrow{font-size:30px;font-weight:900;color:var(--ink-soft)}
+.coderow .k{font-size:22px;font-weight:800;width:108px;flex:none}
+.code{font-family:var(--mono);font-weight:700;font-size:31px;letter-spacing:.03em;background:#fff;color:var(--ink);
+  border:3px solid var(--inp);border-radius:12px;padding:2px 14px;white-space:nowrap}
+.code .n{color:var(--seg-name)} .code .d{color:var(--seg-date)} .code .a{color:var(--seg-at)}
+
+.warn{background:var(--warn-soft);border:3px solid var(--warn);border-radius:14px;padding:8px 14px;
+  font-size:22px;font-weight:800;color:var(--warn-deep);line-height:1.3}
+.warn b{color:var(--warn)}
+
+/* ========== SLIDE 2 ========== */
+.flow{display:grid;grid-template-columns:392px 34px 1fr 34px 470px;gap:0;align-items:stretch}
+.flow + .flow{margin-top:0}
+.fc{background:var(--card);border:2px solid var(--line);border-top:8px solid var(--act);border-radius:16px;
+  padding:8px 14px 10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.fc .top{display:flex;align-items:center;gap:12px}
+.fc .do{font-size:25px;font-weight:800;line-height:1.22}
+.fc .top .do.sm{font-size:23px}
+.fc.inp{border-top-color:var(--inp)}
+.fc.end{background:var(--act-soft);border-color:var(--act)}
+.ar{display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;color:var(--act)}
+.flow.r2{grid-template-columns:1fr 34px 1fr 34px 1.15fr}
+.down{display:flex;justify-content:flex-end;padding-right:36%;font-size:28px;font-weight:900;color:var(--act);
+  line-height:1;margin:-6px 0 -6px}
+.down span{background:var(--act-soft);border:2px solid var(--act);border-radius:999px;padding:2px 16px;font-size:20px}
+
+.login{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center}
+.login .k{font-size:20px;font-weight:800;color:var(--ink-soft);white-space:nowrap}
+.login .code{font-size:26px;padding:0 10px;border-width:2px}
+.ex-lbl{font-size:18px;font-weight:800;color:var(--inp-deep);letter-spacing:.06em}
+
+.note{background:var(--warn-soft);border:4px solid var(--warn);border-radius:18px;padding:6px 18px 10px}
+.note h3{font-size:26px;font-weight:900;color:var(--warn);letter-spacing:.06em}
+.note ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 26px;margin-top:4px}
+.note li{font-size:22px;font-weight:700;line-height:1.3;padding-left:32px;position:relative}
+.note li::before{content:"⛔";position:absolute;left:0;top:0;font-size:20px}
+.note li.ok::before{content:"✅"}
+.note li.hand{grid-column:1 / -1;background:var(--warn);color:#fff;border-radius:12px;padding:6px 12px 6px 52px;
+  font-size:25px;font-weight:800}
+.note li.hand::before{content:"✋";left:12px;top:5px;font-size:26px}
+.note li.hand b{color:#ffe98a}
+
+/* ---------- phóng to lớn: xếp một cột ---------- */
+html.zoom-hi .s1-body{grid-template-columns:1fr}
+html.zoom-hi .flow,html.zoom-hi .flow.r2{grid-template-columns:1fr}
+html.zoom-hi .ar{transform:rotate(90deg);height:40px}
+html.zoom-hi .down{display:none}
+html.zoom-hi .note ul{grid-template-columns:1fr}
+
+/* ---------- thanh điều khiển ---------- */
+#bar{position:absolute;left:0;right:0;bottom:0;height:58px;background:#101c30;color:#fff;
+  display:flex;align-items:center;gap:10px;padding:0 14px;font-size:18px;z-index:5}
+#bar button{font-family:var(--font);font-size:19px;font-weight:800;color:#fff;background:#24385a;border:0;
+  border-radius:10px;padding:8px 16px;cursor:pointer}
+#bar button:hover{background:#34507f}
+#bar button:disabled{opacity:.35;cursor:default}
+#bar .next{background:var(--act)}
+#bar .next:hover{background:#2f74ea}
+#counter{font-weight:800;min-width:62px;text-align:center;font-size:20px}
+#bar .sp{flex:1}
+#bar .title{font-size:16px;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#zVal{min-width:58px;text-align:center;font-weight:800}
+#more{position:absolute;right:18px;bottom:70px;z-index:6;background:var(--ink);color:#fff;font-weight:800;
+  font-size:18px;border-radius:999px;padding:6px 14px;opacity:.85;pointer-events:none}
+#more[hidden]{display:none}
+</style>
+</head>
+<body>
+<div id="viewport">
+<div id="stage">
+
+  <!-- ======================= SLIDE 1 – ĐĂNG KÝ ======================= -->
+  <section class="slide active" data-title="Đăng ký tài khoản">
+    <div class="slide-z">
+      <div class="head">
+        <div class="tag">PHẦN 1<small>trước khi thi</small></div>
+        <h1>HƯỚNG DẪN ĐĂNG KÝ TÀI KHOẢN</h1>
+        <div class="legend"><span class="l-act">Bấm</span><span class="l-inp">Điền</span><span class="l-warn">Chú ý</span></div>
+      </div>
+
+      <div class="s1-body">
+        <!-- cột trái: 3 bước -->
+        <div class="steps">
+          <div class="st">
+            <div class="num">1</div>
+            <div class="txt">
+              <div class="lbl">Truy cập</div>
+              <div class="do"><span class="url big">giaothonghanoi.hanoimoi.vn</span></div>
+            </div>
+          </div>
+
+          <div class="st">
+            <div class="num">2</div>
+            <div class="txt">
+              <div class="lbl">Chọn</div>
+              <div class="do"><span class="btn">ĐĂNG KÝ <span class="thin">thành viên/dự thi</span></span></div>
+            </div>
+          </div>
+
+          <div class="st fill">
+            <div class="num inp">3</div>
+            <div class="txt">
+              <div class="do">Điền <u>đầy đủ</u> thông tin cá nhân</div>
+              <div class="form">
+                <div class="row"><div class="k">Họ và tên</div><div class="v"><span class="hint">Ghi ĐÚNG họ tên của em</span></div></div>
+                <div class="row"><div class="k">Cấp học</div><div class="v">THCS</div></div>
+                <div class="row"><div class="k">Phường/Xã</div><div class="v">Phường Hoàng Mai</div></div>
+                <div class="row"><div class="k">Trường</div><div class="v">Trung học cơ sở Hoàng Mai</div></div>
+                <div class="row"><div class="k">Số CCCD</div><div class="v code">123456</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- cột phải: quy tắc + ví dụ + cảnh báo -->
+        <div class="right">
+          <div class="rule">
+            <h3>🔑 QUY TẮC TẠO TÀI KHOẢN</h3>
+
+            <div class="formula">
+              <span class="who">Tên tài khoản =</span>
+              <span class="pill name">HỌ TÊN viết liền<br>không dấu</span>
+              <span class="plus">+</span>
+              <span class="pill date">NGÀY THÁNG<br>NĂM SINH</span>
+            </div>
+            <div class="formula">
+              <span class="who inl">Mật khẩu =</span>
+              <span class="pill acc">TÊN TÀI KHOẢN</span>
+              <span class="plus">+</span>
+              <span class="pill at">@</span>
+            </div>
+
+            <div class="example">
+              <div class="who-ex">Ví dụ: <span class="p">Nguyễn Văn A</span> &nbsp;sinh <span class="p">01/01/2014</span></div>
+              <div class="coderow">
+                <span class="arrow">→</span><span class="k">Tài khoản</span>
+                <span class="code"><span class="n">nguyenvana</span><span class="d">01012014</span></span>
+              </div>
+              <div class="coderow">
+                <span class="arrow">→</span><span class="k">Mật khẩu</span>
+                <span class="code"><span class="n">nguyenvana</span><span class="d">01012014</span><span class="a">@</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="warn">⚠️ Viết <b>liền</b> – <b>không dấu</b> – <b>không có khoảng trắng</b>.</div>
+          <div class="warn">⚠️ Nhớ <b>chính xác</b> tài khoản và mật khẩu để đăng nhập thi.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= SLIDE 2 – ĐĂNG NHẬP & THI ======================= -->
+  <section class="slide" data-title="Đăng nhập và làm bài thi">
+    <div class="slide-z">
+      <div class="head">
+        <div class="tag">PHẦN 2<small>vào thi</small></div>
+        <h1>ĐĂNG NHẬP VÀ LÀM BÀI THI</h1>
+        <div class="legend"><span class="l-act">Bấm</span><span class="l-inp">Điền</span><span class="l-warn">Chú ý</span></div>
+      </div>
+
+      <div class="flow">
+        <div class="fc">
+          <div class="top"><div class="num">1</div><div class="do">Truy cập</div></div>
+          <div><span class="url mid">giaothonghanoi.hanoimoi.vn</span></div>
+        </div>
+        <div class="ar">➜</div>
+        <div class="fc">
+          <div class="top"><div class="num">2</div><div class="do">Chọn</div></div>
+          <div class="do"><span class="btn">ĐĂNG NHẬP</span></div>
+        </div>
+        <div class="ar">➜</div>
+        <div class="fc inp">
+          <div class="top"><div class="num inp">3</div><div class="do sm">Nhập tài khoản và mật khẩu vừa đăng ký</div></div>
+          <div class="login">
+            <span class="ex-lbl" style="grid-column:1 / -1">VÍ DỤ</span>
+            <span class="k">Tài khoản:</span><span class="code">nguyenvana01012014</span>
+            <span class="k">Mật khẩu:</span><span class="code">nguyenvana01012014<span class="a" style="color:var(--seg-at)">@</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow r2">
+        <div class="fc">
+          <div class="top"><div class="num">4</div><div class="do">Đăng nhập thành công → chọn</div></div>
+          <div class="do"><span class="btn">VÀO THI</span></div>
+        </div>
+        <div class="ar">➜</div>
+        <div class="fc">
+          <div class="top"><div class="num">5</div><div class="do">Chọn</div></div>
+          <div class="do"><span class="btn">THI CHÍNH THỨC</span></div>
+        </div>
+        <div class="ar">➜</div>
+        <div class="fc end">
+          <div class="top"><div class="num">6</div><div class="do">Tham gia vòng thi <u>đang được giáo viên hướng dẫn</u></div></div>
+        </div>
+      </div>
+
+      <div class="note">
+        <h3>⚠️ LƯU Ý</h3>
+        <ul>
+          <li class="ok">Đọc kỹ câu hỏi trước khi chọn đáp án.</li>
+          <li>Không tự ý thoát khỏi trang thi.</li>
+          <li>Không đổi máy khi chưa báo giáo viên.</li>
+          <li>Không tự tạo thêm tài khoản khác khi gặp lỗi.</li>
+          <li class="hand">Không đăng nhập được hoặc gặp lỗi → <b>GIƠ TAY BÁO GIÁO VIÊN</b>.</li>
+          <li class="ok" style="grid-column:1 / -1">Hoàn thành bài theo hướng dẫn của giáo viên.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div id="more" hidden>▼ còn nội dung bên dưới</div>
+
+  <!-- ======================= thanh điều khiển ======================= -->
+  <div id="bar">
+    <button id="prevBtn" title="Trước (← / PageUp)">◀ Trước</button>
+    <span id="counter">1 / 2</span>
+    <button id="nextBtn" class="next" title="Sau (→ / PageDown)">Sau ▶</button>
+    <span class="title" id="slideTitle"></span>
+    <span class="sp"></span>
+    <span>Cỡ chữ</span>
+    <button id="zMinus" title="Thu nhỏ (−)">A−</button>
+    <span id="zVal">100%</span>
+    <button id="zPlus" title="Phóng to (+)">A+</button>
+    <button id="zReset" title="Về 100% (0)">↺</button>
+    <button id="fsBtn" title="Toàn màn hình (F)">⛶</button>
+  </div>
+</div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var stage = document.getElementById("stage");
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var total = slides.length, current = 0;
+  var counter = document.getElementById("counter");
+  var titleEl = document.getElementById("slideTitle");
+  var prevBtn = document.getElementById("prevBtn");
+  var nextBtn = document.getElementById("nextBtn");
+  var more = document.getElementById("more");
+  var params = new URLSearchParams(location.search);
+
+  /* 16:9 co giãn vừa màn hình */
+  function fit() {
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    stage.style.transform = "scale(" + s + ")";
+  }
+  window.addEventListener("resize", fit);
+  document.addEventListener("fullscreenchange", function () { setTimeout(fit, 60); });
+  document.addEventListener("webkitfullscreenchange", function () { setTimeout(fit, 60); });
+  fit();
+
+  function belowFold(s) {
+    var top = Math.max(s.scrollTop, s._target || 0);
+    return top + s.clientHeight < s.scrollHeight - 6;
+  }
+  function updateMore() { more.hidden = !belowFold(slides[current]); }
+
+  function show(i) {
+    if (i < 0 || i >= total) return;
+    slides[current].classList.remove("active");
+    current = i;
+    var s = slides[current];
+    s.classList.add("active");
+    s.scrollTop = 0; s._target = 0;
+    counter.textContent = (current + 1) + " / " + total;
+    titleEl.textContent = s.getAttribute("data-title") || "";
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1 && !belowFold(s);
+    try { history.replaceState(null, "", location.search + "#" + (current + 1)); } catch (e) { /* file:// */ }
+    setTimeout(updateMore, 30);
+  }
+  function next() {
+    var s = slides[current];
+    if (belowFold(s)) {   // slide đang phóng to và dài hơn màn hình → cuộn xuống trước
+      var from = Math.max(s.scrollTop, s._target || 0);
+      s._target = Math.min(from + s.clientHeight * 0.8, s.scrollHeight - s.clientHeight);
+      s.scrollTo({ top: s._target, behavior: "smooth" });
+      return;
+    }
+    show(current + 1);
+  }
+  function prev() { show(current - 1); }
+
+  slides.forEach(function (s) {
+    s.addEventListener("scroll", function () {
+      if (s._target != null && Math.abs(s.scrollTop - s._target) < 2) s._target = null;
+      if (s === slides[current]) {
+        updateMore();
+        nextBtn.disabled = current === total - 1 && !belowFold(s);
+      }
+    });
+    s.addEventListener("wheel", function () { s._target = null; }, { passive: true });
+  });
+
+  /* toàn màn hình */
+  function toggleFullscreen() {
+    var d = document;
+    try {
+      if (!d.fullscreenElement && !d.webkitFullscreenElement) {
+        var el = d.documentElement, req = el.requestFullscreen || el.webkitRequestFullscreen;
+        if (req) { var p = req.call(el); if (p && p.catch) p.catch(function () {}); }
+      } else {
+        var ex = d.exitFullscreen || d.webkitExitFullscreen;
+        if (ex) { var q = ex.call(d); if (q && q.catch) q.catch(function () {}); }
+      }
+    } catch (err) { /* không hỗ trợ */ }
+  }
+
+  /* phóng to / thu nhỏ chữ */
+  var ZMIN = 80, ZMAX = 160, ZSTEP = 10, ZDEF = 100, ZKEY = "atgtSlideZoom", zoomNow = ZDEF;
+  var root = document.documentElement, zVal = document.getElementById("zVal");
+  function applyZoom(pct, save) {
+    pct = Math.max(ZMIN, Math.min(ZMAX, Math.round(pct / ZSTEP) * ZSTEP));
+    zoomNow = pct;
+    root.style.setProperty("--zoom", (pct / 100).toFixed(2));
+    root.classList.toggle("zoom-hi", pct >= 130);
+    zVal.textContent = pct + "%";
+    if (save !== false) { try { localStorage.setItem(ZKEY, String(pct)); } catch (e) { /* bỏ qua */ } }
+    var s = slides[current]; s.scrollTop = 0; s._target = 0;
+    setTimeout(function () { updateMore(); nextBtn.disabled = current === total - 1 && !belowFold(s); }, 30);
+  }
+  function storedZoom() {
+    try { var v = parseInt(localStorage.getItem(ZKEY), 10); if (!isNaN(v)) return v; } catch (e) { /* bỏ qua */ }
+    return ZDEF;
+  }
+
+  prevBtn.addEventListener("click", prev);
+  nextBtn.addEventListener("click", next);
+  document.getElementById("zMinus").addEventListener("click", function () { applyZoom(zoomNow - ZSTEP); });
+  document.getElementById("zPlus").addEventListener("click", function () { applyZoom(zoomNow + ZSTEP); });
+  document.getElementById("zReset").addEventListener("click", function () { applyZoom(ZDEF); });
+  document.getElementById("fsBtn").addEventListener("click", toggleFullscreen);
+
+  /* bàn phím + bút trình chiếu */
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    switch (e.key) {
+      case "ArrowRight": case "PageDown": case "ArrowDown": case " ": case "Spacebar": case "Enter":
+        e.preventDefault(); if (document.activeElement) document.activeElement.blur(); next(); break;
+      case "ArrowLeft": case "PageUp": case "ArrowUp":
+        e.preventDefault(); if (document.activeElement) document.activeElement.blur(); prev(); break;
+      case "Home": e.preventDefault(); show(0); break;
+      case "End": e.preventDefault(); show(total - 1); break;
+      case "f": case "F": e.preventDefault(); toggleFullscreen(); break;
+      case "+": case "=": e.preventDefault(); applyZoom(zoomNow + ZSTEP); break;
+      case "-": case "_": e.preventDefault(); applyZoom(zoomNow - ZSTEP); break;
+      case "0": e.preventDefault(); applyZoom(ZDEF); break;
+    }
+  });
+
+  window.addEventListener("hashchange", function () {
+    var n = parseInt(location.hash.replace("#", ""), 10);
+    if (!isNaN(n) && n - 1 !== current) show(n - 1);
+  });
+
+  applyZoom(params.get("z") ? parseInt(params.get("z"), 10) : storedZoom(), false);
+  var start = parseInt((location.hash || "").replace("#", ""), 10);
+  slides.forEach(function (s) { s.classList.remove("active"); });
+  current = !isNaN(start) && start >= 1 && start <= total ? start - 1 : 0;
+  slides[current].classList.add("active");
+  show(current);
+
+  /* kiểm tra tràn (chỉ dùng khi test): ?qa=1 → body[data-qa] = "slide:tràn dọc/số phần tử lòi ra phải" */
+  if (params.get("qa") === "1") {
+    var rep = [];
+    slides.forEach(function (s, i) {
+      s.classList.add("active");
+      var sr = s.getBoundingClientRect(), bad = 0;
+      s.querySelectorAll(".slide-z *").forEach(function (n) {
+        var r = n.getBoundingClientRect();
+        if (r.width && r.right > sr.right + 2) bad++;
+      });
+      rep.push((i + 1) + ":" + (s.scrollHeight - s.clientHeight) + "/" + bad);
+      if (i !== current) s.classList.remove("active");
+    });
+    document.body.setAttribute("data-qa", rep.join(" "));
+  }
+})();
+</script>
+</body>
+</html>
