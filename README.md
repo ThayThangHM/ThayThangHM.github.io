@@ -60,6 +60,22 @@ Nguồn: `GiaoTrinh-GiaoAn-PP/Hoat-Dong-Ngoai-Gio/`. Mỗi hướng dẫn là m�
 `hoat-dong-ngoai-gio/<ten-muc>/index.html` (vd. `Huong-Dan-Thi-ATGT.html` → `huong-dan-thi-atgt/index.html`),
 rồi thêm một `<li class="card lesson">` vào `hoat-dong-ngoai-gio/index.html`.
 
+## Banner đăng ký học lập trình
+
+Banner nổi góc dưới phải (điện thoại: sát đáy) hiện trên **mọi trang**, kể cả slide. Toàn bộ nội dung, link form
+và giao diện nằm trong một file: `assets/js/promo-banner.js` — đổi chữ/link thì sửa các hằng ở đầu file đó.
+
+Mỗi trang gắn banner bằng một dòng `<script src="…/assets/js/promo-banner.js" defer></script>` trước `</body>`.
+`publish-slides.py` tự thêm dòng này vào mọi trang `.html` còn thiếu sau mỗi lần đồng bộ (slide copy từ nguồn
+không có sẵn). Thêm trang mới bằng tay thì chạy:
+
+```sh
+python scripts/publish-slides.py --banner-only
+```
+
+Người xem bấm `×` thì banner ẩn đến hết phiên (dùng `sessionStorage`). Tắt banner toàn website: xoá nội dung
+file `promo-banner.js` (giữ file rỗng).
+
 ## Mở chuyên mục "Đang cập nhật" trên trang chủ
 
 Khi `/doi-tuyen/` hoặc `/robotics/` có nội dung, sửa card tương ứng trong `index.html` ở gốc

@@ -15,10 +15,15 @@ Bài không đạt sẽ bị bỏ qua (không copy).
 Sau đó danh sách bài trong tin-hoc-X/index.html (giữa hai dòng đánh dấu
 <!-- LESSONS:BEGIN --> và <!-- LESSONS:END -->) được tạo lại.
 
+Cuối cùng, mọi trang .html trong repo được gắn banner đăng ký dùng chung
+(assets/js/promo-banner.js) bằng một dòng <script> trước </body> — trang nào có rồi thì giữ nguyên.
+Slide copy nguyên bản từ nguồn nên không có dòng này; script thêm lại sau mỗi lần đồng bộ.
+
 Cách dùng (chạy tại gốc repo website):
     python scripts/publish-slides.py --dry-run     # xem trước, không ghi gì
     python scripts/publish-slides.py               # đồng bộ thật
     python scripts/publish-slides.py --source "D:/duong/dan/GiaoTrinh-GiaoAn-PP"
+    python scripts/publish-slides.py --banner-only # chỉ gắn banner vào các trang, không đồng bộ slide
 """
 
 import argparse
@@ -36,6 +41,8 @@ LESSON_DIR = re.compile(r"^Bai-(\d+)$")
 # Bài không đưa lên website (vẫn giữ trong nguồn). 0 = Bài mở đầu (Bai-00).
 EXCLUDE = {0}
 BEGIN, END = "<!-- LESSONS:BEGIN -->", "<!-- LESSONS:END -->"
+# Banner đăng ký dùng chung cho mọi trang (nội dung, link, giao diện nằm trong file này)
+BANNER_JS = "assets/js/promo-banner.js"
 
 REF = re.compile(
     r"""(?:src|href|poster|data-src)\s*=\s*["']([^"']+)["']"""
@@ -160,12 +167,42 @@ def update_index(grade, lessons, dry):
     print(f"  danh sách bài trong {page.relative_to(REPO)}: {'giữ nguyên' if new == s else 'cập nhật'}")
 
 
+def ensure_banner(dry):
+    """Gắn <script> banner dùng chung vào mọi trang .html trong repo (bỏ qua trang đã có)."""
+    added = 0
+    for page in sorted(REPO.rglob("*.html")):
+        rel = page.relative_to(REPO)
+        if rel.parts[0].startswith("."):
+            continue
+        with open(page, encoding="utf-8", newline="") as f:
+            s = f.read()
+        if Path(BANNER_JS).name in s:
+            continue
+        i = s.lower().rfind("</body>")
+        if i < 0:
+            print(f"  ! {rel.as_posix()}: không có </body> — không gắn được banner")
+            continue
+        src = "../" * (len(rel.parts) - 1) + BANNER_JS
+        nl = "\r\n" if "\r\n" in s else "\n"
+        if not dry:
+            with open(page, "w", encoding="utf-8", newline="") as f:
+                f.write(f'{s[:i]}<script src="{src}" defer></script>{nl}{s[i:]}')
+        print(f"  + {rel.as_posix()}")
+        added += 1
+    print(f"Banner đăng ký ({BANNER_JS}): {f'gắn thêm vào {added} trang' if added else 'mọi trang đã có'}\n")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--source", type=Path, default=DEFAULT_SOURCE, help="thư mục GiaoTrinh-GiaoAn-PP")
     ap.add_argument("--dry-run", action="store_true", help="chỉ in ra, không ghi file")
+    ap.add_argument("--banner-only", action="store_true", help="chỉ gắn banner đăng ký vào các trang, không đồng bộ slide")
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
+
+    if args.banner_only:
+        ensure_banner(args.dry_run)
+        return
 
     if not args.source.is_dir():
         sys.exit(f"Không tìm thấy thư mục nguồn: {args.source}")
@@ -225,6 +262,7 @@ def main():
         update_index(grade, sorted(lessons), args.dry_run)
         print()
 
+    ensure_banner(args.dry_run)
     print("Xong." if not problems else f"Xong, có {problems} bài cần xem lại.")
     print("Script không commit/push. Kiểm tra bằng: python -m http.server 8000")
 
