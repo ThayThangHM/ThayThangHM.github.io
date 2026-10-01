@@ -1,12 +1,12 @@
-# AI giảng bài (lời giảng tự động bằng giọng nói)
+# Thầy Thắng AI — AI giảng bài (lời giảng tự động bằng giọng nói)
 
-Học sinh mở slide, bấm **▶ 🎙 AI giảng bài**: máy đọc lời giảng của slide đang xem, đọc xong tự sang slide sau,
+Học sinh mở slide, bấm **▶ 🎙 Thầy Thắng AI**: máy đọc lời giảng của slide đang xem, đọc xong tự sang slide sau,
 cứ thế đến hết bài. Không có avatar hay video, chỉ có âm thanh.
 
 - Giọng đọc: **Microsoft Edge TTS** qua thư viện Python `edge-tts`. Miễn phí, không cần API key.
 - Audio được **tạo sẵn thành file MP3** trên máy giáo viên. Website (GitHub Pages) chỉ phát file tĩnh,
   không gọi API hay backend nào khi học sinh xem.
-- Đang thử trên **Tin học 6 — Bài 4 (Mạng máy tính)**. Chưa áp dụng cho các bài khác.
+- Đã có cho **Tin học 6 — Bài 4 (Mạng máy tính)** và **Bài 5 (Internet)**.
 
 ## Cấu trúc
 
@@ -45,7 +45,7 @@ Cần có Internet khi **tạo** audio. Khi học sinh xem bài thì không cầ
 python scripts/generate-narration.py --list-voices
 ```
 
-Edge TTS hiện có 2 giọng tiếng Việt:
+Edge TTS hiện chỉ có 2 giọng tiếng Việt (Microsoft không ghi vùng miền, chỉ ghi là giọng chuẩn):
 
 | Giọng                 | Giới tính | Ghi chú                          |
 |-----------------------|-----------|----------------------------------|
@@ -144,7 +144,7 @@ python -m http.server 8000      # mở http://localhost:8000/tin-hoc-6/bai-4/
 
 | Nút / phím      | Tác dụng                                                     |
 |-----------------|--------------------------------------------------------------|
-| ▶ 🎙 AI giảng bài | Bắt đầu giảng **từ slide đang xem**                         |
+| ▶ 🎙 Thầy Thắng AI | Bắt đầu giảng **từ slide đang xem**                       |
 | ⏸ / ▶ · phím **N** | Tạm dừng / tiếp tục (kể cả trong lúc đếm `[pause]`)        |
 | ⏮ ⏭            | Slide trước / sau, rồi giảng slide đó                        |
 | 🔊              | Âm lượng (ẩn trên màn hình hẹp)                              |
