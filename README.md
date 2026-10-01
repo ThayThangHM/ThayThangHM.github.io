@@ -54,6 +54,9 @@ Script:
 
 Nguồn ở chỗ khác: `python scripts/publish-slides.py --source "D:/duong/dan/GiaoTrinh-GiaoAn-PP"`.
 
+**AI giảng bài** (lời giảng tự động, MP3 tạo sẵn bằng Edge TTS — đang thử trên Tin học 6 Bài 4):
+xem [docs/AI-NARRATION.md](docs/AI-NARRATION.md). Tạo audio: `python scripts/generate-narration.py 6/4`.
+
 ## Hoạt động ngoài giờ
 
 Nguồn: `GiaoTrinh-GiaoAn-PP/Hoat-Dong-Ngoai-Gio/`. Mỗi hướng dẫn là một file HTML tự chứa, copy vào

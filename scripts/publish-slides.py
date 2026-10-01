@@ -4,7 +4,8 @@
 Nguồn:   <source>/Tin-Hoc-{6,7,8}/SlideHTML/Bai-XX/
 Đích:    <repo>/tin-hoc-{6,7,8}/bai-X/
 
-Mỗi bài được copy nguyên bản: index.html, các file .css/.js cùng cấp và thư mục assets/.
+Mỗi bài được copy nguyên bản: index.html, các file .css/.js cùng cấp, thư mục assets/ và lời giảng
+"AI giảng bài" nếu có (narration/narration-data.js + narration/audio/*.mp3 — xem docs/AI-NARRATION.md).
 Các file khác trong thư mục bài (ghi chú, bản nháp…) KHÔNG được copy, chỉ cảnh báo.
 Trước khi copy, script kiểm tra mọi đường dẫn trong HTML/CSS/JS:
   - không có đường dẫn tuyệt đối/local (D:\\..., file:///, /...);
@@ -117,7 +118,7 @@ def check_refs(lesson_dir):
 
 
 def files_to_publish(lesson_dir):
-    """index.html + .css/.js cùng cấp + toàn bộ assets/. Trả về (danh sách copy, danh sách bỏ qua)."""
+    """index.html + .css/.js cùng cấp + toàn bộ assets/ + audio lời giảng. Trả về (danh sách copy, danh sách bỏ qua)."""
     keep, skipped = [], []
     for f in lesson_dir.rglob("*"):
         if f.is_dir():
@@ -125,7 +126,13 @@ def files_to_publish(lesson_dir):
         rel = f.relative_to(lesson_dir)
         top_level_code = len(rel.parts) == 1 and (rel.name == "index.html" or rel.suffix in (".css", ".js"))
         in_assets = rel.parts[0] == "assets" and not rel.name.startswith(".")
-        (keep if top_level_code or in_assets else skipped).append(rel)
+        # narration/script.json chỉ dùng để tạo audio trên máy giáo viên, website không cần
+        narration = rel.parts[0] == "narration" and (
+            rel.as_posix() == "narration/narration-data.js"
+            or (len(rel.parts) == 3 and rel.parts[1] == "audio" and rel.suffix == ".mp3"))
+        if rel.parts[0] == "narration" and not narration:
+            continue
+        (keep if top_level_code or in_assets or narration else skipped).append(rel)
     return keep, skipped
 
 
