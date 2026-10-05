@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spreadsheets for Real Problems · Tin học 8 — Bài 5</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--
+  BÀI 5 — SỬ DỤNG BẢNG TÍNH GIẢI QUYẾT BÀI TOÁN THỰC TẾ (SGK Tin học 8 KNTT tr.21–26 = PDF 20–25, Chủ đề 4: Ứng dụng tin học)
+  PPCT (KHDH 2026–27): 2 tiết (1 LT + 1 TH) · tiết 10, 11. NLS: 5.2.TC2b · 5.3.TC2a · 1.3.TC2a.
+  TIẾT 1 (slide 1–14): Khởi động (bảng tính của Khoa) 4' → 1. Địa chỉ tương đối 12' → 2. Địa chỉ tuyệt đối 16' → Luyện tập nhanh 8' → Ghi nhớ 5'.
+  TIẾT 2 (slide 15–21): 3. Thực hành Doanh thu (Hình 5.1–5.5) 15' → 4. Sao chép dữ liệu từ văn bản/trình chiếu (Bảng 5.1) 8'
+  → Luyện tập 2 (mặt hàng giảm giá, Hình 5.7) 15' → Vận dụng + về nhà 4'.
+  Nguồn: SGK (Hoạt động 1–2, Hình 5.1–5.7, Bảng 5.1, các hộp kiến thức, câu hỏi ?, Luyện tập, Vận dụng). Không có PP cũ cho bài này.
+  Đáp án: ? (tr.24) câu 1 → B (=E6*$F$2), câu 2 → D; Luyện tập 1 → C (=C2*D2).
+  Ghi chú Luyện tập 2: SGK ghi "Đơn giá đã giảm = Đơn giá*Tỉ lệ giảm giá" (giữ nguyên theo SGK); slide 19 có thêm thử thách
+  "giá phải trả = Đơn giá*(1−Tỉ lệ giảm giá)" để GV dùng nếu muốn.
+  Hình bảng tính vẽ lại bằng HTML. Phím: → PageDown Space = tiếp · ← PageUp = lùi · F toàn màn hình · + − 0 zoom · Z ghim.
+-->
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- ======================= TIẾT 1 ======================= -->
+
+    <!-- 01 · Title -->
+    <section class="slide" data-part="Bài 5">
+      <div class="slide-z split wide-left">
+        <div>
+          <div class="kicker">Tin học 8 · Chủ đề 4 · Ứng dụng tin học</div>
+          <h1 style="font-size:74px">SPREADSHEETS FOR REAL PROBLEMS</h1>
+          <p class="sub" style="font-size:34px;font-style:normal;font-weight:800;color:var(--blue-deep)">Bài 5 — Sử dụng bảng tính giải quyết bài toán thực tế</p>
+          <p class="lead-vi vi mt">2 tiết · Tiết 1: Địa chỉ tương đối, địa chỉ tuyệt đối<br>Tiết 2: Thực hành tính doanh thu · sao chép dữ liệu sang trang tính</p>
+        </div>
+        <div class="viz">
+          <svg viewBox="0 0 400 330" role="img" aria-label="A dollar sign locking a cell address">
+            <rect x="40" y="60" width="320" height="110" rx="16" fill="#fff" stroke="#217346" stroke-width="5"/>
+            <text x="200" y="134" text-anchor="middle" font-size="56" font-weight="800" fill="#12455a" font-family="Consolas, monospace">=E4*<tspan fill="#d9604f">$</tspan>F<tspan fill="#d9604f">$</tspan>2</text>
+            <rect x="150" y="200" width="100" height="80" rx="14" fill="#e8963c"/>
+            <path d="M170 200 v-26 a30 30 0 0 1 60 0 v26" fill="none" stroke="#8a4b12" stroke-width="10"/>
+            <circle cx="200" cy="236" r="11" fill="#fff"/><rect x="195" y="240" width="10" height="22" fill="#fff"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Goals -->
+    <section class="slide" data-part="Hôm nay">
+      <div class="slide-z mid">
+        <div class="kicker">Today · Sau bài này em sẽ</div>
+        <h2>FOUR THINGS TO LEARN</h2>
+        <div class="cards g2">
+          <div class="card blue"><div class="ico">🔁</div><div><div class="en">Relative addresses</div><span class="vi">Giải thích sự thay đổi địa chỉ tương đối khi sao chép công thức.</span></div></div>
+          <div class="card amber"><div class="ico">🔒</div><div><div class="en">Absolute addresses</div><span class="vi">Phân biệt địa chỉ tương đối và địa chỉ tuyệt đối của một ô tính.</span></div></div>
+          <div class="card green"><div class="ico">💰</div><div><div class="en">Solve a real problem</div><span class="vi">Dùng bảng tính trợ giúp giải bài toán thực tế (tính doanh thu).</span></div></div>
+          <div class="card violet"><div class="ico">📋</div><div><div class="en">Copy tables into a sheet</div><span class="vi">Sao chép dữ liệu từ tệp văn bản, trang trình chiếu sang trang tính.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Warm-up: Khoa's app list (Hình 5.1) -->
+    <section class="slide" data-part="Khởi động">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">🔥</span> Warm-up · Bảng tính của Khoa (Hình 5.1)</div>
+        <p class="lead" style="font-size:28px">Khoa's dad sells apps on an <b>app store</b> (chợ ứng dụng). Khoa lists them:</p>
+        <div class="xls" style="margin-top:10px">
+          <table>
+            <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+            <tr><th class="rh">1</th><td colspan="5" class="b c">DANH SÁCH PHẦN MỀM ỨNG DỤNG</td></tr>
+            <tr><th class="rh">3</th><td class="h">TT</td><td class="h">Sản phẩm</td><td class="h">Đơn giá (đồng)</td><td class="h">Số lượt mua</td><td class="h">Doanh thu</td></tr>
+            <tr><th class="rh">4</th><td class="n">1</td><td>Quản lí thời gian</td><td class="n">39,999</td><td class="n">50,000</td><td></td></tr>
+            <tr><th class="rh">5</th><td class="n">2</td><td>Trò chơi sáng tạo</td><td class="n">109,000</td><td class="n">50,000</td><td></td></tr>
+            <tr><th class="rh">6</th><td class="n">3</td><td>Thiết kế đồ hoạ</td><td class="n">211,000</td><td class="n">10,000</td><td></td></tr>
+            <tr><th class="rh">7</th><td class="n">4</td><td>Từ điển</td><td class="n">0</td><td class="n">20,000</td><td></td></tr>
+            <tr><th class="rh">8</th><td class="n">5</td><td>Quản lí bán hàng cá nhân</td><td class="n">177,000</td><td class="n">5,000</td><td></td></tr>
+            <tr><th class="rh">9</th><td class="n">6</td><td>Sổ sức khoẻ điện tử</td><td class="n">0</td><td class="n">10,000,000</td><td></td></tr>
+          </table>
+        </div>
+        <p class="lead step" style="font-size:28px;margin-top:12px">❓ Bảng tính này có cần bổ sung thông tin gì không? <span class="vi">→ cột <b>Doanh thu</b> đang trống!</span></p>
+      </div>
+    </section>
+
+    <!-- 04 · Activity 1: revenue formula -->
+    <section class="slide" data-part="1. Địa chỉ tương đối">
+      <div class="slide-z split">
+        <div>
+          <div class="badge"><span class="n">1</span> Activity 1 · Tính doanh thu phần mềm</div>
+          <p class="question" style="font-size:38px">Revenue of “Quản lí thời gian” in E4?</p>
+          <p class="q-vi">Viết công thức tính Doanh thu dựa trên Đơn giá và Số lượt mua (phần mềm miễn phí có đơn giá 0).</p>
+          <div class="callout step"><div class="ico">💰</div><div><div class="en">Doanh thu = Đơn giá × Số lượt mua</div><span class="vi">Tại ô E4: <span class="fx-txt" style="color:#fff">=C4*D4</span></span></div></div>
+          <p class="lead step" style="font-size:26px;margin-top:12px">❓ Làm sao tính cho 5 phần mềm còn lại mà <b>không gõ lại</b> công thức?</p>
+        </div>
+        <div class="xls">
+          <div class="fx"><span class="nb">E4</span><span class="fi">fx</span><span class="fv">=C4*D4</span></div>
+          <table>
+            <tr><th class="rh"></th><th>C</th><th>D</th><th>E</th></tr>
+            <tr><th class="rh">3</th><td class="h">Đơn giá</td><td class="h">Số lượt mua</td><td class="h">Doanh thu</td></tr>
+            <tr><th class="rh">4</th><td class="n" style="background:#d6e6f5">39,999</td><td class="n" style="background:#ffe1d9">50,000</td><td class="f cur">=C4*D4</td></tr>
+            <tr><th class="rh">5</th><td class="n">109,000</td><td class="n">50,000</td><td></td></tr>
+            <tr><th class="rh">6</th><td class="n">211,000</td><td class="n">10,000</td><td></td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · Relative address -->
+    <section class="slide" data-part="1. Địa chỉ tương đối">
+      <div class="slide-z">
+        <div class="kicker">Explain · Hình 5.2 · Địa chỉ tương đối</div>
+        <h2 style="font-size:42px">COPY E4 DOWN — THE ADDRESSES FOLLOW</h2>
+        <div class="duo r">
+          <div class="xls lg">
+            <table>
+              <tr><th class="rh"></th><th>C</th><th>D</th><th>E</th></tr>
+              <tr><th class="rh">4</th><td class="n">39,999</td><td class="n">50,000</td><td class="f">=C4*D4</td></tr>
+              <tr><th class="rh">5</th><td class="n">109,000</td><td class="n">50,000</td><td class="f"><span class="step">=C5*D5</span></td></tr>
+              <tr><th class="rh">6</th><td class="n">211,000</td><td class="n">10,000</td><td class="f"><span class="step">=C6*D6</span></td></tr>
+              <tr><th class="rh">7</th><td class="n">0</td><td class="n">20,000</td><td class="f"><span class="step">=C7*D7</span></td></tr>
+              <tr><th class="rh">8</th><td class="n">177,000</td><td class="n">5,000</td><td class="f"><span class="step">=C8*D8</span></td></tr>
+              <tr><th class="rh">9</th><td class="n">0</td><td class="n">10,000,000</td><td class="f"><span class="step">=C9*D9</span></td></tr>
+            </table>
+          </div>
+          <div>
+            <div class="callout"><div class="ico">🔁</div><div><div class="en">Relative address</div><span class="vi">C4, D4… là <b>địa chỉ tương đối</b>: tự động thay đổi khi sao chép công thức (giữ nguyên vị trí tương đối với ô chứa công thức).</span></div></div>
+            <div class="callout amber step"><div class="ico">🖱️</div><div><div class="en">Default when you click a cell</div><span class="vi">Nháy chuột vào ô khi nhập công thức → mặc định là địa chỉ tương đối.</span></div></div>
+          </div>
+        </div>
+        <p class="vi step" style="font-size:22px;margin-top:10px">Bảng tính có 3 loại địa chỉ: <b>tương đối</b>, <b>tuyệt đối</b>, hỗn hợp. Bài này học hai loại đầu.</p>
+      </div>
+    </section>
+
+    <!-- 06 · Activity 2: company share (Hình 5.3) -->
+    <section class="slide" data-part="2. Địa chỉ tuyệt đối">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">2</span> Activity 2 · Doanh thu của công ti = Doanh thu × Tỉ lệ (ô F2 = 70%)</div>
+        <div class="xls" style="margin-top:6px">
+          <table>
+            <tr><th class="rh"></th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+            <tr><th class="rh">2</th><td></td><td></td><td colspan="2" class="c">Tỉ lệ doanh thu của công ti</td><td class="n b hot" id="f2">70%</td></tr>
+            <tr><th class="rh">3</th><td class="h">Sản phẩm</td><td class="h">Đơn giá</td><td class="h">Số lượt mua</td><td class="h">Doanh thu</td><td class="h">Doanh thu của công ti</td></tr>
+            <tr><th class="rh">4</th><td>Quản lí thời gian</td><td class="n">39,999</td><td class="n">50,000</td><td class="n">1,999,950,000</td><td></td></tr>
+            <tr><th class="rh">5</th><td>Trò chơi sáng tạo</td><td class="n">109,000</td><td class="n">50,000</td><td class="n">5,450,000,000</td><td></td></tr>
+            <tr><th class="rh">6</th><td>Thiết kế đồ hoạ</td><td class="n">211,000</td><td class="n">10,000</td><td class="n">2,110,000,000</td><td></td></tr>
+            <tr><th class="rh">7</th><td>Từ điển</td><td class="n">0</td><td class="n">20,000</td><td class="n">0</td><td></td></tr>
+            <tr><th class="rh">8</th><td>Quản lí bán hàng cá nhân</td><td class="n">177,000</td><td class="n">5,000</td><td class="n">885,000,000</td><td></td></tr>
+          </table>
+        </div>
+        <div class="cards g2">
+          <div class="card step"><div class="num">1</div><div><div class="en">Formulas for F4 and F5?</div><span class="vi">Nhập công thức tính Doanh thu của công ti cho 2 phần mềm đầu.</span></div></div>
+          <div class="card step"><div class="num">2</div><div><div class="en">Copy F4 → F5: is it right?</div><span class="vi">Sao chép từ F4 sang F5 có cho công thức đúng không? Vì sao?</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · The trap: =E4*F2 copied -->
+    <section class="slide" data-part="2. Địa chỉ tuyệt đối">
+      <div class="slide-z">
+        <div class="kicker">Try it · Thử với địa chỉ tương đối</div>
+        <h2 style="font-size:42px">=E4*F2 … THEN COPY. OOPS!</h2>
+        <div class="duo r">
+          <div class="xls lg">
+            <table>
+              <tr><th class="rh"></th><th>E</th><th>F</th></tr>
+              <tr><th class="rh">2</th><td></td><td class="n b">70%</td></tr>
+              <tr><th class="rh">3</th><td class="h">Doanh thu</td><td class="h">Doanh thu công ti</td></tr>
+              <tr><th class="rh">4</th><td class="n">1,999,950,000</td><td class="f">=E4*F2 <span style="color:var(--green)">✔</span></td></tr>
+              <tr><th class="rh">5</th><td class="n">5,450,000,000</td><td class="f"><span class="step" style="color:var(--coral)">=E5*F3 ✘</span></td></tr>
+              <tr><th class="rh">6</th><td class="n">2,110,000,000</td><td class="f"><span class="step" style="color:var(--coral)">=E6*F4 ✘</span></td></tr>
+            </table>
+          </div>
+          <div>
+            <div class="callout amber step" style="margin-top:0"><div class="ico">⚠️</div><div><div class="en">F2 slid down to F3, F4…</div><span class="vi">Địa chỉ tương đối F2 cũng bị “trượt” theo → không còn trỏ tới ô tỉ lệ 70% → kết quả sai (F3 là ô tiêu đề).</span></div></div>
+            <div class="callout step"><div class="ico">🔒</div><div><div class="en">We need F2 to stay fixed!</div><span class="vi">Cần một loại địa chỉ <b>không thay đổi</b> khi sao chép.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · Absolute address (Hình 5.4) -->
+    <section class="slide" data-part="2. Địa chỉ tuyệt đối">
+      <div class="slide-z">
+        <div class="kicker">Explain · Hình 5.4 · Địa chỉ tuyệt đối</div>
+        <h2 style="font-size:44px">LOCK IT WITH <span style="color:var(--coral)">$</span></h2>
+        <div class="duo r">
+          <div class="xls lg">
+            <table>
+              <tr><th class="rh"></th><th>E</th><th>F</th></tr>
+              <tr><th class="rh">4</th><td class="n">1,999,950,000</td><td class="f">=E4*<span style="color:var(--coral)">$F$2</span></td></tr>
+              <tr><th class="rh">5</th><td class="n">5,450,000,000</td><td class="f"><span class="step">=E5*<span style="color:var(--coral)">$F$2</span></span></td></tr>
+              <tr><th class="rh">6</th><td class="n">2,110,000,000</td><td class="f"><span class="step">=E6*<span style="color:var(--coral)">$F$2</span></span></td></tr>
+            </table>
+          </div>
+          <div class="labels">
+            <div class="lb"><span class="k" style="background:var(--blue)">E</span><div><div class="en">E4 → E5 → E6</div><span class="vi">tương đối: thay đổi theo từng dòng</span></div></div>
+            <div class="lb step"><span class="k">$</span><div><div class="en">$F$2 → $F$2 → $F$2</div><span class="vi">tuyệt đối: luôn trỏ ô tỉ lệ 70%</span></div></div>
+          </div>
+        </div>
+        <div class="cards g2 step">
+          <div class="card coral"><div class="ico">💲</div><div><div class="en">$ before column AND row</div><span class="vi">Địa chỉ tuyệt đối có dấu $ trước tên cột và tên hàng: <span class="mono">$F$2</span>.</span></div></div>
+          <div class="card amber"><div class="ico">⌨️</div><div><div class="en">Shortcut: F4</div><span class="vi">Gõ F2 rồi nhấn phím <span class="kbd">F4</span> → thành <span class="mono">$F$2</span>.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 · Compare table -->
+    <section class="slide" data-part="2. Địa chỉ tuyệt đối">
+      <div class="slide-z">
+        <div class="kicker">Compare · Tương đối hay tuyệt đối?</div>
+        <h2>TWO KINDS OF ADDRESS</h2>
+        <table class="big xl">
+          <tr><th style="width:24%"></th><th>🔁 Địa chỉ tương đối</th><th>🔒 Địa chỉ tuyệt đối</th></tr>
+          <tr class="step"><td><b>Cách viết</b></td><td class="mono">E4</td><td class="mono">$F$2</td></tr>
+          <tr class="step"><td><b>Khi sao chép</b></td><td>Tự động thay đổi theo vị trí</td><td>Không thay đổi</td></tr>
+          <tr class="step"><td><b>Dùng khi</b></td><td>Dữ liệu khác nhau ở mỗi dòng (doanh thu từng phần mềm)</td><td>Một giá trị dùng chung (tỉ lệ 70%, tỉ lệ giảm giá…)</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 · SGK ? 1 — B -->
+    <section class="slide" data-part="2. Địa chỉ tuyệt đối">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check 1 · Câu hỏi SGK</div>
+        <h2 style="font-size:40px">F5 HAS =E5*$F$2. COPY IT TO F6…</h2>
+        <p class="sub">Trong Hình 5.3, công thức tại ô F5 là =E5*$F$2. Sao chép đến ô F6, kết quả là:</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span class="en mono">=E6*F3</span></button>
+          <button class="choice" data-correct><span class="letter">B</span><span class="en mono">=E6*$F$2</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en mono">=$E$6*F3</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en mono">=$E$6*$F$2</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:14px">✅ B — E5 (tương đối) → E6; $F$2 (tuyệt đối) giữ nguyên.</p>
+      </div>
+    </section>
+
+    <!-- 11 · SGK ? 2 — D -->
+    <section class="slide" data-part="2. Địa chỉ tuyệt đối">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check 2 · Câu hỏi SGK</div>
+        <h2>HOW DO YOU TYPE THE $ SIGN?</h2>
+        <p class="sub">Cách nhập kí hiệu $ cho địa chỉ tuyệt đối là:</p>
+        <div class="choices stack" data-quiz style="gap:10px">
+          <button class="choice"><span class="letter">A</span><span class="en">Gõ kí hiệu $ từ bàn phím khi nhập địa chỉ ô.</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en">Sau khi nhập địa chỉ tương đối, nhấn phím F4 để chuyển thành địa chỉ tuyệt đối.</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en">Sau khi nhập địa chỉ tương đối, nhấn phím F2 để chuyển thành địa chỉ tuyệt đối.</span></button>
+          <button class="choice" data-correct><span class="letter">D</span><span class="en">Thực hiện được theo cả hai cách A và B.</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:12px">✅ D — gõ $ (<span class="kbd">Shift</span>+<span class="kbd">4</span>) hoặc nhấn <span class="kbd">F4</span>. (F2 là phím sửa ô.)</p>
+      </div>
+    </section>
+
+    <!-- 12 · SGK ? relative: E6..E9 -->
+    <section class="slide" data-part="Luyện tập nhanh">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Think · Câu hỏi SGK tr.22</div>
+          <p class="question" style="font-size:36px">Copy E4 (=C4*D4) to E6, E7, E8, E9. What are the formulas?</p>
+          <p class="q-vi">Nếu sao chép công thức từ ô E4 đến các ô E6, E7, E8, E9 thì công thức trong các ô đó là gì?</p>
+        </div>
+        <table class="big xl">
+          <tr><th>Ô</th><th>Công thức</th></tr>
+          <tr><td class="mono">E6</td><td><b class="step mono">=C6*D6</b></td></tr>
+          <tr><td class="mono">E7</td><td><b class="step mono">=C7*D7</b></td></tr>
+          <tr><td class="mono">E8</td><td><b class="step mono">=C8*D8</b></td></tr>
+          <tr><td class="mono">E9</td><td><b class="step mono">=C9*D9</b></td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- 13 · Luyện tập 1 — C -->
+    <section class="slide" data-part="Luyện tập nhanh">
+      <div class="slide-z">
+        <div class="kicker">Practice 1 · Luyện tập SGK (Hình 5.6)</div>
+        <h2 style="font-size:40px">C1 HAS =A1*B1. COPY IT TO E2…</h2>
+        <div class="duo r" style="margin-top:4px">
+          <div class="choices stack" data-quiz style="gap:10px;margin-top:0">
+            <button class="choice"><span class="letter">A</span><span class="en mono">=C1*D2</span></button>
+            <button class="choice"><span class="letter">B</span><span class="en mono">=C2*D1</span></button>
+            <button class="choice" data-correct><span class="letter">C</span><span class="en mono">=C2*D2</span></button>
+            <button class="choice"><span class="letter">D</span><span class="en mono">=B2*C2</span></button>
+          </div>
+          <div>
+            <div class="xls lg">
+              <div class="fx"><span class="nb">C1</span><span class="fi">fx</span><span class="fv">=A1*B1</span></div>
+              <table>
+                <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+                <tr><th class="rh">1</th><td class="n">5</td><td class="n">7</td><td class="n cur">35</td><td></td><td></td></tr>
+                <tr><th class="rh">2</th><td></td><td></td><td></td><td></td><td class="hot"></td></tr>
+              </table>
+            </div>
+            <div class="callout green step" data-answer><div class="ico">➡️</div><div><div class="en">C1 → E2: +2 columns, +1 row</div><span class="vi">A1 → C2, B1 → D2 ⇒ <span class="mono">=C2*D2</span></span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · CORE NOTES -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Địa chỉ tương đối và tuyệt đối</div></div>
+          <span class="pg">1 / 1</span>
+        </div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en"><span class="k">Địa chỉ tương đối</span> (E4) tự động thay đổi khi sao chép công thức.</div></div></li>
+          <li><span class="rn">2</span><div><div class="en"><span class="k">Địa chỉ tuyệt đối</span> ($F$2) có dấu $ trước tên cột và tên hàng, <b>không thay đổi</b> khi sao chép.</div></div></li>
+          <li><span class="rn">3</span><div><div class="en">Nhập $: gõ từ bàn phím hoặc nhấn <span class="k">F4</span> sau khi nhập địa chỉ ô.</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================= TIẾT 2 · THỰC HÀNH ======================= -->
+
+    <!-- 15 · Roadmap -->
+    <section class="slide" data-part="3. Thực hành">
+      <div class="slide-z mid">
+        <div class="kicker">Lesson 5 · Tiết 2 · Thực hành</div>
+        <h2>THREE MISSIONS ON THE COMPUTER</h2>
+        <div class="roadmap">
+          <div class="stop"><div class="ico">💰</div><span class="n">MISSION 1</span><div class="en">Revenue</div><span class="vi">Tạo bảng Hình 5.1, tính Doanh thu và Doanh thu của công ti</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">📋</div><span class="n">MISSION 2</span><div class="en">Copy a table</div><span class="vi">Sao chép Bảng 5.1 từ văn bản / trình chiếu sang trang tính</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">🏷️</div><span class="n">MISSION 3</span><div class="en">Sale prices</div><span class="vi">Luyện tập 2: mặt hàng được giảm giá</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · Mission 1 result (Hình 5.5) -->
+    <section class="slide" data-part="3. Thực hành">
+      <div class="slide-z">
+        <div class="badge"><span class="n">1</span> Mission 1 · Hình 5.5 · Kết quả cần đạt</div>
+        <div class="xls" style="margin-top:4px">
+          <table>
+            <tr><th class="rh"></th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+            <tr><th class="rh">2</th><td></td><td></td><td colspan="2" class="c">Tỉ lệ doanh thu của công ti</td><td class="n b">70%</td></tr>
+            <tr><th class="rh">3</th><td class="h">Sản phẩm</td><td class="h">Đơn giá</td><td class="h">Số lượt mua</td><td class="h">Doanh thu</td><td class="h">Doanh thu của công ti</td></tr>
+            <tr><th class="rh">4</th><td>Quản lí thời gian</td><td class="n">39,999</td><td class="n">50,000</td><td class="n">1,999,950,000</td><td class="n"><b class="step">1,399,965,000</b></td></tr>
+            <tr><th class="rh">5</th><td>Trò chơi sáng tạo</td><td class="n">109,000</td><td class="n">50,000</td><td class="n">5,450,000,000</td><td class="n"><b class="step">3,815,000,000</b></td></tr>
+            <tr><th class="rh">6</th><td>Thiết kế đồ hoạ</td><td class="n">211,000</td><td class="n">10,000</td><td class="n">2,110,000,000</td><td class="n"><b class="step">1,477,000,000</b></td></tr>
+            <tr><th class="rh">7</th><td>Từ điển</td><td class="n">0</td><td class="n">20,000</td><td class="n">0</td><td class="n"><b class="step">0</b></td></tr>
+            <tr><th class="rh">8</th><td>Quản lí bán hàng cá nhân</td><td class="n">177,000</td><td class="n">5,000</td><td class="n">885,000,000</td><td class="n"><b class="step">619,500,000</b></td></tr>
+            <tr><th class="rh">9</th><td>Sổ sức khoẻ điện tử</td><td class="n">0</td><td class="n">10,000,000</td><td class="n">0</td><td class="n"><b class="step">0</b></td></tr>
+          </table>
+        </div>
+        <ol class="todo" style="margin-top:10px">
+          <li><div><div class="en">E4 <span class="mono">=C4*D4</span> → copy E5:E9 · D2 “Tỉ lệ doanh thu của công ti”, F2 = 70%</div></div></li>
+          <li><div><div class="en">F4 <span class="mono">=E4*$F$2</span> (gõ $ hoặc F4) → copy F5:F9 · lưu tệp</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 17 · Mission 2: copy from text / slides -->
+    <section class="slide" data-part="4. Sao chép dữ liệu">
+      <div class="slide-z">
+        <div class="badge violet"><span class="n">2</span> Mission 2 · Sao chép dữ liệu từ văn bản, trình chiếu sang trang tính</div>
+        <div class="duo r" style="margin-top:4px">
+          <div class="page" style="border-color:var(--violet)">
+            <h4 style="color:var(--violet)">Bảng 5.1. Số liệu thống kê lựa chọn nhóm nghề của học sinh</h4>
+            <table>
+              <tr><th>TT</th><th>Nhóm nghề</th><th class="c">Số HS</th></tr>
+              <tr><td class="c">1</td><td>Lĩnh vực phát triển phần mềm</td><td class="c">46</td></tr>
+              <tr><td class="c">2</td><td>Lĩnh vực mạng máy tính và an toàn thông tin</td><td class="c">25</td></tr>
+              <tr><td class="c">3</td><td>Lĩnh vực đa phương tiện</td><td class="c">78</td></tr>
+              <tr><td class="c">4</td><td>Lĩnh vực khác của Công nghệ thông tin</td><td class="c">42</td></tr>
+            </table>
+            <p style="font-size:18px;color:var(--ink-soft);margin-top:6px">(tệp Word / PowerPoint — cột “Nghề” trong SGK được lược bớt)</p>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step"><div><div class="en">Select the table</div><span class="vi">Trong Word/PowerPoint: chọn các hàng, cột của bảng</span></div></li>
+            <li class="step"><div><div class="en">Home → Copy</div><span class="vi">hoặc <span class="kbd">Ctrl</span>+<span class="kbd">C</span></span></div></li>
+            <li class="step"><div><div class="en">Click the top-left cell</div><span class="vi">Mở bảng tính, chọn ô góc trên bên trái vùng muốn dán → <b>Paste</b> (<span class="kbd">Ctrl</span>+<span class="kbd">V</span>)</span></div></li>
+            <li class="step"><div><div class="en">Save Khaosat.xlsx</div><span class="vi">Đóng tệp văn bản/trình chiếu, lưu bảng tính</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 · Practice 2 (Hình 5.7) -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">3</span> Mission 3 · Luyện tập 2 · Mặt hàng được giảm giá (Hình 5.7)</div>
+        <div class="duo r" style="margin-top:4px">
+          <div class="xls">
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+              <tr><th class="rh">1</th><td colspan="6" class="b">Danh sách các mặt hàng được giảm giá</td></tr>
+              <tr><th class="rh">2</th><td colspan="3" class="b">Tỉ lệ giảm giá</td><td class="n b hot">20%</td><td></td><td></td></tr>
+              <tr><th class="rh">4</th><td class="h">TT</td><td class="h">Tên mặt hàng</td><td class="h">Đơn giá</td><td class="h">Đơn giá đã giảm</td><td class="h">Số lượng</td><td class="h">Tổng tiền</td></tr>
+              <tr><th class="rh">5</th><td class="c">1</td><td>Vở 80 trang</td><td></td><td></td><td></td><td></td></tr>
+              <tr><th class="rh">6</th><td class="c">2</td><td>Vở 120 trang</td><td></td><td></td><td></td><td></td></tr>
+              <tr><th class="rh">7</th><td class="c">3</td><td>Bút bi</td><td></td><td></td><td></td><td></td></tr>
+              <tr><th class="rh">8</th><td class="c">4</td><td>Bút chì</td><td></td><td></td><td></td><td></td></tr>
+              <tr><th class="rh">9</th><td class="c">5</td><td>Balo</td><td></td><td></td><td></td><td></td></tr>
+              <tr><th class="rh">10</th><td class="c">6</td><td>Cặp sách</td><td></td><td></td><td></td><td></td></tr>
+              <tr><th class="rh">11</th><td></td><td></td><td></td><td></td><td></td><td class="hot"></td></tr>
+            </table>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li><div><div class="en">a, b) Type the table + prices</div><span class="vi">Tìm đơn giá thật của từng mặt hàng</span></div></li>
+            <li><div><div class="en">c) D5:D10</div><span class="vi">Đơn giá đã giảm = Đơn giá × Tỉ lệ giảm giá</span></div></li>
+            <li><div><div class="en">d, e) Số lượng, Tổng tiền</div><span class="vi">Tổng tiền = Số lượng × Đơn giá đã giảm</span></div></li>
+            <li><div><div class="en">f) F11</div><span class="vi">Tổng tiền phải trả cho tất cả mặt hàng</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 · Practice 2 — formulas -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Check · Công thức gợi ý (theo SGK)</div>
+        <h2>WHICH ADDRESS NEEDS THE $?</h2>
+        <table class="big xl">
+          <tr><th style="width:18%">Ô</th><th>Công thức</th><th>Sao chép đến</th></tr>
+          <tr><td class="mono">D5</td><td><b class="step mono">=C5*$D$2</b></td><td>D6:D10</td></tr>
+          <tr><td class="mono">F5</td><td><b class="step mono">=E5*D5</b></td><td>F6:F10</td></tr>
+          <tr><td class="mono">F11</td><td><b class="step mono">=SUM(F5:F10)</b> <span class="vi" style="font-size:20px">hoặc =F5+F6+…+F10</span></td><td>—</td></tr>
+        </table>
+        <div class="callout violet step"><div class="ico">🤔</div><div><div class="en">Challenge: the real price after a 20% discount?</div><span class="vi">Giá phải trả thực tế = Đơn giá × (1 − 20%) → <span class="mono">=C5*(1-$D$2)</span>. Vì sao vẫn cần $ ở D2?</span></div></div>
+        <div style="display:flex;justify-content:flex-end;margin-top:12px"><div class="timer step" data-min="15" style="padding:8px 22px"><div class="t" style="font-size:56px">15:00</div><div class="l">Practice time</div></div></div>
+      </div>
+    </section>
+
+    <!-- 20 · Vận dụng -->
+    <section class="slide" data-part="Vận dụng">
+      <div class="slide-z">
+        <div class="kicker">Apply · Vận dụng (về nhà)</div>
+        <h2>YOUR OWN APP-STORE SHEET</h2>
+        <p class="sub">Truy cập một số chợ ứng dụng, tìm thông tin về 5 phần mềm em quan tâm (đơn giá, số lượt mua…) và lập bảng tính như Hình 5.5.</p>
+        <div class="cards g2">
+          <div class="card blue"><div class="num">1</div><div><div class="en">Doanh thu</div><span class="vi"><span class="mono">=Đơn giá*Số lượt mua</span> — địa chỉ tương đối</span></div></div>
+          <div class="card amber"><div class="num">2</div><div><div class="en">Doanh thu của công ti (75%)</div><span class="vi">Ô tỉ lệ 75% dùng <b>địa chỉ tuyệt đối</b></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21 · Summary + next -->
+    <section class="slide" data-part="Tổng kết">
+      <div class="slide-z">
+        <div class="kicker">Wrap-up · Sau bài học, em cần nhớ gì?</div>
+        <h2>WHAT SHOULD YOU REMEMBER?</h2>
+        <div class="cards g2">
+          <div class="card blue"><div class="num">1</div><div><div class="en">E4 moves when copied</div><span class="vi">Địa chỉ tương đối thay đổi khi sao chép công thức.</span></div></div>
+          <div class="card blue"><div class="num">2</div><div><div class="en">$F$2 stays put</div><span class="vi">Địa chỉ tuyệt đối có $ trước tên cột, tên hàng; không đổi.</span></div></div>
+          <div class="card blue"><div class="num">3</div><div><div class="en">Shared value → $</div><span class="vi">Giá trị dùng chung (tỉ lệ, đơn giá chung) → dùng địa chỉ tuyệt đối.</span></div></div>
+          <div class="card blue"><div class="num">4</div><div><div class="en">Ctrl+C → Ctrl+V</div><span class="vi">Sao chép bảng từ văn bản, trình chiếu sang trang tính.</span></div></div>
+        </div>
+        <div class="next-up">
+          <div class="en">Next: Lesson 6 — Sorting and filtering data 🔽</div>
+          <span class="vi">Bài 6: Sắp xếp và lọc dữ liệu.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 5</span>
+      <div id="ticks"></div>
+      <span id="more-hint" hidden>▼ more</span>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 21</span>
+    </div>
+    <div id="help">Presenter / ← → · Next reveals, then advances<br>F fullscreen · + − 0 zoom · Z pin zoom bar</div>
+
+  </div>
+</div>
+
+<!-- Zoom bar: fixed to the real screen; auto-hides (move the mouse or press + − 0 to show it) -->
+<div id="zoombar">
+  <button id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="zsep"></span>
+  <button id="zMinus" title="Thu nhỏ (−)">A−</button>
+  <input type="range" id="zRange" min="80" max="170" step="10" value="100" aria-label="Zoom">
+  <button id="zPlus" title="Phóng to (+)">A+</button>
+  <span id="zVal">100%</span>
+  <button id="zReset" title="Về 100% (phím 0)">100%</button>
+  <button id="zPin" title="Ghim thanh zoom (Z)">📌</button>
+</div>
+<div id="ztoast"></div>
+
+<script src="slides.js"></script>
+<script src="../../assets/js/promo-banner.js" defer></script>
+</body>
+</html>

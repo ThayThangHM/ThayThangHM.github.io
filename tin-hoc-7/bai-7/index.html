@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Let the Sheet Do the Maths · Tin học 7 — Bài 7</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--
+  BÀI 7 — TÍNH TOÁN TỰ ĐỘNG TRÊN BẢNG TÍNH (SGK Tin học 7 KNTT tr.34–38, Chủ đề 4: Ứng dụng tin học)
+  PPCT (KHDH 2026–27): 2 tiết (1 LT + 1 TH) · tiết 12, 13. NLS: 3.1.TC1a.
+  TIẾT 1 (slide 1–19): Khởi động 4' → 1. Kiểu dữ liệu, phép toán 12' → 2. Công thức dùng địa chỉ ô 13' → 3. Sao chép công thức 12' → Ghi nhớ 4'.
+  TIẾT 2 (slide 20–27): 4. Thực hành "2. Dự kiến số lượng cây" (THXanh.xlsx) 20' → Luyện tập 15' → Vận dụng + về nhà 5'.
+  Nguồn: SGK (Hoạt động 1–3, Hình 7.1–7.11, Bảng 7.1, các hộp kiến thức, câu hỏi ?, Luyện tập, Vận dụng);
+  đáp án câu ? "công thức sai" theo SGV Tin 7 tr.48: B (thừa dấu ")") và C (thiếu phép toán giữa 2 và (3+4)).
+  PP cũ "Bài 7 T1, T2" (công thức Hình 7.5/7.6: =(C3+C4+C5)/2, =2*C4*C3, =C4*C3*C3; câu hỏi khởi động tiết 2).
+  Hình bảng tính vẽ lại bằng HTML. Phím: → PageDown Space = tiếp · ← PageUp = lùi · F toàn màn hình · + − 0 zoom · Z ghim.
+-->
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- ======================= TIẾT 1 ======================= -->
+
+    <!-- 01 · Title -->
+    <section class="slide" data-part="Bài 7">
+      <div class="slide-z split wide-left">
+        <div>
+          <div class="kicker">Tin học 7 · Chủ đề 4 · Ứng dụng tin học</div>
+          <h1 style="font-size:76px">LET THE SHEET DO THE MATHS</h1>
+          <p class="sub" style="font-size:36px;font-style:normal;font-weight:800;color:var(--blue-deep)">Bài 7 — Tính toán tự động trên bảng tính</p>
+          <p class="lead-vi vi mt">2 tiết · Tiết 1: Kiểu dữ liệu, công thức, sao chép công thức<br>Tiết 2: Thực hành “Dự kiến số lượng cây”</p>
+        </div>
+        <div class="viz">
+          <svg viewBox="0 0 400 320" role="img" aria-label="A formula bar showing =C4*D4 and a cell with the result 250">
+            <rect x="20" y="40" width="360" height="60" rx="12" fill="#fff" stroke="#217346" stroke-width="5"/>
+            <text x="44" y="82" font-size="30" font-style="italic" font-weight="800" fill="#7a7466" font-family="Georgia, serif">fx</text>
+            <text x="100" y="84" font-size="34" font-weight="800" fill="#12455a" font-family="Consolas, monospace">=C4*D4</text>
+            <path d="M200 110 V170" stroke="#e8963c" stroke-width="6"/><path d="M186 160 L200 182 L214 160z" fill="#e8963c"/>
+            <rect x="110" y="190" width="180" height="80" rx="8" fill="#fff" stroke="#217346" stroke-width="7"/>
+            <text x="270" y="246" text-anchor="end" font-size="44" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">250</text>
+            <text x="320" y="230" font-size="40">✨</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Goals -->
+    <section class="slide" data-part="Hôm nay">
+      <div class="slide-z mid">
+        <div class="kicker">Today · Sau bài này em sẽ</div>
+        <h2>THREE THINGS TO LEARN</h2>
+        <div class="cards g1 xl">
+          <div class="card blue"><div class="ico">🔢</div><div><div class="en">Data types on a spreadsheet</div><span class="vi">Nhận biết một số kiểu dữ liệu: văn bản, số, ngày tháng, công thức.</span></div></div>
+          <div class="card amber"><div class="ico">🟰</div><div><div class="en">Write formulas with cell addresses</div><span class="vi">Nhập công thức, dùng địa chỉ ô; tạo bảng tính có số liệu tính bằng công thức.</span></div></div>
+          <div class="card green"><div class="ico">📋</div><div><div class="en">Copy formulas — still automatic</div><span class="vi">Sao chép công thức; giải thích vì sao công thức giúp tính toán tự động.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Warm-up -->
+    <section class="slide" data-part="Khởi động">
+      <div class="slide-z split">
+        <div>
+          <div class="badge amber"><span class="n">🔥</span> Warm-up · Khởi động</div>
+          <p class="question" style="font-size:44px">Can we type a <span class="hl">calculation</span> into a cell?</p>
+          <p class="q-vi">Bài trước em đã nhập số, văn bản, ngày tháng. Có thể nhập dữ liệu là công thức tính toán được không?</p>
+        </div>
+        <div>
+          <div class="callout amber step"><div class="ico">🌳</div><div><div class="en">The Green School project needs lots of maths.</div><span class="vi">Tính số cây mỗi loại, tiền mua từng loại cây, tổng kinh phí…</span></div></div>
+          <div class="callout step"><div class="ico">➕✖️</div><div><div class="en">Let the spreadsheet calculate for us!</div><span class="vi">Cùng tìm hiểu các công cụ tính toán của phần mềm bảng tính.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · Activity 1: Hình 7.1, 7.2 -->
+    <section class="slide" data-part="1. Kiểu dữ liệu">
+      <div class="slide-z">
+        <div class="badge"><span class="n">1</span> Activity 1 · Nhận biết kiểu dữ liệu (Hình 7.1, 7.2)</div>
+        <div class="duo">
+          <div class="xls">
+            <div class="fx"><span class="nb">B3</span><span class="fi">fx</span><span class="fv">3/5/2010 <span style="color:#d9604f">★</span></span></div>
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th></tr>
+              <tr><th class="rh">2</th><td class="tx">Họ tên</td><td class="tx">Nguyễn Văn Hùng</td></tr>
+              <tr><th class="rh">3</th><td class="tx">Ngày sinh</td><td class="n dt cur">3/5/2010</td></tr>
+              <tr><th class="rh">4</th><td class="tx">Quê quán</td><td class="tx">Hải Phòng</td></tr>
+              <tr><th class="rh">5</th><td class="tx">Điểm Toán</td><td class="n nu">8.5</td></tr>
+              <tr><th class="rh">6</th><td class="tx">Điểm Ngữ văn</td><td class="n nu">9</td></tr>
+            </table>
+          </div>
+          <div class="xls">
+            <div class="fx"><span class="nb">B4</span><span class="fi">fx</span><span class="fv">=2+1.5+2.5 <span style="color:#d9604f">★</span></span></div>
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th></tr>
+              <tr><th class="rh">3</th><td class="tx">Tam giác có các cạnh 2; 1.5; 2.5</td><td></td></tr>
+              <tr><th class="rh">4</th><td class="tx">Chu vi tam giác</td><td class="n fo cur">6</td></tr>
+            </table>
+            <p class="vi" style="font-size:21px;padding:8px 14px">Ô hiện kết quả <b>6</b>, vùng nhập dữ liệu hiện công thức.</p>
+          </div>
+        </div>
+        <p class="lead step" style="font-size:30px;margin-top:14px">❓ Bảng tính nhận biết được những kiểu dữ liệu nào? Chúng hiện thế nào?</p>
+      </div>
+    </section>
+
+    <!-- 05 · Data types -->
+    <section class="slide" data-part="1. Kiểu dữ liệu">
+      <div class="slide-z">
+        <div class="kicker">Explain · Kiểu dữ liệu trên bảng tính</div>
+        <h2>FOUR KINDS OF DATA</h2>
+        <div class="cards g2">
+          <div class="card blue step"><div class="ico">🔤</div><div><div class="en">Text · Văn bản</div><span class="vi">Họ tên, quê quán… → tự động <b>căn trái</b>.</span></div></div>
+          <div class="card amber step"><div class="ico">🔢</div><div><div class="en">Number · Số</div><span class="vi">8.5, 9 … → tự động <b>căn phải</b>.</span></div></div>
+          <div class="card green step"><div class="ico">📅</div><div><div class="en">Date · Ngày tháng</div><span class="vi">3/5/2010 … → tự động <b>căn phải</b>.</span></div></div>
+          <div class="card coral step"><div class="ico">🟰</div><div><div class="en">Formula · Công thức</div><span class="vi">Luôn bắt đầu bằng dấu <b class="mono">=</b>, sau đó là biểu thức. Ô hiện <b>kết quả</b>.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Bảng 7.1 operators -->
+    <section class="slide" data-part="1. Phép toán">
+      <div class="slide-z">
+        <div class="kicker">Bảng 7.1 · Kí hiệu phép toán trong bảng tính</div>
+        <h2>MATHS SIGNS ON THE KEYBOARD</h2>
+        <table class="big xl">
+          <tr><th>Phép toán</th><th>Toán học</th><th>Bảng tính</th><th>Ví dụ</th><th>Kết quả</th></tr>
+          <tr><td>Cộng</td><td class="c">+</td><td class="c mono"><b>+</b></td><td class="mono">=20+7</td><td class="c"><b class="step">27</b></td></tr>
+          <tr><td>Trừ</td><td class="c">−</td><td class="c mono"><b>-</b></td><td class="mono">=42-35</td><td class="c"><b class="step">7</b></td></tr>
+          <tr><td>Nhân</td><td class="c">×</td><td class="c mono"><b>*</b></td><td class="mono">=7*9</td><td class="c"><b class="step">63</b></td></tr>
+          <tr><td>Chia</td><td class="c">:</td><td class="c mono"><b>/</b></td><td class="mono">=35/7</td><td class="c"><b class="step">5</b></td></tr>
+          <tr><td>Luỹ thừa</td><td class="c">a<sup>x</sup></td><td class="c mono"><b>^</b></td><td class="mono">=5^3</td><td class="c"><b class="step">125</b></td></tr>
+        </table>
+        <p class="vi step" style="font-size:24px;margin-top:12px">📌 Thứ tự thực hiện giống toán học: <b>( )</b> → <b>^</b> → <b>* /</b> → <b>+ −</b>. Ví dụ <span class="mono">=2+3*4</span> → 14 · <span class="mono">=(2+3)*4</span> → 20.</p>
+      </div>
+    </section>
+
+    <!-- 07 · SGK ?: wrong formula — B and C (SGV) -->
+    <section class="slide" data-part="1. Phép toán">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check · Câu hỏi SGK</div>
+        <h2>WHICH FORMULA IS <em>WRONG</em>? WHY?</h2>
+        <p class="sub">Trong phần mềm bảng tính, công thức tính nào dưới đây sai? (có thể nhiều hơn một)</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span class="en mono">=5^2+6*101</span></button>
+          <button class="choice" data-correct><span class="letter">B</span><span class="en mono">=6*(3+2))</span></button>
+          <button class="choice" data-correct><span class="letter">C</span><span class="en mono">=2(3+4)</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en mono">=1^2+2^2</span></button>
+        </div>
+        <div class="callout green step" data-answer><div class="ico">🔍</div><div><div class="en">B and C are wrong.</div><span class="vi">B thừa một dấu “)”. C thiếu phép toán giữa 2 và (3+4) — phải viết <span class="mono">=2*(3+4)</span>.</span></div></div>
+      </div>
+    </section>
+
+    <!-- 08 · Activity 2: two ways (Hình 7.3, 7.4) -->
+    <section class="slide" data-part="2. Công thức">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">2</span> Activity 2 · Tổng số cây hoa ở ô E4 = Vị trí × Số lượng</div>
+        <div class="duo">
+          <div>
+            <p class="lead" style="font-size:28px">Way 1 · Cách 1: gõ số</p>
+            <div class="xls">
+              <div class="fx"><span class="nb">E4</span><span class="fi">fx</span><span class="fv">=25*10</span></div>
+              <table>
+                <tr><th class="rh"></th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+                <tr><th class="rh">3</th><td class="h">Loại cây</td><td class="h">Vị trí</td><td class="h">Số lượng</td><td class="h">Tổng số</td></tr>
+                <tr><th class="rh">4</th><td>Cây hoa</td><td class="n">25</td><td class="n">10</td><td class="n cur">250</td></tr>
+              </table>
+            </div>
+          </div>
+          <div>
+            <p class="lead" style="font-size:28px">Way 2 · Cách 2: dùng địa chỉ ô</p>
+            <div class="xls">
+              <div class="fx"><span class="nb">E4</span><span class="fi">fx</span><span class="fv">=C4*D4</span></div>
+              <table>
+                <tr><th class="rh"></th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+                <tr><th class="rh">3</th><td class="h">Loại cây</td><td class="h">Vị trí</td><td class="h">Số lượng</td><td class="h">Tổng số</td></tr>
+                <tr><th class="rh">4</th><td>Cây hoa</td><td class="n">25</td><td class="n">10</td><td class="n cur">250</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p class="lead step" style="font-size:30px;margin-top:16px">❓ Cả hai đều ra 250. Cách nào tốt hơn? Vì sao?</p>
+      </div>
+    </section>
+
+    <!-- 09 · Change C4 → automatic update -->
+    <section class="slide" data-part="2. Công thức">
+      <div class="slide-z">
+        <div class="kicker">Test · Thêm vị trí trồng: sửa ô C4 từ 25 thành 30</div>
+        <h2 style="font-size:42px">CHANGE THE DATA — WHO KEEPS UP?</h2>
+        <div class="duo">
+          <div>
+            <p class="lead" style="font-size:28px">Cách 1 · <span class="fx-txt">=25*10</span></p>
+            <div class="xls lg">
+              <table>
+                <tr><th class="rh"></th><th>C</th><th>D</th><th>E</th></tr>
+                <tr><th class="rh">4</th><td class="n hot">30</td><td class="n">10</td><td class="n"><span class="step" style="color:var(--coral);font-weight:800">250 ❌</span></td></tr>
+              </table>
+            </div>
+            <p class="vi step" style="font-size:23px;margin-top:8px">Kết quả <b>không</b> được cập nhật.</p>
+          </div>
+          <div>
+            <p class="lead" style="font-size:28px">Cách 2 · <span class="fx-txt">=C4*D4</span></p>
+            <div class="xls lg">
+              <table>
+                <tr><th class="rh"></th><th>C</th><th>D</th><th>E</th></tr>
+                <tr><th class="rh">4</th><td class="n hot">30</td><td class="n">10</td><td class="n"><span class="step" style="color:var(--green);font-weight:800">300 ✅</span></td></tr>
+              </table>
+            </div>
+            <p class="vi step" style="font-size:23px;margin-top:8px">Tự động cập nhật đúng — <b>tính toán tự động</b>.</p>
+          </div>
+        </div>
+        <div class="callout step"><div class="ico">💡</div><div><div class="en">Use cell addresses in formulas!</div><span class="vi">Khi tính với dữ liệu ở ô khác, công thức cần ghi <b>địa chỉ ô</b>. Phần mềm tự động tính và cập nhật kết quả khi dữ liệu thay đổi.</span></div></div>
+      </div>
+    </section>
+
+    <!-- 10 · How to enter a formula -->
+    <section class="slide" data-part="2. Công thức">
+      <div class="slide-z">
+        <div class="kicker">How to · Nhập công thức vào ô</div>
+        <h2>FOUR STEPS TO A FORMULA</h2>
+        <ol class="todo">
+          <li class="step"><div><div class="en">Click the result cell</div><span class="vi">Chọn ô cần nhập công thức (ví dụ E4).</span></div></li>
+          <li class="step"><div><div class="en">Type <span class="mono">=</span></div><span class="vi">Gõ dấu bằng trước tiên.</span></div></li>
+          <li class="step"><div><div class="en">Type the expression</div><span class="vi">Gõ biểu thức; có thể gõ địa chỉ hoặc <b>nháy chuột vào ô</b> để lấy địa chỉ (C4, D4).</span></div></li>
+          <li class="step"><div><div class="en">Press Enter ⏎</div><span class="vi">Ô hiện kết quả; nháy vào ô để xem công thức ở vùng nhập dữ liệu.</span></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 11 · SGK ? Hình 7.5 -->
+    <section class="slide" data-part="2. Công thức">
+      <div class="slide-z split">
+        <div class="xls lg">
+          <table>
+            <tr><th class="rh"></th><th>B</th><th>C</th></tr>
+            <tr><th class="rh">2</th><td class="b">Thông tin tam giác ABC</td><td></td></tr>
+            <tr><th class="rh">3</th><td>AB</td><td class="n">15</td></tr>
+            <tr><th class="rh">4</th><td>BC</td><td class="n">10</td></tr>
+            <tr><th class="rh">5</th><td>CA</td><td class="n">12</td></tr>
+            <tr><th class="rh">6</th><td>Nửa chu vi:</td><td class="n cur"><span class="step">18.5</span></td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="kicker">Your turn 1 · Hình 7.5</div>
+          <p class="question" style="font-size:38px">Half the perimeter of triangle ABC in C6?</p>
+          <p class="q-vi">Công thức tính nửa chu vi tam giác ABC nhập vào ô C6?</p>
+          <div class="callout step"><div class="ico">🟰</div><div><div class="en mono" style="font-size:36px">=(C3+C4+C5)/2</div><span class="vi">Nhớ dấu ngoặc! Không có ngoặc thì chỉ C5 bị chia 2.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · SGK ? Hình 7.6 -->
+    <section class="slide" data-part="2. Công thức">
+      <div class="slide-z split">
+        <div class="xls lg">
+          <table>
+            <tr><th class="rh"></th><th>B</th><th>C</th></tr>
+            <tr><th class="rh">2</th><td class="b">Thông tin hình tròn</td><td></td></tr>
+            <tr><th class="rh">3</th><td>Bán kính R</td><td class="n">10.45</td></tr>
+            <tr><th class="rh">4</th><td>Pi</td><td class="n">3.141593</td></tr>
+            <tr><th class="rh">5</th><td>Chu vi:</td><td class="n cur"><span class="step">65.659</span></td></tr>
+            <tr><th class="rh">6</th><td>Diện tích:</td><td class="n cur"><span class="step">343.07</span></td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="kicker">Your turn 2 · Hình 7.6</div>
+          <p class="question" style="font-size:38px">Circle: perimeter in C5, area in C6?</p>
+          <p class="q-vi">Công thức tính chu vi (C = 2πR) và diện tích (S = πR²) hình tròn.</p>
+          <div class="callout step"><div class="ico">⭕</div><div><div class="en mono" style="font-size:32px">C5: =2*C4*C3</div><span class="vi">Chu vi = 2 × Pi × R</span></div></div>
+          <div class="callout green step"><div class="ico">🟢</div><div><div class="en mono" style="font-size:32px">C6: =C4*C3^2</div><span class="vi">hoặc <span class="mono">=C4*C3*C3</span> · Diện tích = Pi × R²</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · CORE NOTES 1 -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Kiểu dữ liệu và công thức</div></div>
+          <span class="pg">1 / 2</span>
+        </div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en">Dữ liệu trong ô có thể là <span class="k">văn bản, số, ngày tháng</span> hoặc <span class="k">công thức</span>.</div></div></li>
+          <li><span class="rn">2</span><div><div class="en">Công thức luôn bắt đầu bằng dấu <span class="k">=</span>, sau đó là biểu thức với <b>+ − * / ^</b> và dấu ngoặc ( ).</div></div></li>
+          <li><span class="rn">3</span><div><div class="en">Dùng <span class="k">địa chỉ ô</span> trong công thức → phần mềm <b>tự động tính</b> và cập nhật khi dữ liệu thay đổi.</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 14 · Activity 3: copy a formula (Hình 7.7, 7.8) -->
+    <section class="slide" data-part="3. Sao chép công thức">
+      <div class="slide-z">
+        <div class="badge green"><span class="n">3</span> Activity 3 · Sao chép ô tính chứa công thức</div>
+        <div class="duo r">
+          <div class="xls" id="cp">
+            <div class="fx"><span class="nb">E4</span><span class="fi">fx</span><span class="fv">=C4*D4</span></div>
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+              <tr><th class="rh">3</th><td class="h">STT</td><td class="h">Loại cây</td><td class="h">Vị trí</td><td class="h">Số lượng</td><td class="h">Tổng số</td></tr>
+              <tr><th class="rh">4</th><td class="n">1</td><td>Cây hoa</td><td class="n">25</td><td class="n">10</td><td class="n" id="cp-e4">250</td></tr>
+              <tr><th class="rh">5</th><td class="n">2</td><td>Cây ăn quả</td><td class="n">20</td><td class="n">5</td><td class="n cp-dst"><span class="step">100</span></td></tr>
+              <tr><th class="rh">6</th><td class="n">3</td><td>Cây bóng mát</td><td class="n">50</td><td class="n">3</td><td class="n cp-dst"><span class="step">150</span></td></tr>
+            </table>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step" data-mark="#cp-e4|cur"><div><div class="en">Select E4</div><span class="vi">Chọn ô có công thức</span></div></li>
+            <li class="step"><div><div class="en"><span class="kbd">Ctrl</span>+<span class="kbd">C</span></div><span class="vi">Sao chép</span></div></li>
+            <li class="step" data-mark="#cp .cp-dst|sel"><div><div class="en">Select E5:E6</div><span class="vi">Chọn vùng cần dán</span></div></li>
+            <li class="step"><div><div class="en"><span class="kbd">Ctrl</span>+<span class="kbd">V</span></div><span class="vi">Dán → kết quả tự tính</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · Relative position kept -->
+    <section class="slide" data-part="3. Sao chép công thức">
+      <div class="slide-z">
+        <div class="kicker">Explain · Công thức sau khi sao chép</div>
+        <h2 style="font-size:42px">THE ADDRESSES MOVE WITH THE CELL</h2>
+        <div class="duo r">
+          <div class="xls lg">
+            <table>
+              <tr><th class="rh"></th><th>C</th><th>D</th><th>E</th></tr>
+              <tr><th class="rh">4</th><td class="n">25</td><td class="n">10</td><td class="f">=C4*D4</td></tr>
+              <tr><th class="rh">5</th><td class="n">20</td><td class="n">5</td><td class="f"><span class="step">=C5*D5</span></td></tr>
+              <tr><th class="rh">6</th><td class="n">50</td><td class="n">3</td><td class="f"><span class="step">=C6*D6</span></td></tr>
+            </table>
+          </div>
+          <div class="viz">
+            <svg viewBox="0 0 300 200" role="img" aria-label="Cell E with arrows pointing two cells left and one cell left">
+              <g font-family="Segoe UI, sans-serif" font-weight="800" text-anchor="middle">
+                <rect x="10" y="70" width="80" height="60" rx="8" fill="#dff0f2" stroke="#1f6f8b" stroke-width="4"/><text x="50" y="110" font-size="26" fill="#12455a">C</text>
+                <rect x="110" y="70" width="80" height="60" rx="8" fill="#dff0f2" stroke="#1f6f8b" stroke-width="4"/><text x="150" y="110" font-size="26" fill="#12455a">D</text>
+                <rect x="210" y="70" width="80" height="60" rx="8" fill="#fff" stroke="#217346" stroke-width="6"/><text x="250" y="110" font-size="26" fill="#217346">E</text>
+              </g>
+              <path d="M250 64 C230 20 80 20 54 62" stroke="#e8963c" stroke-width="5" fill="none"/><path d="M46 54 l8 18 l12 -14z" fill="#e8963c"/>
+              <path d="M250 138 C236 176 166 176 154 140" stroke="#d9604f" stroke-width="5" fill="none"/><path d="M146 148 l8 -16 l12 12z" fill="#d9604f"/>
+              <text x="150" y="16" text-anchor="middle" font-size="18" font-weight="700" fill="#8a4b12" font-family="Segoe UI, sans-serif">bên trái 2 ô</text>
+              <text x="200" y="196" text-anchor="middle" font-size="18" font-weight="700" fill="#8f2f22" font-family="Segoe UI, sans-serif">bên trái 1 ô</text>
+            </svg>
+          </div>
+        </div>
+        <div class="callout step"><div class="ico">🔁</div><div><div class="en">Relative position stays the same.</div><span class="vi">Khi sao chép, các địa chỉ được điều chỉnh để giữ nguyên <b>vị trí tương đối</b> giữa ô chứa công thức và các ô trong công thức → tính toán tự động vẫn đúng.</span></div></div>
+      </div>
+    </section>
+
+    <!-- 16 · SGK ? copy questions -->
+    <section class="slide" data-part="3. Sao chép công thức">
+      <div class="slide-z">
+        <div class="kicker">Think · Câu hỏi SGK</div>
+        <h2>WHAT DOES THE COPIED FORMULA BECOME?</h2>
+        <div class="verdicts">
+          <div class="verdict"><span class="k">1</span><div class="txt"><div class="en">Sao chép công thức <span class="mono">=C4*D4</span> từ ô E4 sang ô E10.</div><span class="vi step">→ Xuống 6 hàng, giữ nguyên cột.</span></div><span class="tag ok step mono">=C10*D10</span></div>
+          <div class="verdict"><span class="k">2</span><div class="txt"><div class="en">Ô G10 có <span class="mono">=H10+2*K10</span>. Sao chép đến ô G12.</div><span class="vi step">→ Xuống 2 hàng: số hàng tăng 2; số 2 trong công thức giữ nguyên.</span></div><span class="tag ok step mono">=H12+2*K12</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · Quiz (PP): which formula updates when copied — A -->
+    <section class="slide" data-part="3. Sao chép công thức">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check · Chọn phương án đúng</div>
+        <h2 style="font-size:42px">WHICH FORMULA STAYS “SMART” WHEN COPIED?</h2>
+        <p class="sub">Công thức nào sau đây được tự động tính toán theo dữ liệu mới khi sao chép?</p>
+        <div class="choices" data-quiz>
+          <button class="choice" data-correct><span class="letter">A</span><span class="en mono">=B5+C5+E5</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en mono">=3.14*(15+45)</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en mono">=2*(13+14)</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en mono">=13+14+15</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:14px">✅ A — chỉ công thức dùng <b>địa chỉ ô</b> mới thay đổi theo vị trí; các công thức chỉ có số luôn cho cùng một kết quả.</p>
+      </div>
+    </section>
+
+    <!-- 18 · Quiz (PP): purpose of formulas — D -->
+    <section class="slide" data-part="3. Sao chép công thức">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check · Chọn phương án đúng</div>
+        <h2>WHY DO WE ENTER FORMULAS?</h2>
+        <p class="sub">Công thức được nhập vào bảng tính với mục đích gì?</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span class="en">Thuận tiện khi nhập dữ liệu</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en">Căn chỉnh hàng cho đẹp</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en">Căn chỉnh cột cho đẹp</span></button>
+          <button class="choice" data-correct><span class="letter">D</span><span class="en">Tính toán</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:14px">✅ D — đưa công thức vào bảng tính là cách <b>điều khiển tính toán tự động</b> trên dữ liệu.</p>
+      </div>
+    </section>
+
+    <!-- 19 · CORE NOTES 2 -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Sao chép công thức</div></div>
+          <span class="pg">2 / 2</span>
+        </div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en">Sao chép: chọn ô → <b>Ctrl+C</b> → chọn ô/vùng đích → <b>Ctrl+V</b>.</div></div></li>
+          <li><span class="rn">2</span><div><div class="en">Khi sao chép, địa chỉ trong công thức được điều chỉnh để giữ nguyên <span class="k">vị trí tương đối</span>: E4 <span class="mono">=C4*D4</span> → E6 <span class="mono">=C6*D6</span>.</div></div></li>
+          <li><span class="rn">3</span><div><div class="en">Nhờ vậy chức năng <span class="k">tính toán tự động</span> vẫn được bảo toàn khi sao chép công thức.</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================= TIẾT 2 · THỰC HÀNH ======================= -->
+
+    <!-- 20 · Practice roadmap -->
+    <section class="slide" data-part="4. Thực hành">
+      <div class="slide-z mid">
+        <div class="kicker">Lesson 7 · Tiết 2 · Thực hành: Nhập thông tin dự kiến số lượng cây cần trồng</div>
+        <h2>PLAN THE TREES IN THXanh.xlsx</h2>
+        <div class="roadmap">
+          <div class="stop"><div class="ico">➕</div><span class="n">STEP 1–2</span><div class="en">New sheet</div><span class="vi">Mở THXanh.xlsx → nháy ⊕ → tên “2. Dự kiến số lượng cây” → nhập Hình 7.9</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">🟰</div><span class="n">STEP 3–4</span><div class="en">Formulas</div><span class="vi">E4 <span class="mono">=C4*D4</span> → sao chép xuống E5, E6 · E7 <span class="mono">=E4+E5+E6</span></span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">🎨</div><span class="n">STEP 5–6</span><div class="en">Format &amp; save</div><span class="vi">A2, hàng 3 đậm, nền vàng; STT căn giữa; độ rộng cột → lưu</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21 · Hình 7.9 with results -->
+    <section class="slide" data-part="4. Thực hành">
+      <div class="slide-z">
+        <div class="badge"><span class="n">4</span> Hình 7.9 · Trang tính “2. Dự kiến số lượng cây”</div>
+        <div class="xls lg" style="margin-top:6px">
+          <table>
+            <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+            <tr><th class="rh">2</th><td colspan="5" class="b">Bảng 2. Dự kiến số lượng cây cần trồng</td></tr>
+            <tr><th class="rh">3</th><td class="h">STT</td><td class="h">Loại cây</td><td class="h">Vị trí</td><td class="h">Số lượng</td><td class="h">Tổng số</td></tr>
+            <tr><th class="rh">4</th><td class="c">1</td><td>Cây hoa</td><td class="n">25</td><td class="n">10</td><td class="n"><span class="step"><span class="fx-txt">=C4*D4</span> → <b>250</b></span></td></tr>
+            <tr><th class="rh">5</th><td class="c">2</td><td>Cây ăn quả</td><td class="n">20</td><td class="n">5</td><td class="n"><span class="step"><span class="fx-txt">=C5*D5</span> → <b>100</b></span></td></tr>
+            <tr><th class="rh">6</th><td class="c">3</td><td>Cây bóng mát</td><td class="n">50</td><td class="n">3</td><td class="n"><span class="step"><span class="fx-txt">=C6*D6</span> → <b>150</b></span></td></tr>
+            <tr><th class="rh">7</th><td></td><td></td><td></td><td class="b">Tổng</td><td class="n"><span class="step"><span class="fx-txt">=E4+E5+E6</span> → <b>500</b></span></td></tr>
+          </table>
+          <div class="tabs"><span>1. Khảo sát</span><span class="act">2. Dự kiến số lượng cây</span><span class="add">⊕</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;margin-top:14px">
+          <div class="callout amber" style="margin-top:0"><div class="ico">🧪</div><div><div class="en">Try it: change D4 to 12. What happens to E4 and E7?</div><span class="vi">Thử sửa D4 thành 12 → E4 = 300, E7 = 550 tự động.</span></div></div>
+          <div class="timer step" data-min="15" style="padding:10px 22px"><div class="t" style="font-size:60px">15:00</div><div class="l">Practice time</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22 · Luyện tập: Hình 7.10 -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Practice 1–2 · Trang tính “3. Tìm hiểu giống cây” (Hình 7.10)</div>
+        <h2 style="font-size:40px">PRICE × QUANTITY = TOTAL</h2>
+        <div class="xls" style="margin-top:8px">
+          <div class="fx"><span class="nb">F4</span><span class="fi">fx</span><span class="fv">=D4*E4</span></div>
+          <table>
+            <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+            <tr><th class="rh">3</th><td class="h">STT</td><td class="h">Loại cây</td><td class="h">Tên cây</td><td class="h">Đơn giá</td><td class="h">Số lượng</td><td class="h">Thành tiền</td></tr>
+            <tr><th class="rh">4</th><td class="c">1</td><td>Cây hoa</td><td>Hoa Mười giờ</td><td class="n">25000</td><td class="n">20</td><td class="n"><b class="step">500000</b></td></tr>
+            <tr><th class="rh">5</th><td class="c">2</td><td></td><td>Hoa Dạ yến thảo</td><td class="n">45000</td><td class="n">23</td><td class="n"><b class="step">1035000</b></td></tr>
+            <tr><th class="rh">6</th><td class="c">3</td><td></td><td>Hoa Dừa cạn</td><td class="n">15500</td><td class="n">43</td><td class="n"><b class="step">666500</b></td></tr>
+            <tr><th class="rh">…</th><td class="c dim">…</td><td class="dim">…</td><td class="dim">… (16 loại cây, đến hàng 19)</td><td class="dim"></td><td class="dim"></td><td class="dim"></td></tr>
+          </table>
+        </div>
+        <p class="vi step" style="font-size:24px;margin-top:12px">👉 Nhập <span class="mono">=D4*E4</span> vào F4 rồi sao chép F4 xuống <b>F5:F19</b> — không cần gõ lại 15 công thức!</p>
+      </div>
+    </section>
+
+    <!-- 23 · Vận dụng 1: change alignment -->
+    <section class="slide" data-part="Vận dụng">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Apply · Vận dụng 1</div>
+          <p class="question" style="font-size:38px">Numbers go right, text goes left. Can we change that?</p>
+          <p class="q-vi">Có thể thay đổi cách căn lề mặc định cho số, ngày tháng và văn bản không? Bằng lệnh nào?</p>
+        </div>
+        <div>
+          <div class="callout green step"><div class="ico">✅</div><div><div class="en">Yes!</div><span class="vi">Chọn ô/vùng → thẻ <b>Home</b> → nhóm <b>Alignment</b> → nút căn trái / giữa / phải.</span></div></div>
+          <div class="rib step" style="margin-top:14px;align-self:flex-start;display:inline-flex">
+            <div class="grp"><div class="row"><span class="bt">☰⬅</span><span class="bt">☰</span><span class="bt">➡☰</span></div><div class="gl">Alignment</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 24 · Vận dụng 2: Hình 7.11 forest area -->
+    <section class="slide" data-part="Vận dụng">
+      <div class="slide-z">
+        <div class="kicker">Apply · Vận dụng 2 · Tệp Dientichrung.xlsx (Hình 7.11)</div>
+        <h2 style="font-size:40px">FOREST AREA IN THE NORTH-EAST</h2>
+        <div class="xls" style="margin-top:8px">
+          <table>
+            <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+            <tr><th class="rh">1</th><td colspan="4" class="b" style="color:#c0392b">DIỆN TÍCH PHỦ RỪNG CÁC TỈNH VÙNG ĐÔNG BẮC (đơn vị: ha)</td></tr>
+            <tr><th class="rh">3</th><td class="h">Tỉnh</td><td class="h">Rừng tự nhiên</td><td class="h">Rừng trồng</td><td class="h">Tổng diện tích</td></tr>
+            <tr><th class="rh">4</th><td>Hà Giang</td><td class="n">382.118</td><td class="n">87.939</td><td class="n"><span class="step"><span class="fx-txt">=B4+C4</span> → <b>470.057</b></span></td></tr>
+            <tr><th class="rh">5</th><td>Tuyên Quang</td><td class="n">233.193</td><td class="n">191.496</td><td class="n"><b class="step">424.689</b></td></tr>
+            <tr><th class="rh">6</th><td>Cao Bằng</td><td class="n">353.259</td><td class="n">20.026</td><td class="n"><b class="step">373.285</b></td></tr>
+            <tr><th class="rh">7</th><td>Lạng Sơn</td><td class="n">293.601</td><td class="n">238.055</td><td class="n"><b class="step">531.656</b></td></tr>
+            <tr><th class="rh">8</th><td>Bắc Giang</td><td class="n">56.123</td><td class="n">104.385</td><td class="n"><b class="step">160.508</b></td></tr>
+          </table>
+        </div>
+        <p class="vi step" style="font-size:23px;margin-top:10px">👉 Nhập công thức cho Hà Giang (D4) rồi sao chép xuống D5:D8. Lưu tệp tên <b>Dientichrung.xlsx</b>.</p>
+      </div>
+    </section>
+
+    <!-- 25 · Summary -->
+    <section class="slide" data-part="Tổng kết">
+      <div class="slide-z">
+        <div class="kicker">Wrap-up · Sau bài học, em cần nhớ gì?</div>
+        <h2>WHAT SHOULD YOU REMEMBER?</h2>
+        <div class="cards g2">
+          <div class="card blue"><div class="num">1</div><div><div class="en">Text · number · date · formula</div><span class="vi">Văn bản căn trái; số, ngày tháng căn phải; công thức bắt đầu bằng “=”.</span></div></div>
+          <div class="card blue"><div class="num">2</div><div><div class="en">+ − * / ^ and ( )</div><span class="vi">Phép toán trong bảng tính, thứ tự như toán học.</span></div></div>
+          <div class="card blue"><div class="num">3</div><div><div class="en">Addresses, not numbers</div><span class="vi">Dùng địa chỉ ô để kết quả tự động cập nhật.</span></div></div>
+          <div class="card blue"><div class="num">4</div><div><div class="en">Copy formulas: Ctrl+C, Ctrl+V</div><span class="vi">Địa chỉ tự điều chỉnh theo vị trí tương đối.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 26 · Homework + next -->
+    <section class="slide" data-part="Về nhà">
+      <div class="slide-z">
+        <div class="kicker">Homework · Về nhà</div>
+        <h2>FINISH &amp; GET READY</h2>
+        <ol class="todo">
+          <li><div><div class="en">Finish sheet “3. Tìm hiểu giống cây”</div><span class="vi">Hoàn thành cột Thành tiền F4:F19 (Luyện tập 1, 2).</span></div></li>
+          <li><div><div class="en">Dientichrung.xlsx</div><span class="vi">Làm Vận dụng 2, lưu tệp.</span></div></li>
+          <li><div><div class="en">Think: how to add up 16 cells quickly?</div><span class="vi">Gõ <span class="mono">=F4+F5+…+F19</span> rất dài — có cách nào nhanh hơn?</span></div></li>
+        </ol>
+        <div class="next-up">
+          <div class="en">Next: Lesson 8 — Tools that help you calculate (SUM, AVERAGE…) 🧰</div>
+          <span class="vi">Bài 8: Công cụ hỗ trợ tính toán.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 7</span>
+      <div id="ticks"></div>
+      <span id="more-hint" hidden>▼ more</span>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 26</span>
+    </div>
+    <div id="help">Presenter / ← → · Next reveals, then advances<br>F fullscreen · + − 0 zoom · Z pin zoom bar</div>
+
+  </div>
+</div>
+
+<!-- Zoom bar: fixed to the real screen; auto-hides (move the mouse or press + − 0 to show it) -->
+<div id="zoombar">
+  <button id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="zsep"></span>
+  <button id="zMinus" title="Thu nhỏ (−)">A−</button>
+  <input type="range" id="zRange" min="80" max="170" step="10" value="100" aria-label="Zoom">
+  <button id="zPlus" title="Phóng to (+)">A+</button>
+  <span id="zVal">100%</span>
+  <button id="zReset" title="Về 100% (phím 0)">100%</button>
+  <button id="zPin" title="Ghim thanh zoom (Z)">📌</button>
+</div>
+<div id="ztoast"></div>
+
+<script src="slides.js"></script>
+<script src="../../assets/js/promo-banner.js" defer></script>
+</body>
+</html>

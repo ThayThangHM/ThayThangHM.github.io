@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sort &amp; Filter · Tin học 8 — Bài 6</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--
+  BÀI 6 — SẮP XẾP VÀ LỌC DỮ LIỆU (SGK Tin học 8 KNTT tr.27–31 = PDF 26–30, Chủ đề 4: Ứng dụng tin học)
+  PPCT (KHDH 2026–27, tên "Sắp xếp, lọc dữ liệu"): 2 tiết (1 LT + 1 TH) · tiết 12, 13. NLS: 1.3.TC2a · 1.3.TC2b · 5.2.TC2b.
+  TIẾT 1 (slide 1–17): Khởi động CLB Tin học 5' → 1. Bảng tính giải bài toán thực tế 8' → 2. Sắp xếp (1 và nhiều tiêu chí) 14'
+  → 3. Lọc (1 và nhiều tiêu chí) 13' → Ghi nhớ 5'.
+  TIẾT 2 (slide 18–23): Luyện tập TGSDThietbiso.xlsx (Hình 6.9) a–d 25' → chữa bài 8' → Vận dụng Number Filters 7' → tổng kết.
+  Nguồn: SGK (Hoạt động 1, Hình 6.1–6.9, câu hỏi ?, Luyện tập, Vận dụng). Không có PP cũ cho bài này.
+  Đáp án tự tính từ Hình 6.9 (tổng mỗi cột khớp Hình 7.8 của Bài 7: 68 · 131 · 146 · 72 · 12):
+  b) Không sử dụng giảm dần: 8A8(9) · 8A1, 8A4, 8A5 (8) · 8A2, 8A6 (7) · 8A3, 8A9 (6) · 8A7 (5) · 8A10 (4)
+  c) + Dưới 1 giờ giảm dần: 8A8 · 8A1 · 8A4 · 8A5 · 8A6 · 8A2 · 8A3 · 8A9 · 8A7 · 8A10
+  d) không có HS từ 5 giờ (ô trống): 8A2, 8A5, 8A6, 8A7, 8A8 · Vận dụng (3–4 giờ ≥ 10): 8A5.
+  Lưu ý: SGK nói Unicode sắp xếp không hoàn toàn đúng thứ tự tiếng Việt (vd chữ Đ).
+  Phím: → PageDown Space = tiếp · ← PageUp = lùi · F toàn màn hình · + − 0 zoom · Z ghim.
+-->
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- ======================= TIẾT 1 ======================= -->
+
+    <!-- 01 · Title -->
+    <section class="slide" data-part="Bài 6">
+      <div class="slide-z split wide-left">
+        <div>
+          <div class="kicker">Tin học 8 · Chủ đề 4 · Ứng dụng tin học</div>
+          <h1 style="font-size:84px">SORT &amp; FILTER</h1>
+          <p class="sub" style="font-size:36px;font-style:normal;font-weight:800;color:var(--blue-deep)">Bài 6 — Sắp xếp và lọc dữ liệu</p>
+          <p class="lead-vi vi mt">2 tiết · Tiết 1: Sắp xếp, lọc dữ liệu — dự án CLB Tin học<br>Tiết 2: Luyện tập với số liệu khảo sát khối 8</p>
+        </div>
+        <div class="viz">
+          <svg viewBox="0 0 400 330" role="img" aria-label="Bars sorted from short to tall next to a funnel">
+            <g fill="#1f6f8b"><rect x="30" y="230" width="34" height="60" rx="4"/><rect x="74" y="200" width="34" height="90" rx="4"/><rect x="118" y="160" width="34" height="130" rx="4"/><rect x="162" y="110" width="34" height="180" rx="4"/></g>
+            <path d="M30 300 H200" stroke="#12233b" stroke-width="5"/>
+            <path d="M240 60 H380 L330 150 V250 L290 280 V150z" fill="#f6e0c4" stroke="#e8963c" stroke-width="6" stroke-linejoin="round"/>
+            <g font-size="26"><text x="262" y="48">🔵</text><text x="300" y="40">🟠</text><text x="338" y="48">🔵</text></g>
+            <text x="296" y="320" font-size="30">🟠</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Goals -->
+    <section class="slide" data-part="Hôm nay">
+      <div class="slide-z mid">
+        <div class="kicker">Today · Sau bài này em sẽ</div>
+        <h2>THREE THINGS TO LEARN</h2>
+        <div class="cards g1 xl">
+          <div class="card blue"><div class="ico">🧩</div><div><div class="en">Use a spreadsheet to solve a real task</div><span class="vi">Sử dụng phần mềm bảng tính trợ giúp giải quyết bài toán thực tế.</span></div></div>
+          <div class="card amber"><div class="ico">💡</div><div><div class="en">When do we sort or filter?</div><span class="vi">Nêu được tình huống thực tế cần dùng chức năng sắp xếp, lọc dữ liệu.</span></div></div>
+          <div class="card green"><div class="ico">🔽</div><div><div class="en">Sort &amp; filter in Excel</div><span class="vi">Thực hiện được các thao tác sắp xếp, lọc dữ liệu.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Warm-up: survey form (Hình 6.1) -->
+    <section class="slide" data-part="Khởi động">
+      <div class="slide-z split">
+        <div>
+          <div class="badge amber"><span class="n">🔥</span> Project · Thành lập CLB Tin học</div>
+          <p class="lead" style="font-size:30px">Class 8A asks: what do you want to learn more about?</p>
+          <span class="lead-vi vi">Lớp 8A phát phiếu khảo sát để tổ chức hoạt động cho CLB Tin học.</span>
+          <div class="callout step"><div class="ico">❓</div><div><div class="en">Activity 1 · Hoạt động 1</div><span class="vi">Câu trả lời cần lưu trong bảng tính. Bảng tính gồm những cột nào? Mỗi hàng lưu dữ liệu gì?</span></div></div>
+        </div>
+        <div class="paper">
+          <h4>PHIẾU KHẢO SÁT</h4>
+          <div>Họ và tên: ……………………… Tổ: ……</div>
+          <div style="font-weight:700;margin-top:4px">Bạn muốn tìm hiểu thêm nội dung Tin học nào? (chọn một)</div>
+          <div><span class="bx"></span>1. Ngôn ngữ lập trình</div>
+          <div><span class="bx"></span>2. Mạng máy tính</div>
+          <div><span class="bx"></span>3. Đồ hoạ máy tính</div>
+          <div><span class="bx"></span>4. Bảng tính điện tử</div>
+          <div><span class="bx"></span>5. Soạn thảo văn bản</div>
+          <div><span class="bx"></span>6. Phần mềm trình chiếu</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · Hình 6.2 survey results -->
+    <section class="slide" data-part="1. Bài toán thực tế">
+      <div class="slide-z">
+        <div class="kicker">Hình 6.2 · Bảng kết quả khảo sát lớp 8A</div>
+        <div class="duo r" style="margin-top:4px">
+          <div class="xls sm" id="sv">
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+              <tr><th class="rh">2</th><td class="h">TT</td><td class="h">Họ đệm</td><td class="h">Tên</td><td class="h">Tổ</td><td class="h">Nội dung</td></tr>
+              <tr><th class="rh">3</th><td class="c">1</td><td>Phạm Hoàng Bảo</td><td>An</td><td class="c">1</td><td>Mạng máy tính</td></tr>
+              <tr><th class="rh">4</th><td class="c">2</td><td>Trương Thanh</td><td>Hà</td><td class="c">2</td><td>Soạn thảo văn bản</td></tr>
+              <tr><th class="rh">5</th><td class="c">3</td><td>Vũ Thị Minh</td><td>An</td><td class="c">3</td><td>Ngôn ngữ lập trình</td></tr>
+              <tr><th class="rh">6</th><td class="c">4</td><td>Đỗ Minh</td><td>Giang</td><td class="c">2</td><td>Bảng tính điện tử</td></tr>
+              <tr><th class="rh">7</th><td class="c">5</td><td>Trần Minh</td><td>Châu</td><td class="c">2</td><td>Ngôn ngữ lập trình</td></tr>
+              <tr><th class="rh">8</th><td class="c">6</td><td>Ngô Hà</td><td>Trang</td><td class="c">1</td><td>Đồ hoạ máy tính</td></tr>
+              <tr><th class="rh">9</th><td class="c">7</td><td>Dương Gia</td><td>Khánh</td><td class="c">3</td><td>Phần mềm trình chiếu</td></tr>
+              <tr><th class="rh">10</th><td class="c">8</td><td>Đặng Mai</td><td>Trang</td><td class="c">1</td><td>Ngôn ngữ lập trình</td></tr>
+              <tr><th class="rh">11</th><td class="c">9</td><td>Phùng Khánh</td><td>Toàn</td><td class="c">1</td><td>Ngôn ngữ lập trình</td></tr>
+              <tr><th class="rh">12</th><td class="c">10</td><td>Phạm Ngọc</td><td>Linh</td><td class="c">3</td><td>Đồ hoạ máy tính</td></tr>
+            </table>
+          </div>
+          <div>
+            <p class="lead" style="font-size:26px">CLB cần biết:</p>
+            <ol class="todo" style="margin-top:6px">
+              <li class="step"><div><span class="vi" style="font-size:22px;font-style:normal;color:var(--ink)">Danh sách theo thứ tự bảng chữ cái để dễ tìm</span></div></li>
+              <li class="step"><div><span class="vi" style="font-size:22px;font-style:normal;color:var(--ink)">Mỗi nội dung có những bạn nào?</span></div></li>
+              <li class="step"><div><span class="vi" style="font-size:22px;font-style:normal;color:var(--ink)">Nội dung nào được chọn nhiều nhất?</span></div></li>
+              <li class="step"><div><span class="vi" style="font-size:22px;font-style:normal;color:var(--ink)">Mỗi nội dung có HS những tổ nào → chia nhóm</span></div></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · Sort vs filter concept -->
+    <section class="slide" data-part="1. Bài toán thực tế">
+      <div class="slide-z">
+        <div class="kicker">Key idea · Hai công cụ xử lí dữ liệu</div>
+        <h2>SORT IT, OR FILTER IT</h2>
+        <div class="ba">
+          <figure class="good">
+            <svg viewBox="0 0 420 150" role="img" aria-label="Rows rearranged into order">
+              <g fill="#1f6f8b"><rect x="20" y="20" width="120" height="22" rx="4"/><rect x="20" y="52" width="70" height="22" rx="4"/><rect x="20" y="84" width="160" height="22" rx="4"/><rect x="20" y="116" width="40" height="22" rx="4"/></g>
+              <path d="M200 79 H240" stroke="#e8963c" stroke-width="6"/><path d="M236 66 l18 13 l-18 13z" fill="#e8963c"/>
+              <g fill="#3f8f6b"><rect x="270" y="20" width="40" height="22" rx="4"/><rect x="270" y="52" width="70" height="22" rx="4"/><rect x="270" y="84" width="120" height="22" rx="4"/><rect x="270" y="116" width="140" height="22" rx="4"/></g>
+            </svg>
+            <figcaption>🔽 Sort · Sắp xếp<span class="vi">Đổi <b>thứ tự</b> các hàng theo một hay nhiều tiêu chí (A→Z, tăng/giảm dần). Không mất hàng nào.</span></figcaption>
+          </figure>
+          <figure class="good step">
+            <svg viewBox="0 0 420 150" role="img" aria-label="Only matching rows stay visible">
+              <g><rect x="20" y="20" width="160" height="22" rx="4" fill="#e8963c"/><rect x="20" y="52" width="160" height="22" rx="4" fill="#c9bfa8"/><rect x="20" y="84" width="160" height="22" rx="4" fill="#e8963c"/><rect x="20" y="116" width="160" height="22" rx="4" fill="#c9bfa8"/></g>
+              <path d="M200 79 H240" stroke="#e8963c" stroke-width="6"/><path d="M236 66 l18 13 l-18 13z" fill="#e8963c"/>
+              <g fill="#e8963c"><rect x="270" y="52" width="140" height="22" rx="4"/><rect x="270" y="84" width="140" height="22" rx="4"/></g>
+            </svg>
+            <figcaption>🔍 Filter · Lọc<span class="vi">Chỉ <b>hiển thị</b> các hàng thoả điều kiện; các hàng khác <b>bị ẩn đi</b> (không bị xoá).</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Real-life situations -->
+    <section class="slide" data-part="1. Bài toán thực tế">
+      <div class="slide-z">
+        <div class="kicker">Real life · Tình huống cần sắp xếp, lọc</div>
+        <h2>SORT OR FILTER?</h2>
+        <div class="verdicts">
+          <div class="verdict"><span class="k">1</span><div class="txt"><div class="en">Xếp hạng điểm thi từ cao xuống thấp</div></div><span class="tag ok step">SẮP XẾP</span></div>
+          <div class="verdict"><span class="k">2</span><div class="txt"><div class="en">Chỉ xem các bạn Tổ 1 muốn học Đồ hoạ máy tính</div></div><span class="tag no step" style="background:var(--amber)">LỌC</span></div>
+          <div class="verdict"><span class="k">3</span><div class="txt"><div class="en">Danh bạ điện thoại theo thứ tự tên A → Z</div></div><span class="tag ok step">SẮP XẾP</span></div>
+          <div class="verdict"><span class="k">4</span><div class="txt"><div class="en">Tìm các mặt hàng có giá dưới 50 000 đồng</div></div><span class="tag no step" style="background:var(--amber)">LỌC</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · SGK ? sort criteria -->
+    <section class="slide" data-part="2. Sắp xếp">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Think · Câu hỏi SGK</div>
+          <p class="question" style="font-size:38px">Sort the class list A → Z. Which column first?</p>
+          <p class="q-vi">Nêu tiêu chí sắp xếp danh sách học sinh theo thứ tự bảng chữ cái trong Hình 6.2.</p>
+        </div>
+        <div>
+          <div class="callout step"><div class="ico">1️⃣</div><div><div class="en">First: Tên (first name)</div><span class="vi">Người Việt sắp xếp theo <b>Tên</b> trước.</span></div></div>
+          <div class="callout amber step"><div class="ico">2️⃣</div><div><div class="en">Same name? Then Họ đệm</div><span class="vi">Nếu trùng tên thì xét tiếp cột <b>Họ đệm</b>.</span></div></div>
+          <p class="vi step" style="font-size:21px;margin-top:10px">⚠️ Sắp xếp theo bảng mã Unicode không hoàn toàn đúng thứ tự tiếng Việt (ví dụ chữ Đ).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · Sort one criterion: dialog (Hình 6.3) -->
+    <section class="slide" data-part="2. Sắp xếp">
+      <div class="slide-z">
+        <div class="badge"><span class="n">a</span> Sort by 1 criterion · Sắp xếp cột Tên theo bảng chữ cái</div>
+        <div class="duo r" style="margin-top:4px">
+          <div>
+            <div class="dlg">
+              <div class="ttl"><span>Sort</span><span>? ✕</span></div>
+              <div class="tb"><span class="btn">＋ Add Level</span><span class="btn">✕ Delete Level</span><span class="btn">Copy Level</span><span class="chk" id="s-hdr"><span class="bx">✓</span>My data has headers</span></div>
+              <table>
+                <tr><th>Column</th><th>Sort On</th><th>Order</th></tr>
+                <tr><td>Sort by <span class="sel" id="s-col">Tên <span>▾</span></span></td><td><span class="sel">Cell Values <span>▾</span></span></td><td><span class="sel" id="s-ord">A to Z <span>▾</span></span></td></tr>
+              </table>
+              <div class="ft"><span class="btn" id="s-ok">OK</span><span class="btn">Cancel</span></div>
+            </div>
+            <p class="cap">Hình 6.3 · Hộp thoại Sort</p>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step"><div><div class="en">Select A2:E12</div><span class="vi">Hàng 2 là tiêu đề</span></div></li>
+            <li class="step"><div><div class="en">Data → Sort</div><span class="vi">Thẻ Data, nhóm Sort &amp; Filter</span></div></li>
+            <li class="step" data-mark="#s-hdr|hot"><div><div class="en">✓ My data has headers</div><span class="vi">Không sắp xếp dòng tiêu đề</span></div></li>
+            <li class="step" data-mark="#s-col, #s-ord|hot"><div><div class="en">Tên · A to Z → OK</div><span class="vi">Chọn cột và thứ tự sắp xếp</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 · Result Hình 6.4 → problem -->
+    <section class="slide" data-part="2. Sắp xếp">
+      <div class="slide-z">
+        <div class="kicker">Result · Hình 6.4 · Đã sắp xếp theo Tên</div>
+        <div class="duo r" style="margin-top:4px">
+          <div class="xls sm">
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+              <tr><th class="rh">2</th><td class="h">TT</td><td class="h">Họ đệm</td><td class="h">Tên</td><td class="h">Tổ</td><td class="h">Nội dung</td></tr>
+              <tr><th class="rh">3</th><td class="c">1</td><td>Phạm Hoàng Bảo</td><td class="ok">An</td><td class="c">1</td><td>Mạng máy tính</td></tr>
+              <tr><th class="rh">4</th><td class="c">3</td><td>Vũ Thị Minh</td><td class="ok">An</td><td class="c">3</td><td>Ngôn ngữ lập trình</td></tr>
+              <tr><th class="rh">5</th><td class="c">5</td><td>Trần Minh</td><td class="ok">Châu</td><td class="c">2</td><td>Ngôn ngữ lập trình</td></tr>
+              <tr><th class="rh">6</th><td class="c">4</td><td>Đỗ Minh</td><td class="ok">Giang</td><td class="c">2</td><td>Bảng tính điện tử</td></tr>
+              <tr><th class="rh">7</th><td class="c">2</td><td>Trương Thanh</td><td class="ok">Hà</td><td class="c">2</td><td>Soạn thảo văn bản</td></tr>
+              <tr><th class="rh">8</th><td class="c">7</td><td>Dương Gia</td><td class="ok">Khánh</td><td class="c">3</td><td>Phần mềm trình chiếu</td></tr>
+              <tr><th class="rh">9</th><td class="c">10</td><td>Phạm Ngọc</td><td class="ok">Linh</td><td class="c">3</td><td>Đồ hoạ máy tính</td></tr>
+              <tr><th class="rh">10</th><td class="c">9</td><td>Phùng Khánh</td><td class="ok">Toàn</td><td class="c">1</td><td>Ngôn ngữ lập trình</td></tr>
+              <tr><th class="rh">11</th><td class="c">6</td><td class="tr">Ngô Hà</td><td class="ok tr">Trang</td><td class="c">1</td><td>Đồ hoạ máy tính</td></tr>
+              <tr><th class="rh">12</th><td class="c">8</td><td class="tr">Đặng Mai</td><td class="ok tr">Trang</td><td class="c">1</td><td>Ngôn ngữ lập trình</td></tr>
+            </table>
+          </div>
+          <div>
+            <div class="callout amber step" data-mark=".tr|hot" style="margin-top:0"><div class="ico">🤔</div><div><div class="en">Two “Trang”s — wrong order!</div><span class="vi">Ngô Hà Trang đứng trước Đặng Mai Trang, trong khi Đ đứng trước N.</span></div></div>
+            <div class="callout step"><div class="ico">➕</div><div><div class="en">Add a 2nd criterion: Họ đệm</div><span class="vi">Cùng Tên thì sắp xếp tiếp theo cột Họ đệm.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · Multi-criteria dialog (Hình 6.5) -->
+    <section class="slide" data-part="2. Sắp xếp">
+      <div class="slide-z">
+        <div class="badge"><span class="n">b</span> Sort by many criteria · Sắp xếp theo nhiều tiêu chí (Hình 6.5)</div>
+        <div class="duo r" style="margin-top:4px">
+          <div class="dlg">
+            <div class="ttl"><span>Sort</span><span>? ✕</span></div>
+            <div class="tb"><span class="btn" id="m-add">＋ Add Level</span><span class="btn">✕ Delete Level</span><span class="chk" id="m-hdr"><span class="bx">✓</span>My data has headers</span></div>
+            <table>
+              <tr><th>Column</th><th>Sort On</th><th>Order</th></tr>
+              <tr><td>Sort by <span class="sel" id="m-1">Tên <span>▾</span></span></td><td><span class="sel">Cell Values <span>▾</span></span></td><td><span class="sel">A to Z <span>▾</span></span></td></tr>
+              <tr><td>Then by <span class="sel" id="m-2">Họ đệm <span>▾</span></span></td><td><span class="sel">Cell Values <span>▾</span></span></td><td><span class="sel">A to Z <span>▾</span></span></td></tr>
+            </table>
+            <div class="ft"><span class="btn">OK</span><span class="btn">Cancel</span></div>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step" data-mark="#m-hdr|hot"><div><div class="en">✓ My data has headers</div></div></li>
+            <li class="step" data-mark="#m-add|hot"><div><div class="en">Add Level</div><span class="vi">Thêm tiêu chí sắp xếp</span></div></li>
+            <li class="step" data-mark="#m-1|hot"><div><div class="en">Sort by: Tên</div><span class="vi">Tiêu chí thứ nhất</span></div></li>
+            <li class="step" data-mark="#m-2|hot"><div><div class="en">Then by: Họ đệm → OK</div><span class="vi">Tiêu chí thứ hai</span></div></li>
+          </ol>
+        </div>
+        <p class="vi step" style="font-size:22px;margin-top:12px">Kết quả (Hình 6.6): … Toàn · <b>Đặng Mai Trang</b> · <b>Ngô Hà Trang</b>. Sau khi sắp xếp, có thể nhập lại cột TT cho đúng thứ tự. <b>Delete Level</b> để xoá bớt tiêu chí.</p>
+      </div>
+    </section>
+
+    <!-- 11 · SGK ? three criteria -->
+    <section class="slide" data-part="2. Sắp xếp">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Think · Câu hỏi SGK</div>
+          <p class="question" style="font-size:36px">Sort by group; same group → by name; same name → by middle name. Possible?</p>
+          <p class="q-vi">Có thể sắp xếp theo Tổ, nếu cùng tổ theo Tên, nếu cùng tên theo Họ đệm được không?</p>
+        </div>
+        <div class="dlg step">
+          <div class="ttl"><span>Sort</span><span>? ✕</span></div>
+          <table>
+            <tr><th>Column</th><th>Order</th></tr>
+            <tr><td>Sort by <span class="sel">Tổ <span>▾</span></span></td><td><span class="sel">Smallest to Largest</span></td></tr>
+            <tr><td>Then by <span class="sel">Tên <span>▾</span></span></td><td><span class="sel">A to Z</span></td></tr>
+            <tr><td>Then by <span class="sel">Họ đệm <span>▾</span></span></td><td><span class="sel">A to Z</span></td></tr>
+          </table>
+          <p class="vi" style="font-size:21px;padding:8px 14px">✅ Được — dùng <b>Add Level</b> 2 lần để có 3 tiêu chí.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · Filter: steps + dropdown (Hình 6.7) -->
+    <section class="slide" data-part="3. Lọc dữ liệu">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">1</span> Filter by 1 criterion · Lọc theo nội dung Tin học</div>
+        <div class="duo r" style="margin-top:4px">
+          <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start">
+            <div class="xls sm">
+              <table>
+                <tr><th class="rh"></th><th>C</th><th>E</th></tr>
+                <tr><th class="rh">2</th><td class="h">Tên<span class="flt">▼</span></td><td class="h" id="fl-btn">Nội dung<span class="flt">▼</span></td></tr>
+                <tr><th class="rh">3</th><td>An</td><td>Mạng máy tính</td></tr>
+                <tr><th class="rh">4</th><td>An</td><td>Ngôn ngữ lập trình</td></tr>
+                <tr><th class="rh">5</th><td>Châu</td><td>Ngôn ngữ lập trình</td></tr>
+                <tr><th class="rh">…</th><td class="dim">…</td><td class="dim">…</td></tr>
+              </table>
+            </div>
+            <div class="menu" style="font-size:19px;min-width:250px">
+              <div class="it">Sort A to Z</div><div class="it">Sort Z to A</div><div class="sep"></div>
+              <div class="it" id="fl-all"><span class="bx">■</span>(Select All)</div>
+              <div class="it"><span class="bx"></span>Bảng tính điện tử</div>
+              <div class="it"><span class="bx"></span>Đồ hoạ máy tính</div>
+              <div class="it"><span class="bx"></span>Mạng máy tính</div>
+              <div class="it" id="fl-pick"><span class="bx">✓</span>Ngôn ngữ lập trình</div>
+              <div class="it"><span class="bx"></span>Phần mềm trình chiếu</div>
+              <div class="it"><span class="bx"></span>Soạn thảo văn bản</div>
+            </div>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step"><div><div class="en">Select A2:E12</div></div></li>
+            <li class="step"><div><div class="en">Data → Filter</div><span class="vi">Nút ▼ xuất hiện ở dòng tiêu đề</span></div></li>
+            <li class="step" data-mark="#fl-btn|hot"><div><div class="en">Click ▼ of Nội dung</div></div></li>
+            <li class="step" data-mark="#fl-all, #fl-pick|hot"><div><div class="en">Untick All, tick 1 → OK</div><span class="vi">Bỏ chọn tất cả, chọn “Ngôn ngữ lập trình”</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · Filter result Hình 6.8 -->
+    <section class="slide" data-part="3. Lọc dữ liệu">
+      <div class="slide-z">
+        <div class="kicker">Result · Hình 6.8 · Các bạn muốn tìm hiểu Ngôn ngữ lập trình</div>
+        <div class="xls lg" style="margin-top:8px">
+          <table>
+            <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+            <tr><th class="rh">2</th><td class="h">TT<span class="flt">▼</span></td><td class="h">Họ đệm<span class="flt">▼</span></td><td class="h">Tên<span class="flt">▼</span></td><td class="h">Tổ<span class="flt">▼</span></td><td class="h">Nội dung<span class="flt" style="background:#217346;color:#fff">⏷</span></td></tr>
+            <tr><th class="rh" style="color:#1f5fbf">4</th><td class="c">3</td><td>Vũ Thị Minh</td><td>An</td><td class="c">3</td><td>Ngôn ngữ lập trình</td></tr>
+            <tr><th class="rh" style="color:#1f5fbf">5</th><td class="c">5</td><td>Trần Minh</td><td>Châu</td><td class="c">2</td><td>Ngôn ngữ lập trình</td></tr>
+            <tr><th class="rh" style="color:#1f5fbf">10</th><td class="c">9</td><td>Phùng Khánh</td><td>Toàn</td><td class="c">1</td><td>Ngôn ngữ lập trình</td></tr>
+            <tr><th class="rh" style="color:#1f5fbf">11</th><td class="c">8</td><td>Đặng Mai</td><td>Trang</td><td class="c">1</td><td>Ngôn ngữ lập trình</td></tr>
+          </table>
+        </div>
+        <div class="cards g2">
+          <div class="card amber step"><div class="ico">🙈</div><div><div class="en">Other rows are hidden</div><span class="vi">Số hàng nhảy cóc 4, 5, 10, 11 → các hàng khác bị <b>ẩn</b>, không bị xoá.</span></div></div>
+          <div class="card green step"><div class="ico">↩️</div><div><div class="en">Remove the filter</div><span class="vi">Nháy ▼ → chọn <b>(Select All)</b> để hiện lại tất cả.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · Filter many criteria -->
+    <section class="slide" data-part="3. Lọc dữ liệu">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">2</span> Filter by many criteria · Tổ 1 muốn tìm hiểu Đồ hoạ máy tính</div>
+        <ol class="todo">
+          <li class="step"><div><div class="en">Data → Filter (như Nhiệm vụ 1)</div></div></li>
+          <li class="step"><div><div class="en">Nội dung ▼ → chỉ chọn “Đồ hoạ máy tính”</div><span class="vi">Còn lại: Ngô Hà Trang (Tổ 1), Phạm Ngọc Linh (Tổ 3)</span></div></li>
+          <li class="step"><div><div class="en">Tổ ▼ → chỉ chọn “1”</div></div></li>
+        </ol>
+        <div class="xls lg step" style="margin-top:12px">
+          <table>
+            <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+            <tr><th class="rh">2</th><td class="h">TT</td><td class="h">Họ đệm</td><td class="h">Tên</td><td class="h">Tổ<span class="flt" style="background:#217346;color:#fff">⏷</span></td><td class="h">Nội dung<span class="flt" style="background:#217346;color:#fff">⏷</span></td></tr>
+            <tr><th class="rh" style="color:#1f5fbf">8</th><td class="c">6</td><td>Ngô Hà</td><td>Trang</td><td class="c">1</td><td>Đồ hoạ máy tính</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · Quiz: hidden — B -->
+    <section class="slide" data-part="3. Lọc dữ liệu">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check · Chọn phương án đúng</div>
+        <h2 style="font-size:44px">AFTER FILTERING, THE OTHER ROWS ARE…</h2>
+        <p class="sub">Sau khi lọc, các hàng không thoả mãn điều kiện lọc sẽ:</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span class="en">Bị xoá khỏi bảng tính</span></button>
+          <button class="choice" data-correct><span class="letter">B</span><span class="en">Bị ẩn đi</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en">Chuyển xuống cuối bảng</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en">Được tô màu đỏ</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:14px">✅ B — chọn (Select All) để hiện lại.</p>
+      </div>
+    </section>
+
+    <!-- 16 · Quiz: where is Sort/Filter — C -->
+    <section class="slide" data-part="3. Lọc dữ liệu">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check · Chọn phương án đúng</div>
+        <h2>WHERE ARE SORT AND FILTER?</h2>
+        <p class="sub">Lệnh Sort và Filter nằm ở nhóm Sort &amp; Filter của thẻ nào?</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span class="en">Home</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en">Insert</span></button>
+          <button class="choice" data-correct><span class="letter">C</span><span class="en">Data</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en">View</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:14px">✅ C — thẻ <b>Data</b>, nhóm <b>Sort &amp; Filter</b>.</p>
+      </div>
+    </section>
+
+    <!-- 17 · CORE NOTES -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Sắp xếp và lọc dữ liệu</div></div>
+          <span class="pg">1 / 1</span>
+        </div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en"><span class="k">Sắp xếp</span>: chọn vùng → Data → <b>Sort</b> → ✓ My data has headers → chọn cột, thứ tự; <b>Add Level</b> để thêm tiêu chí.</div></div></li>
+          <li><span class="rn">2</span><div><div class="en"><span class="k">Lọc</span>: chọn vùng → Data → <b>Filter</b> → nháy ▼ ở cột cần lọc → chọn giá trị. Lọc nhiều cột = nhiều tiêu chí.</div></div></li>
+          <li><span class="rn">3</span><div><div class="en">Hàng không thoả điều kiện lọc <span class="k">bị ẩn</span>; chọn (Select All) để bỏ lọc.</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================= TIẾT 2 · LUYỆN TẬP ======================= -->
+
+    <!-- 18 · Practice data Hình 6.9 -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Practice · Tiết 2 · Tệp TGSDThietbiso.xlsx (Hình 6.9)</div>
+        <h2 style="font-size:40px">HOURS A DAY ON DIGITAL DEVICES</h2>
+        <p class="sub" style="font-size:24px">Số HS mỗi lớp khối 8 theo thời gian dùng thiết bị số mỗi ngày (ngoài giờ học ở trường)</p>
+        <div class="xls sm" style="margin-top:6px">
+          <table>
+            <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr>
+            <tr><th class="rh">3</th><td class="h">TT</td><td class="h">Lớp</td><td class="h">Không sử dụng</td><td class="h">Dưới 1 giờ</td><td class="h">1-2 giờ</td><td class="h">3-4 giờ</td><td class="h">Từ 5 giờ trở lên</td></tr>
+            <tr><th class="rh">4</th><td class="c">1</td><td class="c">8A1</td><td class="c">8</td><td class="c">12</td><td class="c">15</td><td class="c">7</td><td class="c">1</td></tr>
+            <tr><th class="rh">5</th><td class="c">2</td><td class="c">8A2</td><td class="c">7</td><td class="c">10</td><td class="c">17</td><td class="c">6</td><td class="c"></td></tr>
+            <tr><th class="rh">6</th><td class="c">3</td><td class="c">8A3</td><td class="c">6</td><td class="c">13</td><td class="c">15</td><td class="c">8</td><td class="c">2</td></tr>
+            <tr><th class="rh">7</th><td class="c">4</td><td class="c">8A4</td><td class="c">8</td><td class="c">11</td><td class="c">10</td><td class="c">9</td><td class="c">3</td></tr>
+            <tr><th class="rh">8</th><td class="c">5</td><td class="c">8A5</td><td class="c">8</td><td class="c">10</td><td class="c">12</td><td class="c">11</td><td class="c"></td></tr>
+            <tr><th class="rh">9</th><td class="c">6</td><td class="c">8A6</td><td class="c">7</td><td class="c">12</td><td class="c">14</td><td class="c">8</td><td class="c"></td></tr>
+            <tr><th class="rh">10</th><td class="c">7</td><td class="c">8A7</td><td class="c">5</td><td class="c">20</td><td class="c">15</td><td class="c">9</td><td class="c"></td></tr>
+            <tr><th class="rh">11</th><td class="c">8</td><td class="c">8A8</td><td class="c">9</td><td class="c">16</td><td class="c">17</td><td class="c">7</td><td class="c"></td></tr>
+            <tr><th class="rh">12</th><td class="c">9</td><td class="c">8A9</td><td class="c">6</td><td class="c">12</td><td class="c">15</td><td class="c">4</td><td class="c">2</td></tr>
+            <tr><th class="rh">13</th><td class="c">10</td><td class="c">8A10</td><td class="c">4</td><td class="c">15</td><td class="c">16</td><td class="c">3</td><td class="c">4</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 · Tasks + timer -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Tasks · Em hãy thực hiện</div>
+        <h2>FOUR TASKS</h2>
+        <ol class="todo">
+          <li><div><div class="en">a) Type &amp; format the table, save TGSDThietbiso.xlsx</div><span class="vi">Tạo bảng dữ liệu, định dạng theo mẫu Hình 6.9</span></div></li>
+          <li><div><div class="en">b) Sort “Không sử dụng” — largest to smallest</div><span class="vi">Sắp xếp giảm dần theo cột Không sử dụng</span></div></li>
+          <li><div><div class="en">c) …then by “Dưới 1 giờ”, largest to smallest</div><span class="vi">Nếu bằng nhau thì giảm dần theo cột Dưới 1 giờ</span></div></li>
+          <li><div><div class="en">d) Classes with NO student using ≥ 5 hours</div><span class="vi">Lọc các lớp không có HS dùng thiết bị số từ 5 giờ trở lên</span></div></li>
+        </ol>
+        <div style="display:flex;justify-content:flex-end;margin-top:10px"><div class="timer step" data-min="20" style="padding:8px 22px"><div class="t" style="font-size:56px">20:00</div><div class="l">Practice time</div></div></div>
+      </div>
+    </section>
+
+    <!-- 20 · Answers b, c -->
+    <section class="slide" data-part="Chữa bài">
+      <div class="slide-z">
+        <div class="kicker">Check · Đáp án câu b và c</div>
+        <h2 style="font-size:42px">WHO COMES FIRST?</h2>
+        <table class="big xl">
+          <tr><th style="width:24%">Câu</th><th>Thứ tự các lớp</th></tr>
+          <tr><td><b>b)</b> Không sử dụng ↓</td><td class="step">8A8 (9) · 8A1, 8A4, 8A5 (8) · 8A2, 8A6 (7) · 8A3, 8A9 (6) · 8A7 (5) · 8A10 (4)<br><span class="vi" style="font-size:20px">Các lớp bằng nhau có thể giữ thứ tự ban đầu.</span></td></tr>
+          <tr><td><b>c)</b> + Dưới 1 giờ ↓</td><td class="step">8A8 · <b>8A1 (12), 8A4 (11), 8A5 (10)</b> · <b>8A6 (12), 8A2 (10)</b> · <b>8A3 (13), 8A9 (12)</b> · 8A7 · 8A10</td></tr>
+        </table>
+        <div class="dlg step" style="margin-top:14px;align-self:flex-start">
+          <table>
+            <tr><th>Column</th><th>Order</th></tr>
+            <tr><td>Sort by <span class="sel">Không sử dụng</span></td><td><span class="sel">Largest to Smallest</span></td></tr>
+            <tr><td>Then by <span class="sel">Dưới 1 giờ</span></td><td><span class="sel">Largest to Smallest</span></td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21 · Answer d -->
+    <section class="slide" data-part="Chữa bài">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Check · Đáp án câu d</div>
+          <p class="question" style="font-size:38px">No student ≥ 5 hours → the cell is empty.</p>
+          <p class="q-vi">Cột “Từ 5 giờ trở lên” ▼ → bỏ chọn tất cả → chỉ chọn <b>(Blanks)</b> (ô trống).</p>
+        </div>
+        <div>
+          <div class="pills step"><span>8A2</span><span>8A5</span><span>8A6</span><span>8A7</span><span>8A8</span></div>
+          <div class="callout green step"><div class="ico">✅</div><div><div class="en">5 classes</div><span class="vi">Các lớp không có học sinh sử dụng thiết bị số từ 5 giờ trở lên mỗi ngày.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22 · Vận dụng: Number Filters -->
+    <section class="slide" data-part="Vận dụng">
+      <div class="slide-z">
+        <div class="kicker">Apply · Vận dụng · Number Filters</div>
+        <h2 style="font-size:40px">CLASSES WITH “3–4 HOURS” ≥ 10 STUDENTS</h2>
+        <div class="duo r">
+          <div class="menu" style="font-size:22px">
+            <div class="it">Sort Smallest to Largest</div>
+            <div class="sep"></div>
+            <div class="it" id="nf">Number Filters ▸</div>
+            <div class="sep"></div>
+            <div class="it" style="padding-left:40px">Equals… · Does Not Equal…</div>
+            <div class="it" style="padding-left:40px">Greater Than…</div>
+            <div class="it" style="padding-left:40px" id="nf2">Greater Than Or Equal To…</div>
+            <div class="it" style="padding-left:40px">Less Than… · Between… · Top 10…</div>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step" data-mark="#nf|hot"><div><div class="en">Cột 3-4 giờ ▼ → Number Filters</div><span class="vi">Text Filters nếu cột chứa chữ</span></div></li>
+            <li class="step" data-mark="#nf2|hot"><div><div class="en">Greater Than Or Equal To… → 10</div><span class="vi">Lớn hơn hoặc bằng 10</span></div></li>
+            <li class="step"><div><div class="en">Result: 8A5 (11)</div><span class="vi">Chỉ còn lớp 8A5</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 23 · Summary + next -->
+    <section class="slide" data-part="Tổng kết">
+      <div class="slide-z">
+        <div class="kicker">Wrap-up · Sau bài học, em cần nhớ gì?</div>
+        <h2>WHAT SHOULD YOU REMEMBER?</h2>
+        <div class="cards g2">
+          <div class="card blue"><div class="num">1</div><div><div class="en">Data → Sort</div><span class="vi">Sắp xếp 1 hay nhiều tiêu chí (Add Level), tăng/giảm dần.</span></div></div>
+          <div class="card blue"><div class="num">2</div><div><div class="en">Data → Filter</div><span class="vi">Chọn giá trị ở nút ▼; Number/Text Filters để lọc theo điều kiện.</span></div></div>
+          <div class="card blue"><div class="num">3</div><div><div class="en">Filtered rows are hidden</div><span class="vi">Không bị xoá — (Select All) để hiện lại.</span></div></div>
+          <div class="card blue"><div class="num">4</div><div><div class="en">Real problems, fast answers</div><span class="vi">Xếp hạng, tìm danh sách thoả điều kiện, chia nhóm…</span></div></div>
+        </div>
+        <div class="next-up">
+          <div class="en">Next: Lesson 7 — Visualising data with charts 📊 (giữ tệp TGSDThietbiso.xlsx!)</div>
+          <span class="vi">Bài 7: Trực quan hoá dữ liệu.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 6</span>
+      <div id="ticks"></div>
+      <span id="more-hint" hidden>▼ more</span>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 23</span>
+    </div>
+    <div id="help">Presenter / ← → · Next reveals, then advances<br>F fullscreen · + − 0 zoom · Z pin zoom bar</div>
+
+  </div>
+</div>
+
+<!-- Zoom bar: fixed to the real screen; auto-hides (move the mouse or press + − 0 to show it) -->
+<div id="zoombar">
+  <button id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="zsep"></span>
+  <button id="zMinus" title="Thu nhỏ (−)">A−</button>
+  <input type="range" id="zRange" min="80" max="170" step="10" value="100" aria-label="Zoom">
+  <button id="zPlus" title="Phóng to (+)">A+</button>
+  <span id="zVal">100%</span>
+  <button id="zReset" title="Về 100% (phím 0)">100%</button>
+  <button id="zPin" title="Ghim thanh zoom (Z)">📌</button>
+</div>
+<div id="ztoast"></div>
+
+<script src="slides.js"></script>
+<script src="../../assets/js/promo-banner.js" defer></script>
+</body>
+</html>

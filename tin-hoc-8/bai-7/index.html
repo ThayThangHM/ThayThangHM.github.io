@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>See the Data · Tin học 8 — Bài 7</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--
+  BÀI 7 — TRỰC QUAN HOÁ DỮ LIỆU (SGK Tin học 8 KNTT tr.32–35 = PDF 31–34, Chủ đề 4: Ứng dụng tin học)
+  PPCT (KHDH 2026–27, tên "Trình bày dữ liệu bằng biểu đồ"): 1 tiết (1 TH) · tiết 14. NLS: 3.1.TC2a · 3.2.TC2a · 5.2.TC2a.
+  1 TIẾT (45'): Khởi động bảng vs biểu đồ 4' → 1. Ba loại biểu đồ + chọn biểu đồ 9' → 2. Thực hành tạo biểu đồ cột, quạt tròn 12'
+  → sao chép dữ liệu từ trang trình chiếu 3' → Luyện tập 1–2 (TGSDThietbiso.xlsx, Hình 7.8–7.9) 13' → Vận dụng + tổng kết 4'.
+  Nguồn: SGK (Hình 7.1–7.9, Hoạt động 1, hộp kiến thức, câu hỏi ?, Luyện tập, Vận dụng). Không có PP cũ cho bài này.
+  Biểu đồ vẽ lại bằng SVG từ số liệu SGK (scratchpad charts.py). Hình 7.3 không ghi số: giá trị đọc gần đúng từ hình, nên chỉ vẽ đường, không ghi nhãn số.
+  Tỉ lệ % quạt tròn tự tính: khảo sát 8A (tổng 41 HS) 20/17/37/10/5/12 — SGK in 19/17/37/10/5/12 (Excel làm tròn khác 1%).
+  Phím: → PageDown Space = tiếp · ← PageUp = lùi · F toàn màn hình · + − 0 zoom · Z ghim.
+-->
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 01 · Title -->
+    <section class="slide" data-part="Bài 7">
+      <div class="slide-z split wide-left">
+        <div>
+          <div class="kicker">Tin học 8 · Chủ đề 4 · Ứng dụng tin học</div>
+          <h1 style="font-size:84px">SEE THE DATA</h1>
+          <p class="sub" style="font-size:36px;font-style:normal;font-weight:800;color:var(--blue-deep)">Bài 7 — Trực quan hoá dữ liệu</p>
+          <p class="lead-vi vi mt">1 tiết thực hành · Trình bày dữ liệu bằng biểu đồ:<br>biểu đồ cột, đoạn thẳng, hình quạt tròn</p>
+        </div>
+        <div class="viz">
+          <svg viewBox="0 0 400 330" role="img" aria-label="A column chart, a line and a pie">
+            <rect x="10" y="20" width="380" height="290" rx="18" fill="#fff" stroke="#c9bfa8" stroke-width="3"/>
+            <g fill="#1f6f8b"><rect x="40" y="200" width="36" height="80"/><rect x="88" y="150" width="36" height="130"/><rect x="136" y="90" width="36" height="190"/><rect x="184" y="170" width="36" height="110"/></g>
+            <polyline points="40,170 100,120 160,130 220,60" fill="none" stroke="#e8963c" stroke-width="6"/>
+            <circle cx="310" cy="130" r="64" fill="#3f8f6b"/><path d="M310 130 L310 66 A64 64 0 0 1 368 157z" fill="#d9604f"/><path d="M310 130 L368 157 A64 64 0 0 1 280 186z" fill="#e8963c"/>
+            <path d="M30 282 H240" stroke="#12233b" stroke-width="4"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Goals -->
+    <section class="slide" data-part="Hôm nay">
+      <div class="slide-z mid">
+        <div class="kicker">Today · Sau bài này em sẽ</div>
+        <h2>THREE THINGS TO LEARN</h2>
+        <div class="cards g1 xl">
+          <div class="card blue"><div class="ico">📊</div><div><div class="en">When do we need a chart?</div><span class="vi">Nêu được một số tình huống thực tế cần sử dụng chức năng tạo biểu đồ.</span></div></div>
+          <div class="card amber"><div class="ico">🖱️</div><div><div class="en">Make charts in Excel</div><span class="vi">Thực hiện được các thao tác tạo biểu đồ của phần mềm bảng tính.</span></div></div>
+          <div class="card green"><div class="ico">📋</div><div><div class="en">Copy data from slides into a sheet</div><span class="vi">Sao chép dữ liệu từ tệp trình chiếu sang trang tính.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Warm-up: table vs chart (Hình 7.1, 7.2) -->
+    <section class="slide" data-part="Khởi động">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">🔥</span> Warm-up · Hai cách trình bày kết quả khảo sát lớp 8A</div>
+        <div class="duo" style="grid-template-columns:.8fr 1.2fr;align-items:center">
+          <div class="xls sm">
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th></tr>
+              <tr><th class="rh">2</th><td class="h">TT</td><td class="h">Nội dung Tin học</td><td class="h">Số HS</td></tr>
+              <tr><th class="rh">3</th><td class="c">1</td><td>Ngôn ngữ lập trình</td><td class="c">8</td></tr>
+              <tr><th class="rh">4</th><td class="c">2</td><td>Mạng máy tính</td><td class="c">7</td></tr>
+              <tr><th class="rh">5</th><td class="c">3</td><td>Đồ hoạ máy tính</td><td class="c">15</td></tr>
+              <tr><th class="rh">6</th><td class="c">4</td><td>Bảng tính điện tử</td><td class="c">4</td></tr>
+              <tr><th class="rh">7</th><td class="c">5</td><td>Soạn thảo văn bản</td><td class="c">2</td></tr>
+              <tr><th class="rh">8</th><td class="c">6</td><td>Phần mềm trình chiếu</td><td class="c">5</td></tr>
+            </table>
+            <p class="cap">Hình 7.1 · Bảng</p>
+          </div>
+          <div class="viz step" style="flex-direction:column"><svg viewBox="0 0 600 340" role="img" aria-label="Column chart: number of students interested in each topic"><rect x="0" y="0" width="600" height="340" rx="14" fill="#fff"/><g class="c-grid"><path d="M64 270.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="276.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">0</text><path d="M64 243.2 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="249.2" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">2</text><path d="M64 216.5 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="222.5" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">4</text><path d="M64 189.8 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="195.8" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">6</text><path d="M64 163.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="169.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">8</text><path d="M64 136.2 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="142.2" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">10</text><path d="M64 109.5 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="115.5" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">12</text><path d="M64 82.8 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="88.8" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">14</text><path d="M64 56.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="62.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">16</text></g><path d="M64 270 H584" stroke="#8b8474" stroke-width="3"/><rect class="bar b0" x="83.5" y="163.0" width="47.7" height="107.0" fill="#1f6f8b"/><text x="107.3" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Lập</text><text x="107.3" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">trình</text><rect class="bar b1" x="170.2" y="176.4" width="47.7" height="93.6" fill="#1f6f8b"/><text x="194.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Mạng</text><text x="194.0" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">máy tính</text><rect class="bar b2" x="256.8" y="69.4" width="47.7" height="200.6" fill="#1f6f8b"/><text x="280.7" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Đồ hoạ</text><text x="280.7" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">máy tính</text><rect class="bar b3" x="343.5" y="216.5" width="47.7" height="53.5" fill="#1f6f8b"/><text x="367.3" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Bảng tính</text><text x="367.3" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">điện tử</text><rect class="bar b4" x="430.2" y="243.2" width="47.7" height="26.8" fill="#1f6f8b"/><text x="454.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Soạn thảo</text><text x="454.0" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">văn bản</text><rect class="bar b5" x="516.8" y="203.1" width="47.7" height="66.9" fill="#1f6f8b"/><text x="540.7" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Phần mềm</text><text x="540.7" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">trình chiếu</text><g class="c-lab"><text x="107.3" y="155.0" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">8</text><text x="194.0" y="168.4" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">7</text><text x="280.7" y="61.4" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">15</text><text x="367.3" y="208.5" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">4</text><text x="454.0" y="235.2" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">2</text><text x="540.7" y="195.1" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">5</text></g><g class="c-title"><text x="300.0" y="34" text-anchor="middle" font-size="24" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">Số học sinh quan tâm</text></g></svg><p class="cap">Hình 7.2 · Biểu đồ</p></div>
+        </div>
+        <p class="lead step" style="font-size:28px;margin-top:6px">❓ Nhìn cách nào em thấy <b>ngay</b> nội dung được quan tâm nhiều nhất?</p>
+      </div>
+    </section>
+
+    <!-- 04 · Activity 1 -->
+    <section class="slide" data-part="1. Biểu đồ">
+      <div class="slide-z">
+        <div class="badge"><span class="n">1</span> Activity 1 · Trực quan dữ liệu</div>
+        <div class="cards g1">
+          <div class="card"><div class="num">1</div><div><div class="en">Compare the numbers of students at a glance: table or chart?</div><span class="vi">So sánh trực quan số HS quan tâm các nội dung: cách nào hiệu quả hơn?</span>
+            <div class="callout green step" style="margin-top:10px"><div class="ico">📊</div><div><div class="en">The column chart.</div><span class="vi">Cột cao nhất (Đồ hoạ máy tính) và thấp nhất (Soạn thảo văn bản) thấy ngay.</span></div></div></div></div>
+          <div class="card"><div class="num">2</div><div><div class="en">Show the % of each topic out of all students?</div><span class="vi">So sánh tỉ lệ phần trăm của mỗi nội dung trên tổng số HS khảo sát thì dùng cách nào?</span>
+            <div class="callout amber step" style="margin-top:10px"><div class="ico">🥧</div><div><div class="en">A pie chart.</div><span class="vi">Biểu đồ hình quạt tròn: mỗi phần là một “miếng bánh” của tổng thể.</span></div></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · Column chart -->
+    <section class="slide" data-part="1. Biểu đồ">
+      <div class="slide-z split">
+        <div class="viz"><svg viewBox="0 0 600 340" role="img" aria-label="Column chart with the tallest and shortest bars highlighted"><rect x="0" y="0" width="600" height="340" rx="14" fill="#fff"/><g class="c-grid"><path d="M64 270.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="276.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">0</text><path d="M64 243.2 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="249.2" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">2</text><path d="M64 216.5 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="222.5" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">4</text><path d="M64 189.8 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="195.8" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">6</text><path d="M64 163.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="169.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">8</text><path d="M64 136.2 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="142.2" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">10</text><path d="M64 109.5 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="115.5" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">12</text><path d="M64 82.8 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="88.8" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">14</text><path d="M64 56.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="62.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">16</text></g><path d="M64 270 H584" stroke="#8b8474" stroke-width="3"/><rect class="bar b0" x="83.5" y="163.0" width="47.7" height="107.0" fill="#1f6f8b"/><text x="107.3" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Lập</text><text x="107.3" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">trình</text><rect class="bar b1" x="170.2" y="176.4" width="47.7" height="93.6" fill="#1f6f8b"/><text x="194.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Mạng</text><text x="194.0" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">máy tính</text><rect class="bar b2" x="256.8" y="69.4" width="47.7" height="200.6" fill="#e8963c"/><text x="280.7" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Đồ hoạ</text><text x="280.7" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">máy tính</text><rect class="bar b3" x="343.5" y="216.5" width="47.7" height="53.5" fill="#1f6f8b"/><text x="367.3" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Bảng tính</text><text x="367.3" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">điện tử</text><rect class="bar b4" x="430.2" y="243.2" width="47.7" height="26.8" fill="#d9604f"/><text x="454.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Soạn thảo</text><text x="454.0" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">văn bản</text><rect class="bar b5" x="516.8" y="203.1" width="47.7" height="66.9" fill="#1f6f8b"/><text x="540.7" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Phần mềm</text><text x="540.7" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">trình chiếu</text><g class="c-lab"><text x="107.3" y="155.0" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">8</text><text x="194.0" y="168.4" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">7</text><text x="280.7" y="61.4" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">15</text><text x="367.3" y="208.5" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">4</text><text x="454.0" y="235.2" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">2</text><text x="540.7" y="195.1" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">5</text></g><g class="c-title"><text x="300.0" y="34" text-anchor="middle" font-size="24" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">Số học sinh quan tâm</text></g></svg></div>
+        <div>
+          <div class="kicker">Type 1 · Biểu đồ cột</div>
+          <p class="lead" style="font-size:36px">📊 Column chart → <span class="hl">compare</span></p>
+          <span class="lead-vi vi">Thường dùng để <b>so sánh</b> dữ liệu.</span>
+          <div class="callout amber step"><div class="ico">⬆️</div><div><div class="en">Đồ hoạ máy tính: most popular</div><span class="vi">Sau đó là Ngôn ngữ lập trình.</span></div></div>
+          <div class="callout violet step"><div class="ico">⬇️</div><div><div class="en">Soạn thảo văn bản: least</div><span class="vi">Ít học sinh quan tâm nhất.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Line chart -->
+    <section class="slide" data-part="1. Biểu đồ">
+      <div class="slide-z split">
+        <div class="viz" style="flex-direction:column"><svg viewBox="0 0 600 320" role="img" aria-label="Line chart rising from 2017 to 2020"><rect width="600" height="320" rx="14" fill="#fff"/><path d="M70 270.0 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="276.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">0</text><path d="M70 227.2 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="233.2" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">50</text><path d="M70 184.4 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="190.4" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">100</text><path d="M70 141.6 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="147.6" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">150</text><path d="M70 98.8 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="104.8" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">200</text><path d="M70 56.0 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="62.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">250</text><text x="132.5" y="296" text-anchor="middle" font-size="19" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2017</text><text x="257.5" y="296" text-anchor="middle" font-size="19" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2018</text><text x="382.5" y="296" text-anchor="middle" font-size="19" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2019</text><text x="507.5" y="296" text-anchor="middle" font-size="19" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2020</text><polyline fill="none" stroke="#1f6f8b" stroke-width="6" stroke-linejoin="round" points="132.5,150.2 257.5,103.9 382.5,95.4 507.5,85.1"/><circle cx="132.5" cy="150.2" r="8" fill="#e8963c" stroke="#fff" stroke-width="3"/><circle cx="257.5" cy="103.9" r="8" fill="#e8963c" stroke="#fff" stroke-width="3"/><circle cx="382.5" cy="95.4" r="8" fill="#e8963c" stroke="#fff" stroke-width="3"/><circle cx="507.5" cy="85.1" r="8" fill="#e8963c" stroke="#fff" stroke-width="3"/><text x="300.0" y="34" text-anchor="middle" font-size="23" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">Số ứng dụng tải về từ các chợ ứng dụng</text></svg><p class="cap">Hình 7.3 · Biểu đồ đoạn thẳng</p></div>
+        <div>
+          <div class="kicker">Type 2 · Biểu đồ đoạn thẳng</div>
+          <p class="lead" style="font-size:36px">📈 Line chart → <span class="hl">trend</span></p>
+          <span class="lead-vi vi">Quan sát <b>xu hướng tăng, giảm</b> của dữ liệu theo thời gian hay một quá trình.</span>
+          <div class="callout step"><div class="ico">📱</div><div><div class="en">2017 → 2020: going up</div><span class="vi">Số ứng dụng tải về từ các chợ ứng dụng có xu hướng tăng dần.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · Pie chart -->
+    <section class="slide" data-part="1. Biểu đồ">
+      <div class="slide-z split">
+        <div class="viz" style="flex-direction:column"><svg viewBox="0 0 600 330" role="img" aria-label="Pie chart: share of students for each topic"><rect width="600" height="330" rx="14" fill="#fff"/><text x="300.0" y="34" text-anchor="middle" font-size="24" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">Số học sinh quan tâm</text><path d="M190 196 L190.0 76.0 A120 120 0 0 1 302.9 155.4z" fill="#1f6f8b" stroke="#fff" stroke-width="3"/><text x="235.6" y="138.2" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">20%</text><path d="M190 196 L302.9 155.4 A120 120 0 0 1 279.6 275.8z" fill="#d9604f" stroke="#fff" stroke-width="3"/><text x="267.8" y="218.1" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">17%</text><path d="M190 196 L279.6 275.8 A120 120 0 0 1 70.8 209.8z" fill="#8b8474" stroke="#fff" stroke-width="3"/><text x="166.1" y="278.5" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">37%</text><path d="M190 196 L70.8 209.8 A120 120 0 0 1 84.6 138.7z" fill="#e8963c" stroke="#fff" stroke-width="3"/><text x="112.2" y="187.9" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">10%</text><path d="M190 196 L84.6 138.7 A120 120 0 0 1 106.8 109.5z" fill="#6a4c9c" stroke="#fff" stroke-width="3"/><text x="113.7" y="144.8" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">5%</text><path d="M190 196 L106.8 109.5 A120 120 0 0 1 190.0 76.0z" fill="#3f8f6b" stroke="#fff" stroke-width="3"/><text x="160.4" y="129.5" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">12%</text><rect x="352" y="74" width="20" height="20" rx="4" fill="#1f6f8b"/><text x="382" y="90" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Ngôn ngữ lập trình</text><rect x="352" y="108" width="20" height="20" rx="4" fill="#d9604f"/><text x="382" y="124" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Mạng máy tính</text><rect x="352" y="142" width="20" height="20" rx="4" fill="#8b8474"/><text x="382" y="158" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Đồ hoạ máy tính</text><rect x="352" y="176" width="20" height="20" rx="4" fill="#e8963c"/><text x="382" y="192" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Bảng tính điện tử</text><rect x="352" y="210" width="20" height="20" rx="4" fill="#6a4c9c"/><text x="382" y="226" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Soạn thảo văn bản</text><rect x="352" y="244" width="20" height="20" rx="4" fill="#3f8f6b"/><text x="382" y="260" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Phần mềm trình chiếu</text></svg><p class="cap">Hình 7.4 · Biểu đồ hình quạt tròn</p></div>
+        <div>
+          <div class="kicker">Type 3 · Biểu đồ hình quạt tròn</div>
+          <p class="lead" style="font-size:36px">🥧 Pie chart → <span class="hl">part of a whole</span></p>
+          <span class="lead-vi vi">So sánh <b>các phần với tổng thể</b> (tỉ lệ phần trăm).</span>
+          <div class="callout green step"><div class="ico">🎯</div><div><div class="en">Graphics: about 1/3 of the class</div><span class="vi">Đồ hoạ máy tính chiếm khoảng 37% số HS khảo sát.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · Pick the chart -->
+    <section class="slide" data-part="1. Biểu đồ">
+      <div class="slide-z">
+        <div class="kicker">Game · Chọn loại biểu đồ phù hợp</div>
+        <h2>WHICH CHART FITS?</h2>
+        <div class="verdicts">
+          <div class="verdict"><span class="k">1</span><div class="txt"><div class="en">Nhiệt độ trung bình 12 tháng ở Hà Nội</div><span class="vi">thay đổi theo thời gian</span></div><span class="tag step" style="background:var(--amber);color:#fff">📈 ĐOẠN THẲNG</span></div>
+          <div class="verdict"><span class="k">2</span><div class="txt"><div class="en">Điểm trung bình các môn học của em</div><span class="vi">so sánh giữa các môn</span></div><span class="tag step" style="background:var(--blue);color:#fff">📊 CỘT</span></div>
+          <div class="verdict"><span class="k">3</span><div class="txt"><div class="en">Một ngày 24 giờ: ngủ, học, chơi, việc nhà…</div><span class="vi">các phần của tổng thể</span></div><span class="tag ok step">🥧 QUẠT TRÒN</span></div>
+          <div class="verdict"><span class="k">4</span><div class="txt"><div class="en">Số học sinh của từng lớp khối 8</div></div><span class="tag step" style="background:var(--blue);color:#fff">📊 CỘT</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 · Core note -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Trực quan hoá dữ liệu</div></div>
+          <span class="pg">1 / 1</span>
+        </div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en"><span class="k">Biểu đồ</span> minh hoạ dữ liệu trực quan, giúp dễ so sánh, nhận định xu hướng thay đổi của dữ liệu.</div></div></li>
+          <li><span class="rn">2</span><div><div class="en">Cột → <span class="k">so sánh</span> · Đoạn thẳng → <span class="k">xu hướng theo thời gian</span> · Quạt tròn → <span class="k">phần so với tổng thể</span>.</div></div></li>
+          <li><span class="rn">3</span><div><div class="en">Chọn loại biểu đồ <b>phù hợp với mục đích</b> biểu diễn dữ liệu.</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 10 · Practice a) column chart: steps -->
+    <section class="slide" data-part="2. Thực hành">
+      <div class="slide-z">
+        <div class="badge"><span class="n">a</span> Practice · Tạo biểu đồ cột như Hình 7.2</div>
+        <div class="duo r" style="margin-top:4px">
+          <div>
+            <div class="rib-tabs"><span>Home</span><span class="act">Insert</span><span>Data</span></div>
+            <div class="rib">
+              <div class="grp"><div class="row"><span class="bt tall"><span class="i">📊?</span>Recommended<br>Charts</span></div><div class="gl">&nbsp;</div></div>
+              <div class="grp">
+                <div class="row"><span class="bt" id="ch-col">📊▾</span><span class="bt">▦▾</span><span class="bt">📶▾</span></div>
+                <div class="row"><span class="bt">📈▾</span><span class="bt">▥▾</span><span class="bt" id="ch-pie">🥧▾</span></div>
+                <div class="gl">Charts</div>
+              </div>
+            </div>
+            <div class="menu step" style="margin-top:12px;display:inline-block" data-mark="#ch-col|hot">
+              <div class="it" style="font-weight:800">2-D Column</div>
+              <div class="it" id="ch-cc"><span style="font-size:28px">📊</span> Clustered Column</div>
+            </div>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step"><div><div class="en">Type Hình 7.1</div><span class="vi">Khởi động bảng tính, nhập dữ liệu</span></div></li>
+            <li class="step"><div><div class="en">Select B2:C8</div><span class="vi">Cột tên nội dung + cột số HS</span></div></li>
+            <li class="step" data-mark="#ch-col|hot"><div><div class="en">Insert → Charts</div><span class="vi">Lệnh <b>Insert Column or Bar Chart</b></span></div></li>
+            <li class="step" data-mark="#ch-cc|hot"><div><div class="en">2-D Column → Clustered Column</div><span class="vi">Biểu đồ xuất hiện trên trang tính</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · Step 5 Chart Elements (Hình 7.6) -->
+    <section class="slide" data-part="2. Thực hành">
+      <div class="slide-z split wide-left">
+        <div class="viz" style="align-items:flex-start;gap:10px">
+          <svg viewBox="0 0 600 340" role="img" aria-label="Column chart; title, data labels and gridlines appear one by one"><rect x="0" y="0" width="600" height="340" rx="14" fill="#fff"/><g class="on-hide c-grid"><path d="M64 270.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="276.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">0</text><path d="M64 243.2 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="249.2" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">2</text><path d="M64 216.5 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="222.5" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">4</text><path d="M64 189.8 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="195.8" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">6</text><path d="M64 163.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="169.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">8</text><path d="M64 136.2 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="142.2" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">10</text><path d="M64 109.5 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="115.5" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">12</text><path d="M64 82.8 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="88.8" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">14</text><path d="M64 56.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="62.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">16</text></g><path d="M64 270 H584" stroke="#8b8474" stroke-width="3"/><rect class="bar b0" x="83.5" y="163.0" width="47.7" height="107.0" fill="#1f6f8b"/><text x="107.3" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Lập</text><text x="107.3" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">trình</text><rect class="bar b1" x="170.2" y="176.4" width="47.7" height="93.6" fill="#1f6f8b"/><text x="194.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Mạng</text><text x="194.0" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">máy tính</text><rect class="bar b2" x="256.8" y="69.4" width="47.7" height="200.6" fill="#1f6f8b"/><text x="280.7" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Đồ hoạ</text><text x="280.7" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">máy tính</text><rect class="bar b3" x="343.5" y="216.5" width="47.7" height="53.5" fill="#1f6f8b"/><text x="367.3" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Bảng tính</text><text x="367.3" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">điện tử</text><rect class="bar b4" x="430.2" y="243.2" width="47.7" height="26.8" fill="#1f6f8b"/><text x="454.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Soạn thảo</text><text x="454.0" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">văn bản</text><rect class="bar b5" x="516.8" y="203.1" width="47.7" height="66.9" fill="#1f6f8b"/><text x="540.7" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Phần mềm</text><text x="540.7" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">trình chiếu</text><g class="on-hide c-lab"><text x="107.3" y="155.0" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">8</text><text x="194.0" y="168.4" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">7</text><text x="280.7" y="61.4" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">15</text><text x="367.3" y="208.5" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">4</text><text x="454.0" y="235.2" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">2</text><text x="540.7" y="195.1" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">5</text></g><g class="on-hide c-title"><text x="300.0" y="34" text-anchor="middle" font-size="24" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">Số học sinh quan tâm</text></g></svg>
+          <div class="menu" style="font-size:17px;flex:none">
+            <div class="it" style="font-weight:800">Chart Elements</div>
+            <div class="it"><span class="bx">✓</span>Axes</div>
+            <div class="it"><span class="bx"></span>Axis Titles</div>
+            <div class="it" id="ce-t"><span class="bx">✓</span>Chart Title</div>
+            <div class="it" id="ce-l"><span class="bx">✓</span>Data Labels ▸</div>
+            <div class="it"><span class="bx"></span>Data Table</div>
+            <div class="it" id="ce-g"><span class="bx">✓</span>Gridlines</div>
+            <div class="it"><span class="bx"></span>Legend</div>
+          </div>
+        </div>
+        <div>
+          <div class="kicker">Step 5 · Bổ sung thông tin cho biểu đồ</div>
+          <p class="lead" style="font-size:27px">Click the chart → <b>＋ Chart Elements</b> (góc trên bên phải)</p>
+          <div class="labels mt-s">
+            <div class="lb step" data-mark=".c-title, #ce-t|on"><span class="k">1</span><div><div class="en">Chart Title</div><span class="vi">Tiêu đề biểu đồ</span></div></div>
+            <div class="lb step" data-mark=".c-lab, #ce-l|on"><span class="k">2</span><div><div class="en">Data Labels → Outside End</div><span class="vi">Nhãn số liệu trên mỗi cột</span></div></div>
+            <div class="lb step" data-mark=".c-grid, #ce-g|on"><span class="k">3</span><div><div class="en">Gridlines</div><span class="vi">Đường lưới giúp đọc giá trị</span></div></div>
+          </div>
+          <p class="vi step" style="font-size:21px;margin-top:10px">💡 Thử chọn thêm các mục khác và quan sát biểu đồ thay đổi.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · Practice b) pie chart -->
+    <section class="slide" data-part="2. Thực hành">
+      <div class="slide-z split">
+        <div class="viz"><svg viewBox="0 0 600 330" role="img" aria-label="Pie chart: share of students for each topic"><rect width="600" height="330" rx="14" fill="#fff"/><text x="300.0" y="34" text-anchor="middle" font-size="24" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">Số học sinh quan tâm</text><path d="M190 196 L190.0 76.0 A120 120 0 0 1 302.9 155.4z" fill="#1f6f8b" stroke="#fff" stroke-width="3"/><text x="235.6" y="138.2" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">20%</text><path d="M190 196 L302.9 155.4 A120 120 0 0 1 279.6 275.8z" fill="#d9604f" stroke="#fff" stroke-width="3"/><text x="267.8" y="218.1" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">17%</text><path d="M190 196 L279.6 275.8 A120 120 0 0 1 70.8 209.8z" fill="#8b8474" stroke="#fff" stroke-width="3"/><text x="166.1" y="278.5" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">37%</text><path d="M190 196 L70.8 209.8 A120 120 0 0 1 84.6 138.7z" fill="#e8963c" stroke="#fff" stroke-width="3"/><text x="112.2" y="187.9" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">10%</text><path d="M190 196 L84.6 138.7 A120 120 0 0 1 106.8 109.5z" fill="#6a4c9c" stroke="#fff" stroke-width="3"/><text x="113.7" y="144.8" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">5%</text><path d="M190 196 L106.8 109.5 A120 120 0 0 1 190.0 76.0z" fill="#3f8f6b" stroke="#fff" stroke-width="3"/><text x="160.4" y="129.5" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">12%</text><rect x="352" y="74" width="20" height="20" rx="4" fill="#1f6f8b"/><text x="382" y="90" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Ngôn ngữ lập trình</text><rect x="352" y="108" width="20" height="20" rx="4" fill="#d9604f"/><text x="382" y="124" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Mạng máy tính</text><rect x="352" y="142" width="20" height="20" rx="4" fill="#8b8474"/><text x="382" y="158" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Đồ hoạ máy tính</text><rect x="352" y="176" width="20" height="20" rx="4" fill="#e8963c"/><text x="382" y="192" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Bảng tính điện tử</text><rect x="352" y="210" width="20" height="20" rx="4" fill="#6a4c9c"/><text x="382" y="226" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Soạn thảo văn bản</text><rect x="352" y="244" width="20" height="20" rx="4" fill="#3f8f6b"/><text x="382" y="260" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Phần mềm trình chiếu</text></svg></div>
+        <div>
+          <div class="badge green"><span class="n">b</span> Tạo biểu đồ hình quạt tròn</div>
+          <ol class="todo" style="margin-top:4px">
+            <li class="step"><div><div class="en">Select B2:C8</div></div></li>
+            <li class="step"><div><div class="en">Insert → Pie or Doughnut → 2-D Pie</div><span class="vi">Có sẵn tiêu đề và chú giải (Legend)</span></div></li>
+            <li class="step"><div><div class="en">Data Labels → More Options…</div><span class="vi">Label Options → đánh dấu <b>Percentage</b> để hiện %</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · Copy data from a presentation (KHDH) -->
+    <section class="slide" data-part="2. Thực hành">
+      <div class="slide-z">
+        <div class="kicker">Skill · Sao chép dữ liệu từ tệp trình chiếu sang trang tính</div>
+        <h2 style="font-size:40px">THE DATA IS ON A SLIDE? COPY IT!</h2>
+        <div class="roadmap">
+          <div class="stop"><div class="ico">🖥️</div><span class="n">POWERPOINT</span><div class="en">Select the table</div><span class="vi">Chọn bảng trên trang chiếu → <span class="kbd">Ctrl</span>+<span class="kbd">C</span></span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">🟩</div><span class="n">EXCEL</span><div class="en">Click 1 cell</div><span class="vi">Chọn ô góc trên bên trái vùng muốn dán</span></div>
+          <div class="arrow">→</div>
+          <div class="stop on"><div class="ico">📋</div><span class="n">PASTE</span><div class="en">Ctrl+V</div><span class="vi">Dữ liệu vào đúng các ô → vẽ biểu đồ ngay</span></div>
+        </div>
+        <p class="vi step" style="font-size:23px;margin-top:14px">👉 GV gửi tệp trình chiếu có Bảng Hình 7.1 — em sao chép sang trang tính thay vì gõ lại.</p>
+      </div>
+    </section>
+
+    <!-- 14 · Luyện tập 1: SUM + charts -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Practice 1 · Mở tệp TGSDThietbiso.xlsx (Bài 6)</div>
+        <h2 style="font-size:40px">ADD UP, THEN DRAW</h2>
+        <div class="duo r">
+          <div class="xls">
+            <table>
+              <tr><th class="rh"></th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr>
+              <tr><th class="rh">3</th><td class="h">Không sử dụng</td><td class="h">Dưới 1 giờ</td><td class="h">1-2 giờ</td><td class="h">3-4 giờ</td><td class="h">≥ 5 giờ</td></tr>
+              <tr><th class="rh">…</th><td class="dim c">…</td><td class="dim c">…</td><td class="dim c">…</td><td class="dim c">…</td><td class="dim c">…</td></tr>
+              <tr><th class="rh">14</th><td class="c b"><span class="step">68</span></td><td class="c b"><span class="step">131</span></td><td class="c b"><span class="step">146</span></td><td class="c b"><span class="step">72</span></td><td class="c b"><span class="step">12</span></td></tr>
+            </table>
+            <p class="vi" style="font-size:21px;padding:8px 14px">C14: <span class="fx-txt">=SUM(C4:C13)</span> → sao chép sang D14:G14 (Hình 7.8)</p>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li><div><div class="en">a) Column chart</div><span class="vi">Số HS theo từng khoảng thời gian. Em nhận xét gì?</span></div></li>
+            <li><div><div class="en">b) Pie chart</div><span class="vi">Tỉ lệ % số HS theo từng khoảng thời gian</span></div></li>
+          </ol>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:8px"><div class="timer step" data-min="10" style="padding:8px 22px"><div class="t" style="font-size:52px">10:00</div><div class="l">Practice time</div></div></div>
+      </div>
+    </section>
+
+    <!-- 15 · Luyện tập 1 answers -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Check · Kết quả Luyện tập 1</div>
+        <div class="duo">
+          <div class="viz"><svg viewBox="0 0 600 340" role="img" aria-label="Column chart of students by daily device time"><rect x="0" y="0" width="600" height="340" rx="14" fill="#fff"/><g class="c-grid"><path d="M64 270.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="276.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">0</text><path d="M64 243.2 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="249.2" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">20</text><path d="M64 216.5 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="222.5" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">40</text><path d="M64 189.8 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="195.8" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">60</text><path d="M64 163.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="169.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">80</text><path d="M64 136.2 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="142.2" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">100</text><path d="M64 109.5 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="115.5" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">120</text><path d="M64 82.8 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="88.8" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">140</text><path d="M64 56.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="62.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">160</text></g><path d="M64 270 H584" stroke="#8b8474" stroke-width="3"/><rect class="bar b0" x="87.4" y="179.1" width="57.2" height="91.0" fill="#1f6f8b"/><text x="116.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Không</text><text x="116.0" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">sử dụng</text><rect class="bar b1" x="191.4" y="94.8" width="57.2" height="175.2" fill="#1f6f8b"/><text x="220.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Dưới</text><text x="220.0" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">1 giờ</text><rect class="bar b2" x="295.4" y="74.7" width="57.2" height="195.3" fill="#1f6f8b"/><text x="324.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">1–2 giờ</text><rect class="bar b3" x="399.4" y="173.7" width="57.2" height="96.3" fill="#1f6f8b"/><text x="428.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">3–4 giờ</text><rect class="bar b4" x="503.4" y="253.9" width="57.2" height="16.1" fill="#1f6f8b"/><text x="532.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">Từ 5 giờ</text><text x="532.0" y="314" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">trở lên</text><g class="c-lab"><text x="116.0" y="171.1" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">68</text><text x="220.0" y="86.8" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">131</text><text x="324.0" y="66.7" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">146</text><text x="428.0" y="165.7" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">72</text><text x="532.0" y="245.9" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">12</text></g><g class="c-title"><text x="300.0" y="34" text-anchor="middle" font-size="24" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">Số HS khối 8 dùng thiết bị số mỗi ngày</text></g></svg></div>
+          <div class="viz step"><svg viewBox="0 0 600 330" role="img" aria-label="Pie chart of students by daily device time"><rect width="600" height="330" rx="14" fill="#fff"/><text x="300.0" y="34" text-anchor="middle" font-size="24" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">Tỉ lệ HS theo thời gian dùng thiết bị số</text><path d="M190 196 L190.0 76.0 A120 120 0 0 1 290.7 130.8z" fill="#1f6f8b" stroke="#fff" stroke-width="3"/><text x="227.8" y="133.4" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">16%</text><path d="M190 196 L290.7 130.8 A120 120 0 0 1 217.0 312.9z" fill="#d9604f" stroke="#fff" stroke-width="3"/><text x="263.4" y="232.7" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">31%</text><path d="M190 196 L217.0 312.9 A120 120 0 0 1 76.9 155.9z" fill="#8b8474" stroke="#fff" stroke-width="3"/><text x="130.9" y="255.7" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">34%</text><path d="M190 196 L76.9 155.9 A120 120 0 0 1 169.0 77.8z" fill="#e8963c" stroke="#fff" stroke-width="3"/><text x="138.8" y="142.6" text-anchor="middle" font-size="21" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">17%</text><path d="M190 196 L169.0 77.8 A120 120 0 0 1 190.0 76.0z" fill="#6a4c9c" stroke="#fff" stroke-width="3"/><text x="177.8" y="64.3" text-anchor="middle" font-size="17" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">3%</text><rect x="352" y="74" width="20" height="20" rx="4" fill="#1f6f8b"/><text x="382" y="90" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Không sử dụng</text><rect x="352" y="108" width="20" height="20" rx="4" fill="#d9604f"/><text x="382" y="124" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Dưới 1 giờ</text><rect x="352" y="142" width="20" height="20" rx="4" fill="#8b8474"/><text x="382" y="158" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">1–2 giờ</text><rect x="352" y="176" width="20" height="20" rx="4" fill="#e8963c"/><text x="382" y="192" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">3–4 giờ</text><rect x="352" y="210" width="20" height="20" rx="4" fill="#6a4c9c"/><text x="382" y="226" font-size="19" font-weight="600" fill="#12233b" font-family="Segoe UI, sans-serif">Từ 5 giờ trở lên</text></svg></div>
+        </div>
+        <div class="callout step"><div class="ico">🧐</div><div><div class="en">Most students: under 2 hours a day.</div><span class="vi">Nhiều nhất là 1–2 giờ và dưới 1 giờ; vẫn có 12 HS dùng từ 5 giờ trở lên — cần điều chỉnh để bảo vệ sức khoẻ.</span></div></div>
+      </div>
+    </section>
+
+    <!-- 16 · Luyện tập 2: Hình 7.9 -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z split wide-left">
+        <div class="viz" style="flex-direction:column"><svg viewBox="0 0 600 340" role="img" aria-label="Column chart of software industry revenue 2016-2020"><rect x="0" y="0" width="600" height="340" rx="14" fill="#fff"/><g class="c-grid"><path d="M64 270.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="276.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">0</text><path d="M64 238.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="244.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">1.000</text><path d="M64 206.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="212.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">2.000</text><path d="M64 174.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="180.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">3.000</text><path d="M64 142.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="148.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">4.000</text><path d="M64 110.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="116.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">5.000</text><path d="M64 78.0 H584" stroke="#e3dccb" stroke-width="2"/><text x="56" y="84.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">6.000</text></g><path d="M64 270 H584" stroke="#8b8474" stroke-width="3"/><rect class="bar b0" x="87.4" y="172.8" width="57.2" height="97.2" fill="#1f8fb5"/><text x="116.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2016</text><rect class="bar b1" x="191.4" y="149.1" width="57.2" height="120.9" fill="#1f8fb5"/><text x="220.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2017</text><rect class="bar b2" x="295.4" y="127.7" width="57.2" height="142.3" fill="#1f8fb5"/><text x="324.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2018</text><rect class="bar b3" x="399.4" y="112.2" width="57.2" height="157.8" fill="#1f8fb5"/><text x="428.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2019</text><rect class="bar b4" x="503.4" y="96.0" width="57.2" height="174.0" fill="#1f8fb5"/><text x="532.0" y="294" text-anchor="middle" font-size="18" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2020</text><g class="c-lab"><text x="116.0" y="164.8" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">3.038</text><text x="220.0" y="141.1" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">3.779</text><text x="324.0" y="119.7" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">4.447</text><text x="428.0" y="104.2" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">4.932</text><text x="532.0" y="88.0" text-anchor="middle" font-size="20" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">5.439</text></g><g class="c-title"><text x="300.0" y="34" text-anchor="middle" font-size="24" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">Doanh thu công nghiệp phần mềm 2016–2020</text></g><text x="14" y="62" font-size="16" font-weight="700" fill="#6b6658" font-family="Segoe UI, sans-serif">Triệu USD</text></svg><p class="cap">Hình 7.9 · Theo Sách trắng CNTT 2021 – Bộ TT&amp;TT</p></div>
+        <div>
+          <div class="kicker">Practice 2 · Luyện tập 2</div>
+          <ol class="todo" style="margin-top:4px">
+            <li><div><div class="en">a) What do you notice?</div><span class="vi step">→ Doanh thu tăng đều mỗi năm: từ 3.038 lên 5.439 triệu USD (gần gấp 1,8 lần).</span></div></li>
+            <li><div><div class="en">b) Make the table</div><span class="vi">Năm | Doanh thu (triệu USD)</span></div></li>
+            <li><div><div class="en">c) Column chart from it</div><span class="vi">Chọn bảng → Insert → Clustered Column</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · Vận dụng: line chart -->
+    <section class="slide" data-part="Vận dụng">
+      <div class="slide-z split wide-left">
+        <div class="viz step"><svg viewBox="0 0 600 320" role="img" aria-label="Line chart of software industry revenue rising 2016-2020"><rect width="600" height="320" rx="14" fill="#fff"/><path d="M70 270.0 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="276.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">0</text><path d="M70 238.0 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="244.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">1.000</text><path d="M70 206.0 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="212.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">2.000</text><path d="M70 174.0 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="180.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">3.000</text><path d="M70 142.0 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="148.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">4.000</text><path d="M70 110.0 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="116.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">5.000</text><path d="M70 78.0 H570" stroke="#e3dccb" stroke-width="2"/><text x="62" y="84.0" text-anchor="end" font-size="17" fill="#6b6658" font-family="Segoe UI, sans-serif">6.000</text><text x="120.0" y="296" text-anchor="middle" font-size="19" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2016</text><text x="220.0" y="296" text-anchor="middle" font-size="19" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2017</text><text x="320.0" y="296" text-anchor="middle" font-size="19" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2018</text><text x="420.0" y="296" text-anchor="middle" font-size="19" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2019</text><text x="520.0" y="296" text-anchor="middle" font-size="19" font-weight="600" fill="#3d5573" font-family="Segoe UI, sans-serif">2020</text><polyline fill="none" stroke="#1f6f8b" stroke-width="6" stroke-linejoin="round" points="120.0,172.8 220.0,149.1 320.0,127.7 420.0,112.2 520.0,96.0"/><circle cx="120.0" cy="172.8" r="8" fill="#e8963c" stroke="#fff" stroke-width="3"/><text x="120.0" y="156.8" text-anchor="middle" font-size="19" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">3.038</text><circle cx="220.0" cy="149.1" r="8" fill="#e8963c" stroke="#fff" stroke-width="3"/><text x="220.0" y="133.1" text-anchor="middle" font-size="19" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">3.779</text><circle cx="320.0" cy="127.7" r="8" fill="#e8963c" stroke="#fff" stroke-width="3"/><text x="320.0" y="111.7" text-anchor="middle" font-size="19" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">4.447</text><circle cx="420.0" cy="112.2" r="8" fill="#e8963c" stroke="#fff" stroke-width="3"/><text x="420.0" y="96.2" text-anchor="middle" font-size="19" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">4.932</text><circle cx="520.0" cy="96.0" r="8" fill="#e8963c" stroke="#fff" stroke-width="3"/><text x="520.0" y="80.0" text-anchor="middle" font-size="19" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">5.439</text><text x="300.0" y="34" text-anchor="middle" font-size="23" font-weight="800" fill="#12233b" font-family="Segoe UI, sans-serif">Doanh thu công nghiệp phần mềm 2016–2020</text><text x="14" y="62" font-size="16" font-weight="700" fill="#6b6658" font-family="Segoe UI, sans-serif">Triệu USD</text></svg></div>
+        <div>
+          <div class="kicker">Apply · Vận dụng</div>
+          <p class="lead" style="font-size:30px">Same data → a <span class="hl">line chart</span>. What is the trend?</p>
+          <span class="lead-vi vi">Từ bảng ở Luyện tập 2, tạo biểu đồ đường thẳng (Insert → Line) và nhận xét xu hướng.</span>
+          <div class="callout green step"><div class="ico">📈</div><div><div class="en">Steadily going up</div><span class="vi">Doanh thu công nghiệp phần mềm có xu hướng tăng liên tục 2016–2020.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 · Quiz — C -->
+    <section class="slide" data-part="Củng cố">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check · Chọn phương án đúng</div>
+        <h2 style="font-size:42px">TO SHOW % OF A WHOLE, USE A…</h2>
+        <p class="sub">Muốn so sánh tỉ lệ phần trăm của các phần so với tổng thể, em dùng biểu đồ nào?</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span class="en">Biểu đồ cột</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en">Biểu đồ đoạn thẳng</span></button>
+          <button class="choice" data-correct><span class="letter">C</span><span class="en">Biểu đồ hình quạt tròn</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en">Không cần biểu đồ</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:14px">✅ C — quạt tròn: các phần so với tổng thể.</p>
+      </div>
+    </section>
+
+    <!-- 19 · Summary + next -->
+    <section class="slide" data-part="Tổng kết">
+      <div class="slide-z">
+        <div class="kicker">Wrap-up · Sau bài học, em cần nhớ gì?</div>
+        <h2>WHAT SHOULD YOU REMEMBER?</h2>
+        <div class="cards g2">
+          <div class="card blue"><div class="num">1</div><div><div class="en">Select data → Insert → Charts</div><span class="vi">Chọn vùng dữ liệu (có tiêu đề) rồi chọn loại biểu đồ.</span></div></div>
+          <div class="card blue"><div class="num">2</div><div><div class="en">＋ Chart Elements</div><span class="vi">Tiêu đề, nhãn dữ liệu, đường lưới, chú giải…</span></div></div>
+          <div class="card blue"><div class="num">3</div><div><div class="en">Column · line · pie</div><span class="vi">So sánh · xu hướng · phần trong tổng thể.</span></div></div>
+          <div class="card blue"><div class="num">4</div><div><div class="en">Copy from slides: Ctrl+C → Ctrl+V</div><span class="vi">Không cần gõ lại dữ liệu có sẵn.</span></div></div>
+        </div>
+        <div class="next-up">
+          <div class="en">Next: Lesson 8a — Lists and pictures in a document 📝</div>
+          <span class="vi">Bài 8a: Làm việc với danh sách dạng liệt kê và hình ảnh trong văn bản.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 7</span>
+      <div id="ticks"></div>
+      <span id="more-hint" hidden>▼ more</span>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 19</span>
+    </div>
+    <div id="help">Presenter / ← → · Next reveals, then advances<br>F fullscreen · + − 0 zoom · Z pin zoom bar</div>
+
+  </div>
+</div>
+
+<!-- Zoom bar: fixed to the real screen; auto-hides (move the mouse or press + − 0 to show it) -->
+<div id="zoombar">
+  <button id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="zsep"></span>
+  <button id="zMinus" title="Thu nhỏ (−)">A−</button>
+  <input type="range" id="zRange" min="80" max="170" step="10" value="100" aria-label="Zoom">
+  <button id="zPlus" title="Phóng to (+)">A+</button>
+  <span id="zVal">100%</span>
+  <button id="zReset" title="Về 100% (phím 0)">100%</button>
+  <button id="zPin" title="Ghim thanh zoom (Z)">📌</button>
+</div>
+<div id="ztoast"></div>
+
+<script src="slides.js"></script>
+<script src="../../assets/js/promo-banner.js" defer></script>
+</body>
+</html>

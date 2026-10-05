@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search Smart · Tin học 6 — Bài 7</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--
+  BÀI 7 — TÌM KIẾM THÔNG TIN TRÊN INTERNET (SGK Tin học 6 KNTT tr.28–31 = PDF 29–32, Chủ đề 3)
+  PPCT (KHDH 2026–27): 1 tiết (1 TH) · tiết 14. NLS: 1.1.TC1a · 1.1.TC1b · 1.1.TC1c · 1.1.TC1d.
+  1 TIẾT (45'): Khởi động trò chơi "kể tên sông" 4' → 1. Máy tìm kiếm, từ khoá 12' → 2. Thực hành tìm "vai trò của tầng ozon",
+  lọc kết quả, lưu văn bản/hình ảnh 20' → Luyện tập 6' → Vận dụng (về nhà) 3'.
+  Nguồn: SGK (Hoạt động 1, hộp kiến thức, 2 ghi chú vàng, Hình 3.5–3.8, câu hỏi ?, Luyện tập, Vận dụng).
+  PP cũ "Bài 7 (Phạm Huy)" (trò chơi kể tên các con sông lớn, câu hỏi trắc nghiệm "câu cá").
+  Đáp án: ? 1 → (1) tìm kiếm thông tin (2) liên kết (3) từ khoá · ? 2 → A · Luyện tập 1 → D · Luyện tập 2 → C.
+  ⚠ Trước giờ dạy: thử tìm "vai trò của tầng ozon" trên máy phòng tin; số kết quả thực tế sẽ khác số trong SGK (52.900 / 1.510).
+  Phím: → PageDown Space = tiếp · ← PageUp = lùi · F toàn màn hình · + − 0 zoom · Z ghim.
+-->
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 01 · Title -->
+    <section class="slide" data-part="Bài 7">
+      <div class="slide-z split wide-left">
+        <div>
+          <div class="kicker">Tin học 6 · Chủ đề 3 · Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin</div>
+          <h1 style="font-size:84px">SEARCH SMART</h1>
+          <p class="sub" style="font-size:36px;font-style:normal;font-weight:800;color:var(--blue-deep)">Bài 7 — Tìm kiếm thông tin trên Internet</p>
+          <p class="lead-vi vi mt">1 tiết · Máy tìm kiếm · từ khoá · thực hành tìm kiếm và lưu thông tin</p>
+        </div>
+        <div class="viz">
+          <svg viewBox="0 0 400 330" role="img" aria-label="A magnifying glass over a search box">
+            <rect x="20" y="70" width="360" height="70" rx="35" fill="#fff" stroke="#1f6f8b" stroke-width="5"/>
+            <text x="56" y="116" font-size="28" font-weight="700" fill="#12233b" font-family="Segoe UI, sans-serif">tầng ozon|</text>
+            <circle cx="250" cy="220" r="62" fill="#dff0f2" stroke="#e8963c" stroke-width="14"/>
+            <path d="M296 266 L350 320" stroke="#e8963c" stroke-width="22" stroke-linecap="round"/>
+            <g fill="#3f8f6b"><rect x="218" y="196" width="64" height="10" rx="5"/><rect x="218" y="216" width="50" height="10" rx="5"/><rect x="218" y="236" width="58" height="10" rx="5"/></g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Goals -->
+    <section class="slide" data-part="Hôm nay">
+      <div class="slide-z mid">
+        <div class="kicker">Today · Sau bài này em sẽ</div>
+        <h2>THREE THINGS TO LEARN</h2>
+        <div class="cards g1 xl">
+          <div class="card blue"><div class="ico">🔎</div><div><div class="en">What a search engine does</div><span class="vi">Nêu được công dụng của máy tìm kiếm.</span></div></div>
+          <div class="card amber"><div class="ico">🔑</div><div><div class="en">Choose the right keyword</div><span class="vi">Xác định được từ khoá ứng với mục đích tìm kiếm cho trước.</span></div></div>
+          <div class="card green"><div class="ico">💾</div><div><div class="en">Search and save information</div><span class="vi">Thực hiện tìm kiếm và khai thác thông tin trên Internet.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Warm-up game (PP) -->
+    <section class="slide" data-part="Khởi động">
+      <div class="slide-z split">
+        <div>
+          <div class="badge amber"><span class="n">🎮</span> Game · Tìm kiếm thông tin</div>
+          <p class="question" style="font-size:44px">Name the big rivers of Việt Nam!</p>
+          <p class="q-vi">Mỗi đội 5 bạn, lần lượt lên bảng viết tên các con sông lớn ở nước ta. Mỗi đội 2 phút.</p>
+          <div class="timer step" data-min="2" style="margin-top:16px;padding:8px 22px;align-self:flex-start;display:inline-block"><div class="t" style="font-size:56px">2:00</div><div class="l">Each team</div></div>
+        </div>
+        <div>
+          <div class="callout amber step"><div class="ico">🤔</div><div><div class="en">What was hard?</div><span class="vi">Tìm bằng trí nhớ: chưa đủ, chưa chắc chính xác, mất thời gian…</span></div></div>
+          <div class="callout step"><div class="ico">🌐</div><div><div class="en">The WWW is a huge library…</div><span class="vi">…nhưng tìm trên đó lại rất nhanh: chỉ nhớ vài câu hát là tìm được cả bài hát và video!</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · Activity 1 -->
+    <section class="slide" data-part="1. Máy tìm kiếm">
+      <div class="slide-z">
+        <div class="badge"><span class="n">1</span> Activity 1 · Thảo luận</div>
+        <h2 style="font-size:42px">HAVE YOU EVER SEARCHED THE INTERNET?</h2>
+        <div class="cards g2">
+          <div class="card"><div class="num">1</div><div><div class="en">What did you look for?</div><span class="vi">Em đã tìm gì? Kết quả có như em mong muốn không?</span></div></div>
+          <div class="card"><div class="num">2</div><div><div class="en">Search engines: good &amp; hard parts?</div><span class="vi">Em biết gì về máy tìm kiếm? Dùng nó thấy thuận lợi và khó khăn gì?</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · Search engine -->
+    <section class="slide" data-part="1. Máy tìm kiếm">
+      <div class="slide-z">
+        <div class="kicker">Key idea · Máy tìm kiếm (search engine)</div>
+        <h2>A WEBSITE THAT FINDS WEBSITES</h2>
+        <p class="sub">Tìm kiếm thông tin là một trong các dịch vụ phổ biến của Internet.</p>
+        <div class="pills step" style="margin-top:16px">
+          <span class="mono">www.google.com</span><span class="mono">www.bing.com</span><span class="mono">www.coccoc.com</span><span class="mono amber">www.yahoo.com</span>
+        </div>
+        <div class="cards g2 step">
+          <div class="card blue"><div class="ico">⌨️</div><div><div class="en">You type keywords</div><span class="vi">Người dùng cung cấp <b>từ khoá</b>.</span></div></div>
+          <div class="card green"><div class="ico">🔗</div><div><div class="en">You get a list of links</div><span class="vi">Kết quả là <b>danh sách liên kết</b> trỏ đến các trang web có chứa từ khoá — dạng văn bản, hình ảnh hoặc video.</span></div></div>
+        </div>
+        <p class="vi step" style="font-size:23px;margin-top:12px">Nhìn chung, cách dùng các máy tìm kiếm tương tự nhau.</p>
+      </div>
+    </section>
+
+    <!-- 06 · Result list mock -->
+    <section class="slide" data-part="1. Máy tìm kiếm">
+      <div class="slide-z split wide-left">
+        <div class="browser">
+          <div class="bar"><span class="dots"><span></span><span></span><span></span></span><span class="search" id="sr-q">vai trò của tầng ozon</span></div>
+          <div class="body serp">
+            <div style="display:flex;gap:18px;font-size:20px;font-weight:700;color:#4d5156;border-bottom:2px solid #e3dccb;padding-bottom:6px;margin-bottom:10px" id="sr-tabs"><span style="color:#1a0dab;border-bottom:3px solid #1a0dab">Tất cả</span><span>Hình ảnh</span><span>Tin tức</span><span>Video</span></div>
+            <div id="sr-1"><div class="url">vi.wikipedia.org › wiki › Tầng_ôzôn</div><div class="title">Tầng ôzôn – Wikipedia tiếng Việt</div><div class="snip"><b>Tầng ozon</b> hấp thụ phần lớn tia cực tím từ Mặt Trời…</div></div>
+            <div id="sr-2" style="margin-top:10px"><div class="url">www.youtube.com › watch</div><div class="title">▶ Vai trò của tầng ozon đối với sự sống</div></div>
+            <div style="margin-top:10px"><div class="url">thieunien.vn › …</div><div class="title">Vì sao phải bảo vệ tầng ozon?</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="kicker">Observe · Trang kết quả tìm kiếm</div>
+          <div class="labels">
+            <div class="lb step" data-mark="#sr-q|hot"><span class="k">1</span><div><div class="en">Keywords</div><span class="vi">Từ khoá em nhập</span></div></div>
+            <div class="lb step" data-mark="#sr-1, #sr-2|hot"><span class="k">2</span><div><div class="en">Links</div><span class="vi">Mỗi kết quả là một liên kết — nháy vào để mở trang</span></div></div>
+            <div class="lb step" data-mark="#sr-tabs|hot"><span class="k">3</span><div><div class="en">Filters</div><span class="vi">Lọc kết quả: hình ảnh, tin tức, video</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · Keyword + quotes (Hình 3.5) -->
+    <section class="slide" data-part="1. Từ khoá">
+      <div class="slide-z">
+        <div class="kicker">Explain · Từ khoá · Hình 3.5</div>
+        <h2 style="font-size:42px">QUOTES MAKE THE SEARCH NARROWER</h2>
+        <p class="sub">Từ khoá là một từ hoặc cụm từ liên quan đến nội dung cần tìm, do người dùng cung cấp.</p>
+        <div class="duo">
+          <div class="browser">
+            <div class="bar"><span class="search">vai trò của tầng ozon</span></div>
+            <div class="body"><p style="font-size:24px">Khoảng <b style="color:var(--coral);font-size:30px">52.900</b> kết quả</p><p class="vi" style="font-size:20px">Trang chứa các từ ở bất kì đâu</p></div>
+          </div>
+          <div class="browser step">
+            <div class="bar"><span class="search">"vai trò của tầng ozon"</span></div>
+            <div class="body"><p style="font-size:24px">Khoảng <b style="color:var(--green);font-size:30px">1.510</b> kết quả</p><p class="vi" style="font-size:20px">Trang chứa đúng cả cụm từ này</p></div>
+          </div>
+        </div>
+        <div class="callout step"><div class="ico">“ ”</div><div><div class="en">Put the keyword in double quotes “ ” to narrow the search.</div><span class="vi">Đặt từ khoá trong dấu ngoặc kép để thu hẹp phạm vi tìm kiếm. Có thể dùng dấu + hoặc − để thêm/bớt từ khoá.</span></div></div>
+      </div>
+    </section>
+
+    <!-- 08 · Pick the keyword -->
+    <section class="slide" data-part="1. Từ khoá">
+      <div class="slide-z">
+        <div class="kicker">Practice · Chọn từ khoá phù hợp</div>
+        <h2>WHAT WOULD YOU TYPE?</h2>
+        <table class="big xl">
+          <tr><th>Em muốn tìm…</th><th style="width:44%">Từ khoá gợi ý</th></tr>
+          <tr><td>Lời bài hát “Em yêu trường em”</td><td class="mono"><b class="step">"em yêu trường em" lời bài hát</b></td></tr>
+          <tr><td>Thời tiết Hà Nội ngày mai</td><td class="mono"><b class="step">thời tiết Hà Nội ngày mai</b></td></tr>
+          <tr><td>Hình ảnh vịnh Hạ Long</td><td class="mono"><b class="step">vịnh Hạ Long</b> <span class="vi step" style="font-family:var(--font)">+ lọc Hình ảnh</span></td></tr>
+        </table>
+        <p class="vi step" style="font-size:23px;margin-top:12px">💡 Từ khoá ngắn gọn, đúng trọng tâm → tìm nhanh và chính xác hơn.</p>
+      </div>
+    </section>
+
+    <!-- 09 · SGK ? 1 fill -->
+    <section class="slide" data-part="1. Từ khoá">
+      <div class="slide-z">
+        <div class="kicker">Quick check · Câu hỏi SGK 1 · Điền cụm từ</div>
+        <div class="pills" style="margin-top:6px"><span>từ khoá</span><span>liên kết</span><span>tìm kiếm thông tin</span></div>
+        <div class="fill">
+          <p>a) Máy tìm kiếm là công cụ hỗ trợ <span class="blank"><span class="n">(1)</span> <span class="step">tìm kiếm thông tin</span></span> trên Internet theo yêu cầu của người sử dụng.</p>
+          <p>b) Kết quả tìm kiếm là danh sách các <span class="blank"><span class="n">(2)</span> <span class="step">liên kết</span></span>.</p>
+          <p>c) Cần chọn <span class="blank"><span class="n">(3)</span> <span class="step">từ khoá</span></span> phù hợp.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · SGK ? 2 — A -->
+    <section class="slide" data-part="1. Từ khoá">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check · Câu hỏi SGK 2</div>
+        <h2>WHAT DOES A SEARCH ENGINE GIVE YOU?</h2>
+        <p class="sub">Sử dụng máy tìm kiếm em sẽ nhận được kết quả là gì?</p>
+        <div class="choices stack" data-quiz style="gap:10px">
+          <button class="choice" data-correct><span class="letter">A</span><span class="en">Danh sách liên kết trỏ đến các trang web có chứa từ khoá.</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en">Nội dung thông tin cần tìm trên một trang web.</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en">Danh sách địa chỉ các trang web có chứa thông tin cần tìm.</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en">Danh sách liên kết dạng văn bản.</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:12px">✅ A — liên kết có thể là văn bản, hình ảnh hoặc video (nên D chưa đủ).</p>
+      </div>
+    </section>
+
+    <!-- 11 · Safety sticky (SGK yellow note) -->
+    <section class="slide" data-part="An toàn">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Stay safe · Lưu ý khi dùng Internet</div>
+          <h2 style="font-size:44px">THE INFORMATION HIGHWAY HAS RULES</h2>
+          <p class="sub">Internet như đường cao tốc thông tin — đi nhanh nhưng phải theo luật.</p>
+        </div>
+        <div class="sticky">
+          <p class="step">🚦 Sử dụng Internet cần tuân thủ một số quy định của pháp luật.</p>
+          <p class="step" style="margin-top:10px">⚠️ Có thông tin bổ ích và cả thông tin độc hại → hỏi ý kiến bố mẹ trước khi truy cập.</p>
+          <p class="step" style="margin-top:10px">🔒 Thận trọng khi chia sẻ thông tin cá nhân trên Internet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · Core notes -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Máy tìm kiếm và từ khoá</div></div>
+          <span class="pg">1 / 1</span>
+        </div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en"><span class="k">Máy tìm kiếm</span> là một website đặc biệt, giúp tìm thông tin trên Internet nhanh chóng, hiệu quả thông qua các từ khoá.</div></div></li>
+          <li><span class="rn">2</span><div><div class="en">Kết quả tìm kiếm là <span class="k">danh sách các liên kết</span> — dạng văn bản, hình ảnh hoặc video.</div></div></li>
+          <li><span class="rn">3</span><div><div class="en"><span class="k">Từ khoá</span> rất quan trọng: chọn từ khoá phù hợp giúp tìm nhanh và chính xác; dùng “ ” để thu hẹp.</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 13 · Practice roadmap -->
+    <section class="slide" data-part="2. Thực hành">
+      <div class="slide-z mid">
+        <div class="kicker">Practice · Tìm thông tin và hình ảnh về vai trò của tầng ozon</div>
+        <h2>THREE MISSIONS ON THE COMPUTER</h2>
+        <div class="roadmap">
+          <div class="stop"><div class="ico">🔎</div><span class="n">MISSION 1</span><div class="en">Search 2 ways</div><span class="vi">Có và không có dấu “ ” — so sánh số kết quả</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">🗂️</div><span class="n">MISSION 2</span><div class="en">Filter results</div><span class="vi">Hình ảnh · Tin tức · Video</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">💾</div><span class="n">MISSION 3</span><div class="en">Save it</div><span class="vi">Chép văn bản vào Word, lưu hình ảnh về máy</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · Mission 1 (Hình 3.6) -->
+    <section class="slide" data-part="2. Thực hành">
+      <div class="slide-z">
+        <div class="badge"><span class="n">1</span> Mission 1 · Tìm kiếm với từ khoá (Hình 3.6)</div>
+        <div class="duo r" style="margin-top:4px">
+          <div class="bw">
+            <div class="tools"><span class="btn">⟳</span><span class="addr" id="g-addr">https://www.google.com</span></div>
+            <div class="pg" style="text-align:center;padding:26px 22px">
+              <div style="font-size:64px;font-weight:700;letter-spacing:-2px"><span style="color:#4285f4">G</span><span style="color:#ea4335">o</span><span style="color:#fbbc05">o</span><span style="color:#4285f4">g</span><span style="color:#34a853">l</span><span style="color:#ea4335">e</span></div>
+              <div id="g-box" style="margin:18px auto 0;max-width:520px;border:2px solid #dfe1e5;border-radius:999px;padding:10px 22px;text-align:left;font-size:26px;color:#d93025">🔍 vai trò của tầng ozon</div>
+            </div>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step" data-mark="#g-addr|hot"><div><div class="en">Type google.com → Enter</div><span class="vi">Nhập địa chỉ máy tìm kiếm vào ô địa chỉ</span></div></li>
+            <li class="step" data-mark="#g-box|hot"><div><div class="en">Type keywords → Enter</div><span class="vi">vai trò của tầng ozon</span></div></li>
+            <li class="step"><div><div class="en">Again with “ ”</div><span class="vi">"vai trò của tầng ozon" → ghi lại số kết quả</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · Mission 2 filters (Hình 3.7) -->
+    <section class="slide" data-part="2. Thực hành">
+      <div class="slide-z split wide-left">
+        <div class="browser">
+          <div class="bar"><span style="font-weight:800;font-size:26px"><span style="color:#4285f4">G</span><span style="color:#ea4335">o</span><span style="color:#fbbc05">o</span><span style="color:#4285f4">g</span><span style="color:#34a853">l</span><span style="color:#ea4335">e</span></span><span class="search">vai trò của tầng ozon</span></div>
+          <div class="body">
+            <div style="display:flex;gap:12px;font-size:21px;font-weight:700;flex-wrap:wrap">
+              <span style="color:#1a0dab;border-bottom:3px solid #1a0dab;padding:4px 8px">🔍 Tất cả</span>
+              <span id="t-img" style="padding:4px 8px;border-radius:8px">🖼️ Hình ảnh</span>
+              <span id="t-news" style="padding:4px 8px;border-radius:8px">📰 Tin tức</span>
+              <span id="t-vid" style="padding:4px 8px;border-radius:8px">▶️ Video</span>
+            </div>
+            <p style="font-size:19px;color:#70757a;margin-top:8px">Khoảng 57.800 kết quả (0,47 giây)</p>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">
+              <div style="height:84px;border-radius:8px;background:linear-gradient(135deg,#0b3d91,#4fc3f7)"></div>
+              <div style="height:84px;border-radius:8px;background:linear-gradient(135deg,#1b5e20,#81d4fa)"></div>
+              <div style="height:84px;border-radius:8px;background:linear-gradient(135deg,#311b92,#ffb74d)"></div>
+            </div>
+            <p style="font-size:20px;margin-top:8px"><b>Vai trò của tầng ozon</b> với đời sống…</p>
+          </div>
+        </div>
+        <div>
+          <div class="badge amber"><span class="n">2</span> Mission 2 · Lọc kết quả (Hình 3.7)</div>
+          <div class="labels">
+            <div class="lb step" data-mark="#t-img|hot"><span class="k">1</span><div><div class="en">Images</div><span class="vi">Lọc kết quả dạng hình ảnh</span></div></div>
+            <div class="lb step" data-mark="#t-news|hot"><span class="k">2</span><div><div class="en">News</div><span class="vi">Lọc kết quả là tin tức</span></div></div>
+            <div class="lb step" data-mark="#t-vid|hot"><span class="k">3</span><div><div class="en">Videos</div><span class="vi">Lọc kết quả dạng video</span></div></div>
+          </div>
+          <p class="vi step" style="font-size:21px;margin-top:10px">⚠️ Trang liên quan nhất thường ở đầu danh sách — em cần chọn lọc thông tin chính xác, phù hợp.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · Mission 3 save (Hình 3.8) -->
+    <section class="slide" data-part="2. Thực hành">
+      <div class="slide-z">
+        <div class="badge green"><span class="n">3</span> Mission 3 · Lưu thông tin về máy tính</div>
+        <div class="duo">
+          <div>
+            <p class="lead" style="font-size:28px">📝 Text · Văn bản</p>
+            <ol class="todo" style="margin-top:6px">
+              <li class="step"><div><div class="en">Select → <span class="kbd">Ctrl</span>+<span class="kbd">C</span></div><span class="vi">Chọn nội dung cần sao chép</span></div></li>
+              <li class="step"><div><div class="en">Word → <span class="kbd">Ctrl</span>+<span class="kbd">V</span></div><span class="vi">Mở tệp văn bản, dán vào</span></div></li>
+            </ol>
+          </div>
+          <div>
+            <p class="lead" style="font-size:28px">🖼️ Image · Hình ảnh: nháy <b>nút phải</b> chuột</p>
+            <div class="menu" style="font-size:20px;margin-top:6px">
+              <div class="it">Mở hình ảnh trong thẻ mới</div>
+              <div class="it" id="cm-save">Lưu hình ảnh thành…</div>
+              <div class="it">Sao chép hình ảnh</div>
+              <div class="it">Sao chép địa chỉ hình ảnh</div>
+              <div class="sep"></div>
+              <div class="it dim">Kiểm tra</div>
+            </div>
+            <p class="vi step" data-mark="#cm-save|hot" style="font-size:21px;margin-top:8px">→ chọn <b>Lưu hình ảnh thành…</b>, đặt tên tệp, chọn thư mục, Save.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · Worksheet + timer -->
+    <section class="slide" data-part="2. Thực hành">
+      <div class="slide-z">
+        <div class="kicker">Worksheet · Phiếu thực hành (theo cặp)</div>
+        <h2>RECORD WHAT YOU FOUND</h2>
+        <table class="big xl" style="margin-top:10px">
+          <tr><th>Việc làm</th><th>Kết quả của em</th></tr>
+          <tr><td>Số kết quả: vai trò của tầng ozon</td><td></td></tr>
+          <tr><td>Số kết quả: "vai trò của tầng ozon"</td><td></td></tr>
+          <tr><td>1 thông tin em thấy quan trọng</td><td></td></tr>
+          <tr><td>Tên tệp Word + tệp ảnh đã lưu</td><td></td></tr>
+        </table>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;margin-top:14px">
+          <div class="callout amber" style="margin-top:0"><div class="ico">⭐</div><div><div class="en">Done early? Find a short video about the ozone layer.</div><span class="vi">Xong sớm: lọc Video, tìm một video ngắn về tầng ozon.</span></div></div>
+          <div class="timer step" data-min="15" style="padding:10px 22px"><div class="t" style="font-size:60px">15:00</div><div class="l">Practice time</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 · Luyện tập 1 — D -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z mid">
+        <div class="kicker">Practice 1 · Chọn phương án đúng</div>
+        <h2 style="font-size:42px">SEARCH RESULTS ARE LINKS IN WHAT FORM?</h2>
+        <p class="sub">Khi tìm kiếm thông tin bằng máy tìm kiếm, kết quả là danh sách liên kết dưới dạng nào?</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span class="en">Văn bản</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en">Hình ảnh</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en">Video</span></button>
+          <button class="choice" data-correct><span class="letter">D</span><span class="en">Văn bản, hình ảnh, video</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:14px">✅ D</p>
+      </div>
+    </section>
+
+    <!-- 19 · Luyện tập 2 — C -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z mid">
+        <div class="kicker">Practice 2 · Chọn phương án đúng</div>
+        <h2 style="font-size:40px">NARROW THE SEARCH ABOUT THE EARTH'S CRUST</h2>
+        <p class="sub">Để tìm thông tin về lớp vỏ Trái Đất, em dùng từ khoá nào để thu hẹp phạm vi tìm kiếm?</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span class="en">Trái Đất</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en">Lớp vỏ Trái Đất</span></button>
+          <button class="choice" data-correct><span class="letter">C</span><span class="en">"lớp vỏ Trái Đất"</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en">"lớp vỏ" + "Trái Đất"</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:14px">✅ C — cả cụm từ trong dấu ngoặc kép.</p>
+      </div>
+    </section>
+
+    <!-- 20 · Vận dụng (homework) + next -->
+    <section class="slide" data-part="Về nhà">
+      <div class="slide-z">
+        <div class="kicker">Homework · Vận dụng</div>
+        <h2>BE THE FAMILY TRAVEL HELPER</h2>
+        <div class="cards g2">
+          <div class="card blue"><div class="num">1</div><div><div class="en">Văn Miếu – Quốc Tử Giám</div><span class="vi">Tìm thông tin về di tích này trên Internet.</span></div></div>
+          <div class="card amber"><div class="num">2</div><div><div class="en">Trip to Hạ Long city</div><span class="vi">a) Thời tiết Hạ Long tuần này · b) Các điểm tham quan đẹp · c) Lưu thông tin, hình ảnh vào một tệp văn bản để giới thiệu với gia đình.</span></div></div>
+        </div>
+        <div class="next-up">
+          <div class="en">Next: Lesson 8 — Email ✉️</div>
+          <span class="vi">Bài 8: Thư điện tử.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 7</span>
+      <div id="ticks"></div>
+      <span id="more-hint" hidden>▼ more</span>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 20</span>
+    </div>
+    <div id="help">Presenter / ← → · Next reveals, then advances<br>F fullscreen · + − 0 zoom · Z pin zoom bar</div>
+
+  </div>
+</div>
+
+<!-- Zoom bar: fixed to the real screen; auto-hides (move the mouse or press + − 0 to show it) -->
+<div id="zoombar">
+  <button id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="zsep"></span>
+  <button id="zMinus" title="Thu nhỏ (−)">A−</button>
+  <input type="range" id="zRange" min="80" max="170" step="10" value="100" aria-label="Zoom">
+  <button id="zPlus" title="Phóng to (+)">A+</button>
+  <span id="zVal">100%</span>
+  <button id="zReset" title="Về 100% (phím 0)">100%</button>
+  <button id="zPin" title="Ghim thanh zoom (Z)">📌</button>
+</div>
+<div id="ztoast"></div>
+
+<script src="slides.js"></script>
+<script src="../../assets/js/promo-banner.js" defer></script>
+</body>
+</html>

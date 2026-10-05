@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meet the Spreadsheet · Tin học 7 — Bài 6</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--
+  BÀI 6 — LÀM QUEN VỚI PHẦN MỀM BẢNG TÍNH (SGK Tin học 7 KNTT tr.28–33, Chủ đề 4: Ứng dụng tin học)
+  PPCT (KHDH 2026–27): 2 tiết (1 LT + 1 TH) · tiết 10, 11. NLS: 3.1.TC1a · 3.1.TC1b.
+  TIẾT 1 (slide 1–21): Khởi động "Trường học xanh" 5' → 1. Giao diện, ô, vùng 20' → 2. Nhập, sửa, định dạng 15' → Ghi nhớ 5'.
+  TIẾT 2 (slide 22–29): 3. Thực hành nhập thông tin khảo sát (THXanh.xlsx) 25' → Luyện tập 10' → Vận dụng + về nhà 5'.
+  Nguồn: SGK (Dự án Trường học xanh, Hoạt động 1–3, Hình 6.1–6.8, các hộp kiến thức, câu hỏi ?, Luyện tập, Vận dụng);
+  đáp án câu hỏi theo SGV Tin 7 tr.44–45 (một ô cũng là một vùng, vd A3:A3; A5:B10 có 12 ô; không chọn được vùng tam giác).
+  PP cũ "Bài 6 tiết 1, 2" (câu hỏi Ngôi sao may mắn: địa chỉ 1A sai, bảng tính chứa nhiều trang tính, số tự căn phải).
+  Mọi hình bảng tính vẽ lại bằng HTML (chữ to, đọc rõ từ cuối lớp) thay cho ảnh chụp SGK.
+  Phím: → PageDown Space = tiếp (hiện từng bước) · ← PageUp = lùi · F toàn màn hình · + − 0 zoom chữ · Z ghim thanh zoom.
+-->
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- ======================= TIẾT 1 ======================= -->
+
+    <!-- 01 · Title -->
+    <section class="slide" data-part="Bài 6">
+      <div class="slide-z split wide-left">
+        <div>
+          <div class="kicker">Tin học 7 · Chủ đề 4 · Ứng dụng tin học</div>
+          <h1 style="font-size:78px">MEET THE SPREADSHEET</h1>
+          <p class="sub" style="font-size:36px;font-style:normal;font-weight:800;color:var(--blue-deep)">Bài 6 — Làm quen với phần mềm bảng tính</p>
+          <p class="lead-vi vi mt">2 tiết · Tiết 1: Giao diện, ô, vùng · nhập – sửa – định dạng dữ liệu<br>Tiết 2: Thực hành dự án “Trường học xanh”</p>
+        </div>
+        <div class="viz">
+          <svg viewBox="0 0 400 340" role="img" aria-label="A spreadsheet grid with a green current cell and a small bar chart">
+            <rect x="20" y="30" width="360" height="280" rx="16" fill="#fff" stroke="#217346" stroke-width="5"/>
+            <rect x="20" y="30" width="360" height="44" rx="16" fill="#217346"/><rect x="20" y="56" width="360" height="18" fill="#217346"/>
+            <text x="200" y="62" text-anchor="middle" font-size="24" font-weight="800" fill="#fff" font-family="Segoe UI, sans-serif">A · B · C · D</text>
+            <g stroke="#cfc8b6" stroke-width="2"><path d="M20 120 H380 M20 166 H380 M20 212 H380 M20 258 H380 M110 74 V310 M200 74 V310 M290 74 V310"/></g>
+            <rect x="110" y="120" width="90" height="46" fill="none" stroke="#217346" stroke-width="6"/>
+            <g font-family="Segoe UI, sans-serif" font-size="22" font-weight="700" fill="#12233b">
+              <text x="34" y="150">🌳</text><text x="186" y="150" text-anchor="end">25</text><text x="276" y="150" text-anchor="end">10</text>
+              <text x="34" y="196">🌸</text><text x="186" y="196" text-anchor="end">20</text><text x="276" y="196" text-anchor="end">5</text>
+            </g>
+            <g fill="#e8963c"><rect x="304" y="230" width="18" height="70"/><rect x="328" y="200" width="18" height="100"/><rect x="352" y="250" width="18" height="50"/></g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Goals -->
+    <section class="slide" data-part="Hôm nay">
+      <div class="slide-z mid">
+        <div class="kicker">Today · Sau bài này em sẽ</div>
+        <h2>THREE THINGS TO LEARN</h2>
+        <div class="cards g1 xl">
+          <div class="card blue"><div class="ico">🧮</div><div><div class="en">What a spreadsheet can do</div><span class="vi">Nêu được một số chức năng cơ bản của phần mềm bảng tính.</span></div></div>
+          <div class="card amber"><div class="ico">🔤</div><div><div class="en">Cells, ranges, addresses</div><span class="vi">Nhận biết trang tính, hàng, cột, ô, vùng và địa chỉ của chúng.</span></div></div>
+          <div class="card green"><div class="ico">🎨</div><div><div class="en">Enter, edit and format data</div><span class="vi">Nhập, sửa dữ liệu; chọn phông chữ, căn chỉnh, thay đổi độ rộng cột.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Warm-up: Green School project -->
+    <section class="slide" data-part="Khởi động">
+      <div class="slide-z split wide-right">
+        <div class="viz">
+          <svg viewBox="0 0 400 320" role="img" aria-label="A school building with trees being planted around it">
+            <rect x="80" y="110" width="240" height="150" fill="#f6e0c4" stroke="#8a4b12" stroke-width="5"/>
+            <path d="M60 116 L200 40 L340 116z" fill="#d9604f" stroke="#8a4b12" stroke-width="5"/>
+            <g fill="#dff0f2" stroke="#1f6f8b" stroke-width="4"><rect x="105" y="140" width="46" height="40"/><rect x="177" y="140" width="46" height="40"/><rect x="249" y="140" width="46" height="40"/></g>
+            <rect x="180" y="200" width="40" height="60" fill="#8a4b12"/>
+            <path d="M0 262 H400" stroke="#3f8f6b" stroke-width="8"/>
+            <g><rect x="30" y="220" width="8" height="42" fill="#8a4b12"/><circle cx="34" cy="206" r="28" fill="#3f8f6b"/>
+              <rect x="356" y="220" width="8" height="42" fill="#8a4b12"/><circle cx="360" cy="206" r="28" fill="#6aa84f"/></g>
+            <g font-size="30"><text x="96" y="300">🌸</text><text x="150" y="300">🌳</text><text x="220" y="300">🍊</text><text x="276" y="300">🌸</text></g>
+          </svg>
+        </div>
+        <div>
+          <div class="badge amber"><span class="n">🔥</span> Project · Dự án Trường học xanh</div>
+          <p class="question" style="font-size:38px">Let's plant more trees at our school!</p>
+          <p class="q-vi">Khảo sát cảnh quan nhà trường và thảo luận:</p>
+          <ol class="todo" style="margin-top:8px">
+            <li class="step"><div><span class="vi" style="font-size:25px;font-style:normal;color:var(--ink)">Vị trí nào có thể trồng thêm cây? Loại cây nào hợp với mỗi vị trí?</span></div></li>
+            <li class="step"><div><span class="vi" style="font-size:25px;font-style:normal;color:var(--ink)">Cần làm những công việc gì? Thu thập, tính toán những dữ liệu nào?</span></div></li>
+            <li class="step"><div><span class="vi" style="font-size:25px;font-style:normal;color:var(--ink)">Nên dùng <b>phần mềm nào</b> trên máy tính để làm việc đó?</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · What spreadsheets do -->
+    <section class="slide" data-part="1. Giao diện">
+      <div class="slide-z">
+        <div class="kicker">Key idea · Phần mềm bảng tính</div>
+        <h2>A TABLE THAT CALCULATES FOR YOU</h2>
+        <div class="cards g3">
+          <div class="card col blue step"><div class="ico">📋</div><div class="en">Store &amp; show data as a table</div><span class="vi">Lưu và trình bày thông tin dưới dạng bảng, cô đọng, dễ so sánh.</span></div>
+          <div class="card col amber step"><div class="ico">➕</div><div class="en">Calculate</div><span class="vi">Tính tổng, trung bình cộng, lớn nhất, nhỏ nhất… Dữ liệu đổi → kết quả <b>tự cập nhật</b>.</span></div>
+          <div class="card col green step"><div class="ico">📊</div><div class="en">Draw charts</div><span class="vi">Vẽ biểu đồ minh hoạ trực quan các số liệu.</span></div>
+        </div>
+        <div class="pills step"><span>Microsoft Excel</span><span>Google Sheets</span><span>LibreOffice Calc</span><span class="amber">… chức năng tương tự nhau</span></div>
+      </div>
+    </section>
+
+    <!-- 05 · Interface (Hoạt động 1, Hình 6.1) -->
+    <section class="slide" data-part="1. Giao diện">
+      <div class="slide-z split wide-left" style="gap:26px">
+        <div class="xls" id="ui">
+          <div class="fx"><span class="nb" id="ui-nb">B6</span><span class="fi">fx</span><span class="fv" id="ui-fv">Bùi Lê Đình Anh</span></div>
+          <table>
+            <tr><th class="rh"></th><th class="ch">A</th><th class="ch">B</th><th class="ch">C</th><th class="ch">D</th><th class="ch">E</th><th class="ch">F</th></tr>
+            <tr><th class="rh rn">1</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th class="rh rn">2</th><td></td><td></td><td class="b" colspan="3">BẢNG ĐIỂM LỚP 7A</td><td></td></tr>
+            <tr><th class="rh rn">3</th><td></td><td></td><td colspan="3">NĂM HỌC 2026–2027</td><td></td></tr>
+            <tr><th class="rh rn">4</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th class="rh rn">5</th><td></td><td>Họ tên học sinh</td><td></td><td>Ngữ văn</td><td>Ngoại ngữ</td><td>Toán</td></tr>
+            <tr><th class="rh rn">6</th><td></td><td id="ui-cur">Bùi Lê Đình Anh</td><td></td><td class="n">7</td><td class="n">9</td><td class="n">9</td></tr>
+            <tr><th class="rh rn">7</th><td></td><td>Nguyễn Thị Bình</td><td></td><td class="n">8</td><td class="n">7</td><td class="n">9</td></tr>
+          </table>
+          <div class="tabs" id="ui-tabs"><span class="act">Sheet1</span><span>Sheet2</span><span class="add">⊕</span></div>
+        </div>
+        <div>
+          <div class="kicker">Activity 1 · Hình 6.1 · Giao diện</div>
+          <div class="labels" style="gap:7px">
+            <div class="lb step" data-mark="#ui-nb|hot"><span class="k">1</span><div><div class="en">Name box · Hộp địa chỉ</div><span class="vi">địa chỉ ô hiện thời</span></div></div>
+            <div class="lb step" data-mark="#ui-fv|hot"><span class="k">2</span><div><div class="en">Formula bar · Vùng nhập dữ liệu</div></div></div>
+            <div class="lb step" data-mark="#ui .ch|hot"><span class="k">3</span><div><div class="en">Column names · Tên cột A, B, C…</div></div></div>
+            <div class="lb step" data-mark="#ui .rn|hot"><span class="k">4</span><div><div class="en">Row names · Tên hàng 1, 2, 3…</div></div></div>
+            <div class="lb step" data-mark="#ui-cur|cur"><span class="k">5</span><div><div class="en">Current cell · Ô hiện thời</div><span class="vi">được đóng khung</span></div></div>
+            <div class="lb step" data-mark="#ui-tabs span|hot"><span class="k">6</span><div><div class="en">Sheets · Trang tính</div><span class="vi">Sheet1, Sheet2… ở phía dưới</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Sheet / row / column / cell -->
+    <section class="slide" data-part="1. Giao diện">
+      <div class="slide-z">
+        <div class="kicker">Explain · Trang tính, hàng, cột, ô</div>
+        <h2>ONE WORKBOOK, MANY SHEETS</h2>
+        <div class="cards g2">
+          <div class="card blue step"><div class="ico">📚</div><div><div class="en">Workbook → sheets</div><span class="vi">Một <b>bảng tính</b> có thể chứa nhiều <b>trang tính</b>. Mỗi trang tính là một lưới gồm các hàng và cột.</span></div></div>
+          <div class="card amber step"><div class="ico">↕️</div><div><div class="en">Rows 1, 2, 3… · Columns A, B, C…</div><span class="vi">Hàng đặt tên bằng số (trên → dưới); cột đặt tên bằng chữ cái (trái → phải).</span></div></div>
+          <div class="card green step"><div class="ico">▦</div><div><div class="en">Cell = row ∩ column</div><span class="vi">Giao của một hàng và một cột là một <b>ô tính</b> (gọi tắt là ô).</span></div></div>
+          <div class="card coral step"><div class="ico">🟩</div><div><div class="en">Always one current cell</div><span class="vi">Ô hiện thời được đóng khung; địa chỉ của nó hiện ở hộp địa chỉ.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · SGK ? 1 — A -->
+    <section class="slide" data-part="1. Giao diện">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check 1 · Chọn phương án đúng</div>
+        <h2>WHERE A ROW MEETS A COLUMN…</h2>
+        <p class="sub">Vị trí giao của một hàng và một cột được gọi là gì?</p>
+        <div class="choices" data-quiz>
+          <button class="choice" data-correct><span class="letter">A</span><span class="en">Ô</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en">Trang tính</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en">Hộp địa chỉ</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en">Bảng tính</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:14px">✅ A — ô tính (cell).</p>
+      </div>
+    </section>
+
+    <!-- 08 · SGK ? 2 — B -->
+    <section class="slide" data-part="1. Giao diện">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check 2 · Phát biểu nào đúng?</div>
+        <h2>HOW ARE ROWS AND COLUMNS NAMED?</h2>
+        <div class="choices stack" data-quiz style="gap:10px">
+          <button class="choice"><span class="letter">A</span><span class="en">Các hàng của trang tính được đặt tên theo các chữ cái: A, B, C,…</span></button>
+          <button class="choice" data-correct><span class="letter">B</span><span class="en">Các hàng của trang tính được đặt tên theo các số: 1, 2, 3,…</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en">Các cột của trang tính được đặt tên theo các số: 1, 2, 3,…</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en">Các hàng và cột trong trang tính không có tên.</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:12px">✅ B — hàng: số · cột: chữ cái.</p>
+      </div>
+    </section>
+
+    <!-- 09 · Cell address (Hoạt động 2, Hình 6.2) -->
+    <section class="slide" data-part="1. Ô và vùng">
+      <div class="slide-z split wide-left">
+        <div class="xls" id="ad">
+          <div class="fx"><span class="nb" id="ad-nb">?</span><span class="fi">fx</span><span class="fv">Bùi Lê Đình Anh</span></div>
+          <table>
+            <tr><th class="rh"></th><th>A</th><th id="ad-cb">B</th><th>C</th><th>D</th><th>E</th></tr>
+            <tr><th class="rh">4</th><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th class="rh">5</th><td></td><td>Tên học sinh</td><td></td><td>Ngữ văn</td><td>Toán</td></tr>
+            <tr><th class="rh" id="ad-r6">6</th><td></td><td class="cur">Bùi Lê Đình Anh</td><td></td><td class="n">7</td><td class="n">8</td></tr>
+            <tr><th class="rh">7</th><td></td><td>Nguyễn Thị Bình</td><td></td><td class="n">6</td><td class="n">6</td></tr>
+            <tr><th class="rh">8</th><td></td><td>Nguyễn Đức Hà</td><td></td><td class="n">5</td><td class="n">7</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="badge"><span class="n">2</span> Activity 2 · Ô và địa chỉ ô</div>
+          <p class="lead" style="font-size:31px">How do we name the cell “Bùi Lê Đình Anh”?</p>
+          <div class="labels mt">
+            <div class="lb step" data-mark="#ad-cb|hot"><span class="k">1</span><div><div class="en">Column B</div><span class="vi">tên cột</span></div></div>
+            <div class="lb step" data-mark="#ad-r6|hot"><span class="k">2</span><div><div class="en">Row 6</div><span class="vi">tên hàng</span></div></div>
+          </div>
+          <div class="callout step"><div class="ico">📍</div><div><div class="en" style="font-size:40px">B6</div><span class="vi">&lt;địa chỉ ô&gt; = &lt;tên cột&gt;&lt;tên hàng&gt; · ví dụ A1, B3, C10</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · Range (Hình 6.3) -->
+    <section class="slide" data-part="1. Ô và vùng">
+      <div class="slide-z split wide-left">
+        <div class="xls sm" id="rg">
+          <table>
+            <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+            <tr><th class="rh">3</th><td></td><td class="b" colspan="4">Kết quả thi Tin học trẻ, vòng sơ khảo</td></tr>
+            <tr><th class="rh">4</th><td></td><td class="h r">Số báo danh</td><td class="h r">Bài 1</td><td class="h r">Bài 2</td><td class="h r">Bài 3</td></tr>
+            <tr><th class="rh">5</th><td></td><td class="r">A1</td><td class="n r">26</td><td class="n r">10</td><td class="n r">5</td></tr>
+            <tr><th class="rh">6</th><td></td><td class="r">A2</td><td class="n r">25</td><td class="n r">12</td><td class="r"></td></tr>
+            <tr><th class="rh">7</th><td></td><td class="r">A3</td><td class="n r">20</td><td class="n r">15</td><td class="n r">20</td></tr>
+            <tr><th class="rh">8</th><td></td><td class="r">A4</td><td class="n r">25</td><td class="n r">5</td><td class="n r">5</td></tr>
+            <tr><th class="rh">9</th><td></td><td class="r">A5</td><td class="n r">20</td><td class="n r">20</td><td class="r"></td></tr>
+            <tr><th class="rh">10</th><td></td><td class="r">A6</td><td class="n r">15</td><td class="n r">25</td><td class="n r">2</td></tr>
+            <tr><th class="rh">11</th><td></td><td class="r">A7</td><td class="n r">20</td><td class="r"></td><td class="r"></td></tr>
+            <tr><th class="rh">12</th><td></td><td>A8</td><td class="n">5</td><td></td><td></td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="kicker">Explain · Hình 6.3 · Vùng dữ liệu</div>
+          <p class="lead" style="font-size:31px">Many neighbouring cells forming a <span class="hl">rectangle</span> = a range.</p>
+          <span class="lead-vi vi">Nhiều ô liền kề tạo thành hình chữ nhật gọi là <b>vùng</b>.</span>
+          <p class="step" data-mark="#rg .r|sel" style="font-size:26px;margin-top:14px;font-weight:700">👉 Vùng từ ô B4 đến ô E11</p>
+          <div class="callout amber step"><div class="ico">📐</div><div><div class="en" style="font-size:40px">B4:E11</div><span class="vi">&lt;địa chỉ vùng&gt; = &lt;ô góc trên bên trái&gt; : &lt;ô góc dưới bên phải&gt;</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · Game: say the address -->
+    <section class="slide" data-part="1. Ô và vùng">
+      <div class="slide-z">
+        <div class="kicker">Game · Đọc nhanh địa chỉ</div>
+        <h2 style="font-size:42px">SAY THE ADDRESS!</h2>
+        <div class="duo r">
+          <div class="xls lg" id="gm">
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+              <tr><th class="rh">1</th><td class="hot c">①</td><td></td><td></td><td></td><td></td></tr>
+              <tr><th class="rh">2</th><td></td><td></td><td></td><td class="hot c">②</td><td></td></tr>
+              <tr><th class="rh">3</th><td></td><td class="sel c">③</td><td class="sel"></td><td class="sel"></td><td></td></tr>
+              <tr><th class="rh">4</th><td></td><td class="sel"></td><td class="sel"></td><td class="sel"></td><td></td></tr>
+              <tr><th class="rh">5</th><td></td><td></td><td></td><td></td><td class="ok c">④</td></tr>
+              <tr><th class="rh">6</th><td></td><td></td><td></td><td></td><td class="ok"></td></tr>
+            </table>
+          </div>
+          <table class="big xl" style="margin-top:0">
+            <tr><th>#</th><th>Địa chỉ</th></tr>
+            <tr><td>① ô</td><td><b class="step mono">A1</b></td></tr>
+            <tr><td>② ô</td><td><b class="step mono">D2</b></td></tr>
+            <tr><td>③ vùng</td><td><b class="step mono">B3:D4</b></td></tr>
+            <tr><td>④ vùng</td><td><b class="step mono">E5:E6</b></td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · Selecting -->
+    <section class="slide" data-part="1. Ô và vùng">
+      <div class="slide-z">
+        <div class="kicker">How to · Chọn (đánh dấu) trên trang tính</div>
+        <h2>SELECT A CELL, ROW, COLUMN, RANGE</h2>
+        <div class="cards g2">
+          <div class="card step"><div class="num">1</div><div><div class="en">A cell</div><span class="vi">Nháy chuột vào ô cần chọn.</span></div></div>
+          <div class="card step"><div class="num">2</div><div><div class="en">A row</div><span class="vi">Nháy chuột vào <b>tên hàng</b> (1, 2, 3…).</span></div></div>
+          <div class="card step"><div class="num">3</div><div><div class="en">A column</div><span class="vi">Nháy chuột vào <b>tên cột</b> (A, B, C…).</span></div></div>
+          <div class="card step"><div class="num">4</div><div><div class="en">A range</div><span class="vi">Kéo thả chuột từ một ô góc đến ô góc đối diện. Ô chọn đầu tiên là ô hiện thời.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · SGK ? (3 questions) — SGV answers -->
+    <section class="slide" data-part="1. Ô và vùng">
+      <div class="slide-z">
+        <div class="kicker">Think · Câu hỏi SGK</div>
+        <h2>THREE QUICK QUESTIONS</h2>
+        <div class="verdicts">
+          <div class="verdict"><span class="k">1</span><div class="txt"><div class="en">Một ô có thể coi là một vùng được không?</div><span class="vi step">→ Có: vùng chỉ có 1 ô, ví dụ A3:A3 chính là A3.</span></div><span class="tag ok step">CÓ</span></div>
+          <div class="verdict"><span class="k">2</span><div class="txt"><div class="en">Vùng A5:B10 có bao nhiêu ô?</div><span class="vi step">→ 2 cột (A, B) × 6 hàng (5 → 10) = 12 ô.</span></div><span class="tag ok step">12 Ô</span></div>
+          <div class="verdict"><span class="k">3</span><div class="txt"><div class="en">Có thể chọn một vùng hình tam giác được không?</div><span class="vi step">→ Không: vùng luôn là hình chữ nhật.</span></div><span class="tag no step">KHÔNG</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · CORE NOTES 1 -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Giao diện, ô và vùng</div></div>
+          <span class="pg">1 / 2</span>
+        </div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en">Phần mềm bảng tính giúp <span class="k">lưu và trình bày</span> thông tin dạng bảng, <span class="k">tính toán</span> và <span class="k">vẽ biểu đồ</span>.</div></div></li>
+          <li><span class="rn">2</span><div><div class="en">Bảng tính gồm nhiều trang tính; hàng tên 1, 2, 3…; cột tên A, B, C…; giao hàng – cột là <span class="k">ô</span>.</div></div></li>
+          <li><span class="rn">3</span><div><div class="en"><span class="k">Địa chỉ ô</span> = tên cột + tên hàng (B6). <span class="k">Địa chỉ vùng</span> = ô góc trên trái : ô góc dưới phải (B4:E11).</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 15 · Enter data (Hoạt động 3a, Hình 6.4) -->
+    <section class="slide" data-part="2. Nhập dữ liệu">
+      <div class="slide-z">
+        <div class="badge amber"><span class="n">3</span> Activity 3 · Nhập dữ liệu</div>
+        <h2 style="font-size:42px">TWO WAYS TO TYPE INTO A CELL</h2>
+        <div class="duo">
+          <div class="xls">
+            <div class="fx"><span class="nb" id="en-nb">B2</span><span class="fi">fx</span><span class="fv" id="en-fv">&nbsp;</span></div>
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+              <tr><th class="rh">1</th><td></td><td></td><td></td><td></td></tr>
+              <tr><th class="rh">2</th><td></td><td id="en-cell" class="cur"></td><td></td><td></td></tr>
+              <tr><th class="rh">3</th><td></td><td></td><td></td><td></td></tr>
+            </table>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step" data-mark="#en-cell|hot"><div><div class="en">Click the cell</div><span class="vi">Bước 1. Nháy chuột vào ô muốn nhập.</span></div></li>
+            <li class="step" data-mark="#en-fv|hot"><div><div class="en">Type → Enter</div><span class="vi">Bước 2. Gõ dữ liệu từ bàn phím (hoặc nháy vào <b>vùng nhập dữ liệu</b> rồi gõ), nhấn <span class="kbd">Enter</span>.</span></div></li>
+          </ol>
+        </div>
+        <div class="callout green step"><div class="ico">✌️</div><div><div class="en">2 ways: type in the cell, or in the formula bar.</div><span class="vi">Có 2 cách nhập: trực tiếp tại ô tính, hoặc tại vùng nhập dữ liệu.</span></div></div>
+      </div>
+    </section>
+
+    <!-- 16 · Auto alignment (Hình 6.5) -->
+    <section class="slide" data-part="2. Nhập dữ liệu">
+      <div class="slide-z split wide-left">
+        <div class="xls lg" id="al">
+          <table>
+            <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th></tr>
+            <tr><th class="rh">3</th><td></td><td class="tx">Họ và tên</td><td class="tx">Nguyễn Việt Hương</td></tr>
+            <tr><th class="rh">4</th><td></td><td class="tx">Ngày sinh</td><td class="n nu">9/23/2014</td></tr>
+            <tr><th class="rh">5</th><td></td><td class="tx">Tổ</td><td class="n nu">3</td></tr>
+            <tr><th class="rh">6</th><td></td><td class="tx">Điểm Toán</td><td class="n nu">8.5</td></tr>
+            <tr><th class="rh">7</th><td></td><td class="tx">Điểm Ngữ văn</td><td class="n nu">7</td></tr>
+            <tr><th class="rh">8</th><td></td><td class="tx">Địa chỉ</td><td class="tx">Hoàn Kiếm</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="kicker">Observe · Hình 6.5 · Tự động căn chỉnh</div>
+          <p class="lead" style="font-size:31px">The software recognises the data type by itself.</p>
+          <div class="labels mt">
+            <div class="lb step" data-mark="#al .tx|sel"><span class="k" style="background:var(--blue)">⬅</span><div><div class="en">Text → left</div><span class="vi">Văn bản tự động căn trái.</span></div></div>
+            <div class="lb step" data-mark="#al .nu|ok"><span class="k" style="background:var(--green)">➡</span><div><div class="en">Numbers, dates → right</div><span class="vi">Số, ngày tháng tự động căn phải.</span></div></div>
+          </div>
+          <p class="vi step" style="font-size:22px;margin-top:12px">📅 Ngày tháng mặc định nhập theo dạng <b>tháng/ngày/năm</b> (mm/dd/yyyy).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · Edit data -->
+    <section class="slide" data-part="2. Chỉnh sửa">
+      <div class="slide-z">
+        <div class="kicker">How to · Chỉnh sửa dữ liệu</div>
+        <h2>OOPS, A TYPO! HOW TO FIX IT</h2>
+        <div class="cards g2">
+          <div class="card col blue step"><div class="ico">🖱️🖱️</div><div class="en">Way 1 · Double-click the cell</div><span class="vi">Nháy đúp chuột vào ô cần sửa → con trỏ soạn thảo xuất hiện trong ô → sửa → <span class="kbd">Enter</span>.</span></div>
+          <div class="card col amber step"><div class="ico">🖱️ fx</div><div class="en">Way 2 · Use the formula bar</div><span class="vi">Nháy chuột vào ô → nháy vào vùng nhập dữ liệu → sửa tại thanh này → <span class="kbd">Enter</span>.</span></div>
+        </div>
+        <div class="callout violet step"><div class="ico">🧹</div><div><div class="en">Delete a whole range fast</div><span class="vi">Chọn vùng dữ liệu rồi nhấn phím <span class="kbd">Delete</span>.</span></div></div>
+      </div>
+    </section>
+
+    <!-- 18 · Format (Hình 6.6) -->
+    <section class="slide" data-part="2. Định dạng">
+      <div class="slide-z">
+        <div class="kicker">Explain · Hình 6.6 · Thẻ Home → nhóm Font &amp; Alignment</div>
+        <h2 style="font-size:42px">MAKE YOUR TABLE EASY TO READ</h2>
+        <div class="rib-tabs mt-s"><span>File</span><span class="act">Home</span><span>Insert</span><span>Data</span></div>
+        <div class="rib" style="align-self:flex-start">
+          <div class="grp">
+            <div class="row"><span class="bt wide" id="f-font">Arial <small>▾</small></span><span class="bt wide" id="f-size" style="min-width:76px">11 <small>▾</small></span><span class="bt" id="f-grow">A<sup>+</sup></span><span class="bt" id="f-shr">A<sup>−</sup></span></div>
+            <div class="row"><span class="bt" id="f-b">B</span><span class="bt" id="f-i"><i>I</i></span><span class="bt" id="f-u"><u>U</u></span><span class="bt">⊞</span><span class="bt" id="f-fill" style="border-bottom:6px solid #f5d000">🪣</span><span class="bt" id="f-col" style="color:#d00;border-bottom:6px solid #d00">A</span></div>
+            <div class="gl">Font</div>
+          </div>
+          <div class="grp">
+            <div class="row" id="f-v"><span class="bt">⤒</span><span class="bt">↕</span><span class="bt">⤓</span></div>
+            <div class="row" id="f-h"><span class="bt">☰⬅</span><span class="bt">☰</span><span class="bt">➡☰</span></div>
+            <div class="gl">Alignment</div>
+          </div>
+        </div>
+        <div class="cards g3" style="margin-top:14px">
+          <div class="card step" data-mark="#f-font, #f-size, #f-grow, #f-shr|hot"><div class="num">1</div><div><div class="en">Font, size</div><span class="vi">Phông chữ, cỡ chữ</span></div></div>
+          <div class="card step" data-mark="#f-b, #f-i, #f-u|hot"><div class="num">2</div><div><div class="en">B · I · U</div><span class="vi">Đậm, nghiêng, gạch chân</span></div></div>
+          <div class="card step" data-mark="#f-fill, #f-col|hot"><div class="num">3</div><div><div class="en">Fill · font colour</div><span class="vi">Màu nền ô, màu chữ</span></div></div>
+          <div class="card step" data-mark="#f-v .bt|hot"><div class="num">4</div><div><div class="en">Top · middle · bottom</div><span class="vi">Căn theo chiều dọc</span></div></div>
+          <div class="card step" data-mark="#f-h .bt|hot"><div class="num">5</div><div><div class="en">Left · centre · right</div><span class="vi">Căn theo chiều ngang</span></div></div>
+          <div class="card amber step"><div class="ico" style="font-size:36px">👉</div><div><div class="en">First select the range!</div><span class="vi">Bước 1 luôn là chọn vùng dữ liệu.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 · SGK ? — current cell -->
+    <section class="slide" data-part="2. Định dạng">
+      <div class="slide-z split">
+        <div>
+          <div class="kicker">Think · Câu hỏi SGK</div>
+          <p class="question" style="font-size:42px">You select a range, then type. Which cell gets the data?</p>
+          <p class="q-vi">Nếu em chọn một vùng rồi nhập dữ liệu thì dữ liệu sẽ được nhập vào ô nào?</p>
+        </div>
+        <div>
+          <div class="xls lg">
+            <div class="fx"><span class="nb">B2</span><span class="fi">fx</span><span class="fv">Trường học xanh</span></div>
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+              <tr><th class="rh">2</th><td></td><td class="cur sel">Trường h…</td><td class="sel"></td><td class="sel"></td></tr>
+              <tr><th class="rh">3</th><td></td><td class="sel"></td><td class="sel"></td><td class="sel"></td></tr>
+              <tr><th class="rh">4</th><td></td><td class="sel"></td><td class="sel"></td><td class="sel"></td></tr>
+            </table>
+          </div>
+          <div class="callout step"><div class="ico">🟩</div><div><div class="en">Into the current cell</div><span class="vi">Vào <b>ô hiện thời</b> — ô được chọn đầu tiên của vùng (ở đây là B2).</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20 · Quiz from PP: number alignment — C -->
+    <section class="slide" data-part="2. Định dạng">
+      <div class="slide-z mid">
+        <div class="kicker">Quick check 3 · Chọn phương án đúng</div>
+        <h2>YOU TYPE A NUMBER. IT IS ALIGNED…</h2>
+        <p class="sub">Khi nhập số vào ô tính thì dữ liệu được tự động:</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span class="en">Căn trái</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en">Căn giữa</span></button>
+          <button class="choice" data-correct><span class="letter">C</span><span class="en">Căn phải</span></button>
+          <button class="choice"><span class="letter">D</span><span class="en">Căn đều hai bên</span></button>
+        </div>
+        <p class="vi step" data-answer style="font-size:26px;margin-top:14px">✅ C — số, ngày tháng căn phải; văn bản căn trái.</p>
+      </div>
+    </section>
+
+    <!-- 21 · CORE NOTES 2 -->
+    <section class="slide notes" data-part="Ghi nhớ">
+      <div class="slide-z">
+        <div class="notes-head">
+          <span class="icon">📓</span>
+          <div><div class="t-en">CORE NOTES</div><div class="t-vi">Ghi nhớ cốt lõi — Nhập, sửa, định dạng</div></div>
+          <span class="pg">2 / 2</span>
+        </div>
+        <ol class="core">
+          <li><span class="rn">1</span><div><div class="en"><span class="k">Nhập</span>: nháy vào ô → gõ (tại ô hoặc vùng nhập dữ liệu) → <b>Enter</b>. Văn bản căn trái; số, ngày tháng căn phải.</div></div></li>
+          <li><span class="rn">2</span><div><div class="en"><span class="k">Sửa</span>: nháy đúp vào ô, hoặc sửa tại vùng nhập dữ liệu. Xoá nhanh: chọn vùng → <b>Delete</b>.</div></div></li>
+          <li><span class="rn">3</span><div><div class="en"><span class="k">Định dạng</span>: chọn vùng → thẻ Home, nhóm <b>Font</b> (phông, cỡ, kiểu, màu) và <b>Alignment</b> (căn lề).</div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================= TIẾT 2 · THỰC HÀNH ======================= -->
+
+    <!-- 22 · Practice roadmap -->
+    <section class="slide" data-part="3. Thực hành">
+      <div class="slide-z mid">
+        <div class="kicker">Lesson 6 · Tiết 2 · Thực hành: Nhập thông tin khảo sát dự án Trường học xanh</div>
+        <h2>BUILD THE SURVEY SHEET</h2>
+        <div class="roadmap">
+          <div class="stop"><div class="ico">⌨️</div><span class="n">STEP 1–2</span><div class="en">Open &amp; type</div><span class="vi">Mở Excel → Blank workbook → nhập dữ liệu Hình 6.7</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">🎨</div><span class="n">STEP 3–4</span><div class="en">Edit &amp; format</div><span class="vi">Độ rộng cột, tiêu đề, màu nền; đổi tên trang tính</span></div>
+          <div class="arrow">→</div>
+          <div class="stop"><div class="ico">💾</div><span class="n">STEP 5</span><div class="en">Save</div><span class="vi">Lưu tệp <b>THXanh.xlsx</b> (<span class="kbd">Ctrl</span>+<span class="kbd">S</span>)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 23 · Step 1–2: Hình 6.7 -->
+    <section class="slide" data-part="3. Thực hành">
+      <div class="slide-z">
+        <div class="badge"><span class="n">1</span> Step 1–2 · Mở phần mềm và nhập dữ liệu (Hình 6.7)</div>
+        <div class="duo r" style="margin-top:4px">
+          <div class="xls">
+            <table>
+              <tr><th class="rh"></th><th>A</th><th>B</th><th>C</th></tr>
+              <tr><th class="rh">1</th><td colspan="3">DỰ ÁN TRƯỜNG HỌC XANH</td></tr>
+              <tr><th class="rh">2</th><td colspan="3">Bảng 1. Khảo sát địa điểm trồng cây</td></tr>
+              <tr><th class="rh">3</th><td>STT</td><td>Địa điểm</td><td>Loại cây</td></tr>
+              <tr><th class="rh">4</th><td class="n">1</td><td>Trước lớp học</td><td>Cây hoa</td></tr>
+              <tr><th class="rh">5</th><td class="n">2</td><td>Sân trường</td><td>Cây hoa, cây bóng mát</td></tr>
+              <tr><th class="rh">6</th><td class="n">3</td><td>Cổng trường</td><td>Cây ăn quả</td></tr>
+              <tr><th class="rh">7</th><td class="n">4</td><td>Đường liên thôn</td><td>Cây hoa, cây bóng mát</td></tr>
+              <tr><th class="rh">8</th><td class="n">5</td><td>Trước nhà dân</td><td>Cây ăn quả</td></tr>
+            </table>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step"><div><div class="en">Open Excel</div><span class="vi">Nháy đúp biểu tượng Excel → <b>Blank workbook</b></span></div></li>
+            <li class="step"><div><div class="en">A1, A2</div><span class="vi">Nhập tên dự án và tên bảng</span></div></li>
+            <li class="step"><div><div class="en">Row 3: headers</div><span class="vi">STT · Địa điểm · Loại cây</span></div></li>
+            <li class="step"><div><div class="en">Rows 4–8</div><span class="vi">Nhập 5 địa điểm khảo sát</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 24 · Step 3–5: Hình 6.8 target -->
+    <section class="slide" data-part="3. Thực hành">
+      <div class="slide-z">
+        <div class="badge green"><span class="n">3</span> Step 3–5 · Chỉnh sửa, định dạng, lưu (Hình 6.8)</div>
+        <div class="duo r" style="margin-top:4px">
+          <div class="xls">
+            <table>
+              <tr><th class="rh"></th><th>A</th><th style="min-width:200px">B</th><th style="min-width:250px">C</th></tr>
+              <tr><th class="rh">1</th><td colspan="3" style="color:#2e8b3d;font-weight:800;font-size:27px">DỰ ÁN TRƯỜNG HỌC XANH</td></tr>
+              <tr><th class="rh">2</th><td colspan="3" class="b">Bảng 1. Khảo sát địa điểm trồng cây</td></tr>
+              <tr><th class="rh">3</th><td class="h">STT</td><td class="h">Địa điểm</td><td class="h">Loại cây</td></tr>
+              <tr><th class="rh">4</th><td class="c">1</td><td>Trước lớp học</td><td>Cây hoa</td></tr>
+              <tr><th class="rh">5</th><td class="c">2</td><td>Sân trường</td><td>Cây hoa, cây bóng mát</td></tr>
+              <tr><th class="rh">6</th><td class="c">3</td><td>Cổng trường</td><td>Cây ăn quả</td></tr>
+              <tr><th class="rh">7</th><td class="c">4</td><td>Đường liên thôn</td><td>Cây hoa, cây bóng mát</td></tr>
+              <tr><th class="rh">8</th><td class="c">5</td><td>Trước nhà dân</td><td>Cây ăn quả</td></tr>
+            </table>
+            <div class="tabs"><span class="act">1. Khảo sát</span><span class="add">⊕</span></div>
+          </div>
+          <ol class="todo" style="margin-top:0">
+            <li class="step"><div><div class="en">Column width ✣</div><span class="vi">Kéo vạch giữa các tên cột để thấy đủ dữ liệu</span></div></li>
+            <li class="step"><div><div class="en">A1: bold, green, bigger</div><span class="vi">Hàng 3: nền vàng, căn giữa · cột STT căn giữa</span></div></li>
+            <li class="step"><div><div class="en">Rename the sheet</div><span class="vi">Nháy đúp <b>Sheet1</b> → gõ <b>1. Khảo sát</b></span></div></li>
+            <li class="step"><div><div class="en">Save THXanh.xlsx</div><span class="vi">File → Save hoặc <span class="kbd">Ctrl</span>+<span class="kbd">S</span></span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 25 · Checklist + timer -->
+    <section class="slide" data-part="3. Thực hành">
+      <div class="slide-z">
+        <div class="kicker">Checklist · Tự kiểm tra sản phẩm</div>
+        <h2>IS YOUR SHEET READY?</h2>
+        <table class="big xl" style="margin-top:10px">
+          <tr><th>Tiêu chí</th><th style="width:150px">✔ / ✘</th></tr>
+          <tr><td>Đủ dữ liệu 8 hàng như Hình 6.7, không sai chính tả</td><td></td></tr>
+          <tr><td>Độ rộng cột hiển thị đủ nội dung</td><td></td></tr>
+          <tr><td>Tiêu đề A1 đậm, xanh lá, cỡ to · hàng 3 nền vàng, căn giữa</td><td></td></tr>
+          <tr><td>Trang tính tên “1. Khảo sát” · tệp lưu tên THXanh.xlsx</td><td></td></tr>
+        </table>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;margin-top:14px">
+          <div class="callout amber" style="margin-top:0"><div class="ico">⭐</div><div><div class="en">Done early? Add 2 more places in your school.</div><span class="vi">Xong sớm: thêm 2 địa điểm khác trong trường em.</span></div></div>
+          <div class="timer step" data-min="20" style="padding:10px 22px"><div class="t" style="font-size:64px">20:00</div><div class="l">Practice time</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 26 · Luyện tập 1–2 -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z">
+        <div class="kicker">Practice · Luyện tập SGK</div>
+        <h2>ANSWER IN ONE BREATH</h2>
+        <div class="cards g1">
+          <div class="card"><div class="num">1</div><div><div class="en">Muốn xoá nhanh dữ liệu trong một vùng thì em làm thế nào?</div><span class="vi step">→ Chọn vùng dữ liệu đó rồi nhấn phím <span class="kbd">Delete</span>.</span></div></div>
+          <div class="card"><div class="num">2</div><div><div class="en">Có bao nhiêu cách nhập dữ liệu vào trang tính? Mô tả các cách đó.</div><span class="vi step">→ 2 cách: nháy vào ô rồi gõ trực tiếp tại ô; hoặc nháy vào ô, rồi nháy vào vùng nhập dữ liệu và gõ. Nhấn Enter để kết thúc.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 27 · Quiz from PP: wrong address — D -->
+    <section class="slide" data-part="Luyện tập">
+      <div class="slide-z mid">
+        <div class="kicker">Lucky star · Chọn phương án đúng</div>
+        <h2>WHICH CELL ADDRESS IS <em>WRONG</em>?</h2>
+        <p class="sub">Địa chỉ ô nào sau đây không đúng?</p>
+        <div class="choices" data-quiz>
+          <button class="choice"><span class="letter">A</span><span class="en mono">A100</span></button>
+          <button class="choice"><span class="letter">B</span><span class="en mono">AA2</span></button>
+          <button class="choice"><span class="letter">C</span><span class="en mono">C2</span></button>
+          <button class="choice" data-correct><span class="letter">D</span><span class="en mono">1A</span></button>
+        </div>
+        <div class="callout green step" data-answer><div class="ico">📍</div><div><div class="en">D — column first, then row.</div><span class="vi">Tên cột viết trước, tên hàng viết sau. (Sau cột Z là AA, AB… nên AA2 vẫn đúng.)</span></div></div>
+      </div>
+    </section>
+
+    <!-- 28 · Vận dụng 1 -->
+    <section class="slide" data-part="Vận dụng">
+      <div class="slide-z">
+        <div class="kicker">Apply · Vận dụng 1</div>
+        <h2 style="font-size:40px">WHY DOES ONE DATE GO RIGHT AND THE OTHER LEFT?</h2>
+        <div class="duo">
+          <div class="xls lg">
+            <table>
+              <tr><th class="rh"></th><th style="min-width:260px">A</th></tr>
+              <tr><th class="rh">1</th><td class="n">12/15/2020</td></tr>
+              <tr><th class="rh">2</th><td>15/12/2020</td></tr>
+            </table>
+          </div>
+          <div>
+            <div class="callout green step" style="margin-top:0"><div class="ico">📅</div><div><div class="en">12/15/2020 = month 12, day 15 ✔</div><span class="vi">Máy hiểu theo dạng tháng/ngày/năm → là ngày tháng hợp lệ → căn phải.</span></div></div>
+            <div class="callout amber step"><div class="ico">🔤</div><div><div class="en">15/12/2020 → “month 15”? ✘</div><span class="vi">Không có tháng 15 → máy coi là văn bản → căn trái.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 29 · Vận dụng 2 (homework) + next -->
+    <section class="slide" data-part="Về nhà">
+      <div class="slide-z">
+        <div class="kicker">Homework · Vận dụng 2</div>
+        <h2>LIST THE TREES WE CAN PLANT</h2>
+        <p class="sub">Tạo bảng tính “Danh sách các loại cây” cho dự án Trường học xanh, nhập dữ liệu rồi chỉnh sửa, định dạng.</p>
+        <table class="big xl">
+          <tr><th style="width:110px">STT</th><th>Loại cây</th><th>Tên cây</th></tr>
+          <tr><td class="c">1</td><td>Cây hoa</td><td>Hoa mười giờ, hoa hồng…</td></tr>
+          <tr><td class="c">2</td><td>Cây ăn quả</td><td>Bưởi, xoài…</td></tr>
+          <tr><td class="c">3</td><td>Cây bóng mát</td><td>Bàng, phượng vĩ…</td></tr>
+        </table>
+        <div class="next-up">
+          <div class="en">Next: Lesson 7 — Automatic calculation on a spreadsheet 🧮</div>
+          <span class="vi">Bài 7: Tính toán tự động trên bảng tính.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="part-label">Bài 6</span>
+      <div id="ticks"></div>
+      <span id="more-hint" hidden>▼ more</span>
+      <span id="reveal-hint" hidden></span>
+      <span id="counter">01 / 29</span>
+    </div>
+    <div id="help">Presenter / ← → · Next reveals, then advances<br>F fullscreen · + − 0 zoom · Z pin zoom bar</div>
+
+  </div>
+</div>
+
+<!-- Zoom bar: fixed to the real screen; auto-hides (move the mouse or press + − 0 to show it) -->
+<div id="zoombar">
+  <button id="fsBtn" title="Fullscreen (F)">⛶</button>
+  <span class="zsep"></span>
+  <button id="zMinus" title="Thu nhỏ (−)">A−</button>
+  <input type="range" id="zRange" min="80" max="170" step="10" value="100" aria-label="Zoom">
+  <button id="zPlus" title="Phóng to (+)">A+</button>
+  <span id="zVal">100%</span>
+  <button id="zReset" title="Về 100% (phím 0)">100%</button>
+  <button id="zPin" title="Ghim thanh zoom (Z)">📌</button>
+</div>
+<div id="ztoast"></div>
+
+<script src="slides.js"></script>
+<script src="../../assets/js/promo-banner.js" defer></script>
+</body>
+</html>
