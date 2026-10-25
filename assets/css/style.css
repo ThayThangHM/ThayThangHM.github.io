@@ -722,6 +722,43 @@ kbd {
 /* Đệm trên nút, kể cả khi bài không có tên tiếng Anh */
 .lesson .card-cta { padding-top: 16px; }
 
+/* ---------- Trang kiểm tra (kiem-tra-giua-ky-1) ---------- */
+.exam-facts {
+  display: grid;
+  gap: 6px;
+  margin: 14px 0 22px;
+  font-size: 1.05rem;
+}
+.exam-facts div { display: flex; flex-wrap: wrap; gap: 0 6px; }
+.exam-facts dt { color: var(--text-muted); font-weight: 600; }
+.exam-facts dt::after { content: ":"; }
+.exam-facts dd { margin: 0; color: var(--text); font-weight: 700; }
+
+/* Nút "Vào làm bài kiểm tra" — mở Google Forms trong tab mới */
+.exam .card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--on-brand);
+  font-size: 1.05rem;
+}
+.exam .card-cta::after { content: none; }
+.exam a.card-body:hover .ext-icon { transform: translate(2px, -2px); }
+
+/* Chưa mở: không bấm được, không nổi lên khi rê chuột */
+.exam--closed .card-body {
+  background: var(--surface);
+  border-top-color: var(--border);
+  box-shadow: none;
+  cursor: default;
+}
+.exam--closed .card-body:hover { transform: none; box-shadow: none; border-color: var(--border); }
+.exam--closed .card-icon { background: color-mix(in srgb, var(--text-muted) 12%, transparent); color: var(--text-muted); }
+.exam--closed .card-title { color: var(--text-muted); }
+
 /* ---------- Footer ---------- */
 .site-footer {
   padding-block: 36px 20px;

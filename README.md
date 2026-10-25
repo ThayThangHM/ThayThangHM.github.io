@@ -28,6 +28,7 @@ HTML/CSS/JS thuần, không build.
 | Tin học 6 / 7 / 8   | `/tin-hoc-6/` …          | Có slide   |
 | Một bài             | `/tin-hoc-6/bai-2/`      | Link gửi trực tiếp cho học sinh được |
 | Hoạt động ngoài giờ | `/hoat-dong-ngoai-gio/`  | Có hướng dẫn thi ATGT |
+| Kiểm Tra Giữa Kỳ 1  | `/kiem-tra-giua-ky-1/`   | Link Google Forms Khối 6, 7; Khối 8 chưa mở |
 | Đội tuyển Tin học   | `/doi-tuyen/`            | Roadmap thuật toán lớp 6 → 9 → HSG / chuyên |
 | Hoàng Mai Robotics  | `/robotics/` (dự kiến)   | Đang cập nhật |
 | Học lập trình       | <https://thaythangtoantin.com.vn/> | Link ngoài, mở tab mới |
@@ -62,6 +63,16 @@ xem [docs/AI-NARRATION.md](docs/AI-NARRATION.md). Tạo audio: `python scripts/g
 Nguồn: `GiaoTrinh-GiaoAn-PP/Hoat-Dong-Ngoai-Gio/`. Mỗi hướng dẫn là một file HTML tự chứa, copy vào
 `hoat-dong-ngoai-gio/<ten-muc>/index.html` (vd. `Huong-Dan-Thi-ATGT.html` → `huong-dan-thi-atgt/index.html`),
 rồi thêm một `<li class="card lesson">` vào `hoat-dong-ngoai-gio/index.html`.
+
+## Kiểm Tra Giữa Kỳ 1 (`/kiem-tra-giua-ky-1/`)
+
+Một trang tĩnh, mỗi khối một card trong `kiem-tra-giua-ky-1/index.html`; card mở Google Forms ở tab mới
+(`target="_blank" rel="noopener noreferrer"`), không nhúng iframe. Chỉ dán link **dành cho học sinh**
+(`forms.gle/…` hoặc `…/viewform`) — không bao giờ dán link sửa đề, link Google Sheets hay đáp án.
+
+Mở Khối 8 khi có link: trong card `id="khoi-8"` bỏ class `exam--closed`, đổi `<div class="card-body" aria-disabled="true">`
+thành `<a class="card-body" href="LINK" target="_blank" rel="noopener noreferrer">`, thay mô tả + nhãn
+"Chưa mở bài kiểm tra" bằng khối `exam-facts` và nút `card-cta` giống card Khối 6/7.
 
 ## Roadmap Đội tuyển Tin (`/doi-tuyen/`)
 
