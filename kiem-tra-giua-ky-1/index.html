@@ -73,8 +73,8 @@
           Mỗi khối là một <li class="card exam">.
           - Đã mở: <a class="card-body" href="LINK_GOOGLE_FORMS" target="_blank" rel="noopener noreferrer">
             + nút <span class="card-cta">Vào làm bài kiểm tra …</span>.
-          - Chưa mở (Khối 8): thêm class exam--closed, dùng <div class="card-body"> + nhãn card-status.
-            Khi có link: làm giống card Khối 6/7 (đổi div → a, bỏ exam--closed, thay nhãn bằng nút).
+          - Chưa mở: thêm class exam--closed, dùng <div class="card-body"> + nhãn card-status.
+            Khi có link: làm giống các card đã mở (đổi div → a, bỏ exam--closed, thay nhãn bằng nút).
           Chỉ dán link dành cho HỌC SINH (forms.gle/… hoặc …/viewform) — không dán link sửa đề, link Sheets.
         -->
         <ul class="card-grid" role="list">
@@ -108,14 +108,19 @@
             </a>
           </li>
 
-          <li class="card exam exam--closed" id="khoi-8" style="--accent: var(--c-orange)">
-            <div class="card-body" aria-disabled="true">
+          <li class="card exam" id="khoi-8" style="--accent: var(--c-orange)">
+            <a class="card-body" href="https://forms.gle/uxjjiUzbpNb5Kd7c9" target="_blank" rel="noopener noreferrer">
               <span class="card-icon" aria-hidden="true">8</span>
               <span class="lesson-label">KHỐI 8</span>
               <h2 class="card-title">Kiểm tra giữa học kỳ I – Tin học 8</h2>
-              <p class="card-desc">Thầy sẽ cập nhật link khi mở bài kiểm tra.</p>
-              <span class="card-status">Chưa mở bài kiểm tra</span>
-            </div>
+              <dl class="exam-facts">
+                <div><dt>Năm học</dt><dd>2026–2027</dd></div>
+                <div><dt>Nội dung</dt><dd>Bài 1 đến Bài 4</dd></div>
+                <div><dt>Số câu hỏi</dt><dd>20</dd></div>
+                <div><dt>Hình thức</dt><dd>Trắc nghiệm trực tuyến</dd></div>
+              </dl>
+              <span class="card-cta">Vào làm bài kiểm tra <svg class="ext-icon" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg><span class="sr-only"> (mở trong tab mới)</span></span>
+            </a>
           </li>
         </ul>
       </div>
